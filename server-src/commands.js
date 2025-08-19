@@ -6,7 +6,7 @@ class CommandHandler {
     this.wss = wss;
 
     this.initCommands();
-    
+
     var addCommand = this.addCommand.bind(this); //API to add a command.
     var sendFeedbackLocal = this.sendFeedbackLocal.bind(this); //Send command feedback locally to client.
     var sendFeedbackGlobal = this.sendFeedbackGlobal.bind(this); //Send command feedback globally to client.
@@ -18,7 +18,7 @@ class CommandHandler {
 
     ////////////////////////////////////////////////////
     //Add your commands here.
-    
+
     /*
       addCommand usage:
       
@@ -26,188 +26,271 @@ class CommandHandler {
         //Code here.
       }, "Note for help command");
     */
-    
+
     //This command is here because the original Random Rants using ;commands for a list of commands.
     //This just simply tells the person to migrate to using ;help.
-    addCommand("commands", function (args, userInfo, senderClient) {
-      sendFeedbackLocal(senderClient, "The new command for all listed commands is ;help");
-    }, "Just a placeholder command, it only tells the person using it to use the help command.");
-    
+    addCommand(
+      "commands",
+      function (args, userInfo, senderClient) {
+        sendFeedbackLocal(
+          senderClient,
+          "The new command for all listed commands is ;help"
+        );
+      },
+      "Just a placeholder command, it only tells the person using it to use the help command."
+    );
+
     //This is a useful command, but is separated because yes:
-    
-    addCommand("help", function (args, userInfo, senderClient) {
-      if (typeof args[0] == "string") {
-        var commandName = args[0];
-        
-        if (commandName.length > 0) {
-          if (_this.commandExists(commandName)) {
-            sendFeedbackLocal(senderClient, `[bold][color css=yellow];${commandName}[/color][/bold] - ${_this.commandHelp[commandName]}`);
-          } else {
-            sendFeedbackLocal(senderClient, "Help command was unable to find command \"" + commandName + "\". You must mention this command in its proper case.");
+
+    addCommand(
+      "help",
+      function (args, userInfo, senderClient) {
+        if (typeof args[0] == "string") {
+          var commandName = args[0];
+
+          if (commandName.length > 0) {
+            if (_this.commandExists(commandName)) {
+              sendFeedbackLocal(
+                senderClient,
+                `[bold][color css=yellow];${commandName}[/color][/bold] - ${_this.commandHelp[commandName]}`
+              );
+            } else {
+              sendFeedbackLocal(
+                senderClient,
+                'Help command was unable to find command "' +
+                  commandName +
+                  '". You must mention this command in its proper case.'
+              );
+            }
+            return;
           }
+        }
+        var text = "Command list: ";
+        var excluded = ["commands"];
+        for (var c of Object.keys(_this.commands)) {
+          if (excluded.indexOf(c) < 0) {
+            text +=
+              "[br]" +
+              `[bold][color css=yellow];${c}[/color][/bold][br]${_this.commandHelp[c]}`;
+          }
+        }
+        sendFeedbackLocal(senderClient, text);
+      },
+      "<Command Name (Not required)>[br]Gives you the list of commands, or type the command name as the first argument for it."
+    );
+
+    //Useful commands:
+
+    addCommand(
+      "restart",
+      function (args, userInfo, senderClient) {
+        wss._rrRefreshRoom(); //Random rants + has special properties assigned to client and the room websocket server.
+      },
+      "Restarts the room, this will clear all the messages."
+    );
+
+    addCommand(
+      "runAs",
+      function (args, userInfo, senderClient) {
+        var foundClients = searchUsersByKey(args[0], senderClient);
+        var commandArgs = args.slice(1);
+        if (commandArgs.length < 1) {
           return;
         }
-      }
-      var text = "Command list: ";
-      var excluded = ["commands"];
-      for (var c of Object.keys(_this.commands)) {
-        if (excluded.indexOf(c) < 0) {
-          text += "[br]" + `[bold][color css=yellow];${c}[/color][/bold][br]${_this.commandHelp[c]}`;
+        if (commandArgs[0].startsWith(";")) {
+          commandArgs[0] = commandArgs[0].slice(1);
         }
-      }
-      sendFeedbackLocal(senderClient, text);
-    }, "<Command Name (Not required)>[br]Gives you the list of commands, or type the command name as the first argument for it.");
-    
-    //Useful commands:
-    
-    addCommand("restart", function (args, userInfo, senderClient) {
-      wss._rrRefreshRoom(); //Random rants + has special properties assigned to client and the room websocket server.
-    }, "Restarts the room, this will clear all the messages.");
-    
-    addCommand("runAs", function (args, userInfo, senderClient) {
-      var foundClients = searchUsersByKey(args[0],senderClient);
-      var commandArgs = args.slice(1);
-      if (commandArgs.length < 1) {
-        return;
-      }
-      if (commandArgs[0].startsWith(";")) {
-        commandArgs[0] = commandArgs[0].slice(1);
-      }
-      foundClients.forEach((otherClient) => {
-        _this.doCommand(commandArgs, otherClient);
-      });
-    }, "<Username> <Command>[br]Runs the following command as someone else (as the sender) or multiple people.[br]This should n o t be very annoying.");
+        foundClients.forEach((otherClient) => {
+          _this.doCommand(commandArgs, otherClient);
+        });
+      },
+      "<Username> <Command>[br]Runs the following command as someone else (as the sender) or multiple people.[br]This should n o t be very annoying."
+    );
 
-    addCommand("popupMessage", function (args, userInfo, senderClient) {
-      var foundClients = searchUsersByKey(args[0],senderClient);
-      var message = args.slice(1);
-      foundClients.forEach((otherClient) => {
-        sendClientCommand(otherClient, "popupMessage", message.join(" "));
-      });
-    }, "<Username> <Message>[br]Shows a popup to the user's browser saying the message provided.");
-    
-    addCommand("kick", function (args, userInfo, senderClient) {
-      var foundClients = searchUsersByKey(args[0],senderClient);
-      foundClients.forEach((otherClient) => {
-        sendClientCommand(otherClient, "kick");
-        otherClient.close();
-      });
-    }, "<Username>[br]Kick out the specified user from the room.");
-    
-    addCommand("freeze", function (args, userInfo, senderClient) {
-      var foundClients = searchUsersByKey(args[0], senderClient);
-      foundClients.forEach((otherClient) => {
-        sendClientCommand(otherClient, "freeze");
-      });
-    }, "<Username>[br]Freezes the UI temporarily for the user.");
-    
-    addCommand("redirect", function (args, userInfo, senderClient) {
-      var foundClients = searchUsersByKey(args[0], senderClient);
-      const url = args[1];
-      if (!/^https?:\/\//.test(url)) {
-        sendFeedbackLocal(senderClient, "URL must start with http:// or https://");
-        return;
-      }
-      foundClients.forEach((otherClient) => {
-        sendClientCommand(otherClient, "redirect", url);
-      });
-    }, "<Username> <URL>[br]Redirects the user to a new page.");
-    
+    addCommand(
+      "popupMessage",
+      function (args, userInfo, senderClient) {
+        var foundClients = searchUsersByKey(args[0], senderClient);
+        var message = args.slice(1);
+        foundClients.forEach((otherClient) => {
+          sendClientCommand(otherClient, "popupMessage", message.join(" "));
+        });
+      },
+      "<Username> <Message>[br]Shows a popup to the user's browser saying the message provided."
+    );
+
+    addCommand(
+      "kick",
+      function (args, userInfo, senderClient) {
+        var foundClients = searchUsersByKey(args[0], senderClient);
+        foundClients.forEach((otherClient) => {
+          sendClientCommand(otherClient, "kick");
+          otherClient.close();
+        });
+      },
+      "<Username>[br]Kick out the specified user from the room."
+    );
+
+    addCommand(
+      "freeze",
+      function (args, userInfo, senderClient) {
+        var foundClients = searchUsersByKey(args[0], senderClient);
+        foundClients.forEach((otherClient) => {
+          sendClientCommand(otherClient, "freeze");
+        });
+      },
+      "<Username>[br]Freezes the UI temporarily for the user."
+    );
+
+    addCommand(
+      "redirect",
+      function (args, userInfo, senderClient) {
+        var foundClients = searchUsersByKey(args[0], senderClient);
+        const url = args[1];
+        if (!/^https?:\/\//.test(url)) {
+          sendFeedbackLocal(
+            senderClient,
+            "URL must start with http:// or https://"
+          );
+          return;
+        }
+        foundClients.forEach((otherClient) => {
+          sendClientCommand(otherClient, "redirect", url);
+        });
+      },
+      "<Username> <URL>[br]Redirects the user to a new page."
+    );
+
     //Joke commands:
-    
-    addCommand("uh", function (args, userInfo, senderClient) {
-      var allClients = getActiveClients();
-      allClients.forEach((client) => {
-        sendClientCommand(client, "macreJoke");
-      });
-    }, "Ballz");
-    
-    addCommand("luig", function (args, userInfo, senderClient) {
-      var allClients = getActiveClients();
-      allClients.forEach((client) => {
-        sendClientCommand(client, "luigJoke");
-      });
-    }, "What do you think this command does?");
-    
-    addCommand("spin", function (args, userInfo, senderClient) {
-      sendClientCommand(senderClient, "spin");
-    }, "Spinny spin spin!");
-    
-    addCommand("popcat", function (args, userInfo, senderClient) {
-      sendClientCommand(senderClient, "popcat", args[0]);
-    }, "<Seconds>[br]Pop pop pop pop pop");
-    
-    addCommand("shake", function (args, userInfo, senderClient) {
-      var foundClients = searchUsersByKey(args[0], senderClient);
-      foundClients.forEach((otherClient) => {
-        sendClientCommand(otherClient, "shake", Number(args[1]));
-      });
-    }, "<Username>[br]Gives the specified users a good screen shake.");
-    
-    addCommand("crashTab", function (args, userInfo, senderClient) {
-      var foundClients = searchUsersByKey(args[0],senderClient);
-      foundClients.forEach((otherClient) => {
-        sendClientCommand(otherClient, "crash");
-        otherClient.close();
-      });
-    }, "<Username>[br]Crashes the specified users tab.");
-    
-    addCommand("flash", function (args, userInfo, senderClient) {
-      var foundClients = searchUsersByKey(args[0], senderClient);
-      foundClients.forEach((otherClient) => {
-        sendClientCommand(otherClient, "flash");
-      });
-    }, "<Username>[br]Flashes the screen background for a moment.");
 
-    addCommand("fortune", function (args, userInfo, senderClient) {
-      const fortunes = [
-        "You will find a chicken nugget in your shoe.",
-        "Your Chromebook holds forbidden knowledge.",
-        "You will win a thumb war by default.",
-        "Beware of hallway WiFi drops.",
-        "A ghost is watching you… from the school ceiling.",
-        "You will open a website, and it will work. Miraculously.",
-        "Don't open this site on Safari, you would not like the result.",
-        "Don't question the lag. The lag questions you.",
-        "Your Chromebook knows what you did last update.",
-        "An unexpected pop-up will appear. You will click it anyway.",
-        "Your tabs are watching you. Especially the one you forgot about.",
-        "Someone is typing… but they deleted it all.",
-        "You will press Ctrl+W at the worst possible time.",
-        "The WiFi spirit is not pleased today.",
-        "Lag is temporary. Screaming into the void is forever.",
-        "Your next message will be grammatically cursed.",
-        "The randomizer has chosen you. For what? Unknown.",
-        "You will enter a room with one person… and immediately regret it.",
-        "Beware the user with too many emojis in their name.",
-        "An admin is watching. They are confused but intrigued.",
-        "Your next fortune will be a lie.",
-        "Everything will crash... right after you say it won’t.",
-        "You are the main character — until the plot twist.",
-        "Someone will try to mute you. It won’t work.",
-        "You will scroll too far and uncover forbidden messages.",
-        "Still no dark mode. Consider sunglasses.",
-        "Brightness warning: This site glows like a school projector.",
-        "Dark mode is currently held hostage by light mode.",
-        "Oops, we don’t have dark mode. Sorry if you get flashbanged at 3 AM.",
-      ];
+    addCommand(
+      "uh",
+      function (args, userInfo, senderClient) {
+        var allClients = getActiveClients();
+        allClients.forEach((client) => {
+          sendClientCommand(client, "macreJoke");
+        });
+      },
+      "Ballz"
+    );
 
-      const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-      const fortuneMessage = `[color css=lightblue][Fortune for ${userInfo.displayName}]: ${randomFortune}[/color]`;
+    addCommand(
+      "luig",
+      function (args, userInfo, senderClient) {
+        var allClients = getActiveClients();
+        allClients.forEach((client) => {
+          sendClientCommand(client, "luigJoke");
+        });
+      },
+      "What do you think this command does?"
+    );
 
-      _this.sendFeedbackGlobal(fortuneMessage);
-    }, "Tells everyone your questionable fortune.");
+    addCommand(
+      "spin",
+      function (args, userInfo, senderClient) {
+        sendClientCommand(senderClient, "spin");
+      },
+      "Spinny spin spin!"
+    );
+
+    addCommand(
+      "popcat",
+      function (args, userInfo, senderClient) {
+        sendClientCommand(senderClient, "popcat", args[0]);
+      },
+      "<Seconds>[br]Pop pop pop pop pop"
+    );
+
+    addCommand(
+      "shake",
+      function (args, userInfo, senderClient) {
+        var foundClients = searchUsersByKey(args[0], senderClient);
+        foundClients.forEach((otherClient) => {
+          sendClientCommand(otherClient, "shake", Number(args[1]));
+        });
+      },
+      "<Username>[br]Gives the specified users a good screen shake."
+    );
+
+    addCommand(
+      "crashTab",
+      function (args, userInfo, senderClient) {
+        var foundClients = searchUsersByKey(args[0], senderClient);
+        foundClients.forEach((otherClient) => {
+          sendClientCommand(otherClient, "crash");
+          otherClient.close();
+        });
+      },
+      "<Username>[br]Crashes the specified users tab."
+    );
+
+    addCommand(
+      "flash",
+      function (args, userInfo, senderClient) {
+        var foundClients = searchUsersByKey(args[0], senderClient);
+        foundClients.forEach((otherClient) => {
+          sendClientCommand(otherClient, "flash");
+        });
+      },
+      "<Username>[br]Flashes the screen background for a moment."
+    );
+
+    addCommand(
+      "fortune",
+      function (args, userInfo, senderClient) {
+        const fortunes = [
+          "You will find a chicken nugget in your shoe.",
+          "Your Chromebook holds forbidden knowledge.",
+          "You will win a thumb war by default.",
+          "Beware of hallway WiFi drops.",
+          "A ghost is watching you… from the school ceiling.",
+          "You will open a website, and it will work. Miraculously.",
+          "Don't open this site on Safari, you would not like the result.",
+          "Don't question the lag. The lag questions you.",
+          "Your Chromebook knows what you did last update.",
+          "An unexpected pop-up will appear. You will click it anyway.",
+          "Your tabs are watching you. Especially the one you forgot about.",
+          "Someone is typing… but they deleted it all.",
+          "You will press Ctrl+W at the worst possible time.",
+          "The WiFi spirit is not pleased today.",
+          "Lag is temporary. Screaming into the void is forever.",
+          "Your next message will be grammatically cursed.",
+          "The randomizer has chosen you. For what? Unknown.",
+          "You will enter a room with one person… and immediately regret it.",
+          "Beware the user with too many emojis in their name.",
+          "An admin is watching. They are confused but intrigued.",
+          "Your next fortune will be a lie.",
+          "Everything will crash... right after you say it won’t.",
+          "You are the main character — until the plot twist.",
+          "Someone will try to mute you. It won’t work.",
+          "You will scroll too far and uncover forbidden messages.",
+          "Still no dark mode. Consider sunglasses.",
+          "Brightness warning: This site glows like a school projector.",
+          "Dark mode is currently held hostage by light mode.",
+          "Oops, we don’t have dark mode. Sorry if you get flashbanged at 3 AM.",
+        ];
+
+        const randomFortune =
+          fortunes[Math.floor(Math.random() * fortunes.length)];
+        const fortuneMessage = `[color css=lightblue][Fortune for ${userInfo.displayName}]: ${randomFortune}[/color]`;
+
+        _this.sendFeedbackGlobal(fortuneMessage);
+      },
+      "Tells everyone your questionable fortune."
+    );
 
     ////////////////////////////////////////////////////
   }
-  
-  sendClientCommand (client,type,...args) {
+
+  sendClientCommand(client, type, ...args) {
     //Allows certian commands that need browser behavior.
-    client.send(JSON.stringify({
-      type: "commandToClient",
-      cType: type,
-      args
-    }));
+    client.send(
+      JSON.stringify({
+        type: "commandToClient",
+        cType: type,
+        args,
+      })
+    );
   }
 
   initCommands() {
@@ -258,8 +341,8 @@ class CommandHandler {
       color: client._rrUsername,
     };
   }
-  
-  getActiveClients () {
+
+  getActiveClients() {
     var activeUsers = [];
     for (var client of this.wss.clients) {
       if (client._rrIsReady) {
@@ -268,46 +351,49 @@ class CommandHandler {
     }
     return activeUsers;
   }
-  
-  searchUsersByKey (key,senderClient) {
+
+  searchUsersByKey(key, senderClient) {
     if (typeof key !== "string") {
       return [];
     }
-    
+
     var lowercaseKey = key.trim().toLowerCase();
     var clients = this.getActiveClients();
     var senderClientInfo = this.getUserInfo(senderClient);
-    
+
     //You can use @all, @others, and @me to do multiple people or yourself.
-    
-    if (lowercaseKey == "@all") { //Everyone, including the sender.
+
+    if (lowercaseKey == "@all") {
+      //Everyone, including the sender.
       return clients;
     }
-    
-    if (lowercaseKey == "@others") { //Everyone, except the sender.
+
+    if (lowercaseKey == "@others") {
+      //Everyone, except the sender.
       var otherClients = [];
       for (var client of clients) {
         //The server should reject people joining with the same username so it will be fine.
-        if (senderClientInfo.username !== client.username) {
+        if (senderClientInfo.username !== this.getUserInfo(client).username) {
           otherClients.push(client);
         }
       }
       return otherClients;
     }
-    
-    if (lowercaseKey == "@me") { //Only the sender, better than typing your username.
+
+    if (lowercaseKey == "@me") {
+      //Only the sender, better than typing your username.
       return [senderClient];
     }
-    
+
     //Otherwise, its a username search.
-    
+
     for (var client of clients) {
       var lowercaseUsername = senderClientInfo.username.toLowerCase().trim(); //trim(), just to make sure.
       if (lowercaseUsername == lowercaseKey) {
         return [client];
       }
     }
-    
+
     //Else, return empty array.
     return [];
   }

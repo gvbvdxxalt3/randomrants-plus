@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 
 require("./initcounters.js");
 
@@ -94,6 +94,30 @@ function setNoCorsHeaders(res) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );*/
+}
+
+async function doesUsernameExist(username) {
+  if (!username) {
+    return false;
+  }
+  if (typeof username !== "string") {
+    return false;
+  }
+  username = username.trim();
+  var username = username.toLowerCase();
+  var i = 0;
+  while (i < username.length) {
+    if (usernameSafeChars.indexOf(username[i]) < 0) {
+      return false;
+    }
+    i += 1;
+  }
+  try {
+    await storage.getFileStatus(`user-${username}.json`);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 async function getUserProfilePicture(username) {
@@ -927,7 +951,7 @@ async function startRoomWSS(roomid) {
   wss._rrRoomPermissions = info.permissions;
   wss._rrRoomMessages = [];
   wss._rrPeopleCount = 0;
-  function hasPermission(permName,ws) {
+  function hasPermission(permName, ws) {
     //Not ready, h o p e f u l l y this does not break things when not ready.
     if (!ws._rrIsReady) {
       return false;
@@ -938,7 +962,8 @@ async function startRoomWSS(roomid) {
     }
     //Owner needs to check if has the ownership.
     if (wss._rrRoomPermissions[permName] == "owner") {
-      if (ws._rrIsOwner) { //Have small anxiety about using the && and || operators with == operators. This should calm myself, but look weird for other developers.
+      if (ws._rrIsOwner) {
+        //Have small anxiety about using the && and || operators with == operators. This should calm myself, but look weird for other developers.
         return true;
       }
     }
@@ -972,6 +997,7 @@ async function startRoomWSS(roomid) {
     var onlist = JSON.stringify({
       type: "onlineList",
       list: userlist,
+      owners: info.owners, //First owner can't be removed.
     });
     wss.clients.forEach((cli) => {
       cli.send(onlist);
@@ -1003,20 +1029,21 @@ async function startRoomWSS(roomid) {
     //Permission update needs to check permissions for each socket.
     var socketPerms = {};
     for (var name of Object.keys(wss._rrRoomPermissions)) {
-      socketPerms[name] = hasPermission(name,ws);
+      socketPerms[name] = hasPermission(name, ws);
     }
     ws.send(
       JSON.stringify({
         type: "roomPermissions",
-        perms: socketPerms
+        perms: socketPerms,
       })
     );
 
-    if (ws._rrIsOwner) { //Specifically for the room settings, send permission levels.
+    if (ws._rrIsOwner) {
+      //Specifically for the room settings, send permission levels.
       ws.send(
         JSON.stringify({
           type: "roomPermissionSettings",
-          perms: wss._rrRoomPermissions
+          perms: wss._rrRoomPermissions,
         })
       );
     }
@@ -1136,27 +1163,33 @@ async function startRoomWSS(roomid) {
                   type: "typing",
                   username: ws._rrUsername,
                   displayName: ws._rrDisplayName,
-                  color: ws._rrUserColor
+                  color: ws._rrUserColor,
                 })
               );
             }
           }
-          if (json.type == "playSoundboard" && hasPermission("soundboard",ws)) {
+          if (
+            json.type == "playSoundboard" &&
+            hasPermission("soundboard", ws)
+          ) {
             for (var client of wss.clients) {
               client.send(
                 JSON.stringify({
                   type: "playSoundboard",
                   index: json.index,
-                  mult: json.mult
+                  mult: json.mult,
                 })
               );
             }
           }
-          if (json.type == "stopSoundboard" && hasPermission("soundboard",ws)) {
+          if (
+            json.type == "stopSoundboard" &&
+            hasPermission("soundboard", ws)
+          ) {
             for (var client of wss.clients) {
               client.send(
                 JSON.stringify({
-                  type: "stopSoundboard"
+                  type: "stopSoundboard",
                 })
               );
             }
@@ -1215,7 +1248,10 @@ async function startRoomWSS(roomid) {
                 );
               });
             }
-            if (json.command == "screenshareRunning" && hasPermission("media",ws)) {
+            if (
+              json.command == "screenshareRunning" &&
+              hasPermission("media", ws)
+            ) {
               currentScreenshareCode = json.code;
               currentScreensharingWebsocket = ws._rrConnectionID;
               wss.clients.forEach((cli) => {
@@ -1228,7 +1264,10 @@ async function startRoomWSS(roomid) {
                 );
               });
             }
-            if (json.command == "mediaEmbedRunning" && hasPermission("media",ws)) {
+            if (
+              json.command == "mediaEmbedRunning" &&
+              hasPermission("media", ws)
+            ) {
               if (typeof json.url !== "string") {
                 return;
               }
@@ -1496,35 +1535,39 @@ var fileUploads = {};
 var fileUploadCount = 0;
 var fileUploadTypes = {};
 
-
-var roomPermNames = [ //These are kinda hardcoded into the logic of the server, so be careful and make sure you account for code before editing this!
+var roomPermNames = [
+  //These are kinda hardcoded into the logic of the server, so be careful and make sure you account for code before editing this!
   "soundboard",
-  "media"
+  "media",
 ];
 
-
-var roomPermValues = [ //Just for validation.
+var roomPermValues = [
+  //Just for validation.
   "everyone",
   "owner",
-  "none"
+  "none",
 ];
 
-var roomDefaultPerms = { //names and values must be ones from above
-  "soundboard": "everyone",
-  "media": "everyone"
+var roomDefaultPerms = {
+  //names and values must be ones from above
+  soundboard: "everyone",
+  media: "everyone",
 };
 
-function applyNewRoomPermissionValues (roomInfo) { //So no need to manually edit all the room files, just add it automatically.
+function applyNewRoomPermissionValues(roomInfo) {
+  //So no need to manually edit all the room files, just add it automatically.
   var roomPerms = roomInfo.permissions;
-  if (roomPerms) { //Condition passes, then room permissions must be checked and new default values must be applied.
+  if (roomPerms) {
+    //Condition passes, then room permissions must be checked and new default values must be applied.
 
     for (var name of roomPermNames) {
-      if (typeof roomPerms[name] !== "string") { //Room permission does not exist, or is invalid type.
+      if (typeof roomPerms[name] !== "string") {
+        //Room permission does not exist, or is invalid type.
         roomPerms[name] = roomDefaultPerms[name]; //Set it to the default value.
       }
     }
-
-  } else { //Room permission doesn't exist at all, just set it to defaults.
+  } else {
+    //Room permission doesn't exist at all, just set it to defaults.
 
     //Could just use JSON.parse(JSON.stringify(defaultRoomPerms)) to safely copy the values, but this method feels better.
     var roomPerms = {}; //Create empty object
@@ -1533,7 +1576,6 @@ function applyNewRoomPermissionValues (roomInfo) { //So no need to manually edit
     }
 
     roomInfo.permissions = roomPerms; //Actually set the value.
-
   }
 
   return roomInfo; //Return it just because.
@@ -1851,7 +1893,9 @@ const server = http.createServer(async function (req, res) {
           }
           if (defaultRooms.indexOf(json.id) > -1) {
             res.statusCode = 400;
-            res.end("Room ID is from a default room ID, these can't be edited!");
+            res.end(
+              "Room ID is from a default room ID, these can't be edited!"
+            );
             return;
           }
 
@@ -1887,7 +1931,6 @@ const server = http.createServer(async function (req, res) {
           );
           var roomData = JSON.parse(roomBuffer.toString());
           if (roomData.owners.indexOf(decryptedUserdata.username) > -1) {
-
             roomData = applyNewRoomPermissionValues(roomData); //Get up-to-date room permission data. (so code below does not fail)
 
             //Edit room permission value.
@@ -2001,7 +2044,17 @@ const server = http.createServer(async function (req, res) {
           var roomData = JSON.parse(roomBuffer.toString());
           if (roomData.owners.indexOf(decryptedUserdata.username) > -1) {
             if (roomData.owners.indexOf(json.who) < 0) {
-              roomData.owners.push(json.who);
+              if (await doesUsernameExist(json.who)) {
+                roomData.owners.push(json.who);
+              } else {
+                console.log("Username " + json.who + " don't exist");
+                res.statusCode = 401;
+                res.end("");
+                return;
+              }
+            }
+            for (var i in roomData.owners) {
+              roomData.owners[i] = roomData.owners[i].toLowerCase();
             }
             await storage.uploadFile(
               `room-${id}-info.json`,

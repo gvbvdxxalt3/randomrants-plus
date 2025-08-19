@@ -48,6 +48,8 @@ var reconnectUsernameError = elements.getGPId("reconnectUsernameError");
 var userMessagesContainer = elements.getGPId("userMessagesContainer");
 var rrLoadingStatusText = elements.getGPId("rrLoadingStatusText");
 var usersOnlineContainer = elements.getGPId("usersOnlineContainer");
+var ownershipUsersContainer = elements.getGPId("ownershipUsersContainer");
+var addOwnershipUsernameButton = elements.getGPId("addOwnershipUsernameButton");
 var showSoundboardButton = elements.getGPId("showSoundboardButton");
 var toggleCameraButton = elements.getGPId("toggleCameraButton");
 var roomErrorScreen = elements.getGPId("roomErrorScreen");
@@ -139,6 +141,30 @@ reconnectingScreen.hidden = true;
       microphones.tick();
     }, 100);
 
+    async function changeOwnershipUser(promoting, username) {
+      if (promoting) {
+        await fetch(
+          accountHelper.getServerURL() + "/rooms/addowner/" + currentRoom,
+          {
+            body: JSON.stringify({
+              who: username,
+            }),
+            method: "POST",
+          }
+        );
+      } else {
+        await fetch(
+          accountHelper.getServerURL() + "/rooms/removeowner/" + currentRoom,
+          {
+            body: JSON.stringify({
+              who: username,
+            }),
+            method: "POST",
+          }
+        );
+      }
+    }
+
     function putMessage(
       username,
       displayName,
@@ -168,13 +194,12 @@ reconnectingScreen.hidden = true;
       if (messageElement) {
         messageElement.animate(
           [
-            { transform: "translate(0px, -8px)", opacity: "1" },
-            { transform: "translate(0px, 4px)", opacity: "0.5" },
+            { transform: "translate(0px, -10px)", opacity: "0" },
             { transform: "translate(0px, 0px)" },
           ],
           {
-            duration: 60,
-            easing: "linear",
+            duration: 50,
+            easing: "ease-in",
           }
         );
       }
@@ -203,6 +228,16 @@ reconnectingScreen.hidden = true;
         userMessagesBox.scrollTo(0, userMessagesBox.scrollHeight);
       }
     }
+
+    addOwnershipUsernameButton.addEventListener("click", async function () {
+      var response = await dialogs.prompt(
+        "Who do you want to give ownership to?\nDrop their username below:"
+      );
+      if (!response) {
+        return;
+      }
+      await changeOwnershipUser(true, response);
+    });
 
     function onMessage(e) {
       try {
@@ -332,35 +367,14 @@ reconnectingScreen.hidden = true;
           for (var e of a) {
             e.remove();
           }
+          var a = [];
+          for (var e of ownershipUsersContainer.children) {
+            a.push(e);
+          }
+          for (var e of a) {
+            e.remove();
+          }
           json.list.forEach((userInfo) => {
-            async function changeOwnershipUser(promoting) {
-              if (promoting) {
-                await fetch(
-                  accountHelper.getServerURL() +
-                    "/rooms/addowner/" +
-                    currentRoom,
-                  {
-                    body: JSON.stringify({
-                      who: userInfo.username,
-                    }),
-                    method: "POST",
-                  }
-                );
-              } else {
-                await fetch(
-                  accountHelper.getServerURL() +
-                    "/rooms/removeowner/" +
-                    currentRoom,
-                  {
-                    body: JSON.stringify({
-                      who: userInfo.username,
-                    }),
-                    method: "POST",
-                  }
-                );
-              }
-            }
-
             var onlineUser = onlineUserElementGenerator(
               userInfo.username,
               userInfo.displayName,
@@ -371,9 +385,44 @@ reconnectingScreen.hidden = true;
               userInfo.micEnabled,
               userInfo.isRealOwner,
               userState.isOwner,
-              changeOwnershipUser
+              async function (promoting) {
+                if (!promoting) {
+                  var response = await dialogs.confirm(
+                    "Are you sure you want to remove ownership?\nThis will disable their owner functions."
+                  );
+                  if (!response) {
+                    return;
+                  }
+                }
+                await changeOwnershipUser(promoting, userInfo.username);
+              }
             );
             usersOnlineContainer.append(onlineUser);
+          });
+          json.owners.forEach((username, i) => {
+            var onlineUser = onlineUserElementGenerator(
+              username,
+              username,
+              "",
+              "#000000",
+              true,
+              false,
+              false,
+              i == 0, //If first one than its true owner.
+              userState.isOwner,
+              async function (promoting) {
+                if (!promoting) {
+                  var response = await dialogs.confirm(
+                    "Are you sure you want to remove ownership?\nThis will disable their owner functions."
+                  );
+                  if (!response) {
+                    return;
+                  }
+                }
+                await changeOwnershipUser(promoting, username);
+              }
+            );
+            ownershipUsersContainer.append(onlineUser);
           });
         }
         if (json.type == "media") {

@@ -290,7 +290,7 @@ function returnRandomValueFromArray(array) {
 }
 
 function loopAnimation() {
-  var anim = randomFactSpan.animate(
+  var anim = rrLoadingScreenText.animate(
     [{ opacity: "1" }, { opacity: "0", transform: "translateY(-10px)" }],
     {
       duration: 350,

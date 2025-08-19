@@ -260,11 +260,44 @@ var rightSide = {
       children: [
         {
           element: "span",
-          style: { fontWeight: "bold" },
+          style: { fontWeight: "bold", fontSize: "15px" },
           textContent: "Users online in this room:",
         },
         { element: "hr" },
         { element: "div", gid: "usersOnlineContainer" },
+        { element: "hr" },
+        {
+          element: "span",
+          style: { fontWeight: "bold", fontSize: "15px" },
+          textContent: "Users with admin/ownership:",
+        },
+        {
+          element: "br",
+        },
+        {
+          element: "div",
+          style: {
+            height: "23px",
+          },
+          className: "divButton roundborder",
+          title: "Click to add ownership via a username.",
+          gid: "addOwnershipUsernameButton",
+          children: [
+            {
+              element: "img",
+              style: {
+                height: "100%",
+              },
+              src: "images/promote.svg",
+            },
+            {
+              element: "span",
+              textContent: "Promote from username",
+            },
+          ],
+        },
+        { element: "hr" },
+        { element: "div", gid: "ownershipUsersContainer" },
       ],
     },
   ],
