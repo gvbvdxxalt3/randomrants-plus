@@ -26,7 +26,7 @@ com.popupMessage = function (message) {
 
 com.macreJoke = function () {
   var img = document.createElement("img");
-  img.src = rrURL + "macres-a.svg";
+  img.src = "images/commands/macres-a.svg";
   img.style.top = "0";
   img.style.left = "0";
   img.style.position = "fixed";
@@ -35,13 +35,13 @@ com.macreJoke = function () {
   img.style.pointerEvents = "none";
   commandEffectsDiv.append(img);
   setTimeout(async () => {
-    var audio = new Audio(rrURL + "pause-or-balls-which-one.wav");
+    var audio = new Audio("sounds/macre-joke.wav");
     audio.looped = false;
     await audio.play();
-    img.src = rrURL + "macres-b.svg";
+    img.src = "images/commands/macres-b.svg";
 
     audio.onended = () => {
-      img.src = rrURL + "macres-a.svg";
+      img.src = "images/commands/macres-a.svg";
       setTimeout(async () => {
         img.remove();
       }, 500);
@@ -51,7 +51,7 @@ com.macreJoke = function () {
 
 com.luigJoke = async function () {
   var video = document.createElement("video");
-  video.src = rrURL + "luig.mp4";
+  video.src = "videos/luig.mp4";
   video.style.top = "0";
   video.style.left = "0";
   video.style.position = "fixed";
@@ -107,15 +107,12 @@ com.popcat = function (time) {
   var interval = setInterval(() => {
     mouthOpen = !mouthOpen;
     if (mouthOpen) {
-      img.src =
-        "https://cdn.glitch.global/fa5e6d1e-8b42-4a21-81e8-03fd7cd6401a/pop-cat2.png?v=1713969814980";
+      img.src = "images/commands/pop-cat2.png";
       var popcat = document.createElement("audio");
-      popcat.src =
-        "https://cdn.glitch.global/fa5e6d1e-8b42-4a21-81e8-03fd7cd6401a/infographic-pop-8-197875.mp3?v=1713915310573";
+      popcat.src = "sounds/pop.mp3";
       popcat.play();
     } else {
-      img.src =
-        "https://cdn.glitch.global/fa5e6d1e-8b42-4a21-81e8-03fd7cd6401a/pop-cat.png?v=1713969813552";
+      img.src = "images/commands/pop-cat.png";
     }
   }, 1000 * 0.06);
   setTimeout(() => {

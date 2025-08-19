@@ -51,7 +51,7 @@ var typingnote = {
         }, 1500);
         typingMessageText.animate(
           [
-            { transform: "translate(0px, -3.5px)" },
+            { transform: "translate(-4.5px, 0px)" },
             { transform: "translate(0px, 0px)" },
           ],
           {

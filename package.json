@@ -5,9 +5,9 @@
   "scripts": {
     "build": "node updatetime.js && webpack",
     "watch": "webpack --watch",
-    "dev:server": "nodemon server-src/server.js",
+    "dev:server": "nodemon server-src/server-runner.js",
     "dev": "concurrently -k \"npm:watch\" \"npm:dev:server\"",
-    "start": "node server-src/server.js",
+    "start": "node server-src/server-runner.js",
     "prestart": "node updatetime.js && webpack"
   },
   "devDependencies": {

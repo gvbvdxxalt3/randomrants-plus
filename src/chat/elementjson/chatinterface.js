@@ -196,6 +196,7 @@ var rightSide = {
           element: "div",
           gid: "typingNoticeDiv",
           className: "typingNoticeDiv",
+          children: [],
         },
       ],
     },

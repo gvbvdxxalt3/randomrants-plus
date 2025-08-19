@@ -15,6 +15,15 @@ var contentRange = require("content-range");
 var encryptor = require("../encrypt");
 var gvbbaseStorage = require("./storage.js"); //Supabase storage module.
 var cons = require("./constants.js");
+var userMediaDirectory = "./usermedia";
+try {
+  fs.rmSync(userMediaDirectory, { directory: true, recursive: true });
+} catch (e) {}
+try {
+  fs.mkdirSync(userMediaDirectory);
+} catch (e) {
+  console.log("Failed to make user media directory." + e);
+}
 
 var storage = new gvbbaseStorage(
   process.env.sbBucket,
@@ -216,6 +225,23 @@ function checkUsername(username) {
       return false;
     }
     i += 1;
+  }
+  return true;
+}
+
+function checkPassword(password) {
+  if (!password) {
+    return false;
+  }
+  if (typeof password !== "string") {
+    return false;
+  }
+  password = password.trim();
+  if (password.length < cons.MIN_PASSWORD_LENGTH) {
+    return false;
+  }
+  if (password.length > cons.MAX_PASSWORD_LENGTH) {
+    return false;
   }
   return true;
 }
@@ -939,6 +965,62 @@ function getFormattedTime() {
   return `${hours}:${formattedMinutes} ${ampm}`;
 }
 
+function terminateGhostSockets(ws) {
+  let isAlive = true;
+  let terminated = false;
+
+  function heartbeat() {
+    isAlive = true;
+  }
+
+  ws.on("pong", heartbeat);
+
+  const interval = setInterval(() => {
+    if (!isAlive) {
+      if (!terminated) {
+        terminated = true;
+        clearInterval(interval);
+        // Force close and emit 'close' if it hasn't happened
+        ws.terminate();
+        //ws.emit("close");
+      }
+      return;
+    }
+
+    isAlive = false;
+    try {
+      ws.ping();
+    } catch (err) {
+      if (!terminated) {
+        terminated = true;
+        clearInterval(interval);
+        ws.terminate();
+        //ws.emit("close");
+      }
+    }
+  }, 400); // Check 2.5 times per second (400ms intervals)
+
+  ws.on("close", () => {
+    if (!terminated) {
+      terminated = true;
+      clearInterval(interval);
+    }
+  });
+
+  // Start with a ping immediately
+  try {
+    ws.ping();
+  } catch (err) {
+    // Socket might already be broken
+    if (!terminated) {
+      terminated = true;
+      clearInterval(interval);
+      ws.terminate();
+      //ws.emit("close");
+    }
+  }
+}
+
 async function startRoomWSS(roomid) {
   var wss = new ws.WebSocketServer({ noServer: true });
   roomWebsockets[roomid.toString()] = "loading";
@@ -1055,7 +1137,6 @@ async function startRoomWSS(roomid) {
   var connectionIDCount = 0;
   wss._rrCommandHandler = new commandHandler(wss);
   wss.on("connection", (ws, request) => {
-    ws.ping();
     ws._rrConnectionID = connectionIDCount;
     connectionIDCount += 1;
     (async function () {
@@ -1140,14 +1221,7 @@ async function startRoomWSS(roomid) {
       if (!_isMediaRunning) {
       }
       ws._rrkeepAliveTimeout = null;
-      ws.on("pong", () => {
-        clearTimeout(ws._rrkeepAliveTimeout);
-        ws._rrkeepAliveTimeout = setTimeout(() => {
-          try {
-            ws.close();
-          } catch (e) {}
-        }, 10000);
-      });
+      terminateGhostSockets(ws);
       ws.on("message", (data) => {
         try {
           var json = JSON.parse(data.toString());
@@ -1300,6 +1374,18 @@ async function startRoomWSS(roomid) {
           }
           if (json.type == "postMessage") {
             if (typeof json.message == "string") {
+              if (json.message.length > 300) {
+                cli.send(
+                  JSON.stringify({
+                    type: "newMessage",
+                    message:
+                      "The message you tried to post is too long. Message was not posted.",
+                    isServer: true,
+                    displayName: "[Notice]",
+                  })
+                );
+                return;
+              }
               messageChatNumber += 1;
               wss._rrRoomMessages.push({
                 displayName: displayName,
@@ -1367,10 +1453,25 @@ async function startRoomWSS(roomid) {
         `${displayName} has joined the room.`,
         true
       );
-      ws._rrPeopleCount += 1;
+      if (wss._rrEndRoomTimeout) {
+        clearTimeout(wss._rrEndRoomTimeout); //Clear the timeout after a new websocket hops in.
+        wss._rrEndRoomTimeout = null;
+      }
+      wss._rrPeopleCount += 1;
       ws.on("close", () => {
         clearTimeout(ws._rrkeepAliveTimeout);
-        ws._rrPeopleCount -= 1;
+        wss._rrPeopleCount -= 1;
+        if (wss._rrPeopleCount < 1) {
+          wss._rrPeopleCount = 0;
+          if (wss._rrEndRoomTimeout) {
+            //Avoid any double timeouts.
+            clearTimeout(wss._rrEndRoomTimeout);
+          }
+          wss._rrEndRoomTimeout = setTimeout(
+            wss._rrEndRoom,
+            cons.ROOM_CLEANUP_TIMEOUT
+          ); //Destory the room websocket, but not the room data after the period of inactivity.
+        }
         sendOnlineList();
         sendRoomChatMessage(
           "[Random Rants +]",
@@ -1393,12 +1494,23 @@ async function startRoomWSS(roomid) {
     })();
   });
 
+  wss._rrEndRoom = function () {
+    wss._rrStopRoom();
+    roomWebsockets[roomid.toString()] = undefined;
+  };
+
+  wss._rrEndRoomTimeout = setTimeout(wss._rrEndRoom, cons.ROOM_CLEANUP_TIMEOUT);
+
   wss._rrStopRoom = function () {
     for (var client of wss.clients) {
       client.close();
     }
     wss.close();
     clearInterval(wss._rrKeepAliveInterval);
+    if (wss._rrEndRoomTimeout) {
+      //Avoid any double timeouts.
+      clearTimeout(wss._rrEndRoomTimeout);
+    }
   };
 
   wss._rrReloadUserlist = function () {
@@ -1522,7 +1634,6 @@ async function startRoomWSS(roomid) {
 
   wss._rrKeepAliveInterval = setInterval(() => {
     for (var client of wss.clients) {
-      client.ping();
       client.send(JSON.stringify({ type: "keepAlive" }));
     }
   }, 100);
@@ -1615,6 +1726,32 @@ const server = http.createServer(async function (req, res) {
     var decryptedUserdata = encryptor.decrypt(usercookie);
   }
 
+  if (decryptedUserdata) {
+    var hasInvalid = false;
+    try {
+      if (!checkUsername(decryptedUserdata.username)) {
+        hasInvalid = true;
+      }
+      if (!checkPassword(decryptedUserdata.password)) {
+        hasInvalid = true;
+      }
+      for (var char of decryptedUserdata.username) {
+        if (char.toLowerCase() !== char) {
+          hasInvalid = true;
+        }
+      }
+    } catch (e) {
+      hasInvalid = true;
+    }
+
+    if (hasInvalid) {
+      runStaticStuff(req, res, {
+        status: 400,
+      });
+      return;
+    }
+  }
+
   if (urlsplit[1] == "quickjoin") {
     if (urlsplit[2] == "code" && req.method == "POST") {
       (async function () {
@@ -1681,14 +1818,17 @@ const server = http.createServer(async function (req, res) {
             return;
           }
           var id = fileUploadCount + "z" + Math.round(Math.random() * 100000);
-          fileUploads[id] = fileInfo.buffer;
+          fs.writeFileSync(
+            path.join(userMediaDirectory, id + ".media"),
+            fileInfo.buffer
+          );
           fileUploadTypes[id] = fileInfo.mimeType;
           fileUploadCount += 1;
           res.end(JSON.stringify({ id }));
           setInterval(() => {
             fileUploadTypes[id] = null;
-            fileUploads[id] = null;
-          }, 1000 * 60 * (60 * 2)); //should be two hours
+            fs.rmSync(path.join(userMediaDirectory, id + ".media"));
+          }, 1000 * 60 * 30); //should be 30 minutes
         } catch (e) {
           res.statusCode = 500;
           res.end("Server error");
@@ -1700,7 +1840,9 @@ const server = http.createServer(async function (req, res) {
       var id = urlsplit[3];
       if (fileUploadTypes[id]) {
         var type = fileUploadTypes[id];
-        var data = fileUploads[id];
+        var data = fs.readFileSync(
+          path.join(userMediaDirectory, id + ".media")
+        );
 
         // Get the file length
         var fileLength = data.length;
@@ -1794,7 +1936,7 @@ const server = http.createServer(async function (req, res) {
           }
 
           var roomInfo = {
-            name: decryptedUserdata.username + "'s Room",
+            name: decryptedUserdata.username + "'s chatroom",
             owners: [decryptedUserdata.username.toLowerCase()],
           };
 

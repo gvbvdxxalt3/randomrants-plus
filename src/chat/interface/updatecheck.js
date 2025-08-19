@@ -12,12 +12,29 @@ var updateChecker = {
   },
   removeUpdateListener: function (id) {
     delete this.updateListeners[id];
-  }
+  },
 };
 
 var updateScreenDiv = elements.getGPId("rrUpdateScreen");
+var updateVersionTime = elements.getGPId("updateVersionTime");
 
-async function getVersion () {
+function formatTimeDifference(oldTimestamp, newTimestamp) {
+  let diffMs = Math.abs(newTimestamp - oldTimestamp);
+
+  const seconds = Math.floor(diffMs / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const years = Math.floor(days / 365);
+
+  if (years > 0) return years + " year" + (years > 1 ? "s" : "");
+  if (days > 0) return days + " day" + (days > 1 ? "s" : "");
+  if (hours > 0) return hours + " hour" + (hours > 1 ? "s" : "");
+  if (minutes > 0) return minutes + " minute" + (minutes > 1 ? "s" : "");
+  return seconds + " second" + (seconds !== 1 ? "s" : "");
+}
+
+async function getVersion() {
   try {
     var versionInfo = await fetchUtils.fetchAsJSON("/version.json");
     return versionInfo.timestamp;
@@ -28,8 +45,8 @@ async function getVersion () {
 
 (async function () {
   updateChecker.currentVersion = await getVersion();
-  
-  async function checkUpdate () {
+
+  async function checkUpdate() {
     const newVersion = await getVersion();
     if (!newVersion) {
       return;
@@ -37,6 +54,10 @@ async function getVersion () {
     if (newVersion !== updateChecker.currentVersion) {
       updateChecker.needsUpdate = true;
       updateScreenDiv.hidden = false;
+      updateVersionTime.textContent = formatTimeDifference(
+        Number(updateChecker.currentVersion),
+        Number(newVersion)
+      );
 
       for (const key in updateChecker.updateListeners) {
         const listener = updateChecker.updateListeners[key];
@@ -48,7 +69,7 @@ async function getVersion () {
       clearInterval(updateChecker.updateInterval);
     }
   }
-  
+
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) {
       // Tab became active again — check immediately

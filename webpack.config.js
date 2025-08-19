@@ -1,11 +1,21 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const VersionUpdatePlugin = require("./versionstampplugin.js");
 
-const pages = ["index", "signin", "signup", "myaccount", "chat", "join", "about", "security"];
-try{
-  require("fs").rmSync("./public",{recursive:true});
-}catch(e){}
+const pages = [
+  "index",
+  "signin",
+  "signup",
+  "myaccount",
+  "chat",
+  "join",
+  "about",
+  "security",
+];
+try {
+  require("fs").rmSync("./public", { recursive: true });
+} catch (e) {}
 
 module.exports = {
   mode: "production",
@@ -28,6 +38,9 @@ module.exports = {
     path: path.resolve(__dirname, "public"),
     filename: "[name].bundle.js",
     clean: true,
+  },
+  watchOptions: {
+    ignored: [path.resolve(__dirname, "wpstatic/version.json")], //Ignore version file.
   },
   module: {
     rules: [
@@ -75,6 +88,7 @@ module.exports = {
           noErrorOnMissing: true,
         },
       ],
-    })
+    }),
+    new VersionUpdatePlugin(),
   ],
 };

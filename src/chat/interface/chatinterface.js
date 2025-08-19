@@ -282,10 +282,12 @@ reconnectingScreen.hidden = true;
           chatInterface.hidden = false;
           reconnectingScreen.hidden = true;
           userState.isOwner = false;
+          addOwnershipUsernameButton.hidden = true;
         }
         if (json.type == "isOwner") {
           userState.isOwner = json.isOwner;
           showRoomSettingsButton.hidden = !json.isOwner;
+          addOwnershipUsernameButton.hidden = !json.isOwner;
         }
         if (json.type == "messages") {
           //This also clears messages and rewrites them.
@@ -386,14 +388,6 @@ reconnectingScreen.hidden = true;
               userInfo.isRealOwner,
               userState.isOwner,
               async function (promoting) {
-                if (!promoting) {
-                  var response = await dialogs.confirm(
-                    "Are you sure you want to remove ownership?\nThis will disable their owner functions."
-                  );
-                  if (!response) {
-                    return;
-                  }
-                }
                 await changeOwnershipUser(promoting, userInfo.username);
               }
             );
@@ -411,14 +405,6 @@ reconnectingScreen.hidden = true;
               i == 0, //If first one than its true owner.
               userState.isOwner,
               async function (promoting) {
-                if (!promoting) {
-                  var response = await dialogs.confirm(
-                    "Are you sure you want to remove ownership?\nThis will disable their owner functions."
-                  );
-                  if (!response) {
-                    return;
-                  }
-                }
                 await changeOwnershipUser(promoting, username);
               }
             );
