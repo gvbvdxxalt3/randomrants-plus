@@ -2,28 +2,29 @@ var elements = require("../../../gp2/elements.js");
 var dialog = require("../../../dialogs.js");
 var sws = require("../sharedwebsocket.js");
 var userState = require("../userstate.js");
+var uploadFileAsURL = require("../uploadfiles.js");
 
 var movingMediaTexts = [
   "Broadcasting at 144p, just kidding... or are we?",
-  "Your tabs are now everyone's business 💻",
+  "Your tabs are now everyone's business",
   "Don’t alt-tab into your search history!",
   "Lag is temporary, screenshots are forever",
   "Pixel-perfect judgment is happening now",
   "Trying not to stream your homework folder...",
-  "Your screen is loud and proud 📢",
-  "Hope you closed that other tab 👀",
+  "Your screen is loud and proud",
+  "Hope you closed that other tab",
   "Stream stabilized... for now",
-  "Initializing RantVision™ tech 📺",
-  "Zooming in on your chaos 🧪",
-  "Deploying screen-sharing goblins 👾",
-  "Everyone is judging your cursor speed 🖱️",
-  "Virtual popcorn ready 🍿",
+  "Initializing RantVision™ tech",
+  "Zooming in on your chaos",
+  "Deploying screen-sharing goblins",
+  "Everyone is judging your cursor speed",
+  "Virtual popcorn ready",
   "Screencast engaged. Panic level: 2",
   "Loading pixel juice...",
-  "Building lag-resistant warp tunnel ⏳",
-  "Beaming your gameplay to the universe 🚀",
-  "Calibrating chaos stream 🔄",
-  "Tapping into the multi-screenverse 🌐",
+  "Building lag-resistant warp tunnel",
+  "Beaming your gameplay to the universe",
+  "Calibrating chaos stream",
+  "Tapping into the multi-screenverse",
 ];
 
 var noInstantPlayNotice =
@@ -772,6 +773,60 @@ async function doMediaSelect() {
                     ],
                   },
 
+                  {
+                    element: "div",
+                    className: "divButton roundborder",
+                    eventListeners: [
+                      {
+                        event: "click",
+                        func: async function (e) {
+                          e.preventDefault();
+                          div.remove();
+                          div = null;
+                          var input = document.createElement("input");
+                          input.onchange = async function () {
+                            if (input.files[0]) {
+                              var file = input.file[0];
+                              var url = await uploadFileAsURL(file);
+                              if (url) {
+                                sws.send(
+                                  JSON.stringify({
+                                    type: "media",
+                                    command: "mediaResetRequest",
+                                  })
+                                );
+                                sws.send(
+                                  JSON.stringify({
+                                    type: "media",
+                                    command: "mediaEmbedRunning",
+                                    url: url,
+                                  })
+                                );
+                              }
+                            }
+                          };
+                          input.type = "file";
+                          input.accept = "video/*, audio/*";
+                          input.click();
+                        },
+                      },
+                    ],
+                    children: [
+                      surroundFlexboxDiv([
+                        {
+                          element: "img",
+                          src: "images/file.svg",
+                          style: { height: "25px" },
+                        },
+                        {
+                          element: "span",
+                          textContent:
+                            "Play video/audio (Short files recommended)",
+                        },
+                      ]),
+                    ],
+                  },
+
                   //This is not going to die (i hope), i'm just working on making it work with render.com
 
                   /*
@@ -880,7 +935,7 @@ chooseMediaButton.addEventListener("click", (e) => {
   doMediaSelect();
 });
 
-userState.on("permissionUpdate", (name,value) => {
+userState.on("permissionUpdate", (name, value) => {
   if (name == "media") {
     chooseMediaButton.hidden = !value; //Show button IF has permission to do so.
   }

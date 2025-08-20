@@ -267,6 +267,14 @@ class CommandHandler {
     );
 
     addCommand(
+      "funni",
+      function (args, userInfo, senderClient) {
+        sendClientCommand(senderClient, "funni");
+      },
+      "XD"
+    );
+
+    addCommand(
       "confetti",
       function (args, userInfo, senderClient) {
         var foundClients = searchUsersByKey(args[0], senderClient);

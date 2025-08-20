@@ -5,18 +5,8 @@ var accountHelper = require("../../accounthelper");
 var messageAttachFilesButton = elements.getGPId("messageAttachFilesButton");
 var messageInputBox = elements.getGPId("messageInputBox");
 
-async function uploadFileAsURL(blob) {
-  try {
-    const formData = new FormData();
-    formData.append("file", blob, blob.name); // Append the file as "file" field
-    var fileurl = accountHelper.getServerURL() + "/uploads/" + "file";
-    var a = await fetch(fileurl, { method: "POST", body: formData });
-    var b = await a.json();
-    return `${fileurl}/${b.id}/${encodeURIComponent(blob.name)}`;
-  } catch (e) {
-    return "";
-  }
-}
+var uploadFileAsURL = require("./uploadfiles.js");
+
 var ogAttachText = messageAttachFilesButton.innerHTML;
 messageAttachFilesButton.addEventListener("click", async function () {
   var buttonChoose = await dialogs.displayButtonChooser(
@@ -76,6 +66,7 @@ messageAttachFilesButton.addEventListener("click", async function () {
       messageAttachFilesButton.disabled = false;
       messageAttachFilesButton.innerHTML = ogAttachText;
     }
+    input.remove();
   };
   input.type = "file";
   input.accept = acceptTypes;

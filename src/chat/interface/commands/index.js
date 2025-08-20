@@ -188,4 +188,21 @@ com.confetti = function () {
   }, 2000);
 };
 
+com.funni = async function () {
+  var img = document.createElement("img");
+  img.src = "https://jasonglenevans.github.io/GvbvdxxChatEmojis/MSG_5.png";
+  img.style.top = "0";
+  img.style.left = "0";
+  img.style.position = "fixed";
+  img.style.width = "100vw";
+  img.style.height = "100vh";
+  img.style.pointerEvents = "none";
+  var audio = new Audio("sounds/laughing-chihuahua.mp3");
+  await audio.play();
+  document.body.append(img);
+  audio.onended = () => {
+    audio.remove();
+    img.remove();
+  };
+};
 module.exports = com;

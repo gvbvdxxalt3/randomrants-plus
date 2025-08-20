@@ -198,7 +198,7 @@ reconnectingScreen.hidden = true;
             { transform: "translate(0px, 0px)" },
           ],
           {
-            duration: 50,
+            duration: 120,
             easing: "ease-in",
           }
         );

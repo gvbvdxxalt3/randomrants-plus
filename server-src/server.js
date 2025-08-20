@@ -1663,6 +1663,7 @@ async function startRoomWSS(roomid) {
 var fileUploads = {};
 var fileUploadCount = 0;
 var fileUploadTypes = {};
+var fileUploadTimeouts = {};
 
 var roomPermNames = [
   //These are kinda hardcoded into the logic of the server, so be careful and make sure you account for code before editing this!
@@ -1861,10 +1862,11 @@ const server = http.createServer(async function (req, res) {
           fileUploadTypes[id] = fileInfo.mimeType;
           fileUploadCount += 1;
           res.end(JSON.stringify({ id }));
-          setInterval(() => {
+          fileUploadTimeouts[id] = setTimeout(() => {
             fileUploadTypes[id] = null;
+            fileUploadTimeouts[id] = null;
             fs.rmSync(path.join(userMediaDirectory, id + ".media"));
-          }, 1000 * 60 * 30); //should be 30 minutes
+          }, 1000 * 60 * 10); //should be 10 minutes
         } catch (e) {
           res.statusCode = 500;
           res.end("Server error");
@@ -1879,6 +1881,13 @@ const server = http.createServer(async function (req, res) {
         var data = fs.readFileSync(
           path.join(userMediaDirectory, id + ".media")
         );
+
+        clearTimeout(fileUploadTimeouts[id]);
+        fileUploadTimeouts[id] = setTimeout(() => {
+          fileUploadTypes[id] = null;
+          fileUploadTimeouts[id] = null;
+          fs.rmSync(path.join(userMediaDirectory, id + ".media"));
+        }, 1000 * 60 * 10);
 
         // Get the file length
         var fileLength = data.length;
