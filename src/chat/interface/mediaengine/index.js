@@ -786,8 +786,10 @@ async function doMediaSelect() {
                           var input = document.createElement("input");
                           input.onchange = async function () {
                             if (input.files[0]) {
-                              var file = input.file[0];
+                              var file = input.files[0];
+                              var loadingMediaDiv = doLoadingMediaScreen();
                               var url = await uploadFileAsURL(file);
+                              loadingMediaDiv.remove();
                               if (url) {
                                 sws.send(
                                   JSON.stringify({
