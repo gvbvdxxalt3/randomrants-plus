@@ -1,5 +1,7 @@
+//Don't question how this is stored.
+var jokes = `
 Was just trying to be funny. Instead, people invented "Jason Touch". Now nobody wants to touch me. Well.. not everyone.
-Gaining laughter... and bad habits.
+Gaining laughter... and possibly bad habits.
 This may or may not start halway fights. Im not responsible for that.
 What gives "staying on my PC for summer" and "I don't feel like doing schoolwork" the fun it needs.
 Made with Jason Touch... Cross your fingers for luck, not to get it.
@@ -39,7 +41,7 @@ This is what happens when “group project” turns into game dev.
 We regret nothing. Except maybe the crash logs.
 Made entirely during advisory.
 Built on vibes and HTML.
-Hosted on glitch.me, because everything needs to have at least one glitch to be good.
+Originally hosted on glitch.me, because everything needs to have at least one glitch to be good.
 Looked in the crash logs, and saw: "Can't make sense of 'ohio'."
 What happens when the kid that does nothing but tech, pairs up with the kid that scroll through youtube short memes.
 The afterlife of getting banned on scratch is this.
@@ -304,3 +306,5 @@ Someone yelled “CHROMEBOOK GANG RISE UP” and now it’s war.
 Loading Random Rants+... hopefully before the teacher notices.
 They joined from a school bus. The audio is a mess. Perfect.
 One Chromebook fell asleep. The chaos didn’t.
+`;
+module.exports = jokes.trim().split("\n");

@@ -2,9 +2,6 @@ var elements = require("../../gp2/elements.js");
 var currentRoom = require("./getroom.js");
 var accountHelper = require("../../accounthelper");
 
-var randomTexts = require("../../randomdialog.txt");
-var randomTextsArray = randomTexts.split("\n");
-
 var rrLoadingScreenText = elements.getGPId("rrLoadingScreenText"); //Gets the loading screen text element.
 var randomFactSpan = elements.getGPId("randomFactSpan");
 

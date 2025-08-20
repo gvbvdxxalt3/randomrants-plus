@@ -1,4 +1,5 @@
 var fortunes = require("./fortunes.js");
+var jokes = require("./jokes.js");
 
 class CommandHandler {
   constructor(wss) {
@@ -189,7 +190,7 @@ class CommandHandler {
           sendClientCommand(client, "luigJoke");
         });
       },
-      "Run it and it will explain it all"
+      "Run it, and it will explain it all"
     );
 
     addCommand(
@@ -254,6 +255,31 @@ class CommandHandler {
       "Tells everyone your questionable fortune."
     );
 
+    addCommand(
+      "joke",
+      function (args, userInfo, senderClient) {
+        const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+        const jokeMessage = `[color css=yellow]${randomJoke}[/color]`;
+
+        _this.sendFeedbackGlobal(jokeMessage);
+      },
+      "Tells everyone your probaly questionable joke."
+    );
+
+    addCommand(
+      "confetti",
+      function (args, userInfo, senderClient) {
+        var foundClients = searchUsersByKey(args[0], senderClient);
+        if (foundClients.length < 1) {
+          foundClients = searchUsersByKey("@all", senderClient);
+        }
+        foundClients.forEach((otherClient) => {
+          sendClientCommand(otherClient, "confetti");
+        });
+      },
+      "<Username>[br]Yipee!"
+    );
+
     ////////////////////////////////////////////////////
   }
 
@@ -296,7 +322,7 @@ class CommandHandler {
           client
         );
       } catch (e) {
-        console.warn(
+        console.log(
           `[Command warning]: Command ${commandName} failed with error ${e}`
         );
       }

@@ -5,6 +5,7 @@ var elements = require("../../../gp2/elements.js");
 var dialogs = require("../../../dialogs.js");
 var sws = require("../sharedwebsocket.js");
 var audio = require("../../../audio.js");
+var confetti = require("./confetti.js");
 
 var commandEffectsDiv = elements.getGPId("commandEffects");
 
@@ -178,6 +179,13 @@ com.freeze = function () {
   setTimeout(() => {
     document.body.style.pointerEvents = "auto";
   }, 5000);
+};
+
+com.confetti = function () {
+  confetti.startConfetti();
+  setTimeout(() => {
+    confetti.stopConfetti();
+  }, 2000);
 };
 
 module.exports = com;

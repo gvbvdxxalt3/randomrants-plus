@@ -16,6 +16,10 @@ var encryptor = require("../encrypt");
 var gvbbaseStorage = require("./storage.js"); //Supabase storage module.
 var cons = require("./constants.js");
 var userMediaDirectory = "./usermedia";
+var wssServerOptions = {
+  //Options to prevent abuse.
+  maxPayload: 1024 * 10,
+};
 try {
   fs.rmSync(userMediaDirectory, { directory: true, recursive: true });
 } catch (e) {}
@@ -34,7 +38,7 @@ var wss = wssHandler.wss;
 var messageChatNumber = 0;
 var adminKey = process.env.adminKey;
 var appealURL = process.env.formURL;
-var mailWs = new ws.WebSocketServer({ noServer: true });
+var mailWs = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
 var commandHandler = require("./commands.js");
 if (!adminKey) {
   adminKey = false;
@@ -980,7 +984,6 @@ function terminateGhostSockets(ws) {
       if (!terminated) {
         terminated = true;
         clearInterval(interval);
-        // Force close and emit 'close' if it hasn't happened
         ws.terminate();
         //ws.emit("close");
       }
@@ -1007,7 +1010,6 @@ function terminateGhostSockets(ws) {
     }
   });
 
-  // Start with a ping immediately
   try {
     ws.ping();
   } catch (err) {
@@ -1016,12 +1018,11 @@ function terminateGhostSockets(ws) {
       terminated = true;
       clearInterval(interval);
       ws.terminate();
-      //ws.emit("close");
     }
   }
 }
 
-var noRoomWss = new ws.WebSocketServer({ noServer: true });
+var noRoomWss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
 
 noRoomWss.on("connection", (ws, request) => {
   ws.send(
@@ -1038,7 +1039,7 @@ noRoomWss.on("connection", (ws, request) => {
 });
 
 async function startRoomWSS(roomid) {
-  var wss = new ws.WebSocketServer({ noServer: true });
+  var wss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
   roomWebsockets[roomid.toString()] = "loading";
   var info = await getRoomInfo(roomid);
   if (!info) {
@@ -1154,6 +1155,7 @@ async function startRoomWSS(roomid) {
   wss._rrCommandHandler = new commandHandler(wss);
   wss.on("connection", (ws, request) => {
     ws._rrConnectionID = connectionIDCount;
+    ws._rrLastMessageTime = Date.now();
     connectionIDCount += 1;
     (async function () {
       ws._rrIsOwner = false;
@@ -1391,7 +1393,7 @@ async function startRoomWSS(roomid) {
           if (json.type == "postMessage") {
             if (typeof json.message == "string") {
               if (json.message.length > 300) {
-                cli.send(
+                ws.send(
                   JSON.stringify({
                     type: "newMessage",
                     message:
@@ -1770,9 +1772,9 @@ const server = http.createServer(async function (req, res) {
 
   if (urlsplit[1] == "client") {
     if (urlsplit[2] == "version") {
-      try{
+      try {
         res.end(fs.readFileSync("wpstatic/version.json"));
-      }catch(e){
+      } catch (e) {
         res.statusCode = 404;
         res.end("No version info was found.");
       }
@@ -3079,59 +3081,59 @@ server.on("upgrade", async function upgrade(request, socket, head) {
   var urlsplit = url.split("/");
   var id = urlsplit[1];
   var wss = null;
-  try{
-  if (id) {
-    id = id.toLowerCase();
-    var roomWs = roomWebsockets[id.toString()];
-    if (roomWs) {
-      if (roomWs == "loading") {
-        wss = new ws.WebSocketServer({ noServer: true });
-        wss.on("connection", (ws, request) => {
-          ws.send(
-            JSON.stringify({
-              type: "roomStillLoading",
-            })
-          );
+  try {
+    if (id) {
+      id = id.toLowerCase();
+      var roomWs = roomWebsockets[id.toString()];
+      if (roomWs) {
+        if (roomWs == "loading") {
+          wss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
+          wss.on("connection", (ws, request) => {
+            ws.send(
+              JSON.stringify({
+                type: "roomStillLoading",
+              })
+            );
 
-          var timeout = setTimeout(() => {
-            ws.close();
-          }, 1000);
-          ws.on("close", () => {
-            clearTimeout(timeout);
+            var timeout = setTimeout(() => {
+              ws.close();
+            }, 1000);
+            ws.on("close", () => {
+              clearTimeout(timeout);
+            });
           });
-        });
+        } else {
+          wss = roomWs;
+        }
       } else {
-        wss = roomWs;
+        wss = await startRoomWSS(id);
       }
     } else {
-      wss = await startRoomWSS(id);
-    }
-  } else {
-    wss = new ws.WebSocketServer({ noServer: true });
+      wss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
 
-    wss.on("connection", (ws, request) => {
-      ws.send(
-        JSON.stringify({
-          type: "invalidRoomId",
-        })
-      );
+      wss.on("connection", (ws, request) => {
+        ws.send(
+          JSON.stringify({
+            type: "invalidRoomId",
+          })
+        );
 
-      var timeout = setTimeout(() => {
-        ws.close();
-      }, 1000);
-      ws.on("close", () => {
-        clearTimeout(timeout);
+        var timeout = setTimeout(() => {
+          ws.close();
+        }, 1000);
+        ws.on("close", () => {
+          clearTimeout(timeout);
+        });
       });
-    });
-  }
-}catch(e){
-  console.log("Got strange error from processing websocket request: ",e);
-  wss = new ws.WebSocketServer({ noServer: true });
+    }
+  } catch (e) {
+    console.log("Got strange error from processing websocket request: ", e);
+    wss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
 
     wss.on("connection", (ws, request) => {
       ws.close();
     });
-}
+  }
 
   wss.handleUpgrade(request, socket, head, function done(ws) {
     wss.emit("connection", ws, request);

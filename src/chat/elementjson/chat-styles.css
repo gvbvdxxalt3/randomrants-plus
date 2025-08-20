@@ -383,6 +383,32 @@ body {
   }
 }
 
+.loaderImage {
+  width: 60px;
+  height: 60px;
+  animation: chillBounce 1.2s ease-in-out infinite;
+  position: absolute;
+  transform-origin: center center;
+}
+
+@keyframes chillBounce {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) rotate(3deg) scale(1.05, 0.95);
+  }
+  50% {
+    transform: translateY(0) rotate(-2deg) scale(0.95, 1.05);
+  }
+  75% {
+    transform: translateY(-4px) rotate(2deg) scale(1.02, 0.98);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
 .soundboardButton {
   min-width: 150px;
   width: fit-content;
