@@ -25,7 +25,8 @@ body {
 }
 
 .menuBarItem,
-.menuBarItemUsername {
+.menuBarItemUsername,
+.menuBarItemLogo {
   color: #000;
   height: 40px;
   display: flex;
@@ -42,6 +43,11 @@ body {
 }
 
 .menuBarItemUsername:hover {
+  background: #787878;
+  border-radius: 5px;
+}
+
+.menuBarItemLogo:hover {
   background: #787878;
   border-radius: 5px;
 }

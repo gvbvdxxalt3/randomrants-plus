@@ -346,7 +346,7 @@ reconnectingScreen.hidden = true;
         }
         if (json.type == "roomStillLoading") {
           rrLoadingStatusText.textContent =
-            "Waiting for server to actually load the room...";
+            "The server is trying to catch up with the chaos...";
         }
         if (json.type == "roomName") {
           roomSettings.changeRoomName(json.name);

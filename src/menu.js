@@ -6,23 +6,27 @@ var elementJSON = [
     className: "menuBar",
     gid:"menu_bar",
     children: [
-      {
-        element: "img",
-        src: "images/appicon.svg"
-      },
       //Home button
       {
         element: "div",
-        className: "menuBarItem",
-        textContent: "Random Rants +",
+        className: "menuBarItemLogo",
+        children: [
+          {
+            element: "img",
+            src: "images/randomrants-plus.svg",
+            style: {
+              height: "100%"
+            }
+          },
+        ],
         eventListeners: [
           {
             event: "click",
             func: function () {
               window.location.href = "/";
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       //Chat button.
       {

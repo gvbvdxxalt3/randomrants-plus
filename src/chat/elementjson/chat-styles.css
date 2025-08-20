@@ -533,26 +533,32 @@ a {
   height: 40px;
 }
 
-.menuBarItem {
+.menuBarItem,
+.menuBarItemUsername,
+.menuBarItemLogo {
+  color: #000;
   height: 40px;
-  align-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   user-select: none;
-  width: fit-content;
-  height: 40px;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding: 0 8px;
+  transition: background-color 0.2s, color 0.2s;
 }
-.menuBarItemInput {
-  height: 40px;
-  align-content: center;
-  width: fit-content;
-  height: 40px;
-  padding-left: 3px;
-  padding-right: 3px;
-}
+
 .menuBarItem:hover {
-  color: var(--menu-bar-hover-color);
+  color: #ebebeb;
+}
+
+.menuBarItemUsername:hover {
+  background: #787878;
+  border-radius: 5px;
+}
+
+.menuBarItemLogo:hover {
+  background: #787878;
+  border-radius: 5px;
 }
 
 .selectObj {

@@ -12,11 +12,11 @@ document.addEventListener("click", (e) => {
       el.getAttribute("onclick") !== null ||
       style.cursor === "pointer" ||
       el.getAttribute("role") === "button" ||
-      clickableClasses.some(cls => el.classList.contains(cls)) ||
+      clickableClasses.some((cls) => el.classList.contains(cls)) ||
       el.tabIndex >= 0;
 
     if (isClickable) {
-      sounds.play("select",1);
+      sounds.play("select", 1);
       return;
     }
 
@@ -24,8 +24,8 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Global keydown listener for typing sound
-document.addEventListener("keydown", e => {
+// Global input listener for typing sound
+document.addEventListener("input", (e) => {
   const el = e.target;
 
   // Check if typing is happening in editable fields
@@ -37,4 +37,3 @@ document.addEventListener("keydown", e => {
     sounds.play("type", 1);
   }
 });
-

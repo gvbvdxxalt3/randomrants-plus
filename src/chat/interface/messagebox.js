@@ -30,6 +30,14 @@ messageSendButton.addEventListener("click", function () {
   messageInputBox.value = "";
 });
 
+messageInputBox.addEventListener("input", function () {
+  sws.send(
+    JSON.stringify({
+      type: "typing",
+    })
+  );
+});
+
 messageInputBox.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
     sendMessageFromTextBox();
@@ -55,10 +63,4 @@ messageInputBox.addEventListener("keydown", function (e) {
     e.preventDefault();
     return;
   }
-
-  sws.send(
-    JSON.stringify({
-      type: "typing",
-    })
-  );
 });

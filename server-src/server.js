@@ -1021,13 +1021,29 @@ function terminateGhostSockets(ws) {
   }
 }
 
+var noRoomWss = new ws.WebSocketServer({ noServer: true });
+
+noRoomWss.on("connection", (ws, request) => {
+  ws.send(
+    JSON.stringify({
+      type: "doesNotExist",
+    })
+  );
+  var timeout = setTimeout(() => {
+    ws.close();
+  }, 1000);
+  ws.on("close", () => {
+    clearTimeout(timeout);
+  });
+});
+
 async function startRoomWSS(roomid) {
   var wss = new ws.WebSocketServer({ noServer: true });
   roomWebsockets[roomid.toString()] = "loading";
   var info = await getRoomInfo(roomid);
   if (!info) {
     roomWebsockets[roomid.toString()] = undefined;
-    return;
+    return noRoomWss;
   }
   info = applyNewRoomPermissionValues(info); //Apply the new permission stuff if not done yet.
   wss._rrRoomPermissions = info.permissions;
@@ -1750,6 +1766,24 @@ const server = http.createServer(async function (req, res) {
       });
       return;
     }
+  }
+
+  if (urlsplit[1] == "client") {
+    if (urlsplit[2] == "version") {
+      try{
+        res.end(fs.readFileSync("wpstatic/version.json"));
+      }catch(e){
+        res.statusCode = 404;
+        res.end("No version info was found.");
+      }
+      return;
+    }
+    if (urlsplit[2] == "time") {
+      res.end(JSON.stringify({ serverTime: Date.now() }));
+    }
+    res.statusCode = 404;
+    res.end("");
+    return;
   }
 
   if (urlsplit[1] == "quickjoin") {
@@ -3045,6 +3079,7 @@ server.on("upgrade", async function upgrade(request, socket, head) {
   var urlsplit = url.split("/");
   var id = urlsplit[1];
   var wss = null;
+  try{
   if (id) {
     id = id.toLowerCase();
     var roomWs = roomWebsockets[id.toString()];
@@ -3070,23 +3105,6 @@ server.on("upgrade", async function upgrade(request, socket, head) {
       }
     } else {
       wss = await startRoomWSS(id);
-      if (!wss) {
-        wss = new ws.WebSocketServer({ noServer: true });
-
-        wss.on("connection", (ws, request) => {
-          ws.send(
-            JSON.stringify({
-              type: "doesNotExist",
-            })
-          );
-          var timeout = setTimeout(() => {
-            ws.close();
-          }, 1000);
-          ws.on("close", () => {
-            clearTimeout(timeout);
-          });
-        });
-      }
     }
   } else {
     wss = new ws.WebSocketServer({ noServer: true });
@@ -3106,14 +3124,27 @@ server.on("upgrade", async function upgrade(request, socket, head) {
       });
     });
   }
+}catch(e){
+  console.log("Got strange error from processing websocket request: ",e);
+  wss = new ws.WebSocketServer({ noServer: true });
+
+    wss.on("connection", (ws, request) => {
+      ws.close();
+    });
+}
 
   wss.handleUpgrade(request, socket, head, function done(ws) {
     wss.emit("connection", ws, request);
   });
 });
 
+var serverPort = 3000;
+if (process.env.serverPort) {
+  serverPort = Number(process.env.serverPort);
+}
+
 (async function () {
   await checkServerLoop(); //when it loops back, it accepts the promise.
-  server.listen(3000);
-  console.log("Server active on http://localhost:3000");
+  server.listen(serverPort);
+  console.log("Server active on http://localhost:" + serverPort);
 })();

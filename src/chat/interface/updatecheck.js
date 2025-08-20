@@ -36,8 +36,16 @@ function formatTimeDifference(oldTimestamp, newTimestamp) {
 
 async function getVersion() {
   try {
-    var versionInfo = await fetchUtils.fetchAsJSON("/version.json");
+    var versionInfo = await fetchUtils.fetchAsJSON("/client/version");
     return versionInfo.timestamp;
+  } catch (e) {
+    return null;
+  }
+}
+async function getServerTime() {
+  try {
+    var versionInfo = await fetchUtils.fetchAsJSON("/client/time");
+    return versionInfo.serverTime;
   } catch (e) {
     return null;
   }
@@ -48,15 +56,19 @@ async function getVersion() {
 
   async function checkUpdate() {
     const newVersion = await getVersion();
+    const serverTime = await getServerTime();
     if (!newVersion) {
+      return;
+    }
+    if (!serverTime) {
       return;
     }
     if (newVersion !== updateChecker.currentVersion) {
       updateChecker.needsUpdate = true;
       updateScreenDiv.hidden = false;
       updateVersionTime.textContent = formatTimeDifference(
-        Number(updateChecker.currentVersion),
-        Number(newVersion)
+        Number(newVersion),
+        Number(serverTime)
       );
 
       for (const key in updateChecker.updateListeners) {
@@ -72,8 +84,9 @@ async function getVersion() {
 
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) {
-      // Tab became active again — check immediately
-      checkUpdate();
+      if (!updateChecker.needsUpdate) {
+        checkUpdate(); //Double check just to make sure.
+      }
     }
   });
 

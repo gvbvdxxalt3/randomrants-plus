@@ -7,13 +7,17 @@ var menuBar = elements.getGPId("menuBar");
 
 var menuItems = [
   {
-    element: "img",
-    src: "images/appicon.svg",
-  },
-  {
     element: "div",
-    className: "menuBarItem",
-    textContent: "Random Rants +",
+    className: "menuBarItemLogo",
+    children: [
+      {
+        element: "img",
+        src: "images/randomrants-plus.svg",
+        style: {
+          height: "100%"
+        }
+      },
+    ],
     eventListeners: [
       {
         event: "click",

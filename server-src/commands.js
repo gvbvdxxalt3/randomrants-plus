@@ -38,6 +38,7 @@ class CommandHandler {
           senderClient,
           "The new command for all listed commands is ;help"
         );
+        _this.doCommand(["help"], senderClient); //Run help command as the sender.
       },
       "Just a placeholder command, it only tells the person using it to use the help command."
     );
@@ -101,6 +102,10 @@ class CommandHandler {
         }
         if (commandArgs[0].startsWith(";")) {
           commandArgs[0] = commandArgs[0].slice(1);
+        }
+        if (commandArgs[0] == "runAs") {
+          sendFeedbackGlobal("command runAs can't be chained.");
+          return;
         }
         foundClients.forEach((otherClient) => {
           _this.doCommand(commandArgs, otherClient);
@@ -184,7 +189,7 @@ class CommandHandler {
           sendClientCommand(client, "luigJoke");
         });
       },
-      "What do you think this command does?"
+      "Run it and it will explain it all"
     );
 
     addCommand(
@@ -211,7 +216,7 @@ class CommandHandler {
           sendClientCommand(otherClient, "shake", Number(args[1]));
         });
       },
-      "<Username>[br]Gives the specified users a good screen shake."
+      "<Username> <Intensity>[br]Gives the specified users a screen shake."
     );
 
     addCommand(
