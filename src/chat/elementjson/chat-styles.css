@@ -443,8 +443,8 @@ body {
 }
 
 .soundboardButtonDisplayNames {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  transform: translate(-50%, calc(-100% + 40px));
 }
 
 .soundboardButtonStop {
@@ -1033,4 +1033,13 @@ a {
   padding: 4px 8px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
+}
+
+.soundboardActiveText {
+  font-weight: bold;
+  color: black;
+  padding: 2px 4px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  font-size: 10px;
 }

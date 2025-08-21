@@ -970,8 +970,8 @@ function getFormattedTime() {
 }
 
 function terminateGhostSockets(ws) {
-  let isAlive = true;
-  let terminated = false;
+  var isAlive = true;
+  var terminated = false;
 
   function heartbeat() {
     isAlive = true;
@@ -979,7 +979,7 @@ function terminateGhostSockets(ws) {
 
   ws.on("pong", heartbeat);
 
-  const interval = setInterval(() => {
+  var interval = setInterval(() => {
     if (!isAlive) {
       if (!terminated) {
         terminated = true;
@@ -1001,7 +1001,7 @@ function terminateGhostSockets(ws) {
         //ws.emit("close");
       }
     }
-  }, 400); // Check 2.5 times per second (400ms intervals)
+  }, 1500); // Check every 1500 miliseconds.
 
   ws.on("close", () => {
     if (!terminated) {
@@ -1060,11 +1060,8 @@ async function startRoomWSS(roomid) {
       return true;
     }
     //Owner needs to check if has the ownership.
-    if (wss._rrRoomPermissions[permName] == "owner") {
-      if (ws._rrIsOwner) {
-        //Have small anxiety about using the && and || operators with == operators. This should calm myself, but look weird for other developers.
-        return true;
-      }
+    if (wss._rrRoomPermissions[permName] == "owner" && ws._rrIsOwner) {
+      return true;
     }
     //None or an invalid value is false.
     return false;
@@ -1270,6 +1267,8 @@ async function startRoomWSS(roomid) {
                   type: "playSoundboard",
                   index: json.index,
                   mult: json.mult,
+                  displayName: ws._rrDisplayName,
+                  username: ws._rrUsername,
                 })
               );
             }
@@ -1392,12 +1391,12 @@ async function startRoomWSS(roomid) {
           }
           if (json.type == "postMessage") {
             if (typeof json.message == "string") {
-              if (json.message.length > 300) {
+              if (json.message.length > cons.MAX_MESSAGE_SIZE) {
                 ws.send(
                   JSON.stringify({
                     type: "newMessage",
                     message:
-                      "The message you tried to post is too long. Message was not posted.",
+                      "The message you tried to post is too long.[br]The message was not posted.",
                     isServer: true,
                     displayName: "[Notice]",
                   })
@@ -1733,6 +1732,19 @@ function generateQuickJoinCode() {
   return string;
 }
 
+function getMediaFolderSizeSync() {
+  var size = 0;
+  for (var file of fs.readdirSync(userMediaDirectory)) {
+    try {
+      var stat = fs.statSync(path.join(userMediaDirectory, file));
+      size += stat.size;
+    } catch (e) {
+      console.log("Failed to read file " + file + " stat", e);
+    }
+  }
+  return size;
+}
+
 const server = http.createServer(async function (req, res) {
   setNoCorsHeaders(res);
 
@@ -1839,19 +1851,30 @@ const server = http.createServer(async function (req, res) {
       (async function () {
         try {
           var size = 0;
-          if (req.headers["content-length"] > cons.MAX_IMAGE_SIZE) {
+          if (req.headers["content-length"] > cons.MAX_FILE_MEDIA_SIZE) {
             size = parseInt(req.headers["content-length"], 10);
           }
 
-          if (size > cons.MAX_IMAGE_SIZE) {
+          if (size > cons.MAX_FILE_MEDIA_SIZE) {
             res.statusCode = 413;
             res.end("File is too big.");
             return;
           }
           var fileInfo = await waitBusboyFile(req);
-          if (fileInfo.buffer.length > cons.MAX_IMAGE_SIZE) {
+          if (fileInfo.buffer.length > cons.MAX_FILE_MEDIA_SIZE) {
             res.statusCode = 413;
             res.end("File is too big.");
+            return;
+          }
+          if (
+            fileInfo.buffer.length + getMediaFolderSizeSync() >
+            cons.MAX_MEDIA_FOLDER_SIZE
+          ) {
+            res.statusCode = 413;
+            res.end(
+              "User media folder is too large, please wait for some files to expire."
+            );
+            console.log("Warning: the user media folder is hitting limits");
             return;
           }
           var id = fileUploadCount + "z" + Math.round(Math.random() * 100000);
@@ -1878,9 +1901,7 @@ const server = http.createServer(async function (req, res) {
       var id = urlsplit[3];
       if (fileUploadTypes[id]) {
         var type = fileUploadTypes[id];
-        var data = fs.readFileSync(
-          path.join(userMediaDirectory, id + ".media")
-        );
+        var filePath = path.join(userMediaDirectory, id + ".media");
 
         clearTimeout(fileUploadTimeouts[id]);
         fileUploadTimeouts[id] = setTimeout(() => {
@@ -1888,9 +1909,9 @@ const server = http.createServer(async function (req, res) {
           fileUploadTimeouts[id] = null;
           fs.rmSync(path.join(userMediaDirectory, id + ".media"));
         }, 1000 * 60 * 10);
-
+        var fileStat = fs.statSync(filePath);
         // Get the file length
-        var fileLength = data.length;
+        var fileLength = fileStat.size;
 
         // Check if the 'Range' header is present in the request
         var range = req.headers["range"];
@@ -1915,9 +1936,6 @@ const server = http.createServer(async function (req, res) {
               return;
             }
 
-            // Slice the data for the requested byte range
-            var chunk = data.slice(start, end + 1);
-
             // Set headers for partial content response
             res.statusCode = 206; // Partial Content
             res.setHeader("Content-Type", type); // Correct MIME type for audio
@@ -1925,11 +1943,20 @@ const server = http.createServer(async function (req, res) {
               "Content-Range",
               `bytes ${start}-${end}/${fileLength}`
             );
-            res.setHeader("Content-Length", chunk.length);
+            res.setHeader("Content-Length", end - start + 1);
             res.setHeader("Accept-Ranges", "bytes"); // Inform the client we support ranges
 
-            // Send the chunk of data for the requested range
-            res.end(chunk);
+            var stream = fs.createReadStream(filePath, { start, end });
+            stream.pipe(res);
+
+            stream.on("error", (streamErr) => {
+              if (!res.headersSent) {
+                res.statusCode = 500;
+                res.end("Internal Server Error while streaming file content.");
+              } else {
+                res.destroy();
+              }
+            });
             return;
           } catch (e) {
             // Handle errors parsing the Range header
@@ -1943,7 +1970,17 @@ const server = http.createServer(async function (req, res) {
         // If no Range header is present, return the full file
         res.setHeader("Content-Type", type);
         res.setHeader("Content-Length", fileLength);
-        res.end(data);
+        var stream = fs.createReadStream(filePath);
+        stream.pipe(res);
+
+        stream.on("error", (streamErr) => {
+          if (!res.headersSent) {
+            res.statusCode = 500;
+            res.end("Internal Server Error while streaming file content.");
+          } else {
+            res.destroy();
+          }
+        });
         return;
       } else {
         res.statusCode = 404;

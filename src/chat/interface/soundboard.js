@@ -227,13 +227,17 @@ function createSoundboardButtonDiv(sound, index) {
         },
         {
           element: "div",
-          className: "soundboardButtonDisplayNames",
+          style: {
+            display: "flex",
+          },
           children: [
             {
               element: "div",
-              textContent: "Someone",
+              className: "soundboardButtonDisplayNames",
+              gid: "sbButtonDisplayNames_"+index,
+              children: [],
             },
-          ],
+          ]
         },
       ],
       gid: "sbButton_" + index,
@@ -342,7 +346,34 @@ sb.playSound = function (index, mult = 1, displayName) {
     player._id = soundIdCounter;
     player._mult = mult;
     player._fromDisplayName = displayName;
-    player._element = elements.getGPId("sbButton_" + index);
+    player._index = index;
+
+    if (displayName) {
+      for (var otherPlayer of playingSounds) {
+        if (otherPlayer._fromDisplayName == displayName && otherPlayer._index == index) {
+          player._element = otherPlayer._element;
+          break;
+        }
+      }
+      if (!player._element) {
+        var displayNamesDiv = elements.getGPId("sbButtonDisplayNames_"+index);
+        var displayNameDiv = document.createElement("div");
+        displayNameDiv.className = "soundboardActiveText";
+        displayNameDiv.textContent = displayName;
+        displayNamesDiv.append(displayNameDiv);
+        player._element = displayNameDiv;
+
+        displayNameDiv.animate([
+          {
+            opacity: 0
+          },
+          {}
+        ],{
+          easing: "ease-in",
+          duration: 110
+        });
+      }
+    } 
 
     player.onended = function () {
       var newPlayingSounds = [];
@@ -352,6 +383,29 @@ sb.playSound = function (index, mult = 1, displayName) {
         }
       }
       playingSounds = newPlayingSounds;
+      if (player._element) {
+        var isLast = true;
+        for (var otherPlayer of playingSounds) {
+          if (otherPlayer._fromDisplayName == displayName && otherPlayer._index == index) {
+            isLast = false;
+            break;
+          }
+        }
+        if (isLast) {
+          var animation = player._element.animate([
+            {},
+            {
+              opacity: 0
+            }
+          ],{
+            easing: "ease-in",
+            duration: 200
+          });
+          animation.addEventListener("finish",() => {
+            player._element.remove();
+          });
+        }
+      }
     };
     player.play();
 
@@ -368,8 +422,6 @@ sb.stopAll = function () {
 setInterval(() => {
   for (var player of playingSounds) {
     player.volume = (soundboardVolume / 100) * player._mult;
-    if (player._element) {
-    }
   }
 }, 1000 / 30);
 

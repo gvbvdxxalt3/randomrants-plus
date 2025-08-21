@@ -36,7 +36,7 @@ messageAttachFilesButton.addEventListener("click", async function () {
   input.onchange = async function () {
     if (input.files[0]) {
       messageAttachFilesButton.disabled = true;
-      messageAttachFilesButton.textContent = "Uploading files...";
+      messageAttachFilesButton.textContent = "0/" + input.files.length;
       var fileCount = 0;
       for (var file of input.files) {
         try {

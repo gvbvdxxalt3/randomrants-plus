@@ -395,7 +395,7 @@ reconnectingScreen.hidden = true;
           });
           json.owners.forEach((username, i) => {
             var onlineUser = onlineUserElementGenerator(
-              username,
+              null,
               username,
               "",
               "#000000",
@@ -418,7 +418,7 @@ reconnectingScreen.hidden = true;
           if (!userState.permissions.soundboard) {
             return;
           }
-          soundboard.playSound(json.index, json.mult);
+          soundboard.playSound(json.index, json.mult, json.displayName);
         }
         if (json.type == "stopSoundboard") {
           soundboard.stopAll();
