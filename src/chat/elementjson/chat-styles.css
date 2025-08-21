@@ -744,12 +744,11 @@ a {
   font-size: 20px;
   color: var(--button-text-color);
   width: fit-content;
-  height: fit-content;
   min-height: 30px;
   min-width: 30px;
   align-content: center;
   text-align: center;
-  padding: 2px;
+  padding: 0px 2px;
 }
 .chatInterfaceMessageSendButton:hover {
   background-color: var(--button-hover-bg-color);
