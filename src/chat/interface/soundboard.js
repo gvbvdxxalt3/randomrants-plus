@@ -100,7 +100,8 @@ var dom = elements.createElementsFromJSON([
             gid: "soundboardMuteButton",
             GPWhenCreated: function (elm) {
               //Load soundboard volume state.
-              if (localStorage.getItem("soundboardUnmuteState") == "N") { //Use off (The value N) so that if no value is set then it defaults to on.
+              if (localStorage.getItem("soundboardUnmuteState") == "N") {
+                //Use off (The value N) so that if no value is set then it defaults to on.
                 soundboardVolume = 0;
               } else {
                 soundboardVolume = 100;
@@ -199,8 +200,8 @@ var dom = elements.createElementsFromJSON([
                     },
                   },
                 ],
-              }
-            ]
+              },
+            ],
           },
         ],
       },
@@ -224,8 +225,18 @@ function createSoundboardButtonDiv(sound, index) {
           element: "span",
           textContent: sound.name,
         },
+        {
+          element: "div",
+          className: "soundboardButtonDisplayNames",
+          children: [
+            {
+              element: "div",
+              textContent: "Someone",
+            },
+          ],
+        },
       ],
-      gid: "sbButton_"+index,
+      gid: "sbButton_" + index,
       eventListeners: [
         {
           event: "click",
@@ -321,7 +332,7 @@ sb.load = function (soundboardURL, onProgress) {
 
 var soundIdCounter = 0;
 
-sb.playSound = function (index, mult = 1) {
+sb.playSound = function (index, mult = 1, displayName) {
   var sound = loadedSounds[index];
 
   if (sound) {
@@ -330,6 +341,8 @@ sb.playSound = function (index, mult = 1) {
     soundIdCounter += 1;
     player._id = soundIdCounter;
     player._mult = mult;
+    player._fromDisplayName = displayName;
+    player._element = elements.getGPId("sbButton_" + index);
 
     player.onended = function () {
       var newPlayingSounds = [];
@@ -355,6 +368,8 @@ sb.stopAll = function () {
 setInterval(() => {
   for (var player of playingSounds) {
     player.volume = (soundboardVolume / 100) * player._mult;
+    if (player._element) {
+    }
   }
 }, 1000 / 30);
 

@@ -1,22 +1,5 @@
 //Don't question how this is stored.
 var jokes = `
-Was just trying to be funny. Instead, people invented "Jason Touch". Now nobody wants to touch me. Well.. not everyone.
-Gaining laughter... and possibly bad habits.
-This may or may not start halway fights. Im not responsible for that.
-What gives "staying on my PC for summer" and "I don't feel like doing schoolwork" the fun it needs.
-Made with Jason Touch... Cross your fingers for luck, not to get it.
-Random Rants +: The unofficial school escape portal.
-Built during the times when it should not be built.
-Don't tell them I made this site.
-Programmed during the times of bordem.
-Dead silence = Random Rants + time
-This site makes Chromebooks louder.
-Most of your Chromebooks battery drains here.
-Randomizing the Rants, perfection.
-Where dramitization gets a whole new level.
-Teacher’s nightmare, student’s dream.
-Gvbvdxx Chat's code got put in the SuperWave, and we got this.
-Absorbing boredom... converting it into chaos.
 Created during “focus time.” Sorry, teacher.
 Polished with duct tape and late-night energy.
 Random Rants+: Your Chromebook’s final form.

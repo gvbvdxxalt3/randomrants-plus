@@ -5,37 +5,37 @@ var elements = require("../gp2/elements.js");
 var accountHelper = require("../accounthelper");
 var dialog = require("../dialogs.js");
 var signInArea = {
-  element:"div",
+  element: "div",
   children: [
     {
-      element:"span",
-      textContent: "Username:"
+      element: "span",
+      textContent: "Username:",
     },
     {
-      element:"input",
+      element: "input",
       type: "text",
       gid: "username_input",
-      className: "inputText1"
+      className: "inputText1",
     },
-    {element: "br"},
+    { element: "br" },
     {
-      element:"span",
-      textContent: "Password:"
+      element: "span",
+      textContent: "Password:",
     },
     {
-      element:"input",
+      element: "input",
       type: "password",
       gid: "password_input",
-      className: "inputText1"
+      className: "inputText1",
     },
     {
       element: "div",
       className: "button",
       textContent: "Sign in!",
-      gid: "goButton"
+      gid: "goButton",
     },
-  ]
-}
+  ],
+};
 var elementJSON = [
   {
     element: "div",
@@ -46,10 +46,11 @@ var elementJSON = [
         className: "headerText",
         textContent: "Sign In",
       },
-      {element:"br"},
+      { element: "br" },
       {
         element: "span",
-        textContent: "Log in to your Random Rants + account to use more features.",
+        textContent:
+          "Log in to your account to get the most out of Random Rants +!",
       },
       signInArea,
     ],
@@ -67,16 +68,19 @@ var passwordInput = elements.getGPId("password_input");
 
 async function logIn() {
   goButton.disabled = true;
-  try{
-    await accountHelper.loginToAccount(usernameInput.value,passwordInput.value);
+  try {
+    await accountHelper.loginToAccount(
+      usernameInput.value,
+      passwordInput.value
+    );
     window.location.href = "/";
-  }catch(e){
+  } catch (e) {
     dialog.alert(e);
   }
-  goButton.disabled = false; 
+  goButton.disabled = false;
 }
 
-goButton.addEventListener("click",logIn);
+goButton.addEventListener("click", logIn);
 
 usernameInput.addEventListener("keydown", function (e) {
   if (e.key == "Enter") {

@@ -50,6 +50,22 @@ body {
 .menuBarItemLogo:hover {
   background: #787878;
   border-radius: 5px;
+  animation: menuBarLogoAnim 0.25s ease-in-out;
+}
+
+@keyframes menuBarLogoAnim {
+  0% {
+    transform: scale(1, 1);
+  }
+  40% {
+    transform: scale(1.1, 0.9);
+  }
+  80% {
+    transform: scale(0.9, 1.1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }
 
 /* Main Center Content */
@@ -165,7 +181,8 @@ body {
 
 .windowDialogInput {
   background: var(--popup-dialog-input-background);
-  border: var(--popup-dialog-input-border-width) solid var(--popup-dialog-input-border-color);
+  border: var(--popup-dialog-input-border-width) solid
+    var(--popup-dialog-input-border-color);
   color: var(--popup-dialog-input-text-color);
   outline: none;
   border-radius: 4px;

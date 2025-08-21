@@ -76,7 +76,7 @@ var randomRantsSecurity = [
   {
     element: "p",
     textContent:
-      "This platform is a personal, experimental project — mostly for fun. If you’re worried about privacy or account safety, you might want to wait until stronger security is added.",
+      "This platform is a personal, experimental project — mostly for fun. Not an platform for impossible to attack security. If you’re worried about privacy or account safety, you might want to wait until stronger security is added.",
     style: { fontSize: "1em", fontStyle: "italic", marginTop: "1em" },
     children: [],
   },
@@ -87,8 +87,14 @@ var randomRantsSecurity = [
     style: { fontSize: "1em", fontWeight: "bold", marginTop: "0.5em" },
     children: [],
   },
+  {
+    element: "p",
+    textContent:
+      "Double check your devices for any malware or suspisous extensions, since if they steal your cookies then they might be able to take your account.",
+    style: { fontSize: "1em", fontWeight: "bold", marginTop: "0.5em" },
+    children: [],
+  },
 ];
-
 
 var elementJSON = [
   {

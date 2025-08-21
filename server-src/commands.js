@@ -217,7 +217,7 @@ class CommandHandler {
           sendClientCommand(otherClient, "shake", Number(args[1]));
         });
       },
-      "<Username> <Intensity>[br]Gives the specified users a screen shake."
+      "<Username> <Intensity>[br]Gives the username typed a screen shake."
     );
 
     addCommand(
@@ -278,8 +278,8 @@ class CommandHandler {
       "confetti",
       function (args, userInfo, senderClient) {
         var foundClients = searchUsersByKey(args[0], senderClient);
-        if (foundClients.length < 1) {
-          foundClients = searchUsersByKey("@all", senderClient);
+        if (!args[0]) {
+          foundClients = getActiveClients();
         }
         foundClients.forEach((otherClient) => {
           sendClientCommand(otherClient, "confetti");
