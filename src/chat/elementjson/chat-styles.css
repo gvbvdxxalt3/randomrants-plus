@@ -749,6 +749,7 @@ a {
   min-width: 30px;
   align-content: center;
   text-align: center;
+  padding: 2px;
 }
 .chatInterfaceMessageSendButton:hover {
   background-color: var(--button-hover-bg-color);
