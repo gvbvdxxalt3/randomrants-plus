@@ -26,6 +26,7 @@ var cookieManager = {
     return null;
   },
 };
+
 function getServerURL() {
   return new URL(window.location.href).origin;
 }
