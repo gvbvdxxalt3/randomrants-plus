@@ -50,8 +50,8 @@ var dom = elements.createElementsFromJSON([
       maxHeight: "calc(100vh - 100px)",
       maxWidth: "calc(100vw - 300px)",
       minWidth: "360px",
-      minHeight: "360px"
-    }, 
+      minHeight: "360px",
+    },
     children: [
       {
         element: "span",
@@ -72,7 +72,7 @@ var dom = elements.createElementsFromJSON([
           fontSize: "14px",
           color: "#665500",
           width: "fit-content",
-          height: "fit-content"
+          height: "fit-content",
         },
         textContent:
           "💡 Tips: Rename your room to something cool and easy to remember. " +
@@ -82,249 +82,262 @@ var dom = elements.createElementsFromJSON([
         element: "div",
         className: "sep1",
       },
-      
-        {
-          element: "span",
-          textContent: "Room info",
-          style: {
-            fontWeight: "bold",
-            fontSize: "20px",
-          },
-        },
-        {
-          element: "br",
-        },
-        {
-          element: "span",
-          textContent: "Name:",
-        },
-        {
-          element: "span",
-          innerHTML: "&nbsp;",
-        },
-        {
-          element: "input",
-          type: "text",
-          className: "inputText1 roundborder",
-          gid: "roomSettingsName",
-          style: {
-            width: "200px",
-            height: "25px",
-          },
-          eventListeners: [
-            {
-              event: "change",
-              func: async function () {
-                var response = await fetch(
-                  accountHelper.getServerURL() + "/rooms/rename",
-                  {
-                    method: "POST",
-                    body: JSON.stringify({
-                      name: this.value,
-                      id: userState.roomID,
-                    }),
-                  }
-                );
-              },
-            },
-          ],
-        },
 
-        {
-          element: "br",
+      {
+        element: "span",
+        textContent: "Room info",
+        style: {
+          fontWeight: "bold",
+          fontSize: "20px",
         },
-
-        {
-          element: "div",
-          className: "sep1",
+      },
+      {
+        element: "br",
+      },
+      {
+        element: "span",
+        textContent: "Name:",
+      },
+      {
+        element: "span",
+        innerHTML: "&nbsp;",
+      },
+      {
+        element: "input",
+        type: "text",
+        className: "inputText1 roundborder",
+        gid: "roomSettingsName",
+        style: {
+          width: "200px",
+          height: "25px",
         },
-
-        {
-          element: "span",
-          textContent: "Room permissions",
-          style: {
-            fontWeight: "bold",
-            fontSize: "20px",
-          },
-        },
-
-        {
-          element: "br",
-        },
-
-        //Soundboard permission
-
-        {
-          element: "span",
-          textContent: "Soundboard:",
-        },
-
-        {
-          element: "select",
-          className: "inputText1 roundborder",
-          gid: "roomPerms_soundboard",
-          style: {
-            width: "200px",
-            height: "30px",
-          },
-          children: roomPermissionOptions,
-          eventListeners: [
-            {
-              event: "change",
-              func: async function () {
-                this.disabled = true;
-                await updatePermissionSetting("soundboard", this.value);
-                this.disabled = false;
-              },
-            },
-          ],
-        },
-        {
-          element: "br",
-        },
-
-        //Media permission
-
-        {
-          element: "span",
-          textContent: "Starting media:",
-        },
-
-        {
-          element: "select",
-          className: "inputText1 roundborder",
-          gid: "roomPerms_media",
-          style: {
-            width: "200px",
-            height: "30px",
-          },
-          children: roomPermissionOptions,
-          eventListeners: [
-            {
-              event: "change",
-              func: async function () {
-                this.disabled = true;
-                await updatePermissionSetting("media", this.value);
-                this.disabled = false;
-              },
-            },
-          ],
-        },
-        {
-          element: "br",
-        },
-
-        {
-          element: "div",
-          className: "sep1",
-        },
-
-        {
-          element: "span",
-          textContent: "Dangerous",
-          style: {
-            fontWeight: "bold",
-            fontSize: "20px",
-          },
-        },
-
-        {
-          element: "br",
-        },
-
-        {
-          element: "div",
-          style: {
-            color: "#cc0606", //Dark red-ish color.
-          },
-          children: [
-            {
-              element: "span",
-              textContent: "Don't mess with these unless you ",
-            },
-            {
-              element: "span",
-              style: {
-                fontWeight: "bold",
-              },
-              textContent: "really", //REALLY tell the user this is actually dangerous! (for the room, and may cause emotional damage)
-            },
-            {
-              element: "span",
-              textContent: " know what you're doing!",
-            },
-          ],
-        },
-
-        {
-          element: "br",
-        },
-
-        {
-          element: "div",
-          className: "divButton roundborder",
-          textContent: "💥 Destroy Room",
-          eventListeners: [
-            {
-              event: "click",
-              func: async function () {
-                const dialogResponse = await dialogs.confirm(
-                  "⚠️ You're about to nuke the room. This *will* make everyone vanish. Are you really sure?\n\nClick OK to unleash chaos, or Cancel if your conscience kicks in."
-                );
-
-                if (dialogResponse) {
-                  try {
-                    const response = await fetch(
-                      accountHelper.getServerURL() + "/rooms/destroy",
-                      {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                          id: userState.roomID,
-                        }),
-                      }
-                    );
-
-                    if (!response.ok) {
-                      dialogs.alert(
-                        `🚫 Room self-destruct failed! Server said: ${response.status}.\n` +
-                          "Maybe someone demoted you behind your back, or your session poofed."
-                      );
-                    }
-                  } catch (e) {
-                    console.error("Room destroy error:", e);
-                    dialogs.alert(
-                      "💥 The room failed to explode due to an unknown error:\n" +
-                        e
-                    );
-                  }
+        eventListeners: [
+          {
+            event: "change",
+            func: async function () {
+              var response = await fetch(
+                accountHelper.getServerURL() + "/rooms/rename",
+                {
+                  method: "POST",
+                  body: JSON.stringify({
+                    name: this.value,
+                    id: userState.roomID,
+                  }),
                 }
-              },
+              );
             },
-          ],
-        },
+          },
+        ],
+      },
 
-        {
-          element: "div",
-          className: "sep1",
-        },
+      {
+        element: "br",
+      },
+      {
+        element: "br",
+      },
 
-        {
-          element: "div",
-          className: "divButton roundborder",
-          textContent: "Close",
-          eventListeners: [
-            {
-              event: "click",
-              func: function () {
-                dialogDiv.hidden = true;
-              },
+      {
+        element: "div",
+        className: "sep1",
+      },
+
+      {
+        element: "span",
+        textContent: "Room permissions",
+        style: {
+          fontWeight: "bold",
+          fontSize: "20px",
+        },
+      },
+
+      {
+        element: "br",
+      },
+
+      //Soundboard permission
+
+      {
+        element: "span",
+        textContent: "Soundboard:",
+      },
+
+      {
+        element: "select",
+        className: "inputText1 roundborder",
+        gid: "roomPerms_soundboard",
+        style: {
+          width: "200px",
+          height: "30px",
+        },
+        children: roomPermissionOptions,
+        eventListeners: [
+          {
+            event: "change",
+            func: async function () {
+              this.disabled = true;
+              await updatePermissionSetting("soundboard", this.value);
+              this.disabled = false;
             },
-          ],
+          },
+        ],
+      },
+      {
+        element: "br",
+      },
+
+      //Media permission
+
+      {
+        element: "span",
+        textContent: "Starting media:",
+      },
+
+      {
+        element: "select",
+        className: "inputText1 roundborder",
+        gid: "roomPerms_media",
+        style: {
+          width: "200px",
+          height: "30px",
         },
-      
+        children: roomPermissionOptions,
+        eventListeners: [
+          {
+            event: "change",
+            func: async function () {
+              this.disabled = true;
+              await updatePermissionSetting("media", this.value);
+              this.disabled = false;
+            },
+          },
+        ],
+      },
+      {
+        element: "br",
+      },
+      {
+        element: "br",
+      },
+
+      {
+        element: "div",
+        className: "sep1",
+      },
+
+      {
+        element: "span",
+        textContent: "Dangerous",
+        style: {
+          fontWeight: "bold",
+          fontSize: "20px",
+        },
+      },
+
+      {
+        element: "br",
+      },
+
+      {
+        element: "div",
+        style: {
+          color: "#cc0606", //Dark red-ish color.
+        },
+        children: [
+          {
+            element: "span",
+            textContent: "Don't mess with these unless you ",
+          },
+          {
+            element: "span",
+            style: {
+              fontWeight: "bold",
+            },
+            textContent: "really", //REALLY tell the user this is actually dangerous! (for the room, and may cause emotional damage)
+          },
+          {
+            element: "span",
+            textContent: " know what you're doing!",
+          },
+        ],
+      },
+
+      {
+        element: "br",
+      },
+
+      {
+        element: "div",
+        className: "divButton roundborder",
+        textContent: "💥 Destroy Room",
+        eventListeners: [
+          {
+            event: "click",
+            func: async function () {
+              const dialogResponse = await dialogs.confirm(
+                "⚠️ You're about to nuke the room. This *will* make everyone vanish. Are you really sure?\n\nClick OK to unleash chaos, or Cancel if your conscience kicks in."
+              );
+
+              if (dialogResponse) {
+                try {
+                  const response = await fetch(
+                    accountHelper.getServerURL() + "/rooms/destroy",
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        id: userState.roomID,
+                      }),
+                    }
+                  );
+
+                  if (!response.ok) {
+                    dialogs.alert(
+                      `🚫 Room self-destruct failed! Server said: ${response.status}.\n` +
+                        "Maybe someone demoted you behind your back, or your session poofed."
+                    );
+                    return;
+                  }
+                  dialogDiv.hidden = true;
+                } catch (e) {
+                  console.error("Room destroy error:", e);
+                  dialogs.alert(
+                    "💥 The room failed to explode due to an unknown error:\n" +
+                      e
+                  );
+                }
+              }
+            },
+          },
+        ],
+      },
+      {
+        element: "br",
+      },
+
+      {
+        element: "div",
+        className: "sep1",
+      },
+      {
+        element: "br",
+      },
+
+      {
+        element: "div",
+        className: "divButton roundborder",
+        textContent: "Close",
+        eventListeners: [
+          {
+            event: "click",
+            func: function () {
+              dialogDiv.hidden = true;
+            },
+          },
+        ],
+      },
     ],
   },
 ]);

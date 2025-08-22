@@ -393,9 +393,10 @@ reconnectingScreen.hidden = true;
             );
             usersOnlineContainer.append(onlineUser);
           });
-          json.owners.forEach((username, i) => {
+          var i = 0;
+          json.owners.forEach((username) => {
             var onlineUser = onlineUserElementGenerator(
-              null,
+              " ",
               username,
               "",
               "#000000",
@@ -409,6 +410,7 @@ reconnectingScreen.hidden = true;
               }
             );
             ownershipUsersContainer.append(onlineUser);
+            i += 1;
           });
         }
         if (json.type == "media") {

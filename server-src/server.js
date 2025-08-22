@@ -1462,7 +1462,6 @@ async function startRoomWSS(roomid) {
           id: roomid,
         })
       );
-
       sendOnlineList();
       sendPermData(ws);
       sendRoomChatMessage(

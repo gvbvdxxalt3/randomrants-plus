@@ -77,8 +77,8 @@ function generateDiv(
             },
             {
               element: "span",
-              textContent: "Demote"
-            }
+              textContent: "Demote",
+            },
           ],
           eventListeners: [
             {
@@ -112,8 +112,8 @@ function generateDiv(
             },
             {
               element: "span",
-              textContent: "Promote"
-            }
+              textContent: "Promote",
+            },
           ],
           eventListeners: [
             {
@@ -185,7 +185,23 @@ function generateDiv(
                 },
               ],
             },
-          ].concat(icons),
+            {
+              element: "div",
+              style: {
+                display: "flex",
+              },
+              children: [
+                {
+                  element: "div",
+                  style: {
+                    marginLeft: "auto",
+                    display: "flex",
+                  },
+                  children: icons,
+                },
+              ],
+            },
+          ],
         },
       ],
     },
