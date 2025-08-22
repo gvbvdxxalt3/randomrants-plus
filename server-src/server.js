@@ -157,9 +157,9 @@ async function getUserProfilePictureResponse(username, req, res) {
   }
 }
 
-function waitBusboyFile(req) {
+function waitBusboyFile(req, options) {
   return new Promise((accept, reject) => {
-    var busboy = Busboy({ headers: req.headers });
+    var busboy = Busboy({ headers: req.headers, ...options });
     var fileBuffer = null;
     var fileInfo = {};
     busboy.on("file", (uname, file, uinfo) => {
@@ -1752,7 +1752,6 @@ const server = http.createServer(async function (req, res) {
   var urlsplit = url.split("/");
 
   var usercookie = getCookie("account", getCookieFromRequest(req));
-
   if (usercookie) {
     var decryptedUserdata = encryptor.decrypt(usercookie);
   }
@@ -1860,7 +1859,12 @@ const server = http.createServer(async function (req, res) {
             res.end("File is too big.");
             return;
           }
-          var fileInfo = await waitBusboyFile(req);
+          var fileInfo = await waitBusboyFile(req, {
+            limits: {
+              fileSize: cons.MAX_MEDIA_SIZE,
+              files: 1,
+            },
+          });
           if (fileInfo.buffer.length > cons.MAX_FILE_MEDIA_SIZE) {
             res.statusCode = 413;
             res.end("File is too big.");

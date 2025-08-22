@@ -343,7 +343,7 @@ function compressImage(oldsrc) {
                 try{
                   var newImage = await compressImage(reader.result);
                 }catch(e){
-                  dialog.alert("Error compressing image: "+e);
+                  dialog.alert("Image resize hit a snag.\nMaybe try a different file or smaller image?\nTechnical error: "+e);
                   return;
                 }
                 
@@ -354,7 +354,7 @@ function compressImage(oldsrc) {
                 loadImage(newImage);
               } catch (e) {
                 dialog.alert(
-                  `Error uploading profile picture, your profile is not uploaded. ${e}`
+                  `Uh-oh, couldn’t upload that pic.\nTry again when you’re ready to flex a new look.\nTechnical error: ${e}`
                 );
               }
             };
@@ -368,7 +368,7 @@ function compressImage(oldsrc) {
 
         resetPFP.disabled = true;
 
-        var accepted = await dialog.confirm("Do you want to reset your profile picture?\nYou can't get it back once its reset.");
+        var accepted = await dialog.confirm("Ready to reset your profile picture?\nIt’s gone for good once you do it — no take-backs!");
 
         if (!accepted) {
           return;
@@ -424,7 +424,7 @@ function compressImage(oldsrc) {
           }
         );
         if (!response.ok) {
-          dialog.alert("Unable to set the display name, this display name may be too long.");
+          dialog.alert("That name’s a bit too wild or long. Try something shorter or cooler.");
           displayNameInput.disabled = false;
           return;
         }
@@ -432,12 +432,12 @@ function compressImage(oldsrc) {
         displayNameInput.disabled = false;
       };
 
-      var confirmPasswordMessage = "Are you sure you want to change your password?\nYou MUST remember this password, otherwise you're locked out of this account for good!";
+      var confirmPasswordMessage = "Changing your password?\nDon’t forget it — no way back if you lose it!";
 
       changePasswordButton.onclick = async function () {
         changePasswordButton.disabled = true;
         if (await dialog.confirm(confirmPasswordMessage)) {
-          var newPassword = await dialog.passwordPrompt("Input your new password.\nMust be completely unique from your other passwords. (Including ones used for other sites)");
+          var newPassword = await dialog.passwordPrompt("Drop your new password here.\nMake it something fresh and easy for you to remember.");
           if (newPassword) {
             var response = await fetch(
               accountHelper.getServerURL() + "/account/passwordchange/",
@@ -449,12 +449,12 @@ function compressImage(oldsrc) {
               }
             );
             if (!response.ok) {
-              dialog.alert("Unable to set the new password.");
+              dialog.alert("Uh-oh, something went wrong changing your password. Give it another shot?");
               return;
             }
-            dialog.alert("Changed password successfully!\nAll other devcices are signed out until you change the password back.");
+            dialog.alert("Password changed! All other devices got the boot until you sign back in.");
           } else {
-            dialog.alert("Password change canceled.");
+            dialog.alert("Password change canceled. No worries!");
           }
         }
         changePasswordButton.disabled = false;
@@ -469,6 +469,9 @@ function compressImage(oldsrc) {
               element: "span",
               className: "headerText",
               textContent: "Error with your account",
+            },
+            {
+              element: "br"
             },
             {
               element: "span",

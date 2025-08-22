@@ -111,37 +111,7 @@ async function doRoomSelect() {
   try {
     var div = document.createElement("div");
     
-    var addButtonJSON = {
-        element: "div",
-        className: "roomButton roomButtonClickable",
-        eventListeners: [
-          {
-            event: "click",
-            func: async function () {
-              try{
-                var a = await fetch(accountHelper.getServerURL()+"/rooms/create",{method:"POST"});
-                if (a.ok) {
-                  var json = await a.json();
-                  window.location.hash = "#"+encodeURIComponent(json.id);
-                  window.location.reload();
-                } else {
-                  dialog.alert("❗ Couldn’t create the room.\nYou might need to log in or sign up first.");
-                }
-              }catch(e){
-                dialog.alert(`💥 Room launch explosion! Something went wrong: ${e}`);
-                console.error(e);
-              }
-            }
-          },
-        ],
-        children: [
-          {
-            element: "span",
-            className: "roomAddButton",
-            textContent: "+",
-          },
-        ],
-      };
+    var addButtonJSON = {element: "div",};
     
     var roomSelectChildren = [];
     
@@ -430,7 +400,7 @@ async function doRoomSelect() {
               {
                 element: "li",
                 textContent:
-                "Click the large plus sign (+) to create a room.",
+                "Click \"🚪 Summon a room\" to create your own room.",
               },
               {
                 element: "li",
@@ -456,12 +426,37 @@ async function doRoomSelect() {
           },
           {
             element: "div",
+            className: "divButton roundborder",
+            textContent: "🚪 Summon a room",
+            eventListeners: [
+              {
+                event: "click",
+                func: async function () {
+                  try{
+                    var a = await fetch(accountHelper.getServerURL()+"/rooms/create",{method:"POST"});
+                    if (a.ok) {
+                      var json = await a.json();
+                      window.location.hash = "#"+encodeURIComponent(json.id);
+                      window.location.reload();
+                    } else {
+                      dialog.alert("❗ Couldn’t create the room.\nYou might need to log in or sign up first.");
+                    }
+                  }catch(e){
+                    dialog.alert(`💥 Room launch explosion! Something went wrong: ${e}`);
+                    console.error(e);
+                  }
+                }
+              },
+            ]
+          },
+          {
+            element: "div",
             className: "roomSelect",
             children: roomSelectChildren,
           },
           {
             element: "div",
-            className: "divButton",
+            className: "divButton roundborder",
             textContent: "Close",
             eventListeners: [
               {

@@ -189,7 +189,7 @@ var dom = elements.createElementsFromJSON([
                 children: [
                   {
                     element: "span",
-                    textContent: "🔇 Stop the chaos",
+                    textContent: "🛑 Stop the chaos",
                   },
                 ],
                 eventListeners: [
@@ -222,10 +222,6 @@ function createSoundboardButtonDiv(sound, index) {
       className: "soundboardButton",
       children: [
         {
-          element: "span",
-          textContent: sound.name,
-        },
-        {
           element: "div",
           style: {
             display: "flex",
@@ -234,10 +230,14 @@ function createSoundboardButtonDiv(sound, index) {
             {
               element: "div",
               className: "soundboardButtonDisplayNames",
-              gid: "sbButtonDisplayNames_"+index,
+              gid: "sbButtonDisplayNames_" + index,
               children: [],
             },
-          ]
+          ],
+        },
+        {
+          element: "span",
+          textContent: sound.name,
         },
       ],
       gid: "sbButton_" + index,
@@ -350,30 +350,36 @@ sb.playSound = function (index, mult = 1, displayName) {
 
     if (displayName) {
       for (var otherPlayer of playingSounds) {
-        if (otherPlayer._fromDisplayName == displayName && otherPlayer._index == index) {
+        if (
+          otherPlayer._fromDisplayName == displayName &&
+          otherPlayer._index == index
+        ) {
           player._element = otherPlayer._element;
           break;
         }
       }
       if (!player._element) {
-        var displayNamesDiv = elements.getGPId("sbButtonDisplayNames_"+index);
+        var displayNamesDiv = elements.getGPId("sbButtonDisplayNames_" + index);
         var displayNameDiv = document.createElement("div");
         displayNameDiv.className = "soundboardActiveText";
         displayNameDiv.textContent = displayName;
         displayNamesDiv.append(displayNameDiv);
         player._element = displayNameDiv;
 
-        displayNameDiv.animate([
+        displayNameDiv.animate(
+          [
+            {
+              opacity: 0,
+            },
+            {},
+          ],
           {
-            opacity: 0
-          },
-          {}
-        ],{
-          easing: "ease-in",
-          duration: 110
-        });
+            easing: "ease-in",
+            duration: 50,
+          }
+        );
       }
-    } 
+    }
 
     player.onended = function () {
       var newPlayingSounds = [];
@@ -386,22 +392,28 @@ sb.playSound = function (index, mult = 1, displayName) {
       if (player._element) {
         var isLast = true;
         for (var otherPlayer of playingSounds) {
-          if (otherPlayer._fromDisplayName == displayName && otherPlayer._index == index) {
+          if (
+            otherPlayer._fromDisplayName == displayName &&
+            otherPlayer._index == index
+          ) {
             isLast = false;
             break;
           }
         }
         if (isLast) {
-          var animation = player._element.animate([
-            {},
+          var animation = player._element.animate(
+            [
+              {},
+              {
+                opacity: 0,
+              },
+            ],
             {
-              opacity: 0
+              easing: "ease-in",
+              duration: 50,
             }
-          ],{
-            easing: "ease-in",
-            duration: 200
-          });
-          animation.addEventListener("finish",() => {
+          );
+          animation.addEventListener("finish", () => {
             player._element.remove();
           });
         }
