@@ -3184,6 +3184,7 @@ server.on("upgrade", async function upgrade(request, socket, head) {
 			ws.close();
 		});
 	}
+  
 
 	wss.handleUpgrade(request, socket, head, function done(ws) {
 		wss.emit("connection", ws, request);
