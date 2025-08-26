@@ -36,7 +36,7 @@ function sendMessageFromTextBox() {
 		sws.send(
     		JSON.stringify({
     			type: "postMessagePrivate",
-    			message: privatemessage,
+    			message: privateMessage,
                 targetUser: targetUsername
     		}),
     	);
