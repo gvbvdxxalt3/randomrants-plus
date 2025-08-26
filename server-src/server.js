@@ -1369,12 +1369,12 @@ async function startRoomWSS(roomid) {
                     if (json.type == "postMessagePrivate") {
 						if (typeof json.message == "string" && typeof json.targetUser == "string") {
                             var targetUser = json.targetUser.trim();
-                            if (checkUsername(targetUser)) {
+                            if (!checkUsername(targetUser)) {
                                 ws.send(
 									JSON.stringify({
 										type: "newMessage",
 										message:
-											"The private message you tried to post is too long.[br]The message was not posted.",
+											"The username to send to is invalid.",
 										isServer: true,
 										displayName: "[Notice]",
 									}),
@@ -1400,13 +1400,29 @@ async function startRoomWSS(roomid) {
 								displayName: displayName,
 								color: ws._rrUserColor,
 							});
-                            ws.send(messageJson);
-
+                            var wasSent = false;
                             wss.clients.forEach((cli) => {
-                                if (cli._rrUsername == targetUser && cli._rrUsername !== ws._rrUsername) {
-                                    cli.send(messageJson);
+                                if (cli._rrUsername == targetUser) {
+                                    if ( cli._rrUsername !== ws._rrUsername) {
+                                        cli.send(messageJson);
+                                    }
+                                    wasSent = true;
                                 }
                             });
+
+                            if (wasSent) {
+                                ws.send(messageJson); //Display the message to the sender so that they know it posted.
+                            } else {
+                                ws.send(
+									JSON.stringify({
+										type: "newMessage",
+										message:
+											"The private message wasn't sent because the username was not found in this room.",
+										isServer: true,
+										displayName: "[Notice]",
+									}),
+								);
+                            }
                         }
                     }
 					if (json.type == "postMessage") {
@@ -3184,7 +3200,6 @@ server.on("upgrade", async function upgrade(request, socket, head) {
 			ws.close();
 		});
 	}
-  
 
 	wss.handleUpgrade(request, socket, head, function done(ws) {
 		wss.emit("connection", ws, request);
