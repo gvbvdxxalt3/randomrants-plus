@@ -296,9 +296,16 @@ async function startScreenshareButton(stream) {
             true,
             function () {
               screenshareCode = null;
-              loadScreenshare();
+              setTimeout(() => {
+                loadScreenshare();
+              },500);
             }
           );
+          await (function () {
+            return new Promise((accept) => {
+              setTimeout(accept,500);
+            });
+          })();
           if (loadingMediaDiv) {
             loadingMediaDiv.remove();
             loadingMediaDiv = null;
