@@ -3056,7 +3056,13 @@ const server = http.createServer(async function (req, res) {
 						password: json.password,
 					});
 					res.setHeader("Access-Control-Allow-Credentials", "true");
-					res.setHeader("Set-Cookie", `account=${value}; Path=/;`);
+					var expires = new Date();
+                    expires.setFullYear(expires.getFullYear() + 10000); // 10000 years from now
+                    
+                    res.setHeader(
+                        "Set-Cookie",
+                        `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Expires=${expires.toUTCString()}`
+                    );
 				}
 				res.end(JSON.stringify(stuff));
 			});
@@ -3103,7 +3109,14 @@ const server = http.createServer(async function (req, res) {
 								username: decrypted.username.toLowerCase(),
 								password: json.newPassword,
 							});
-							res.setHeader("Set-Cookie", `account=${value}; Path=/;`);
+							res.setHeader("Access-Control-Allow-Credentials", "true");
+        					var expires = new Date();
+                            expires.setFullYear(expires.getFullYear() + 10000); // 10000 years from now
+                            
+                            res.setHeader(
+                                "Set-Cookie",
+                                `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Expires=${expires.toUTCString()}`
+                            );
 						}
 					} catch (e) {
 						resp.success = false;
