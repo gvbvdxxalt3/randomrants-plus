@@ -1045,3 +1045,8 @@ a {
   border-radius: 5px;
   font-size: 10px;
 }
+
+.replyableUsernameSpan:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
