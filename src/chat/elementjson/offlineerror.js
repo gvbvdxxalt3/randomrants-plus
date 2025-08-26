@@ -56,7 +56,8 @@ module.exports = {
                 },
                 {
                   element: "span",
-                  textContent: "Reconnect to the internet to resume the madness. Still no luck? Try moving closer to your router—or offer it a snack. 🍪"
+                  textContent:
+                    "Reconnect to the internet to resume the madness. Still no luck? Try moving closer to your router—or offer it a snack. 🍪",
                 },
               ],
             },

@@ -206,7 +206,7 @@ window.commands = {
             vibrate: [150, 60, 150],
             tag: "[Admin Commands]",
             body: `[${msg.username}]: ${message}`,
-          }
+          },
         );
       } catch (e) {}
     }
@@ -542,7 +542,7 @@ window.commands = {
   rickroll: function (props, msg) {
     if (getIsUserFromValue(props[0], msg)) {
       document.write(
-        '<video src="Rick_Astley_Never_Gonna_Give_You_Up.ogv" autoplay style="position:absolute;top:0;left:0;width:100%;height:100vh;background-color:black;"></video>'
+        '<video src="Rick_Astley_Never_Gonna_Give_You_Up.ogv" autoplay style="position:absolute;top:0;left:0;width:100%;height:100vh;background-color:black;"></video>',
       );
     }
   },
@@ -585,7 +585,7 @@ window.commands = {
               "[/color][/bold]" +
               " [color color=yellow]" +
               props +
-              "[/color]"
+              "[/color]",
           );
         }
       }
@@ -717,7 +717,7 @@ window.commands = {
               dvd.x,
               dvd.y,
               dvd.img.width * scale * dvdScale,
-              dvd.img.height * scale * dvdScale
+              dvd.img.height * scale * dvdScale,
             );
             dvd.x += dvd.xspeed;
             dvd.y += dvd.yspeed;
@@ -831,13 +831,13 @@ window.commands = {
   },*/
   america: function () {
     var audio = new Audio(
-      "https://cdn.glitch.global/7d821ad1-bb4a-4c14-9643-218271a015be/Eagle%20earrape.mp3?v=1693684268083"
+      "https://cdn.glitch.global/7d821ad1-bb4a-4c14-9643-218271a015be/Eagle%20earrape.mp3?v=1693684268083",
     );
     audio.play();
   },
   hungry: function () {
     var audio = new Audio(
-      "https://cdn.glitch.global/fa5e6d1e-8b42-4a21-81e8-03fd7cd6401a/hungry.wav?v=1711839410318"
+      "https://cdn.glitch.global/fa5e6d1e-8b42-4a21-81e8-03fd7cd6401a/hungry.wav?v=1711839410318",
     );
     audio.play();
   },
@@ -913,7 +913,7 @@ function runCommand(data, messageData, execute) {
         var d = window.commands[cmdName](
           data.splice(1, data.length),
           messageData,
-          execute
+          execute,
         );
         return d;
       } catch (e) {

@@ -13,7 +13,7 @@ function generateDiv(
   micEnabled,
   isRealOwner,
   isAbleToChangeOwnership,
-  changeOwnershipFunction
+  changeOwnershipFunction,
 ) {
   var pfp = accountHelper.getProfilePictureURL(username);
   if (!username) {

@@ -36,17 +36,47 @@ var randomRantsAbout = [
   {
     element: "ul",
     children: [
-      { element: "li", textContent: "Voice & Video Chat — Talk, yell, or lurk silently.", children: [] },
-      { element: "li", textContent: "Screen Sharing — Only one slot per room, so expect friendly battles.", children: [] },
-      { element: "li", textContent: "Live Chat + Commands — Commands like ;shake and ;popcat are available to owners.", children: [] },
       {
         element: "li",
-        textContent: "Soundboard Spam — Meme sounds, mic peaks, and chaos are part of the fun. Enabled for everyone by default, but owners and ownership users can restrict or disable it.",
-        children: []
+        textContent: "Voice & Video Chat — Talk, yell, or lurk silently.",
+        children: [],
       },
-      { element: "li", textContent: "Owner Privileges — Clear chat, rename rooms, or even nuke (remove) the room.", children: [] },
-      { element: "li", textContent: "File Uploads — Anyone can upload files and attach them to chat messages.", children: [] },
-      { element: "li", textContent: "Camera & Mic — Anyone can enable their camera and microphone independently.", children: [] },
+      {
+        element: "li",
+        textContent:
+          "Screen Sharing — Only one slot per room, so expect friendly battles.",
+        children: [],
+      },
+      {
+        element: "li",
+        textContent:
+          "Live Chat + Commands — Commands like ;shake and ;popcat are available to owners.",
+        children: [],
+      },
+      {
+        element: "li",
+        textContent:
+          "Soundboard Spam — Meme sounds, mic peaks, and chaos are part of the fun. Enabled for everyone by default, but owners and ownership users can restrict or disable it.",
+        children: [],
+      },
+      {
+        element: "li",
+        textContent:
+          "Owner Privileges — Clear chat, rename rooms, or even nuke (remove) the room.",
+        children: [],
+      },
+      {
+        element: "li",
+        textContent:
+          "File Uploads — Anyone can upload files and attach them to chat messages.",
+        children: [],
+      },
+      {
+        element: "li",
+        textContent:
+          "Camera & Mic — Anyone can enable their camera and microphone independently.",
+        children: [],
+      },
     ],
   },
 
@@ -183,7 +213,12 @@ var randomRantsAbout = [
         element: "p",
         textContent:
           "Warning: Sudden loud sounds can happen from soundboard spam (or some sounds in the soundboard), mic peaks, or other media. Please adjust your volume accordingly. We currently don't have ways to shut off the soundboard other than the volume slider in the soundboard menu.",
-        style: { fontSize: "1em", fontWeight: "bold", color: "#b22222", marginBottom: "1em" },
+        style: {
+          fontSize: "1em",
+          fontWeight: "bold",
+          color: "#b22222",
+          marginBottom: "1em",
+        },
         children: [],
       },
     ],
@@ -248,11 +283,33 @@ var randomRantsAbout = [
   {
     element: "ul",
     children: [
-      { element: "li", textContent: "Students needing a break from schoolwork", children: [] },
-      { element: "li", textContent: "Friends wanting a casual, no-pressure place to hang out", children: [] },
-      { element: "li", textContent: "People who like a little chaos, but also respect the vibe", children: [] },
-      { element: "li", textContent: "Anyone who wants to pretend they’re working while actually goofing off", children: [] },
-      { element: "li", textContent: "People that want to chat over the internet", children: [] },
+      {
+        element: "li",
+        textContent: "Students needing a break from schoolwork",
+        children: [],
+      },
+      {
+        element: "li",
+        textContent: "Friends wanting a casual, no-pressure place to hang out",
+        children: [],
+      },
+      {
+        element: "li",
+        textContent:
+          "People who like a little chaos, but also respect the vibe",
+        children: [],
+      },
+      {
+        element: "li",
+        textContent:
+          "Anyone who wants to pretend they’re working while actually goofing off",
+        children: [],
+      },
+      {
+        element: "li",
+        textContent: "People that want to chat over the internet",
+        children: [],
+      },
     ],
   },
   {
@@ -274,13 +331,23 @@ var randomRantsAbout = [
     element: "p",
     children: [
       { element: "strong", textContent: "Random Rants", children: [] },
-      { element: "span", textContent: " was a browser-based chatting and social app originally built to run smoothly on school Chromebooks." },
+      {
+        element: "span",
+        textContent:
+          " was a browser-based chatting and social app originally built to run smoothly on school Chromebooks.",
+      },
     ],
     style: { fontSize: "1.1em", marginBottom: "0.5em" },
   },
   {
     element: "p",
-    children: [{ element: "em", textContent: "Note: The original Random Rants site is no longer active." }],
+    children: [
+      {
+        element: "em",
+        textContent:
+          "Note: The original Random Rants site is no longer active.",
+      },
+    ],
     style: { fontSize: "1em", marginBottom: "0.3em" },
   },
   {
@@ -342,9 +409,22 @@ var randomRantsAbout = [
     element: "ul",
     style: { fontSize: "1.1em", marginBottom: "1.5em" },
     children: [
-      { element: "li", textContent: "No private or unlisted rooms", children: [] },
-      { element: "li", textContent: "Anyone could join your room or track your location", children: [] },
-      { element: "li", textContent: "The auto room selector favored rooms with people, increasing the chance of being followed", children: [] },
+      {
+        element: "li",
+        textContent: "No private or unlisted rooms",
+        children: [],
+      },
+      {
+        element: "li",
+        textContent: "Anyone could join your room or track your location",
+        children: [],
+      },
+      {
+        element: "li",
+        textContent:
+          "The auto room selector favored rooms with people, increasing the chance of being followed",
+        children: [],
+      },
     ],
   },
 ];

@@ -41,7 +41,7 @@ function compressImage(oldsrc) {
         ctx.drawImage(oldImg, xOffset, yOffset, newWidth, newHeight);
 
         // Get compressed image data URL as WebP with 70% quality
-        const dataURL = cvs.toDataURL('image/webp', 0.7);
+        const dataURL = cvs.toDataURL("image/webp", 0.7);
 
         // Clean up
         cvs.width = 1;
@@ -54,11 +54,12 @@ function compressImage(oldsrc) {
       }
     };
     oldImg.onerror = function () {
-      reject("Unable to load image format, browser may not support this file format. (Stop trying to break the system, its not helpful.)");
+      reject(
+        "Unable to load image format, browser may not support this file format. (Stop trying to break the system, its not helpful.)",
+      );
     };
   });
 }
-
 
 (async function () {
   try {
@@ -89,7 +90,7 @@ function compressImage(oldsrc) {
                     imageRendering: "pixelated",
                     top: "0px",
                     width: "64px",
-                    height: "64px"
+                    height: "64px",
                   },
                   gid: "profilePicture_account",
                 },
@@ -119,6 +120,7 @@ function compressImage(oldsrc) {
                         alignContent: "center",
                         fontSize: "16px",
                         color: userColor,
+                        padding: "3px 3px",
                       },
                       gid: "usernameSpan",
                       textContent: session.username,
@@ -167,19 +169,19 @@ function compressImage(oldsrc) {
                   element: "img",
                   src: "images/text.svg",
                   style: {
-                    height: "17px"
-                  }
+                    height: "17px",
+                  },
                 },
                 {
                   element: "span",
                   textContent: "Change display name",
-                }
-              ]
+                },
+              ],
             },
             {
               element: "div",
               style: {
-                display: "flex"
+                display: "flex",
               },
               children: [
                 {
@@ -187,21 +189,21 @@ function compressImage(oldsrc) {
                   className: "button",
                   gid: "uploadPFP",
                   style: {
-                    flexGrow: "1"
+                    flexGrow: "1",
                   },
                   children: [
                     {
                       element: "img",
                       src: "images/profile.svg",
                       style: {
-                        height: "17px"
-                      }
+                        height: "17px",
+                      },
                     },
                     {
                       element: "span",
                       textContent: "Upload profile picture",
-                    }
-                  ]
+                    },
+                  ],
                 },
                 {
                   element: "div",
@@ -215,16 +217,16 @@ function compressImage(oldsrc) {
                       element: "img",
                       src: "images/reload.svg",
                       style: {
-                        height: "17px"
-                      }
+                        height: "17px",
+                      },
                     },
                     {
                       element: "span",
                       textContent: "Reset",
-                    }
-                  ]
+                    },
+                  ],
                 },
-              ]
+              ],
             },
             {
               element: "div",
@@ -234,7 +236,7 @@ function compressImage(oldsrc) {
                   event: "click",
                   func: function () {
                     var usernameColorInput = elements.getGPId(
-                      "username_color_input"
+                      "username_color_input",
                     );
                     usernameColorInput.click();
                   },
@@ -245,14 +247,14 @@ function compressImage(oldsrc) {
                   element: "img",
                   src: "images/brush.svg",
                   style: {
-                    height: "17px"
-                  }
+                    height: "17px",
+                  },
                 },
                 {
                   element: "span",
                   textContent: "Change username color",
-                }
-              ]
+                },
+              ],
             },
             {
               element: "div",
@@ -263,14 +265,14 @@ function compressImage(oldsrc) {
                   element: "img",
                   src: "images/key.svg",
                   style: {
-                    height: "17px"
-                  }
+                    height: "17px",
+                  },
                 },
                 {
                   element: "span",
                   textContent: "Change password",
-                }
-              ]
+                },
+              ],
             },
             {
               element: "div",
@@ -281,14 +283,14 @@ function compressImage(oldsrc) {
                   element: "img",
                   src: "images/signout.svg",
                   style: {
-                    height: "17px"
-                  }
+                    height: "17px",
+                  },
                 },
                 {
                   element: "span",
                   textContent: "Sign out",
-                }
-              ]
+                },
+              ],
             },
           ],
         },
@@ -304,7 +306,6 @@ function compressImage(oldsrc) {
       var changeDisplayNameButton = elements.getGPId("changeDisplayNameButton");
       var displayNameInput = elements.getGPId("displayNameInput");
       var changePasswordButton = elements.getGPId("changePasswordButton");
-      
 
       async function loadImage(imageFile) {
         var imgurl = accountHelper.getProfilePictureURL(session.username);
@@ -339,22 +340,24 @@ function compressImage(oldsrc) {
             var reader = new FileReader();
             reader.onload = async function () {
               try {
-                
-                try{
+                try {
                   var newImage = await compressImage(reader.result);
-                }catch(e){
-                  dialog.alert("Image resize hit a snag.\nMaybe try a different file or smaller image?\nTechnical error: "+e);
+                } catch (e) {
+                  dialog.alert(
+                    "Image resize hit a snag.\nMaybe try a different file or smaller image?\nTechnical error: " +
+                      e,
+                  );
                   return;
                 }
-                
+
                 await fetch(
                   accountHelper.getServerURL() + "/account/picture/",
-                  { method: "POST", body: newImage.split(",").pop() }
+                  { method: "POST", body: newImage.split(",").pop() },
                 );
                 loadImage(newImage);
               } catch (e) {
                 dialog.alert(
-                  `Uh-oh, couldn’t upload that pic.\nTry again when you’re ready to flex a new look.\nTechnical error: ${e}`
+                  `Uh-oh, couldn’t upload that pic.\nTry again when you’re ready to flex a new look.\nTechnical error: ${e}`,
                 );
               }
             };
@@ -365,22 +368,23 @@ function compressImage(oldsrc) {
       };
       var resetPFP = elements.getGPId("resetPFP");
       resetPFP.onclick = async function () {
-
         resetPFP.disabled = true;
 
-        var accepted = await dialog.confirm("Ready to reset your profile picture?\nIt’s gone for good once you do it — no take-backs!");
+        var accepted = await dialog.confirm(
+          "Ready to reset your profile picture?\nIt’s gone for good once you do it — no take-backs!",
+        );
 
         if (!accepted) {
           return;
         }
 
-        try{
-          await fetch(
-            accountHelper.getServerURL() + "/account/picture/",
-            { method: "POST", body: "" }
-          );
+        try {
+          await fetch(accountHelper.getServerURL() + "/account/picture/", {
+            method: "POST",
+            body: "",
+          });
           loadImage();
-        }catch(e){
+        } catch (e) {
           dialog.alert("Error deleting profile picture.");
         }
 
@@ -402,7 +406,7 @@ function compressImage(oldsrc) {
       changeDisplayNameButton.onclick = async function () {
         displayNameInput.focus();
       };
-      
+
       displayNameInput.style.cursor = "pointer";
       displayNameInput.onfocus = async function () {
         displayNameInput.style.cursor = "auto";
@@ -410,7 +414,7 @@ function compressImage(oldsrc) {
       displayNameInput.onblur = async function () {
         displayNameInput.style.cursor = "pointer";
       };
-      
+
       displayNameInput.onchange = async function () {
         displayNameInput.disabled = true;
         var displayName = displayNameInput.value;
@@ -421,10 +425,12 @@ function compressImage(oldsrc) {
             body: JSON.stringify({
               displayName,
             }),
-          }
+          },
         );
         if (!response.ok) {
-          dialog.alert("That name’s a bit too wild or long. Try something shorter or cooler.");
+          dialog.alert(
+            "That name’s a bit too wild or long. Try something shorter or cooler.",
+          );
           displayNameInput.disabled = false;
           return;
         }
@@ -432,12 +438,15 @@ function compressImage(oldsrc) {
         displayNameInput.disabled = false;
       };
 
-      var confirmPasswordMessage = "Changing your password?\nDon’t forget it — no way back if you lose it!";
+      var confirmPasswordMessage =
+        "Changing your password?\nDon’t forget it — no way back if you lose it!";
 
       changePasswordButton.onclick = async function () {
         changePasswordButton.disabled = true;
         if (await dialog.confirm(confirmPasswordMessage)) {
-          var newPassword = await dialog.passwordPrompt("Drop your new password here.\nMake it something fresh and easy for you to remember.");
+          var newPassword = await dialog.passwordPrompt(
+            "Drop your new password here.\nMake it something fresh and easy for you to remember.",
+          );
           if (newPassword) {
             var response = await fetch(
               accountHelper.getServerURL() + "/account/passwordchange/",
@@ -446,13 +455,17 @@ function compressImage(oldsrc) {
                 body: JSON.stringify({
                   newPassword,
                 }),
-              }
+              },
             );
             if (!response.ok) {
-              dialog.alert("Uh-oh, something went wrong changing your password. Give it another shot?");
+              dialog.alert(
+                "Uh-oh, something went wrong changing your password. Give it another shot?",
+              );
               return;
             }
-            dialog.alert("Password changed! All other devices got the boot until you sign back in.");
+            dialog.alert(
+              "Password changed! All other devices got the boot until you sign back in.",
+            );
           } else {
             dialog.alert("Password change canceled. No worries!");
           }
@@ -471,7 +484,7 @@ function compressImage(oldsrc) {
               textContent: "Error with your account",
             },
             {
-              element: "br"
+              element: "br",
             },
             {
               element: "span",

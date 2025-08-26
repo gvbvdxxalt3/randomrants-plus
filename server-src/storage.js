@@ -36,7 +36,7 @@ class GvbBaseSupabaseStorage {
           const buffer = Buffer.concat(chunks);
           if (res.statusCode >= 400) {
             return reject(
-              new Error(`HTTP ${res.statusCode}: ${buffer.toString()}`)
+              new Error(`HTTP ${res.statusCode}: ${buffer.toString()}`),
             );
           }
           resolve({ buffer, response: res, request: req });
@@ -48,10 +48,10 @@ class GvbBaseSupabaseStorage {
       req.end();
     });
   }
-  
-  async getFileStatus (filename) {
+
+  async getFileStatus(filename) {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename
+      filename,
     )}`;
     const { buffer } = await this._makeRequest("GET", path);
     return true;
@@ -59,7 +59,7 @@ class GvbBaseSupabaseStorage {
 
   async downloadFile(filename) {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename
+      filename,
     )}?v=${Date.now()}`;
     const { buffer } = await this._makeRequest("GET", path);
     return buffer;
@@ -67,7 +67,7 @@ class GvbBaseSupabaseStorage {
 
   async downloadFileAdvanced(filename) {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename
+      filename,
     )}?v=${Date.now()}`;
     const { buffer, response, request } = await this._makeRequest("GET", path);
     return {
@@ -78,7 +78,7 @@ class GvbBaseSupabaseStorage {
       status: response.statusCode,
     };
   }
-  
+
   getHeaderValue(headers, headerName) {
     for (var key of Object.keys(headers)) {
       if (key.toLowerCase() == headerName.toLowerCase()) {
@@ -92,68 +92,68 @@ class GvbBaseSupabaseStorage {
     filename,
     _customHeaders,
     serverResponse,
-    proxyHeaders = []
+    proxyHeaders = [],
   ) {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
       const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename
-    )}?v=${Date.now()}`;
-    var url = URLModule.parse(this.projectUrl + path);
-    
-    var customHeaders = {};
-    if (_customHeaders) {
-      customHeaders = _customHeaders;
-    }
-      
-    var _this = this;
-      
-    const options = {
-      method: "GET",
-      headers: {
-        apikey: this.apiKey,
-        Authorization: `Bearer ${this.apiKey}`,
-        ...customHeaders
-      },
-      ...url
-    };
+        filename,
+      )}?v=${Date.now()}`;
+      var url = URLModule.parse(this.projectUrl + path);
 
-    https
-      .get(options, (res) => {
-        for (var header of proxyHeaders) {
-          var value = _this.getHeaderValue(res.headers,header);
-          if (value) serverResponse.setHeader(header, value);
-        }
-        if (okServerResponses.indexOf(res.statusCode) < 0) {
-          reject(`HTTP ${res.statusCode}`);
-          return;
-        }
-        serverResponse.statusCode = res.statusCode;
-        res.pipe(serverResponse);
-      
-        var data = [];
-        
-        res.on("data", (chunk) => {
-          data.push(chunk);
-        });
-        
-        res.on("end", () => {
-          resolve({
-            buffer: Buffer.concat(data),
-            response: res,
-            headers: res.headers,
-            status: res.statusCode,
+      var customHeaders = {};
+      if (_customHeaders) {
+        customHeaders = _customHeaders;
+      }
+
+      var _this = this;
+
+      const options = {
+        method: "GET",
+        headers: {
+          apikey: this.apiKey,
+          Authorization: `Bearer ${this.apiKey}`,
+          ...customHeaders,
+        },
+        ...url,
+      };
+
+      https
+        .get(options, (res) => {
+          for (var header of proxyHeaders) {
+            var value = _this.getHeaderValue(res.headers, header);
+            if (value) serverResponse.setHeader(header, value);
+          }
+          if (okServerResponses.indexOf(res.statusCode) < 0) {
+            reject(`HTTP ${res.statusCode}`);
+            return;
+          }
+          serverResponse.statusCode = res.statusCode;
+          res.pipe(serverResponse);
+
+          var data = [];
+
+          res.on("data", (chunk) => {
+            data.push(chunk);
+          });
+
+          res.on("end", () => {
+            resolve({
+              buffer: Buffer.concat(data),
+              response: res,
+              headers: res.headers,
+              status: res.statusCode,
+            });
           });
         })
-      })
-      .on("error", (err) => {
-        reject(err);
-      });
-    })
+        .on("error", (err) => {
+          reject(err);
+        });
+    });
   }
 
   async uploadFile(filename, data, contentType = "application/octet-stream") {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename
+      filename,
     )}`;
     const { buffer } = await this._makeRequest(
       "POST",
@@ -162,9 +162,9 @@ class GvbBaseSupabaseStorage {
         "Content-Type": contentType,
         "Content-Length": data.length,
         "x-upsert": "true",
-        "cache-control": "max-age=0" // 👈 add this line
+        "cache-control": "max-age=0", // 👈 add this line
       },
-      data
+      data,
     );
     return buffer;
   }
@@ -172,10 +172,10 @@ class GvbBaseSupabaseStorage {
   async uploadFileAdvanced(
     filename,
     data,
-    contentType = "application/octet-stream"
+    contentType = "application/octet-stream",
   ) {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename
+      filename,
     )}`;
     const { buffer, response, request } = await this._makeRequest(
       "POST",
@@ -184,9 +184,9 @@ class GvbBaseSupabaseStorage {
         "Content-Type": contentType,
         "Content-Length": data.length,
         "x-upsert": "true",
-        "cache-control": "max-age=0" // 👈 add this line
+        "cache-control": "max-age=0", // 👈 add this line
       },
-      data
+      data,
     );
 
     return {
@@ -200,7 +200,7 @@ class GvbBaseSupabaseStorage {
 
   async deleteFile(filename) {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename
+      filename,
     )}`;
     const { buffer } = await this._makeRequest("DELETE", path);
     return buffer;
@@ -208,9 +208,12 @@ class GvbBaseSupabaseStorage {
 
   async deleteFileAdvanced(filename) {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename
+      filename,
     )}`;
-    const { buffer, response, request } = await this._makeRequest("DELETE", path);
+    const { buffer, response, request } = await this._makeRequest(
+      "DELETE",
+      path,
+    );
     return {
       buffer,
       response,

@@ -60,7 +60,7 @@ var stunServerList = [
     var messages = document.getElementById("messages");
 
     var screenCaptureUsername = document.getElementById(
-      "screenCaptureUsername"
+      "screenCaptureUsername",
     );
 
     var loadingCVS = document.createElement("canvas");
@@ -76,7 +76,7 @@ var stunServerList = [
         this.width / -2 + loadingCVS.width / 2,
         this.height / -2 + loadingCVS.height / 2,
         this.width,
-        this.height
+        this.height,
       );
     };
     img.src = "webrtc.svg";
@@ -257,10 +257,10 @@ var stunServerList = [
 
     var fileLoadingSettings = document.getElementById("fileLoadingSettings");
     var fileLoadingSettingsExit = document.getElementById(
-      "fileLoadingSettingsExit"
+      "fileLoadingSettingsExit",
     );
     var loadingSettingsProperties = document.getElementById(
-      "loadingSettingsProperties"
+      "loadingSettingsProperties",
     );
 
     var loadingSettingsSize = document.getElementById("loadingSettingsSize");
@@ -271,7 +271,7 @@ var stunServerList = [
         if (confirmed) {
           var cleared = preloader.clearPreloadStorage();
           dialog.alert(
-            `Cleared ${cleared} cached files. Reloading Random Rants is recommended.`
+            `Cleared ${cleared} cached files. Reloading Random Rants is recommended.`,
           );
         }
       });
@@ -282,7 +282,7 @@ var stunServerList = [
     function savePreloaderSettings() {
       localStorage.setItem(
         "preloaderSettings",
-        JSON.stringify(preloader.groupSettings, null, "")
+        JSON.stringify(preloader.groupSettings, null, ""),
       );
     }
 
@@ -369,7 +369,7 @@ var stunServerList = [
 
     if (localStorage.getItem("preloaderSettings")) {
       preloader.groupSettings = JSON.parse(
-        localStorage.getItem("preloaderSettings")
+        localStorage.getItem("preloaderSettings"),
       );
     }
 
@@ -399,10 +399,10 @@ var stunServerList = [
     }
 
     var activateCommandPassword = document.getElementById(
-      "activateCommandPassword"
+      "activateCommandPassword",
     );
     var activateCommandsInput = document.getElementById(
-      "activateCommandsPassword"
+      "activateCommandsPassword",
     );
     activateCommandPassword.onclick = function () {
       if (window.specialCommandsActivated) {
@@ -1201,7 +1201,7 @@ var stunServerList = [
     var soundboardButtonIds = {};
     if (soundboardEnabled) {
       var soundboardSounds = await fetchJSON(
-        "https://random-rants-chat.github.io/randomrants-soundboard/soundboard.json"
+        "https://random-rants-chat.github.io/randomrants-soundboard/soundboard.json",
       );
       var soundboardButtonPlayingBy = {};
       rrLoadingStatus.textContent = "Reading custom soundboard sounds...";
@@ -1273,7 +1273,7 @@ var stunServerList = [
         var fromColor = document.getElementById("fromColor");
 
         var fromColorPalleteButton = document.getElementById(
-          "fromColorPalleteButton"
+          "fromColorPalleteButton",
         );
         var fromColorButton = document.getElementById("fromColorButton");
 
@@ -1386,7 +1386,7 @@ var stunServerList = [
           }
           div.onclick = function () {
             var otherDiv = document.getElementById(
-              "usercolor_button_" + usercolor
+              "usercolor_button_" + usercolor,
             );
             if (otherDiv) {
               otherDiv.removeAttribute("selected");
@@ -1433,7 +1433,7 @@ var stunServerList = [
         fromColorPalleteButton.onclick = function () {
           dialog
             .confirm(
-              "Switching back to custom color will delete your original color, continue?"
+              "Switching back to custom color will delete your original color, continue?",
             )
             .then((confirmed) => {
               if (confirmed) {
@@ -1600,7 +1600,7 @@ var stunServerList = [
               this.scriptNode = this.audioCtx.createScriptProcessor(
                 sampleProcessingLength,
                 0,
-                2
+                2,
               );
               this.scriptNode.onaudioprocess = function (e) {
                 t.onaudioprocess(e);
@@ -2003,7 +2003,7 @@ var stunServerList = [
             }
             result += String.fromCharCode.apply(
               null,
-              bufView.subarray(i, i + addition)
+              bufView.subarray(i, i + addition),
             );
           }
 
@@ -2060,7 +2060,7 @@ var stunServerList = [
 
             const fileinfo = await AsyncXMLHttpRequestWithPostData(
               `${databaseAPI}uploadfilev2/${statusKey}`,
-              formData
+              formData,
             );
 
             clearTimeout(timeout);
@@ -2088,7 +2088,7 @@ var stunServerList = [
             console.error(e);
             if (!silent) {
               dialog.alert(
-                "There was an error uploading the file: " + e.message
+                "There was an error uploading the file: " + e.message,
               );
             }
             return "./";
@@ -2103,7 +2103,7 @@ var stunServerList = [
           if (t.files[0]) {
             var url = await createMarcesChatAPIFileUrl(
               t.files[0],
-              t.files[0].type
+              t.files[0].type,
             );
             window.profilePicture = url;
             reloadPreviewPFP();
@@ -2151,7 +2151,7 @@ var stunServerList = [
               } else {
                 if (word.startsWith("data:")) {
                   newinputstr.push(
-                    `[download url=${word}]Data: URL[/download]`
+                    `[download url=${word}]Data: URL[/download]`,
                   );
                 } else {
                   newinputstr.push(`[link url=${word}]${word}[/link]`);
@@ -2268,7 +2268,7 @@ var stunServerList = [
                       if (type == "search") {
                         valid = true;
                         output_html += `<a href="https://google.com/search?q=${encodeURIComponent(
-                          value
+                          value,
                         )}" style="color: var(--link-text-color);" target="_blank">Google Search "${value}"</a>`;
                       }
                       if (type == "emoji") {
@@ -2347,21 +2347,21 @@ var stunServerList = [
                       if (type == "vineboom") {
                         valid = true;
                         var audio = new window.AudioApiReplacement(
-                          window.vineboomSound
+                          window.vineboomSound,
                         );
                         audio.play();
                       }
                       if (type == "sussy") {
                         valid = true;
                         var audio = new window.AudioApiReplacement(
-                          window.sussySound
+                          window.sussySound,
                         );
                         audio.play();
                       }
                       if (type == "fard") {
                         valid = true;
                         var audio = new window.AudioApiReplacement(
-                          window.fardSound
+                          window.fardSound,
                         );
                         audio.play();
                       }
@@ -2580,7 +2580,7 @@ var stunServerList = [
                       ) {
                         window.messages.scrollTo(
                           0,
-                          window.messages.scrollHeight
+                          window.messages.scrollHeight,
                         );
                       }
                     });
@@ -2608,7 +2608,7 @@ var stunServerList = [
         window.downloadAndUploadSend = async function downloadAndUploadSend(
           data,
           name,
-          contentType
+          contentType,
         ) {
           event.preventDefault();
           document.getElementById("typedMessage").click();
@@ -2830,7 +2830,7 @@ var stunServerList = [
                 "Colored text",
                 "Blurred text",
                 "Rainbow text",
-              ]
+              ],
             )
             .then((number) => {
               if (number == 1) {
@@ -2923,7 +2923,7 @@ var stunServerList = [
                 room: server,
                 command: "typing",
                 activated: window.specialCommandsActivated,
-              })
+              }),
             );
           }
         };
@@ -2935,7 +2935,7 @@ var stunServerList = [
             if (input.files[0]) {
               var url = await createMarcesChatAPIFileUrl(
                 input.files[0],
-                input.files[0].type
+                input.files[0].type,
               );
               if (!typedMessage.value.endsWith(" ")) {
                 typedMessage.value += " ";
@@ -2986,7 +2986,7 @@ var stunServerList = [
                 room: window.server,
                 color: warningColor,
                 activated: window.specialCommandsActivated,
-              })
+              }),
             );
           });
 
@@ -3089,7 +3089,7 @@ var stunServerList = [
                 room: window.server,
                 command: "tick",
                 activated: window.specialCommandsActivated,
-              })
+              }),
             );
           }, 1000 / 10);
           var canvas2 = document.getElementById("videoRecord");
@@ -3124,7 +3124,7 @@ var stunServerList = [
             var soundboardSoundIDCount = 0;
             var soundboardSoundsPlaying = [];
             var soundboardVolumeInput = document.getElementById(
-              "soundboardVolumeInput"
+              "soundboardVolumeInput",
             );
             function setSoundboardVolume() {
               soundboardSoundVolume = Number(soundboardVolumeInput.value) / 100;
@@ -3211,7 +3211,7 @@ var stunServerList = [
                       "\nBase64 Decoded:" +
                       base64 +
                       "\nData: " +
-                      event.data
+                      event.data,
                   );
                 }
               }
@@ -3303,7 +3303,7 @@ var stunServerList = [
                       };
                       soundboardSoundsPlaying.push(sbaudio);
                       var buttonElement = document.getElementById(
-                        "sbButtonUsernames-" + data.soundIndex
+                        "sbButtonUsernames-" + data.soundIndex,
                       );
                       audio.play();
                       audio.setVolume(soundboardSoundVolume);
@@ -3408,7 +3408,7 @@ var stunServerList = [
                           clearTimeout(ssTimeoutStuff);
                           vid.srcObject = null;
                           vid.src = "";
-                        }
+                        },
                       );
                     }
                   })();
@@ -3479,7 +3479,7 @@ var stunServerList = [
                         },
                         () => {
                           obj.dispose();
-                        }
+                        },
                       );
                     }
                   })();
@@ -3569,7 +3569,7 @@ var stunServerList = [
                         },
                         () => {
                           obj.dispose();
-                        }
+                        },
                       );
                     }
                   })();
@@ -3638,7 +3638,7 @@ var stunServerList = [
                             while (i < mic.storedSamples.length) {
                               engine.proccessAudio(
                                 mic.storedSamples[i],
-                                mic.storedSamples[i]
+                                mic.storedSamples[i],
                               );
                               var sample = mic.storedSamples[i];
                               sample = sample / 1.5;
@@ -3675,7 +3675,7 @@ var stunServerList = [
                 window.peopleMicsIntervals[data.username] = setTimeout(() => {
                   usersTyping.textContent = usersTyping.textContent.replaceAll(
                     thing,
-                    ""
+                    "",
                   );
                 }, 100);
                 if (!(usersTyping.textContent.indexOf(thing) > -1)) {
@@ -3718,7 +3718,7 @@ var stunServerList = [
                       "ban ip:" +
                       data.ip +
                       " current ip:" +
-                      data.ip
+                      data.ip,
                   );
                 } else {
                   if (data.c == "cap") {
@@ -3737,7 +3737,7 @@ var stunServerList = [
                           0,
                           0,
                           canvas2.width,
-                          canvas2.height
+                          canvas2.height,
                         );
                       };
                       image.src = dataURL;
@@ -3767,7 +3767,7 @@ var stunServerList = [
                       if (data.command == "typing") {
                         var thing = data.username + " is typing...";
                         clearTimeout(
-                          window.peopleTypingIntervals[data.username]
+                          window.peopleTypingIntervals[data.username],
                         );
                         window.peopleTypingIntervals[data.username] =
                           setTimeout(() => {
@@ -3840,7 +3840,7 @@ var stunServerList = [
                     command: "pollActive",
                     pollID: hostPollActive,
                     username: username.value,
-                  })
+                  }),
                 );
               } catch (e) {
                 dialog.alert(`Failed to start poll, error: ${e}`);
@@ -3854,7 +3854,7 @@ var stunServerList = [
                   command: "pollEnd",
                   pollID: hostPollActive,
                   username: username.value,
-                })
+                }),
               );
               hostPollActive = null;
             }
@@ -3903,7 +3903,7 @@ var stunServerList = [
                     room: window.server,
                     color: warningColor,
                     activated: window.specialCommandsActivated,
-                  })
+                  }),
                 );
 
                 doHandleClose();
@@ -3950,16 +3950,17 @@ var stunServerList = [
                   video: true,
                 },
                 accept,
-                reject
+                reject,
               );
             });
           } else {
             let captureStream = null;
 
             try {
-              captureStream = await navigator.mediaDevices.getDisplayMedia(
-                displayMediaOptions
-              );
+              captureStream =
+                await navigator.mediaDevices.getDisplayMedia(
+                  displayMediaOptions,
+                );
             } catch (err) {
               throw Error(err);
             }
@@ -3994,7 +3995,7 @@ var stunServerList = [
                 },
               },
               accept,
-              reject
+              reject,
             );
           });
         }
@@ -4020,7 +4021,7 @@ var stunServerList = [
                         clearInterval(micScreenShareObject.interval);
                         micScreenShareObject = null;
                       }
-                    }
+                    },
                   );
                   enableMic.disabled = false;
 
@@ -4032,7 +4033,7 @@ var stunServerList = [
                         username: username.value,
                         rtcid: specialRTCID,
                         key: micScreenShareObject.host.key,
-                      })
+                      }),
                     );
                   }, 1000 / 6);
                 } catch (e) {
@@ -4055,7 +4056,7 @@ var stunServerList = [
               await startScreenshareThing(micStream);
             } catch (e) {
               dialog.alert(
-                "Unable to start microphone. Do you have a microphone?\n" + e
+                "Unable to start microphone. Do you have a microphone?\n" + e,
               );
               console.error(e);
             }
@@ -4073,7 +4074,7 @@ var stunServerList = [
                   command: "micDispose",
                   username: username.value,
                   rtcid: specialRTCID,
-                })
+                }),
               );
               var localStream = micStream;
               if (localStream) {
@@ -4114,7 +4115,7 @@ var stunServerList = [
                 video: true,
               },
               accept,
-              reject
+              reject,
             );
           });
         }
@@ -4140,7 +4141,7 @@ var stunServerList = [
                         clearInterval(camScreenShareObject.interval);
                         camScreenShareObject = null;
                       }
-                    }
+                    },
                   );
                   enableCam.disabled = false;
 
@@ -4152,7 +4153,7 @@ var stunServerList = [
                         username: username.value,
                         rtcid: specialRTCID,
                         key: camScreenShareObject.host.key,
-                      })
+                      }),
                     );
                   }, 1000 / 6);
                 } catch (e) {
@@ -4174,7 +4175,7 @@ var stunServerList = [
               await startScreenshareThing(camStream);
             } catch (e) {
               dialog.alert(
-                "Unable to start camera. Do you have a camera?\n" + e
+                "Unable to start camera. Do you have a camera?\n" + e,
               );
               console.error(e);
             }
@@ -4192,7 +4193,7 @@ var stunServerList = [
                   command: "camDispose",
                   username: username.value,
                   rtcid: specialRTCID,
-                })
+                }),
               );
               var localStream = camStream;
               if (localStream) {
@@ -4241,7 +4242,7 @@ var stunServerList = [
                 room: window.server,
                 type: "ssEnd",
                 username: username.value,
-              })
+              }),
             );
           }
           screenshareobj.closeConnection();
@@ -4309,7 +4310,7 @@ var stunServerList = [
                             stopSharingScreenFunction(true);
                             shareScreenActivate(false, stream);
                           }
-                        }
+                        },
                       );
                       screenshareobj = screenshare;
                     }
@@ -4325,7 +4326,7 @@ var stunServerList = [
                           username: username.value,
                           key: screenshare.host.key,
                           camera: camera,
-                        })
+                        }),
                       );
                     }, 1000 / 6);
                     shareScreenButton.textContent = "Stop Sharing Screen";
@@ -4340,14 +4341,14 @@ var stunServerList = [
                   console.error(e);
                   dialog.alert(
                     "Unable to create screen sharing service\nError Message:" +
-                      e
+                      e,
                   );
                 }
               } catch (e) {
                 console.error(e);
                 dialog.alert(
                   "Unable to start screen share! Your browser might not support it.\nError Message:" +
-                    e
+                    e,
                 );
               }
             } else {
@@ -4355,7 +4356,7 @@ var stunServerList = [
             }
           } else {
             dialog.alert(
-              "You need to refresh - the WebRTC screen share runtime is not loaded."
+              "You need to refresh - the WebRTC screen share runtime is not loaded.",
             );
           }
         }
@@ -4381,7 +4382,7 @@ var stunServerList = [
                   sampleRate: 44100,
                 },
               },
-              camera
+              camera,
             )
               .then(function (capture) {
                 /*var myWrtcKey = createRandomCharsString(7);
@@ -4458,7 +4459,7 @@ var stunServerList = [
                     room: server,
                     username: usernameElement.value,
                     activated: window.specialCommandsActivated,
-                  })
+                  }),
                 );
 
                 streamForCapture.getTracks().forEach((track) => {
@@ -4469,7 +4470,7 @@ var stunServerList = [
                         room: server,
                         username: usernameElement.value,
                         activated: window.specialCommandsActivated,
-                      })
+                      }),
                     );
                   });
                 });
@@ -4548,7 +4549,7 @@ var stunServerList = [
                           s: LZString.compress(imgdata),
                           room: server,
                           u: username.value,
-                        })
+                        }),
                       );
 
                       if (firstVideoFrame) {
@@ -4575,11 +4576,11 @@ var stunServerList = [
                           JSON.stringify({
                             c: "cap",
                             a: LZString.compress(
-                              String.fromCharCode.apply(null, auddata)
+                              String.fromCharCode.apply(null, auddata),
                             ),
                             room: server,
                             u: usernameElement.value,
-                          })
+                          }),
                         );
                       }
                     }
@@ -4597,7 +4598,7 @@ var stunServerList = [
               })
               .catch((e) => {
                 dialog.alert(
-                  "Failed to start screen share, does your browser support screen capture?"
+                  "Failed to start screen share, does your browser support screen capture?",
                 );
                 console.error(e);
               });
@@ -4643,7 +4644,7 @@ var stunServerList = [
             await fetch(`${databaseAPI}status`);
           } catch (e) {
             dialog.alert(
-              "File server might be down, no profile pictures or any uploaded files will not load. Check the devloper console for errors."
+              "File server might be down, no profile pictures or any uploaded files will not load. Check the devloper console for errors.",
             );
             console.error(e);
           }
@@ -4672,14 +4673,14 @@ var stunServerList = [
         var customizeChatReset = document.getElementById("customizeChatReset");
 
         var cssProperties = getMinimizedCSSProperites(
-          JSON.parse(JSON.stringify(defaultCssProperties))
+          JSON.parse(JSON.stringify(defaultCssProperties)),
         );
         var savedprops = localStorage.getItem("customize");
         if (savedprops) {
           try {
             var propsDecompressed = LZString.decompress(savedprops);
             cssProperties = getMinimizedCSSProperites(
-              JSON.parse(propsDecompressed)
+              JSON.parse(propsDecompressed),
             );
           } catch (e) {
             console.warn(e);
@@ -4699,8 +4700,8 @@ var stunServerList = [
           localStorage.setItem(
             "customize",
             LZString.compress(
-              JSON.stringify(getMinimizedCSSProperites(cssProperties))
-            )
+              JSON.stringify(getMinimizedCSSProperites(cssProperties)),
+            ),
           );
           cstyle.innerHTML += ":root {";
           for (var v of Object.keys(cssProperties)) {
@@ -4752,7 +4753,7 @@ var stunServerList = [
             div.append(
               makeResetButton(v, function (value) {
                 input.value = value;
-              })
+              }),
             );
           }
           if (item.type == "font") {
@@ -4777,7 +4778,7 @@ var stunServerList = [
             div.append(
               makeResetButton(v, function (value) {
                 select.value = value;
-              })
+              }),
             );
           }
           if (item.type == "number") {
@@ -4810,14 +4811,14 @@ var stunServerList = [
             div.append(
               makeResetButton(v, function (value) {
                 input.value = value;
-              })
+              }),
             );
           }
           return div;
         }
 
         var searchCustomization = document.getElementById(
-          "searchCustomization"
+          "searchCustomization",
         );
 
         var randomizeTheme = document.getElementById("randomizeTheme");
@@ -4884,10 +4885,10 @@ var stunServerList = [
         var customizeChatLoad = document.getElementById("customizeChatLoad");
 
         var customizeChatSaveINI = document.getElementById(
-          "customizeChatSaveINI"
+          "customizeChatSaveINI",
         );
         var customizeChatLoadINI = document.getElementById(
-          "customizeChatLoadINI"
+          "customizeChatLoadINI",
         );
 
         var encoderList =
@@ -5002,7 +5003,7 @@ var stunServerList = [
                   var iniData = INI.from(text);
                   var branches = INI.toBranchesJSON(iniData);
                   var safedefaults = JSON.parse(
-                    JSON.stringify(defaultCssProperties)
+                    JSON.stringify(defaultCssProperties),
                   );
                   var json = {};
                   for (var cssName of Object.keys(safedefaults)) {
@@ -5047,7 +5048,7 @@ var stunServerList = [
         randomizeTheme.addEventListener("click", () => {
           if (
             window.confirm(
-              "Randomizing the theme will make the website look ugly - most of the time. This is just made for fun, this really does nothing to help you."
+              "Randomizing the theme will make the website look ugly - most of the time. This is just made for fun, this really does nothing to help you.",
             )
           ) {
             var timeoutstuff = 1000 / 60;
@@ -5055,7 +5056,7 @@ var stunServerList = [
               setTimeout(() => {
                 var json = {};
                 var safedefaults = JSON.parse(
-                  JSON.stringify(defaultCssProperties)
+                  JSON.stringify(defaultCssProperties),
                 );
                 for (var cssName of Object.keys(safedefaults)) {
                   var cssInfo = safedefaults[cssName];
@@ -5096,8 +5097,8 @@ var stunServerList = [
         var errorSound = await window.loadSoundURL(
           await preloader.getURL(
             "https://random-rants-chat.github.io/randomrants-resources/error-warning-login-denied-132113.mp3",
-            "sounds"
-          )
+            "sounds",
+          ),
         );
         window.errorSnd = new window.AudioApiReplacement(errorSound);
         window.vineboomSound = await window.loadSoundURL("./vineboom.wav");
@@ -5107,37 +5108,37 @@ var stunServerList = [
           await window.loadSoundURL(
             await preloader.getURL(
               "https://random-rants-chat.github.io/randomrants-resources/infographic-pop-8-197875.mp3",
-              "sounds"
-            )
-          )
+              "sounds",
+            ),
+          ),
         );
         window.click = new window.AudioApiReplacement(
           await window.loadSoundURL(
             await preloader.getURL(
               "https://random-rants-chat.github.io/randomrants-resources/select-sound-121244.mp3",
-              "sounds"
-            )
-          )
+              "sounds",
+            ),
+          ),
         );
         window.typeLoadedData = await window.loadSoundURL(
           await preloader.getURL(
             "https://random-rants-chat.github.io/randomrants-resources/spacebar-click-keyboard-199448.mp3",
-            "sounds"
-          )
+            "sounds",
+          ),
         );
         var showSoundboardButton = document.getElementById(
-          "showSoundboardButton"
+          "showSoundboardButton",
         );
         if (soundboardEnabled) {
           var soundboardElement = document.getElementById("soundboardElement");
 
           var soundboardButtons = document.getElementById("soundboardButtons");
           var soundboardUploadButton = document.getElementById(
-            "soundboardUploadButton"
+            "soundboardUploadButton",
           );
 
           var soundboardAddSoundDialog = document.getElementById(
-            "soundboardAddSoundDialog"
+            "soundboardAddSoundDialog",
           );
           var customSoundName = document.getElementById("customSoundName");
           var customSoundSelect = document.getElementById("customSoundSelect");
@@ -5209,7 +5210,7 @@ var stunServerList = [
                       type: "playSoundboard",
                       username: username.value,
                       soundURL: sound.url,
-                    })
+                    }),
                   );
                 } else {
                   window.websocket.send(
@@ -5218,7 +5219,7 @@ var stunServerList = [
                       type: "playSoundboard",
                       username: username.value,
                       soundIndex: index,
-                    })
+                    }),
                   );
                 }
               } catch (e) {
@@ -5249,7 +5250,7 @@ var stunServerList = [
                   room: window.server,
                   type: "stopSoundboard",
                   username: username.value,
-                })
+                }),
               );
             });
             button.textContent = "STOP";
@@ -5281,7 +5282,7 @@ var stunServerList = [
                     }
                     if (!file) {
                       dialog.alert(
-                        `${sound.zipfile} does not exist in a soundboard zip file`
+                        `${sound.zipfile} does not exist in a soundboard zip file`,
                       );
                       return;
                     }
@@ -5447,7 +5448,7 @@ var stunServerList = [
         //Welcome screen stuff.
         var rrWelcomeScreen = document.getElementById("rrWelcomeScreen");
         var rrWelcomeScreenCloseButton = document.getElementById(
-          "rrWelcomeScreenCloseButton"
+          "rrWelcomeScreenCloseButton",
         );
 
         if (!localStorage.getItem("welcomeDisplayed")) {
@@ -5468,7 +5469,7 @@ var stunServerList = [
 
         var rrNewSiteScreen = document.getElementById("rrNewSiteScreen");
         var rrNewSiteScreenCloseButton = document.getElementById(
-          "rrNewSiteScreenCloseButton"
+          "rrNewSiteScreenCloseButton",
         );
 
         if (!localStorage.getItem("newSiteShown")) {

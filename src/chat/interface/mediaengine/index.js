@@ -69,7 +69,7 @@ function stopScreenshareStream() {
     });
   } catch (e) {
     console.warn(
-      `Failed to stop screenshare stream, screenshare stream must be closed manually.`
+      `Failed to stop screenshare stream, screenshare stream must be closed manually.`,
     );
   }
   screenshareStream = null;
@@ -112,7 +112,7 @@ function getMediaPlayingMenuBar() {
                 JSON.stringify({
                   type: "media",
                   command: "mediaResetRequest",
-                })
+                }),
               );
               stopScreenshareStream();
             },
@@ -208,7 +208,7 @@ function createMediaScreenshareVideo(code) {
       videoElement.pause();
       videoElement.remove();
       mediaVideo = null;
-    }
+    },
   );
 
   elements.appendElements(div, dom);
@@ -298,12 +298,12 @@ async function startScreenshareButton(stream) {
               screenshareCode = null;
               setTimeout(() => {
                 loadScreenshare();
-              },500);
-            }
+              }, 500);
+            },
           );
           await (function () {
             return new Promise((accept) => {
-              setTimeout(accept,500);
+              setTimeout(accept, 500);
             });
           })();
           if (loadingMediaDiv) {
@@ -317,7 +317,7 @@ async function startScreenshareButton(stream) {
                   JSON.stringify({
                     type: "media",
                     command: "mediaResetRequest",
-                  })
+                  }),
                 );
               });
             });
@@ -328,7 +328,7 @@ async function startScreenshareButton(stream) {
               type: "media",
               command: "screenshareRunning",
               code: screenshare.host.key,
-            })
+            }),
           );
           if (force) {
             screenshareRunning = true;
@@ -345,18 +345,18 @@ async function startScreenshareButton(stream) {
         JSON.stringify({
           type: "media",
           command: "mediaResetRequest",
-        })
+        }),
       );
       loadScreenshare(true);
       screenshareCode = null;
     } catch (e) {
       dialog.alert(
-        "Screenshare failed, does your current web browser support screen sharing?"
+        "Screenshare failed, does your current web browser support screen sharing?",
       );
     }
   } else {
     dialog.alert(
-      "The external screenshare runtime script is currently unavailible, please refresh your page to fix this error."
+      "The external screenshare runtime script is currently unavailible, please refresh your page to fix this error.",
     );
   }
 }
@@ -450,7 +450,7 @@ function doLoadingMediaScreen() {
                   duration: 200,
                   iterations: 1,
                   easing: "ease-out",
-                }
+                },
               );
 
               anim.addEventListener("finish", () => {
@@ -464,7 +464,7 @@ function doLoadingMediaScreen() {
                     duration: 200,
                     iterations: 1,
                     easing: "ease-out",
-                  }
+                  },
                 );
 
                 anim.addEventListener("finish", () => {
@@ -578,7 +578,7 @@ async function doMediaSelect() {
                             startScreenshareButton(stream);
                           } catch (e) {
                             dialog.alert(
-                              "Camera request failed, does your current browser support camera?\nCheck and see if your camera is blocked."
+                              "Camera request failed, does your current browser support camera?\nCheck and see if your camera is blocked.",
                             );
                           }
                         },
@@ -630,7 +630,7 @@ async function doMediaSelect() {
                             startScreenshareButton(stream);
                           } catch (e) {
                             dialog.alert(
-                              "Screenshare failed, does your current web browser support screen sharing?"
+                              "Screenshare failed, does your current web browser support screen sharing?",
                             );
                           }
                         },
@@ -745,21 +745,21 @@ async function doMediaSelect() {
                           div.remove();
                           div = null;
                           var embedURL = await dialog.prompt(
-                            "Type a link to embed to.\nCertian websites may block embedding for security purposes.\nClick cancel or type nothing to cancel."
+                            "Type a link to embed to.\nCertian websites may block embedding for security purposes.\nClick cancel or type nothing to cancel.",
                           );
                           if (embedURL) {
                             sws.send(
                               JSON.stringify({
                                 type: "media",
                                 command: "mediaResetRequest",
-                              })
+                              }),
                             );
                             sws.send(
                               JSON.stringify({
                                 type: "media",
                                 command: "mediaEmbedRunning",
                                 url: embedURL,
-                              })
+                              }),
                             );
                           }
                         },
@@ -802,14 +802,14 @@ async function doMediaSelect() {
                                   JSON.stringify({
                                     type: "media",
                                     command: "mediaResetRequest",
-                                  })
+                                  }),
                                 );
                                 sws.send(
                                   JSON.stringify({
                                     type: "media",
                                     command: "mediaEmbedRunning",
                                     url: url,
-                                  })
+                                  }),
                                 );
                               }
                             }

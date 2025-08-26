@@ -8,4 +8,4 @@ var dialog = require("../dialogs.js"); //Dialog boxes.
 var elementJSON = [];
 
 var pageElements = elements.createElementsFromJSON(elementJSON);
-elements.appendElements(elements.body,pageElements);
+elements.appendElements(elements.body, pageElements);

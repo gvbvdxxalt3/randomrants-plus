@@ -59,7 +59,7 @@ var elementJSON = [
 
 elements.appendElements(
   elements.body,
-  elements.createElementsFromJSON(elementJSON)
+  elements.createElementsFromJSON(elementJSON),
 );
 
 var goButton = elements.getGPId("goButton");
@@ -71,7 +71,7 @@ async function logIn() {
   try {
     await accountHelper.loginToAccount(
       usernameInput.value,
-      passwordInput.value
+      passwordInput.value,
     );
     window.location.href = "/";
   } catch (e) {

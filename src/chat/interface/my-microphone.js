@@ -60,7 +60,7 @@ toggleButton.addEventListener("click", async () => {
         function () {
           contentSS = null;
           doCamera();
-        }
+        },
       );
     }
     contentStream = stream;
@@ -87,7 +87,7 @@ toggleButton.addEventListener("click", async () => {
       JSON.stringify({
         type: "setMicrophoneCode",
         code: null,
-      })
+      }),
     );
 
     contentStream.getTracks().forEach((track) => {
@@ -109,7 +109,7 @@ setInterval(() => {
       JSON.stringify({
         type: "setMicrophoneCode",
         code: contentSS.host.key,
-      })
+      }),
     );
   }
 }, 1000 / 20);

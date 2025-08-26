@@ -14,8 +14,8 @@ var menuItems = [
         element: "img",
         src: "images/randomrants-plus.svg",
         style: {
-          height: "100%"
-        }
+          height: "100%",
+        },
       },
     ],
     eventListeners: [

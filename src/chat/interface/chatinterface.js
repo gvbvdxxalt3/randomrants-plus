@@ -26,7 +26,7 @@ if (!isSecure()) {
   console.warn(
     "[INSECURE PROTOCOL DETECTED] If you are using the link from a deployment, add https:// to the begining and not http://. \n" +
       "This is because Random Rants + relies on secure content for parts of the site, please change your protocol to HTTPS if possible/" +
-      "\nRandom Rants + is may not work correctly with the http protocol unless changes to the site settings are made."
+      "\nRandom Rants + is may not work correctly with the http protocol unless changes to the site settings are made.",
   );
 }
 
@@ -57,7 +57,7 @@ var roomErrorScreen = elements.getGPId("roomErrorScreen");
 var userOnlineViewBox = elements.getGPId("userOnlineViewBox");
 var toggleMessageAndOnlineView = elements.getGPId("toggleMessageAndOnlineView");
 var toggleMessageAndOnlineViewText = elements.getGPId(
-  "toggleMessageAndOnlineViewText"
+  "toggleMessageAndOnlineViewText",
 );
 
 var showRoomSettingsButton = elements.getGPId("showRoomSettingsButton");
@@ -93,7 +93,7 @@ function toggleMessageAndOnlineViewClicked() {
 
 toggleMessageAndOnlineView.addEventListener(
   "click",
-  toggleMessageAndOnlineViewClicked
+  toggleMessageAndOnlineViewClicked,
 );
 
 reconnectingScreen.hidden = true;
@@ -110,14 +110,14 @@ reconnectingScreen.hidden = true;
     rrLoadingStatusText.textContent = "Injecting WebRTC chaos modules...";
     try {
       var rtcScripts = await fetchUtils.fetchAsJSON(
-        "external/webrtc-helper.json"
+        "external/webrtc-helper.json",
       );
       for (var script of rtcScripts) {
         await addScript(script);
       }
     } catch (e) {
       dialogs.alert(
-        "WebRTC scripts refused to load.\nThat means no screen sharing, no live chaos cams, and no mic mayhem."
+        "WebRTC scripts refused to load.\nThat means no screen sharing, no live chaos cams, and no mic mayhem.",
       );
     }
 
@@ -131,7 +131,7 @@ reconnectingScreen.hidden = true;
         var percent = (current / max) * 100;
         rrLoadingStatusText.textContent =
           "Prepping soundboard overload… (" + Math.round(percent) + "%)";
-      }
+      },
     );
 
     rrLoadingStatusText.textContent =
@@ -150,7 +150,7 @@ reconnectingScreen.hidden = true;
               who: username,
             }),
             method: "POST",
-          }
+          },
         );
       } else {
         await fetch(
@@ -160,7 +160,7 @@ reconnectingScreen.hidden = true;
               who: username,
             }),
             method: "POST",
-          }
+          },
         );
       }
     }
@@ -172,7 +172,7 @@ reconnectingScreen.hidden = true;
       isNew,
       isServerMessage,
       userColor,
-      recent = true
+      recent = true,
     ) {
       var willScroll = false;
       if (
@@ -187,7 +187,7 @@ reconnectingScreen.hidden = true;
         displayName,
         shtml.getMessageHTML(message),
         isServerMessage,
-        userColor
+        userColor,
       );
       userMessagesContainer.append(messageElement);
 
@@ -200,7 +200,7 @@ reconnectingScreen.hidden = true;
           {
             duration: 120,
             easing: "ease-in",
-          }
+          },
         );
       }
 
@@ -231,7 +231,7 @@ reconnectingScreen.hidden = true;
 
     addOwnershipUsernameButton.addEventListener("click", async function () {
       var response = await dialogs.prompt(
-        "Who do you want to give ownership to?\nDrop their username below:"
+        "Who do you want to give ownership to?\nDrop their username below:",
       );
       if (!response) {
         return;
@@ -270,7 +270,7 @@ reconnectingScreen.hidden = true;
               json.code,
               json.displayName,
               json.color,
-              json.isSelf
+              json.isSelf,
             ); //Add isSelf so the audio will not play for yourself to avoid interference.
           } else {
             microphones.end(json.id);
@@ -306,7 +306,7 @@ reconnectingScreen.hidden = true;
               false,
               messageData.isServer,
               messageData.color,
-              false
+              false,
             );
           }
         }
@@ -315,7 +315,7 @@ reconnectingScreen.hidden = true;
             JSON.stringify({
               type: "keepAlive",
               timestamp: Date.now(),
-            })
+            }),
           );
         }
         if (json.type == "newMessage") {
@@ -325,12 +325,12 @@ reconnectingScreen.hidden = true;
             json.message,
             true,
             json.isServer,
-            json.color
+            json.color,
           );
           sounds.play("notify", 1);
           notify.sendIfOnScreen(
             "New message!",
-            `${json.displayName}: ${json.message}`
+            `${json.displayName}: ${json.message}`,
           );
         }
         if (json.type == "usernameExists") {
@@ -389,7 +389,7 @@ reconnectingScreen.hidden = true;
               userState.isOwner,
               async function (promoting) {
                 await changeOwnershipUser(promoting, userInfo.username);
-              }
+              },
             );
             usersOnlineContainer.append(onlineUser);
           });
@@ -407,7 +407,7 @@ reconnectingScreen.hidden = true;
               userState.isOwner,
               async function (promoting) {
                 await changeOwnershipUser(promoting, username);
-              }
+              },
             );
             ownershipUsersContainer.append(onlineUser);
             i += 1;
@@ -434,13 +434,13 @@ reconnectingScreen.hidden = true;
           typingnotice.activateTypingMessage(
             json.username,
             json.displayName,
-            json.color
+            json.color,
           );
         }
       } catch (e) {
         console.error(e);
         dialogs.alert(
-          `Websocket server message decode or handling event error!${"\n"}Please tell the developer to fix, or try reloading page if this error presists. Error message: ${e}`
+          `Websocket server message decode or handling event error!${"\n"}Please tell the developer to fix, or try reloading page if this error presists. Error message: ${e}`,
         );
       }
     }
@@ -456,7 +456,7 @@ reconnectingScreen.hidden = true;
           type: "playSoundboard",
           index,
           mult,
-        })
+        }),
       );
     };
 
@@ -469,7 +469,7 @@ reconnectingScreen.hidden = true;
       sws.send(
         JSON.stringify({
           type: "stopSoundboard",
-        })
+        }),
       );
     };
 
@@ -497,7 +497,7 @@ reconnectingScreen.hidden = true;
           currentRoom,
         onMessage,
         onOpen,
-        onCloseReconnect
+        onCloseReconnect,
       );
     }
     if (!isOffline) {

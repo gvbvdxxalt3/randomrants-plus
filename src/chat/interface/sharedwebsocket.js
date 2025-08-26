@@ -1,10 +1,10 @@
 var websocket = null;
 var sws = {
   isOpen: false,
-  CANCEL_RECONNECT: "CANCEL_RECONNECT"
+  CANCEL_RECONNECT: "CANCEL_RECONNECT",
 };
 
-function openWebsocket (url,onmessage,onopen,onclose) {
+function openWebsocket(url, onmessage, onopen, onclose) {
   if (websocket) {
     websocket.onclose = function () {};
     websocket.onmessage = function () {};
@@ -20,7 +20,7 @@ function openWebsocket (url,onmessage,onopen,onclose) {
       result = await onclose();
     }
     if (result !== sws.CANCEL_RECONNECT) {
-      openWebsocket(url,onmessage,onopen,onclose);
+      openWebsocket(url, onmessage, onopen, onclose);
     }
   };
   websocket.onopen = function (e) {
@@ -32,7 +32,7 @@ function openWebsocket (url,onmessage,onopen,onclose) {
   websocket.onmessage = onmessage;
 }
 
-function closeWebsocket () {
+function closeWebsocket() {
   if (websocket) {
     websocket.onclose = function () {};
     websocket.onmessage = function () {};
@@ -42,7 +42,7 @@ function closeWebsocket () {
   sws.isOpen = false;
 }
 
-function sendWebsocket (d) {
+function sendWebsocket(d) {
   if (sws.isOpen) {
     websocket.send(d);
   }

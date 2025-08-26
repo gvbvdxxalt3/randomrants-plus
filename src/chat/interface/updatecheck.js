@@ -68,7 +68,7 @@ async function getServerTime() {
       updateScreenDiv.hidden = false;
       updateVersionTime.textContent = formatTimeDifference(
         Number(newVersion),
-        Number(serverTime)
+        Number(serverTime),
       );
 
       for (const key in updateChecker.updateListeners) {

@@ -23,16 +23,16 @@ class RRUserState {
         }
       },
       //Events
-      permissionUpdate: []
+      permissionUpdate: [],
     };
   }
 
-  updatePermission (name,value) {
+  updatePermission(name, value) {
     this.permissions[name] = value;
-    this.emitEvent("permissionUpdate",name,value);
+    this.emitEvent("permissionUpdate", name, value);
   }
 
-  hasPermission (name) {
+  hasPermission(name) {
     return this.permissions[name];
   }
 

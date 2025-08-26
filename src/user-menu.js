@@ -12,7 +12,7 @@ var elementJSON = [
 
 elements.appendElements(
   elements.getGPId("menu_bar"),
-  elements.createElementsFromJSON(elementJSON)
+  elements.createElementsFromJSON(elementJSON),
 );
 
 var signInButton = {
@@ -76,7 +76,7 @@ function handleUserAccountButtons() {
             imageRendering: "pixelated",
             top: "0px",
             width: "40px",
-            height: "40px"
+            height: "40px",
           },
           src: accountHelper.getProfilePictureURL(validated.username),
         },
@@ -117,13 +117,13 @@ function handleUserAccountButtons() {
     };
     elements.appendElements(
       elements.getGPId("menu_bar"),
-      elements.createElementsFromJSON([myAccountButton])
+      elements.createElementsFromJSON([myAccountButton]),
     );
     handleUserAccountButtons();
   } else {
     elements.appendElements(
       elements.getGPId("menu_bar"),
-      elements.createElementsFromJSON([signInButton, signUpButton])
+      elements.createElementsFromJSON([signInButton, signUpButton]),
     );
     handleSignedOutAccountButtons();
   }

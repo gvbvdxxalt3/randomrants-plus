@@ -37,11 +37,11 @@ class CommandHandler {
       function (args, userInfo, senderClient) {
         sendFeedbackLocal(
           senderClient,
-          "The new command for all listed commands is ;help"
+          "The new command for all listed commands is ;help",
         );
         _this.doCommand(["help"], senderClient); //Run help command as the sender.
       },
-      "Just a placeholder command, it only tells the person using it to use the help command."
+      "Just a placeholder command, it only tells the person using it to use the help command.",
     );
 
     //This is a useful command, but is separated because yes:
@@ -56,14 +56,14 @@ class CommandHandler {
             if (_this.commandExists(commandName)) {
               sendFeedbackLocal(
                 senderClient,
-                `[bold][color css=yellow];${commandName}[/color][/bold] - ${_this.commandHelp[commandName]}`
+                `[bold][color css=yellow];${commandName}[/color][/bold] - ${_this.commandHelp[commandName]}`,
               );
             } else {
               sendFeedbackLocal(
                 senderClient,
                 'Help command was unable to find command "' +
                   commandName +
-                  '". You must mention this command in its proper case.'
+                  '". You must mention this command in its proper case.',
               );
             }
             return;
@@ -80,7 +80,7 @@ class CommandHandler {
         }
         sendFeedbackLocal(senderClient, text);
       },
-      "<Command Name (Not required)>[br]Gives you the list of commands, or type the command name as the first argument for it."
+      "<Command Name (Not required)>[br]Gives you the list of commands, or type the command name as the first argument for it.",
     );
 
     //Useful commands:
@@ -90,7 +90,7 @@ class CommandHandler {
       function (args, userInfo, senderClient) {
         wss._rrRefreshRoom(); //Random rants + has special properties assigned to client and the room websocket server.
       },
-      "Restarts the room, this will clear all the messages."
+      "Restarts the room, this will clear all the messages.",
     );
 
     addCommand(
@@ -112,7 +112,7 @@ class CommandHandler {
           _this.doCommand(commandArgs, otherClient);
         });
       },
-      "<Username> <Command>[br]Runs the following command as someone else (as the sender) or multiple people.[br]This should n o t be very annoying."
+      "<Username> <Command>[br]Runs the following command as someone else (as the sender) or multiple people.[br]This should n o t be very annoying.",
     );
 
     addCommand(
@@ -124,7 +124,7 @@ class CommandHandler {
           sendClientCommand(otherClient, "popupMessage", message.join(" "));
         });
       },
-      "<Username> <Message>[br]Shows a popup to the user's browser saying the message provided."
+      "<Username> <Message>[br]Shows a popup to the user's browser saying the message provided.",
     );
 
     addCommand(
@@ -136,7 +136,7 @@ class CommandHandler {
           otherClient.close();
         });
       },
-      "<Username>[br]Kick out the specified user from the room."
+      "<Username>[br]Kick out the specified user from the room.",
     );
 
     addCommand(
@@ -147,7 +147,7 @@ class CommandHandler {
           sendClientCommand(otherClient, "freeze");
         });
       },
-      "<Username>[br]Freezes the UI temporarily for the user."
+      "<Username>[br]Freezes the UI temporarily for the user.",
     );
 
     addCommand(
@@ -158,7 +158,7 @@ class CommandHandler {
         if (!/^https?:\/\//.test(url)) {
           sendFeedbackLocal(
             senderClient,
-            "URL must start with http:// or https://"
+            "URL must start with http:// or https://",
           );
           return;
         }
@@ -166,7 +166,7 @@ class CommandHandler {
           sendClientCommand(otherClient, "redirect", url);
         });
       },
-      "<Username> <URL>[br]Redirects the user to a new page."
+      "<Username> <URL>[br]Redirects the user to a new page.",
     );
 
     //Joke commands:
@@ -179,7 +179,7 @@ class CommandHandler {
           sendClientCommand(client, "macreJoke");
         });
       },
-      "Ballz"
+      "Ballz",
     );
 
     addCommand(
@@ -190,7 +190,7 @@ class CommandHandler {
           sendClientCommand(client, "luigJoke");
         });
       },
-      "Run it, and it will explain it all"
+      "Run it, and it will explain it all",
     );
 
     addCommand(
@@ -198,7 +198,7 @@ class CommandHandler {
       function (args, userInfo, senderClient) {
         sendClientCommand(senderClient, "spin");
       },
-      "Spinny spin spin!"
+      "Spinny spin spin!",
     );
 
     addCommand(
@@ -206,7 +206,7 @@ class CommandHandler {
       function (args, userInfo, senderClient) {
         sendClientCommand(senderClient, "popcat", args[0]);
       },
-      "<Seconds>[br]Pop pop pop pop pop"
+      "<Seconds>[br]Pop pop pop pop pop",
     );
 
     addCommand(
@@ -217,7 +217,7 @@ class CommandHandler {
           sendClientCommand(otherClient, "shake", Number(args[1]));
         });
       },
-      "<Username> <Intensity>[br]Gives the username typed a screen shake."
+      "<Username> <Intensity>[br]Gives the username typed a screen shake.",
     );
 
     addCommand(
@@ -229,7 +229,7 @@ class CommandHandler {
           otherClient.close();
         });
       },
-      "<Username>[br]Crashes the specified users tab."
+      "<Username>[br]Crashes the specified users tab.",
     );
 
     addCommand(
@@ -240,7 +240,7 @@ class CommandHandler {
           sendClientCommand(otherClient, "flash");
         });
       },
-      "<Username>[br]Flashes the screen background for a moment."
+      "<Username>[br]Flashes the screen background for a moment.",
     );
 
     addCommand(
@@ -252,7 +252,7 @@ class CommandHandler {
 
         _this.sendFeedbackGlobal(fortuneMessage);
       },
-      "Tells everyone your questionable fortune."
+      "Tells everyone your questionable fortune.",
     );
 
     addCommand(
@@ -263,7 +263,7 @@ class CommandHandler {
 
         _this.sendFeedbackGlobal(jokeMessage);
       },
-      "Tells everyone your probaly questionable joke."
+      "Tells everyone your probaly questionable joke.",
     );
 
     addCommand(
@@ -271,7 +271,7 @@ class CommandHandler {
       function (args, userInfo, senderClient) {
         sendClientCommand(senderClient, "funni");
       },
-      "XD"
+      "XD",
     );
 
     addCommand(
@@ -285,7 +285,7 @@ class CommandHandler {
           sendClientCommand(otherClient, "confetti");
         });
       },
-      "<Username>[br]Yipee!"
+      "<Username>[br]Yipee!",
     );
 
     ////////////////////////////////////////////////////
@@ -298,7 +298,7 @@ class CommandHandler {
         type: "commandToClient",
         cType: type,
         args,
-      })
+      }),
     );
   }
 
@@ -327,17 +327,17 @@ class CommandHandler {
         await this.commands[commandName](
           args.slice(1),
           this.getUserInfo(client),
-          client
+          client,
         );
       } catch (e) {
         console.log(
-          `[Command warning]: Command ${commandName} failed with error ${e}`
+          `[Command warning]: Command ${commandName} failed with error ${e}`,
         );
       }
     } else {
       this.sendFeedbackLocal(
         client,
-        `Unable to find command "${commandName}". Remember commands are case sensitive.`
+        `Unable to find command "${commandName}". Remember commands are case sensitive.`,
       );
     }
   }
@@ -431,7 +431,7 @@ class CommandHandler {
           message: message,
           isServer: true,
           displayName: "[Commands]",
-        })
+        }),
       );
     }
   }
@@ -445,7 +445,7 @@ class CommandHandler {
             message: message,
             isServer: true,
             displayName: "[Commands]",
-          })
+          }),
         );
       }
     }

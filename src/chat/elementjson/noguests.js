@@ -3,7 +3,7 @@ module.exports = {
   gid: "guestErrorScreen",
   hidden: true,
   style: {
-    zIndex: 10
+    zIndex: 10,
   },
   children: [
     {

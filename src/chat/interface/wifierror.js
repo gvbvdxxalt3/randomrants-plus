@@ -8,4 +8,4 @@ var noWifiScreen = elements.getGPId("offlineErrorScreen");
 
 setInterval(() => {
   noWifiScreen.hidden = navigator.onLine;
-},100);
+}, 100);

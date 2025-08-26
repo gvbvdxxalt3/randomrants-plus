@@ -19,11 +19,12 @@ function handleErrors(e) {
     "</ul>" +
     "<br>" +
     "<button onclick='window.location.reload()'>🔄 Refresh This Mess</button>" +
-    " <button onclick='window.open(\"https://github.com/random-rants-chat/randomrants-plus/issues\", \"_blank\")'>🐛 Report to GitHub Repo</button>" +
+    ' <button onclick=\'window.open("https://github.com/random-rants-chat/randomrants-plus/issues", "_blank")\'>🐛 Report to GitHub Repo</button>' +
     "<p><i>Still broken? You’ve officially unlocked ‘Ultra Chaos Mode.’ Congrats?</i></p>" +
     "<hr>" +
     "<pre style='white-space: pre-wrap; word-break: break-word; background:#222; color:#fff; padding:10px; border-radius:10px; font-size: 14px;'>" +
-    "Error details:\n" + e +
+    "Error details:\n" +
+    e +
     "</pre>";
 
   console.error("🚨 Random Rants+ failed to load:\n", e);

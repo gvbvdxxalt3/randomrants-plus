@@ -170,12 +170,12 @@ function getMessageHTML(inputstr, noBracketCode, otherBracketCodes = {}) {
             if (!noBracketCode) {
               if (otherBracketCodes[type]) {
                 valid = true;
-                output_html += otherBracketCodes(type,valname,value);
+                output_html += otherBracketCodes(type, valname, value);
               }
               if (type == "search") {
                 valid = true;
                 output_html += `<a href="https://google.com/search?q=${encodeURIComponent(
-                  value
+                  value,
                 )}" style="color: var(--link-text-color);" target="_blank">Google Search "${value}"</a>`;
               }
               if (type == "emoji") {

@@ -18,12 +18,12 @@ function loopAnimation() {
       duration: 350,
       iterations: 1,
       easing: "ease-out",
-    }
+    },
   );
 
   anim.addEventListener("finish", () => {
     rrLoadingScreenText.textContent = returnRandomValueFromArray(
-      loadingScreenTextScroll
+      loadingScreenTextScroll,
     );
     var anim2 = rrLoadingScreenText.animate(
       [{ opacity: "0", transform: "translateY(10px)" }, { opacity: "1" }],
@@ -31,7 +31,7 @@ function loopAnimation() {
         duration: 350,
         iterations: 1,
         easing: "ease-out",
-      }
+      },
     );
 
     anim2.addEventListener("finish", () => {

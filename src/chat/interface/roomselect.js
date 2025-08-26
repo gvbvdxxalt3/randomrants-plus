@@ -19,7 +19,8 @@ async function getRooms() {
 
 function doJoinCodeScreen(code) {
   var div = document.createElement("div");
-  var joinHref = window.location.protocol + "//" + window.location.host + "/join";
+  var joinHref =
+    window.location.protocol + "//" + window.location.host + "/join";
 
   var dom = elements.createElementsFromJSON([
     //Background
@@ -36,13 +37,13 @@ function doJoinCodeScreen(code) {
           element: "span",
           style: {
             fontSize: "50px",
-            fontWeight: "bold"
+            fontWeight: "bold",
           },
           className: "typingEffect",
-          textContent: code
+          textContent: code,
         },
         {
-          element: "br"
+          element: "br",
         },
         {
           element: "span",
@@ -61,22 +62,24 @@ function doJoinCodeScreen(code) {
           textContent: joinHref,
           style: {
             fontSize: "20px",
-            fontWeight: "bold"
-          }
-        },
-        {
-          element: "br"
-        },
-        {
-          element: "span",
-          textContent: "Someone just dropped a fresh join code into the multiverse. Hit that link to blast into their chaos zone!",
+            fontWeight: "bold",
+          },
         },
         {
           element: "br",
         },
         {
           element: "span",
-          textContent: "⏳ This code self-destructs in 10 minutes. Use it or lose it.",
+          textContent:
+            "Someone just dropped a fresh join code into the multiverse. Hit that link to blast into their chaos zone!",
+        },
+        {
+          element: "br",
+        },
+        {
+          element: "span",
+          textContent:
+            "⏳ This code self-destructs in 10 minutes. Use it or lose it.",
         },
         {
           element: "br",
@@ -90,10 +93,10 @@ function doJoinCodeScreen(code) {
               event: "click",
               func: function () {
                 div.remove();
-              }
-            }
-          ]
-        }
+              },
+            },
+          ],
+        },
       ],
     },
   ]);
@@ -110,11 +113,11 @@ function doJoinCodeScreen(code) {
 async function doRoomSelect() {
   try {
     var div = document.createElement("div");
-    
-    var addButtonJSON = {element: "div",};
-    
+
+    var addButtonJSON = { element: "div" };
+
     var roomSelectChildren = [];
-    
+
     if (validState) {
       roomSelectChildren.push(addButtonJSON);
     } else {
@@ -124,12 +127,13 @@ async function doRoomSelect() {
         children: [
           {
             element: "span",
-            textContent: "⚠️ You’re not logged in, so room controls are locked. Just logged in? Try refreshing the page to unlock everything.",
+            textContent:
+              "⚠️ You’re not logged in, so room controls are locked. Just logged in? Try refreshing the page to unlock everything.",
           },
         ],
       });
     }
-    
+
     var dialogBG = document.createElement("div");
     var loadingSpinnerDiv = document.createElement("div");
     var loadingSpinnerCDiv = document.createElement("div");
@@ -139,42 +143,44 @@ async function doRoomSelect() {
     loadingSpinnerCDiv.className = "centerMiddle";
     dialogBG.append(loadingSpinnerCDiv);
     document.body.append(dialogBG);
-    try{
+    try {
       var rooms = await getRooms();
       dialogBG.remove();
       if (!rooms) {
         dialog.alert("Failed to retrieve rooms.");
         return;
       }
-    }catch(e){
+    } catch (e) {
       dialogBG.remove();
       dialog.alert("Failed to retrieve rooms.");
       return;
     }
     rooms.forEach((room) => {
-      var removeButton =           {
-            element: "div",
-            className: "divButton",
-            textContent: "Remove from list",
-            eventListeners: [
-              {
-                event:"click",
-                func: async function (e) {
-                  e.preventDefault();
-                  var accepted = await dialog.confirm("Remove this room?\nThis room will NOT be deleted from the site.");
-                  if (accepted) {
-                    try{
-                      await accountHelper.removeJoinedRoom(room.id);
-                      div.remove();
-                      doRoomSelect();
-                    }catch(err){
-                      dialog.alert("Error removing this room ${err}");
-                    }
-                  }
+      var removeButton = {
+        element: "div",
+        className: "divButton",
+        textContent: "Remove from list",
+        eventListeners: [
+          {
+            event: "click",
+            func: async function (e) {
+              e.preventDefault();
+              var accepted = await dialog.confirm(
+                "Remove this room?\nThis room will NOT be deleted from the site.",
+              );
+              if (accepted) {
+                try {
+                  await accountHelper.removeJoinedRoom(room.id);
+                  div.remove();
+                  doRoomSelect();
+                } catch (err) {
+                  dialog.alert("Error removing this room ${err}");
                 }
               }
-            ]
-          };
+            },
+          },
+        ],
+      };
       var roomExtraStuff = [];
       if (room.invited) {
         roomExtraStuff.push({
@@ -183,9 +189,9 @@ async function doRoomSelect() {
           style: {
             fontSize: "30px",
             color: "yellow",
-            fontWeight: "bold"
+            fontWeight: "bold",
           },
-          textContent: "(Invited)"
+          textContent: "(Invited)",
         });
       }
       if (room.id == currentRoom) {
@@ -195,9 +201,9 @@ async function doRoomSelect() {
           style: {
             fontSize: "30px",
             color: "green",
-            fontWeight: "bold"
+            fontWeight: "bold",
           },
-          textContent: "*"
+          textContent: "*",
         });
       }
       var usersOnline = "(Unknown)";
@@ -215,7 +221,7 @@ async function doRoomSelect() {
                 justifyContent: "center",
                 padding: "4px 4px",
               },
-              children:[
+              children: [
                 {
                   element: "img",
                   className: "profile",
@@ -223,17 +229,17 @@ async function doRoomSelect() {
                     height: "32px",
                     maxWidth: "32px",
                   },
-                  src: accountHelper.getProfilePictureURL(userInList.username)
+                  src: accountHelper.getProfilePictureURL(userInList.username),
                 },
                 {
                   element: "span",
                   style: {
-                    fontWeight:"bold",
-                    color: userInList.color
+                    fontWeight: "bold",
+                    color: userInList.color,
                   },
-                  textContent: userInList.display
-                }
-              ]
+                  textContent: userInList.display,
+                },
+              ],
             });
           }
         }
@@ -260,7 +266,7 @@ async function doRoomSelect() {
             textContent: "Room ID: " + room.id,
           },
           {
-            element: "br"
+            element: "br",
           },
           {
             element: "span",
@@ -268,19 +274,19 @@ async function doRoomSelect() {
             style: {
               fontSize: "20px",
             },
-            textContent: "Users online: "+usersOnline,
+            textContent: "Users online: " + usersOnline,
           },
           {
-            element: "br"
+            element: "br",
           },
           {
             element: "div",
             style: {
-              display:"flex",
+              display: "flex",
               width: "100%",
-              height: "fit-content"
+              height: "fit-content",
             },
-            children: userPFPs
+            children: userPFPs,
           },
           {
             element: "div",
@@ -291,16 +297,16 @@ async function doRoomSelect() {
                 event: "click",
                 func: function (e) {
                   e.preventDefault();
-                  
+
                   if (room.id == currentRoom) {
                     div.remove();
                     return;
                   }
-                  window.location.hash = "#"+encodeURIComponent(room.id);
+                  window.location.hash = "#" + encodeURIComponent(room.id);
                   window.location.reload();
-                }
-              }
-            ]
+                },
+              },
+            ],
           },
           {
             element: "div",
@@ -311,25 +317,37 @@ async function doRoomSelect() {
                 event: "click",
                 func: async function (e) {
                   e.preventDefault();
-                  try{
-                    var inviteTarget = await dialog.prompt("👥 Who do you want to invite to this room?\nType their username and bring them in!");
+                  try {
+                    var inviteTarget = await dialog.prompt(
+                      "👥 Who do you want to invite to this room?\nType their username and bring them in!",
+                    );
                     if (!inviteTarget) {
                       return;
                     }
-                    var response = await fetch(accountHelper.getServerURL()+"/account/inviteroom",{method:"POST",body: JSON.stringify({
-                      id: room.id,
-                      name: room.name,
-                      username: inviteTarget
-                    })});
+                    var response = await fetch(
+                      accountHelper.getServerURL() + "/account/inviteroom",
+                      {
+                        method: "POST",
+                        body: JSON.stringify({
+                          id: room.id,
+                          name: room.name,
+                          username: inviteTarget,
+                        }),
+                      },
+                    );
                     if (!response.ok) {
-                      dialog.alert("❌ Invite flop. That username doesn’t exist... or maybe it escaped through a portal. Check it and try again!");
+                      dialog.alert(
+                        "❌ Invite flop. That username doesn’t exist... or maybe it escaped through a portal. Check it and try again!",
+                      );
                     }
-                  }catch(e){
-                    dialog.alert("Failed to invite a user to room. Error Message: ${e}");
+                  } catch (e) {
+                    dialog.alert(
+                      "Failed to invite a user to room. Error Message: ${e}",
+                    );
                   }
-                }
-              }
-            ]
+                },
+              },
+            ],
           },
           {
             element: "div",
@@ -340,22 +358,34 @@ async function doRoomSelect() {
                 event: "click",
                 func: async function (e) {
                   e.preventDefault();
-                  try{
-                    var response = await fetch(accountHelper.getServerURL()+"/quickjoin/code",{method:"POST",body: JSON.stringify({
-                      id: room.id,
-                    })});
+                  try {
+                    var response = await fetch(
+                      accountHelper.getServerURL() + "/quickjoin/code",
+                      {
+                        method: "POST",
+                        body: JSON.stringify({
+                          id: room.id,
+                        }),
+                      },
+                    );
                     if (!response.ok) {
-                      dialog.alert("Got error "+response.status+". Unable to create join code, maybe the room was just deleted?");
+                      dialog.alert(
+                        "Got error " +
+                          response.status +
+                          ". Unable to create join code, maybe the room was just deleted?",
+                      );
                       return;
                     }
                     var json = await response.json();
                     doJoinCodeScreen(json.code);
-                  }catch(e){
-                    dialog.alert("Failed to create join code. Error Message: ${e}");
+                  } catch (e) {
+                    dialog.alert(
+                      "Failed to create join code. Error Message: ${e}",
+                    );
                   }
-                }
-              }
-            ]
+                },
+              },
+            ],
           },
         ]),
       };
@@ -385,14 +415,14 @@ async function doRoomSelect() {
             textContent: "Manage rooms",
           },
           {
-            element: "br"
+            element: "br",
           },
           {
             element: "span",
-            textContent:"Tips:",
+            textContent: "Tips:",
             style: {
-              fontWeight: "bold"
-            }
+              fontWeight: "bold",
+            },
           },
           {
             element: "ul",
@@ -400,29 +430,27 @@ async function doRoomSelect() {
               {
                 element: "li",
                 textContent:
-                "Click \"🚪 Summon a room\" to create your own room.",
+                  'Click "🚪 Summon a room" to create your own room.',
+              },
+              {
+                element: "li",
+                textContent: "Click Join room to hop into a chat.",
+              },
+              {
+                element: "li",
+                textContent: "Use Invite someone to bring a friend in.",
               },
               {
                 element: "li",
                 textContent:
-                "Click Join room to hop into a chat.",
+                  "Hit Remove from list if a room’s no longer your vibe.",
               },
               {
                 element: "li",
                 textContent:
-                'Use Invite someone to bring a friend in.',
+                  'Want to invite without typing your friends username? Click "Create join code".',
               },
-              {
-                element: "li",
-                textContent:
-                'Hit Remove from list if a room’s no longer your vibe.',
-              },
-              {
-                element: "li",
-                textContent:
-                'Want to invite without typing your friends username? Click "Create join code".',
-              }
-            ]
+            ],
           },
           {
             element: "div",
@@ -432,22 +460,29 @@ async function doRoomSelect() {
               {
                 event: "click",
                 func: async function () {
-                  try{
-                    var a = await fetch(accountHelper.getServerURL()+"/rooms/create",{method:"POST"});
+                  try {
+                    var a = await fetch(
+                      accountHelper.getServerURL() + "/rooms/create",
+                      { method: "POST" },
+                    );
                     if (a.ok) {
                       var json = await a.json();
-                      window.location.hash = "#"+encodeURIComponent(json.id);
+                      window.location.hash = "#" + encodeURIComponent(json.id);
                       window.location.reload();
                     } else {
-                      dialog.alert("❗ Couldn’t create the room.\nYou might need to log in or sign up first.");
+                      dialog.alert(
+                        "❗ Couldn’t create the room.\nYou might need to log in or sign up first.",
+                      );
                     }
-                  }catch(e){
-                    dialog.alert(`💥 Room launch explosion! Something went wrong: ${e}`);
+                  } catch (e) {
+                    dialog.alert(
+                      `💥 Room launch explosion! Something went wrong: ${e}`,
+                    );
                     console.error(e);
                   }
-                }
+                },
               },
-            ]
+            ],
           },
           {
             element: "div",
@@ -463,10 +498,10 @@ async function doRoomSelect() {
                 event: "click",
                 func: function () {
                   div.remove();
-                }
-              }
-            ]
-          }
+                },
+              },
+            ],
+          },
         ],
       },
     ]);

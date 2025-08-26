@@ -13,73 +13,80 @@ var elementJSON = [
       {
         element: "span",
         className: "headerText",
-        textContent: "🚪 Quick Join Portal"
+        textContent: "🚪 Quick Join Portal",
       },
       {
-        element: "br"
+        element: "br",
       },
       {
         element: "div",
         style: {
           display: "flex",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
         },
         children: [
           {
             element: "span",
-            textContent: "Room code:"
+            textContent: "Room code:",
           },
           {
             element: "div",
             style: {
-              width: "4px"
-            }
+              width: "4px",
+            },
           },
           {
             element: "input",
             className: "inputText1",
-            gid: "joinCodeInput"
+            gid: "joinCodeInput",
           },
           {
             element: "div",
             style: {
-              width: "4px"
-            }
+              width: "4px",
+            },
           },
           {
             element: "div",
             className: "button2",
             textContent: "Beam me in",
-            gid: "joinCodeButton"
+            gid: "joinCodeButton",
           },
-        ]
+        ],
       },
       {
         element: "br",
       },
       {
         element: "span",
-        textContent: "Type the wacky code from your friend's screen to teleport into their chaos chamber (aka chat room). No time to explain—GO!"
-      }
-    ]
-  }
+        textContent:
+          "Type the wacky code from your friend's screen to teleport into their chaos chamber (aka chat room). No time to explain—GO!",
+      },
+    ],
+  },
 ];
 
 var pageElements = elements.createElementsFromJSON(elementJSON);
-elements.appendElements(elements.body,pageElements);
+elements.appendElements(elements.body, pageElements);
 
 var joinCodeInput = elements.getGPId("joinCodeInput");
 var joinCodeButton = elements.getGPId("joinCodeButton");
 
-async function joinToRoom () {
-  var response = await fetch(accountHelper.getServerURL()+"/quickjoin/code/"+joinCodeInput.value);
+async function joinToRoom() {
+  var response = await fetch(
+    accountHelper.getServerURL() + "/quickjoin/code/" + joinCodeInput.value,
+  );
   if (!response.ok) {
-    dialog.alert("💥 Error " + response.status + "! That code might’ve exploded or expired.");
+    dialog.alert(
+      "💥 Error " +
+        response.status +
+        "! That code might’ve exploded or expired.",
+    );
     return;
   }
   var text = await response.text();
-  window.location.href = "/chat#"+text;
+  window.location.href = "/chat#" + text;
 }
 
 joinCodeInput.addEventListener("keydown", (event) => {
@@ -89,5 +96,5 @@ joinCodeInput.addEventListener("keydown", (event) => {
 });
 
 joinCodeButton.addEventListener("click", () => {
-  joinToRoom();  
+  joinToRoom();
 });

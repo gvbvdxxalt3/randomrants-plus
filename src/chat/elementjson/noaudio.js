@@ -3,5 +3,6 @@ module.exports = {
   className: "noSoundMessage",
   gid: "noAudioMessage",
   hidden: true,
-  textContent: "🔇 Audio's still snoozing—tap or click anywhere to wake it up and get the chaos rolling."
+  textContent:
+    "🔇 Audio's still snoozing—tap or click anywhere to wake it up and get the chaos rolling.",
 };

@@ -32,7 +32,6 @@ function getServerURL() {
 }
 
 async function checkSessionCookie() {
-  //Double check this is valid before we just allow it to pass through.
   try {
     var request = await fetch(getServerURL() + "/account/session", {
       method: "GET",
@@ -81,7 +80,9 @@ async function signupAccount(username, password) {
 }
 
 async function logoutOfAccount() {
-  cookieManager.signoutAccountCookie();
+  var request = await fetch(getServerURL() + "/account/logout", {
+    method: "POST",
+  });
 }
 
 function getProfilePictureURL(username) {

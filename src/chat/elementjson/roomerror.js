@@ -75,7 +75,7 @@ module.exports = {
                     "This room was removed from your room list. Hopefully you don't run into this error ever again!",
                 },
                 {
-                  element: "br"
+                  element: "br",
                 },
                 {
                   element: "div",
@@ -87,9 +87,9 @@ module.exports = {
                       event: "click",
                       func: function () {
                         window.location.href = "/chat"; //Goes to chat home page
-                      }
-                    }
-                  ]
+                      },
+                    },
+                  ],
                 },
               ],
             },

@@ -11,7 +11,7 @@ var ogAttachText = messageAttachFilesButton.innerHTML;
 messageAttachFilesButton.addEventListener("click", async function () {
   var buttonChoose = await dialogs.displayButtonChooser(
     "What type of file do you want to attach?",
-    ["Cancel", "Image", "Audio", "Video", "File download link"]
+    ["Cancel", "Image", "Audio", "Video", "File download link"],
   );
 
   var acceptTypes = "";

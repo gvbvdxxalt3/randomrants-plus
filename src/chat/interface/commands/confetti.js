@@ -63,7 +63,7 @@ function startConfettiInner() {
     canvas.setAttribute("id", "confetti-canvas");
     canvas.setAttribute(
       "style",
-      "display:block;z-index:999999;pointer-events:none;position:fixed;top:0;left:0;width:100vw;height:100vh;"
+      "display:block;z-index:999999;pointer-events:none;position:fixed;top:0;left:0;width:100vw;height:100vh;",
     );
     document.body.appendChild(canvas);
     canvas.width = width;
@@ -74,7 +74,7 @@ function startConfettiInner() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       },
-      true
+      true,
     );
   }
   var context = canvas.getContext("2d");

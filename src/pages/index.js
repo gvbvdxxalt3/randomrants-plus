@@ -54,7 +54,7 @@ var elementJSON = [
       position: "fixed",
       bottom: "-20px",
       left: "0px",
-      pointerEvents: "none"
+      pointerEvents: "none",
     },
   },
   {
@@ -66,7 +66,7 @@ var elementJSON = [
       bottom: "-20px",
       right: "0px",
       transform: "scale(-1, 1)",
-      pointerEvents: "none"
+      pointerEvents: "none",
     },
   },
   {
@@ -82,7 +82,7 @@ var elementJSON = [
           duration: 700,
           iterations: 1,
           easing: "ease-out",
-        }
+        },
       );
       anim.addEventListener("finish", () => {
         elm.animate(
@@ -96,7 +96,7 @@ var elementJSON = [
             duration: 600,
             iterations: Infinity,
             easing: "ease-out",
-          }
+          },
         );
       });
     },
@@ -105,7 +105,7 @@ var elementJSON = [
       position: "fixed",
       bottom: "-20px",
       left: "0px",
-      pointerEvents: "none"
+      pointerEvents: "none",
     },
   },
   {
@@ -121,7 +121,7 @@ var elementJSON = [
           duration: 800,
           iterations: 1,
           easing: "ease-out",
-        }
+        },
       );
       anim.addEventListener("finish", () => {
         elm.animate(
@@ -135,7 +135,7 @@ var elementJSON = [
             duration: 800,
             iterations: Infinity,
             easing: "ease-out",
-          }
+          },
         );
       });
     },
@@ -145,7 +145,7 @@ var elementJSON = [
       bottom: "-20px",
       right: "0px",
       transform: "scale(-1, 1)",
-      pointerEvents: "none"
+      pointerEvents: "none",
     },
   },
   {
@@ -173,7 +173,7 @@ var elementJSON = [
           wordBreak: "break-word",
           hyphens: "auto",
           padding: "1rem", // Optional: gives breathing room
-          boxSizing: "border-box"
+          boxSizing: "border-box",
         },
         children: [
           {
@@ -184,7 +184,7 @@ var elementJSON = [
               color: "black",
             },
             innerHTML: shtml.getMessageHTML(
-              returnRandomValueFromArray(randomQuotes).trim()
+              returnRandomValueFromArray(randomQuotes).trim(),
             ),
           },
           {
@@ -204,9 +204,9 @@ var elementJSON = [
             style: {
               display: "flex",
               alignContent: "center",
-              justifyContent: "center"
+              justifyContent: "center",
             },
-            children:[
+            children: [
               {
                 element: "div",
                 className: "button2",
@@ -216,15 +216,19 @@ var elementJSON = [
                     event: "click",
                     func: async function () {
                       if (!accountHelper.getCurrentValidationState()) {
-                        if (await dialogs.confirm("Are you sure you want to join without an Random Rants + account?\nYou won't be able to:\nsave rooms in your room manager\ncreate rooms\ncustomize you're display name and display color\nbecome an room ownership member")) {
+                        if (
+                          await dialogs.confirm(
+                            "Are you sure you want to join without an Random Rants + account?\nYou won't be able to:\nsave rooms in your room manager\ncreate rooms\ncustomize you're display name and display color\nbecome an room ownership member",
+                          )
+                        ) {
                           window.location.href = "/chat";
                         }
                       } else {
                         window.location.href = "/chat";
                       }
-                    }
-                  }
-                ]
+                    },
+                  },
+                ],
               },
               {
                 element: "div",
@@ -235,17 +239,21 @@ var elementJSON = [
                     event: "click",
                     func: async function () {
                       if (!accountHelper.getCurrentValidationState()) {
-                        if (await dialogs.confirm("Are you sure you want to join someones room without an Random Rants + account?\nYou won't be able to:\nsave rooms in your room manager\ncreate rooms\ncustomize you're display name and display color\nbecome an room ownership member")) {
+                        if (
+                          await dialogs.confirm(
+                            "Are you sure you want to join someones room without an Random Rants + account?\nYou won't be able to:\nsave rooms in your room manager\ncreate rooms\ncustomize you're display name and display color\nbecome an room ownership member",
+                          )
+                        ) {
                           window.location.href = "/join";
                         }
                       } else {
                         window.location.href = "/join";
                       }
-                    }
-                  }
-                ]
+                    },
+                  },
+                ],
               },
-            ]
+            ],
           },
           { element: "br" },
           {
@@ -258,9 +266,9 @@ var elementJSON = [
                 style: {
                   display: "flex",
                   alignContent: "center",
-                  justifyContent: "center"
+                  justifyContent: "center",
                 },
-                children:[
+                children: [
                   {
                     element: "div",
                     className: "button2",
@@ -270,9 +278,9 @@ var elementJSON = [
                         event: "click",
                         func: function () {
                           window.location.href = "/signin";
-                        }
-                      }
-                    ]
+                        },
+                      },
+                    ],
                   },
                   {
                     element: "div",
@@ -283,34 +291,36 @@ var elementJSON = [
                         event: "click",
                         func: function () {
                           window.location.href = "/signup";
-                        }
-                      }
-                    ]
+                        },
+                      },
+                    ],
                   },
-                ]
+                ],
               },
               { element: "br" },
-            ]
+            ],
           },
           {
             element: "span",
             className: "fadeIn delay-1",
             gid: "description1",
-            textContent: "Random Rants + is your hideout from homework — chat, meme, and vibe while the teacher thinks you're researching a project.",
+            textContent:
+              "Random Rants + is your hideout from homework — chat, meme, and vibe while the teacher thinks you're researching a project.",
           },
           { element: "br" },
           {
             element: "span",
             className: "fadeIn delay-2",
             gid: "description2",
-            textContent: "Talk loud, spam harder. With memes and sounds that could crash a school network, this is Chromebook rebellion at its finest.",
+            textContent:
+              "Talk loud, spam harder. With memes and sounds that could crash a school network, this is Chromebook rebellion at its finest.",
           },
           { element: "br" },
           {
             element: "div",
             hidden: true,
             gid: "userAccountStuffB",
-            children:[
+            children: [
               {
                 element: "span",
                 className: "fadeIn delay-3",
@@ -319,20 +329,20 @@ var elementJSON = [
                   {
                     element: "a",
                     textContent: "Sign in",
-                    href: "/signin"
+                    href: "/signin",
                   },
                   " or ",
                   {
                     element: "a",
                     textContent: "Sign up",
-                    href: "/signup"
+                    href: "/signup",
                   },
                   ", jump into a room, and start the chaos.",
-                  " Whether it’s behind the teacher’s back or during silent reading, Random Rants + is *your* zone."
-                ]
+                  " Whether it’s behind the teacher’s back or during silent reading, Random Rants + is *your* zone.",
+                ],
               },
-            ]
-          }
+            ],
+          },
         ],
       },
     ],
@@ -341,7 +351,7 @@ var elementJSON = [
 
 elements.appendElements(
   elements.body,
-  elements.createElementsFromJSON(elementJSON)
+  elements.createElementsFromJSON(elementJSON),
 );
 
 var style = document.createElement("style");
@@ -464,7 +474,7 @@ var p1Animation = person1.animate(
     duration: 700,
     iterations: 1,
     easing: "ease-out",
-  }
+  },
 );
 p1Animation.addEventListener("finish", () => {
   person1.animate(
@@ -478,7 +488,7 @@ p1Animation.addEventListener("finish", () => {
       duration: 700,
       iterations: Infinity,
       easing: "ease-out",
-    }
+    },
   );
 });
 
@@ -494,7 +504,7 @@ var p2Animation = person2.animate(
     duration: 900,
     iterations: 1,
     easing: "ease-out",
-  }
+  },
 );
 
 p2Animation.addEventListener("finish", () => {
@@ -509,7 +519,7 @@ p2Animation.addEventListener("finish", () => {
       duration: 800,
       iterations: Infinity,
       easing: "ease-out",
-    }
+    },
   );
 });
 
@@ -549,7 +559,7 @@ function createFloatingEmoji(spawnAnywhere = false) {
   emoji.style.cursor = "pointer";
   emoji.style.userSelect = "none";
   emoji.style.outline = "none";
-  
+
   var animationRunning = true;
 
   emoji.onclick = function () {
@@ -569,7 +579,7 @@ function createFloatingEmoji(spawnAnywhere = false) {
         duration: 350,
         iterations: 1,
         easing: "ease-out",
-      }
+      },
     );
     animation.addEventListener("finish", () => {
       emoji.remove();
@@ -582,12 +592,12 @@ function createFloatingEmoji(spawnAnywhere = false) {
   let lastTimestamp = startTime;
   const duration = 3000 + Math.random() * 1000;
   const SPEED = 100;
-  var offset = Math.random()*5;
+  var offset = Math.random() * 5;
 
   function animate() {
     if (!animationRunning) {
       return;
-    };
+    }
     if (document.visibilityState !== "visible") {
       // pause and wait until visible again
       requestAnimationFrame(animate);
@@ -599,7 +609,7 @@ function createFloatingEmoji(spawnAnywhere = false) {
     const distanceMoved = (elapsed / 1000) * SPEED;
     const currentY = startY - distanceMoved;
     const currentX = startX + offsetX * (elapsed / duration);
-    emoji.style.transform = `rotate(${Math.sin((elapsed / 400)+offset)*10}deg)`;
+    emoji.style.transform = `rotate(${Math.sin(elapsed / 400 + offset) * 10}deg)`;
 
     emoji.style.left = `${currentX}px`;
     emoji.style.top = `${currentY}px`;
@@ -634,7 +644,7 @@ setInterval(() => {
 var userAccountStuffA = elements.getGPId("userAccountStuffA");
 var userAccountStuffB = elements.getGPId("userAccountStuffB");
 
-function showSignStuff () {
+function showSignStuff() {
   userAccountStuffA.hidden = false;
   userAccountStuffB.hidden = false;
 }

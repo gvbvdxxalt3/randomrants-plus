@@ -8,7 +8,8 @@
     "dev:server": "nodemon server-src/server-runner.js",
     "dev": "concurrently -k \"npm:watch\" \"npm:dev:server\"",
     "start": "node server-src/server-runner.js",
-    "prestart": "node updatetime.js && webpack"
+    "prestart": "node updatetime.js && webpack",
+    "format": "prettier --write \"server-src/**/*.js\" \"src/**/*.js\""
   },
   "devDependencies": {
     "busboy": "^1.6.0",
@@ -21,6 +22,7 @@
     "http": "*",
     "jszip": "^3.10.1",
     "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
     "raw-loader": "^4.0.2",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",

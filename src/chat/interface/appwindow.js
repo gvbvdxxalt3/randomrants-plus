@@ -23,7 +23,7 @@ function resizeStuff() {
     // Normal behavior
     sharedAppInterface.style.display = "block";
     chatInterfaceRight.style.display = "block";
-    let chatAreaWidth = (window.innerWidth / 2) - 50;
+    let chatAreaWidth = window.innerWidth / 2 - 50;
     if (chatAreaWidth < 350) {
       chatAreaWidth = 350;
     }

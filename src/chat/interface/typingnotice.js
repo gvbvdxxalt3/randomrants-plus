@@ -57,7 +57,7 @@ var typingnote = {
           {
             duration: 70,
             easing: "ease-out",
-          }
+          },
         );
       },
     };

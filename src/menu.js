@@ -4,7 +4,7 @@ var elementJSON = [
   {
     element: "div",
     className: "menuBar",
-    gid:"menu_bar",
+    gid: "menu_bar",
     children: [
       //Home button
       {
@@ -15,8 +15,8 @@ var elementJSON = [
             element: "img",
             src: "images/randomrants-plus.svg",
             style: {
-              height: "100%"
-            }
+              height: "100%",
+            },
           },
         ],
         eventListeners: [
@@ -38,9 +38,9 @@ var elementJSON = [
             event: "click",
             func: function () {
               window.location.href = "/chat";
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       //Quick join button.
       {
@@ -52,9 +52,9 @@ var elementJSON = [
             event: "click",
             func: function () {
               window.location.href = "/join";
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       //About button.
       {
@@ -66,24 +66,25 @@ var elementJSON = [
             event: "click",
             func: function () {
               window.location.href = "/about";
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
     ],
   },
-  { //Since using position:fixed removes spacing, manually just add it by using a invisible div element.
+  {
+    //Since using position:fixed removes spacing, manually just add it by using a invisible div element.
     element: "div",
     style: {
       width: "100%",
-      height: "40px"
-    }
-  }
+      height: "40px",
+    },
+  },
 ];
 
 elements.appendElements(
   elements.body,
-  elements.createElementsFromJSON(elementJSON)
+  elements.createElementsFromJSON(elementJSON),
 );
 
 require("./user-menu.js");

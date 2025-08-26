@@ -43,7 +43,7 @@ microphones.start = function (id, code, displayName, userColor, isSelf) {
           } catch (e) {}
         }
       },
-      () => {}
+      () => {},
     );
 
     userMicrophones[id] = userMicrophone;
