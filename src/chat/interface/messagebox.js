@@ -24,10 +24,12 @@ function sendMessageFromTextBox() {
             dialogs.alert("You need to type a username, example: @someone hello!");
             return;
 		}
-        if (privateMessage) {
+        if (!privateMessage) {
+            dialogs.alert("The private message was empty");
             return;
         }
         if (privateMessage.trim().length < 1) {
+            dialogs.alert("The private message was empty");
             return;
         }
 		
