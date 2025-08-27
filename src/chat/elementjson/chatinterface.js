@@ -148,10 +148,7 @@ var rightSide = {
           children: [
             {
               element: "img",
-              src: "images/audio.svg",
-              style: {
-                height: "17px",
-              },
+              src: "images/audio.svg"
             },
             {
               element: "span",
@@ -168,9 +165,6 @@ var rightSide = {
             {
               element: "img",
               src: "images/settings.svg",
-              style: {
-                height: "17px",
-              },
             },
             {
               element: "span",
@@ -182,13 +176,6 @@ var rightSide = {
           element: "button",
           className: "roundborder chatInterfaceButton",
           gid: "toggleMessageAndOnlineView",
-          children: [
-            {
-              element: "span",
-              textContent: "View online users",
-              gid: "toggleMessageAndOnlineViewText",
-            },
-          ],
         }
       ],
     },

@@ -119,7 +119,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 15px;
+  width: 24px;
 }
 
 ::-webkit-scrollbar-track {
@@ -735,6 +735,10 @@ a {
 }
 .chatInterfaceButton { 
   flex-grow: 2;
+  font-size: 23px;
+}
+.chatInterfaceButton img { 
+  height: 23px;
 }
 
 .chatInterfaceMessageTextBox {
