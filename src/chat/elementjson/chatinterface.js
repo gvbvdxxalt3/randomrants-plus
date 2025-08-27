@@ -120,31 +120,48 @@ var rightSide = {
       gid: "userButtonBox",
       children: [
         {
-          element: "button",
-          className: "roundborder",
-          gid: "toggleMessageAndOnlineView",
+          element: "div",
+          style: {
+            display: "flex",
+            flexGrow: "1",
+            width: "100%"
+          },
           children: [
             {
-              element: "span",
-              textContent: "View online users",
-              gid: "toggleMessageAndOnlineViewText",
+              element: "button",
+              className: "roundborder chatInterfaceButton",
+              gid: "toggleCameraButton",
+              title: "Toggle camera",
             },
-          ],
+            {
+              element: "button",
+              className: "roundborder chatInterfaceButton",
+              gid: "toggleMicrophoneButton",
+              title: "Toggle microphone",
+            },
+          ]
         },
         {
           element: "button",
-          className: "roundborder",
+          className: "roundborder chatInterfaceButton",
           gid: "showSoundboardButton",
           children: [
             {
+              element: "img",
+              src: "images/audio.svg",
+              style: {
+                height: "17px",
+              },
+            },
+            {
               element: "span",
-              textContent: "🔈Soundboard",
+              textContent: "Soundboard",
             },
           ],
         },
         {
           element: "button",
-          className: "roundborder",
+          className: "roundborder chatInterfaceButton",
           gid: "showRoomSettingsButton",
           hidden: true,
           children: [
@@ -163,16 +180,16 @@ var rightSide = {
         },
         {
           element: "button",
-          className: "roundborder",
-          gid: "toggleCameraButton",
-          title: "Toggle camera",
-        },
-        {
-          element: "button",
-          className: "roundborder",
-          gid: "toggleMicrophoneButton",
-          title: "Toggle microphone",
-        },
+          className: "roundborder chatInterfaceButton",
+          gid: "toggleMessageAndOnlineView",
+          children: [
+            {
+              element: "span",
+              textContent: "View online users",
+              gid: "toggleMessageAndOnlineViewText",
+            },
+          ],
+        }
       ],
     },
     {
