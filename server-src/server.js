@@ -1038,6 +1038,38 @@ noRoomWss.on("connection", (ws, request) => {
   });
 });
 
+var noRoomWss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
+
+noRoomWss.on("connection", (ws, request) => {
+  ws.send(
+    JSON.stringify({
+      type: "doesNotExist",
+    }),
+  );
+  var timeout = setTimeout(() => {
+    ws.close();
+  }, 4000);
+  ws.on("close", () => {
+    clearTimeout(timeout);
+  });
+});
+
+var roomStillLoadingWss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
+
+roomStillLoadingWss.on("connection", (ws, request) => {
+  ws.send(
+    JSON.stringify({
+      type: "roomStillLoading",
+    }),
+  );
+  var timeout = setTimeout(() => {
+    ws.close();
+  }, 4000);
+  ws.on("close", () => {
+    clearTimeout(timeout);
+  });
+});
+
 async function startRoomWSS(roomid) {
   var wss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
   roomWebsockets[roomid.toString()] = "loading";
@@ -1314,7 +1346,7 @@ async function startRoomWSS(roomid) {
           }
           if (json.type == "refresh" && ws._rrIsOwner) {
             for (var client of wss.clients) {
-              client.close();
+              client.terminate();
             }
             wss.close();
             roomWebsockets[roomid.toString()] = undefined;
@@ -1583,7 +1615,7 @@ async function startRoomWSS(roomid) {
 
   wss._rrStopRoom = function () {
     for (var client of wss.clients) {
-      client.close();
+      client.terminate();
     }
     wss.close();
     clearInterval(wss._rrKeepAliveInterval);
@@ -2287,6 +2319,7 @@ const server = http.createServer(async function (req, res) {
               await storage.deleteFile(`room-${json.id}-info.json`);
               if (roomWebsockets[json.id]) {
                 roomWebsockets[json.id]._rrStopRoom();
+                roomWebsockets[json.id] = undefined;
               }
               res.end("");
             } catch (e) {
@@ -3230,21 +3263,7 @@ server.on("upgrade", async function upgrade(request, socket, head) {
       var roomWs = roomWebsockets[id.toString()];
       if (roomWs) {
         if (roomWs == "loading") {
-          wss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
-          wss.on("connection", (ws, request) => {
-            ws.send(
-              JSON.stringify({
-                type: "roomStillLoading",
-              }),
-            );
-
-            var timeout = setTimeout(() => {
-              ws.close();
-            }, 1000);
-            ws.on("close", () => {
-              clearTimeout(timeout);
-            });
-          });
+          wss = roomStillLoadingWss;
         } else {
           wss = roomWs;
         }

@@ -398,7 +398,7 @@ reconnectingScreen.hidden = true;
           var i = 0;
           json.owners.forEach((username) => {
             var onlineUser = onlineUserElementGenerator(
-              " ",
+              null,
               username,
               "",
               "#000000",
