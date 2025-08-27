@@ -559,8 +559,22 @@ function createFloatingEmoji(spawnAnywhere = false) {
   emoji.style.cursor = "pointer";
   emoji.style.userSelect = "none";
   emoji.style.outline = "none";
-
   var animationRunning = true;
+  if (spawnAnywhere) {
+    var anim = emoji.animate([
+      { transform: "scale(0)" },
+      { transform: "scale(1)" },
+    ],
+    {
+      duration: 350,
+      iterations: 1,
+      easing: "ease-out",
+    });
+    animationRunning = false;
+    anim.addEventListener("finish", () => {
+      animationRunning = true;
+    });
+  }
 
   emoji.onclick = function () {
     animationRunning = false;
