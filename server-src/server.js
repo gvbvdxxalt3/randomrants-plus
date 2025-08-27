@@ -1318,7 +1318,6 @@ async function startRoomWSS(roomid) {
             }
             wss.close();
             roomWebsockets[roomid.toString()] = undefined;
-            startRoomWSS(roomid);
           }
           if (json.type == "media") {
             if (json.command == "mediaResetRequest") {
@@ -1601,7 +1600,6 @@ async function startRoomWSS(roomid) {
   wss._rrRefreshRoom = function () {
     wss._rrStopRoom();
     roomWebsockets[roomid.toString()] = undefined;
-    startRoomWSS(roomid);
   };
 
   wss._rrKickUser = function (username) {
