@@ -7,7 +7,6 @@
 .data
 .config
 node_modules
-public
 counters
 crashlogs
 usermedia
