@@ -1,4 +1,5 @@
 var websocket = null;
+var reconnectTimeout = null;
 var sws = {
   isOpen: false,
   CANCEL_RECONNECT: "CANCEL_RECONNECT",
@@ -11,6 +12,7 @@ function openWebsocket(url, onmessage, onopen, onclose) {
     websocket.onopen = function () {};
     websocket.close();
   }
+  clearTimeout(reconnectTimeout);
   sws.isOpen = false;
   websocket = new WebSocket(url);
   websocket.onclose = async function () {
@@ -20,7 +22,9 @@ function openWebsocket(url, onmessage, onopen, onclose) {
       result = await onclose();
     }
     if (result !== sws.CANCEL_RECONNECT) {
-      openWebsocket(url, onmessage, onopen, onclose);
+      reconnectTimeout = setTimeout(() => {
+        openWebsocket(url, onmessage, onopen, onclose);
+      },500);
     }
   };
   websocket.onopen = function (e) {
@@ -40,6 +44,7 @@ function closeWebsocket() {
     websocket.close();
   }
   sws.isOpen = false;
+  clearTimeout(reconnectTimeout);
 }
 
 function sendWebsocket(d) {
