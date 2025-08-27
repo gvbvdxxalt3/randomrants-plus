@@ -550,14 +550,6 @@ async function doMediaSelect() {
             },
             children: [
               {
-                element: "img",
-                src: "images/startmedia.svg",
-                style: {
-                  height: "100%",
-                  padding: "10px 10px",
-                },
-              },
-              {
                 element: "div",
                 style: {
                   padding: "10px 10px",
@@ -906,7 +898,7 @@ async function doMediaSelect() {
                   },
                   {
                     element: "div",
-                    className: "divButton",
+                    className: "divButton roundborder",
                     textContent: "Close",
                     eventListeners: [
                       {

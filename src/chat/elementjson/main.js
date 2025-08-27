@@ -36,6 +36,7 @@ module.exports = [
           require("./reconnecting.js"),
         ],
       },
+      require("./accountnotice.js"),
       require("./usernameerror.js"),
       require("./roomerror.js"),
       require("./noguests.js"),

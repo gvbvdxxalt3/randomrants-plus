@@ -67,9 +67,9 @@ var isOffline = false;
 
 function updateToggleOnlineViewText() {
   if (toggleOnlineView) {
-    toggleMessageAndOnlineViewText.textContent = "View chat messages";
+    toggleMessageAndOnlineViewText.innerHTML = '<img src="images/chaticon.svg" height="17">'+"View chat messages";
   } else {
-    toggleMessageAndOnlineViewText.textContent = "View online users";
+    toggleMessageAndOnlineViewText.innerHTML = '<img src="images/profile.svg" height="17">'+"View online users";
   }
 }
 
@@ -90,6 +90,8 @@ function toggleMessageAndOnlineViewClicked() {
   }
   updateToggleOnlineViewText();
 }
+
+updateToggleOnlineViewText();
 
 toggleMessageAndOnlineView.addEventListener(
   "click",
@@ -524,6 +526,7 @@ reconnectingScreen.hidden = true;
     require("./my-microphone.js");
 
     require("./chatappinterface.js");
+    require("./accountnotice.js");
   } catch (e) {
     handleErrors(e);
   }

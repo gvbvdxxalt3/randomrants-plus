@@ -16,11 +16,11 @@ function startRunningStream() {
 
 function setButtonText(t) {
   var buttonTexts = {
-    starting: "Enabling microphone...",
-    stop: "Disable microphone",
-    start: "Enable microphone",
+    starting: '<img src="images/mic.svg" height="17">'+"Enabling microphone...",
+    stop: '<img src="images/mic.svg" height="17">'+"Disable microphone",
+    start: '<img src="images/mic.svg" height="17">'+"Enable microphone",
   };
-  toggleButton.textContent = buttonTexts[t];
+  toggleButton.innerHTML = buttonTexts[t];
 }
 
 setButtonText("start");

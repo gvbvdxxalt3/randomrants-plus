@@ -16,6 +16,7 @@ var signInArea = {
       type: "text",
       gid: "username_input",
       className: "inputText1",
+      placeholder: "Your username, no spaces."
     },
     { element: "br" },
     {
@@ -27,11 +28,12 @@ var signInArea = {
       type: "password",
       gid: "password_input",
       className: "inputText1",
+      placeholder: "Your password, make it secure and short"
     },
     {
       element: "div",
       className: "button",
-      textContent: "Sign up!",
+      textContent: "Lets go",
       gid: "goButton",
     },
   ],
@@ -44,12 +46,13 @@ var elementJSON = [
       {
         element: "span",
         className: "headerText",
-        textContent: "Sign Up",
+        textContent: "Create Your RR+ Account",
       },
       { element: "br" },
       {
         element: "span",
-        textContent: "Create an account to get the most out of Random Rants +!",
+        textContent:
+          "Join to save rooms, customize your profile, and chat with people — whenever class gets boring.",
       },
       {
         element: "p",
@@ -62,7 +65,7 @@ var elementJSON = [
         children: [
           {
             element: "span",
-            textContent: "Please review the ",
+            textContent: "Take a quick look at the ",
           },
           {
             element: "a",
@@ -74,15 +77,7 @@ var elementJSON = [
           },
           {
             element: "span",
-            textContent:
-              " before signing up to understand important warnings and community guidelines.",
-          },
-          {
-            element: "br",
-          },
-          {
-            element: "span",
-            textContent: "And also try to read the ",
+            textContent: " and ",
           },
           {
             element: "a",
@@ -94,7 +89,7 @@ var elementJSON = [
           },
           {
             element: "span",
-            textContent: " before you sign in on all your devices.",
+            textContent: " so you know what’s up.",
           },
         ],
       },

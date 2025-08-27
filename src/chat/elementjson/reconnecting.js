@@ -47,7 +47,7 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "This could be a momentary glitch, an unstable Wi-Fi ghost, or Glitch throttling the project into oblivion.",
+            "This could be a momentary glitch, an unstable Wi-Fi ghost, or the Server/Service is throttling the project into oblivion.",
         },
         {
           element: "br",
@@ -55,7 +55,7 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "If this screen keeps popping up, Random Rants+ might be updating or Glitch is rate-limiting your soul.",
+            "If this screen keeps popping up, Random Rants+ might be updating or the Server/Service is rate-limiting your soul.",
         },
       ],
     },

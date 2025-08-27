@@ -16,6 +16,7 @@ var signInArea = {
       type: "text",
       gid: "username_input",
       className: "inputText1",
+      placeholder: "You remember it right?"
     },
     { element: "br" },
     {
@@ -27,11 +28,12 @@ var signInArea = {
       type: "password",
       gid: "password_input",
       className: "inputText1",
+      placeholder: "The password you used to sign up with."
     },
     {
       element: "div",
       className: "button",
-      textContent: "Sign in!",
+      textContent: "Get back to the zone",
       gid: "goButton",
     },
   ],
@@ -44,13 +46,13 @@ var elementJSON = [
       {
         element: "span",
         className: "headerText",
-        textContent: "Sign In",
+        textContent: "Sign into your RR+ Account",
       },
       { element: "br" },
       {
         element: "span",
         textContent:
-          "Log in to your account to get the most out of Random Rants +!",
+          "Sign in to get back to the chaos, aka chat zone.",
       },
       signInArea,
     ],

@@ -2479,7 +2479,7 @@ const server = http.createServer(async function (req, res) {
   if (urlsplit[1] == "account") {
     if (urlsplit[2] == "session" && req.method == "GET") {
       var decrypted = {};
-	  var cookie = getCookie("account", getCookieFromRequest(req));
+      var cookie = getCookie("account", getCookieFromRequest(req));
       try {
         try {
           var accountcookie = cookie;
@@ -2494,9 +2494,7 @@ const server = http.createServer(async function (req, res) {
             );
             return;
           } else {
-            decrypted = encryptor.decrypt(
-				cookie
-            );
+            decrypted = encryptor.decrypt(cookie);
             if (!decrypted) {
               res.end(
                 JSON.stringify({
@@ -2525,10 +2523,10 @@ const server = http.createServer(async function (req, res) {
           username: decrypted.username,
           ...stuff,
         };
-		    res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.setHeader("Access-Control-Allow-Credentials", "true");
         res.setHeader(
-        	"Set-Cookie",
-        	`account=${cookie}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
+          "Set-Cookie",
+          `account=${cookie}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
         );
         res.end(JSON.stringify(infoJson));
         return;
@@ -3121,9 +3119,9 @@ const server = http.createServer(async function (req, res) {
             password: json.password,
           });
           res.setHeader("Access-Control-Allow-Credentials", "true");
-		      res.setHeader(
-			      "Set-Cookie",
-			      `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
+          res.setHeader(
+            "Set-Cookie",
+            `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
           );
         }
         res.end(JSON.stringify(stuff));
@@ -3291,7 +3289,6 @@ var serverPort = 3000;
 if (process.env.serverPort) {
   serverPort = Number(process.env.serverPort);
 }
-
 
 (async function () {
   await checkServerLoop(); //when it loops back, it accepts the promise.

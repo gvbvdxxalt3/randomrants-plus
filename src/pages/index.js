@@ -542,7 +542,7 @@ function createFloatingEmoji(spawnAnywhere = false) {
   const emoji = document.createElement("div");
   emoji.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
   emoji.style.position = "absolute";
-  emoji.style.fontSize = `${150 + Math.random() * 20}%`;
+  emoji.style.fontSize = `${230 + Math.random() * 40}%`;
 
   const startX = Math.random() * window.innerWidth;
   const offsetX = (Math.random() - 0.5) * 100;

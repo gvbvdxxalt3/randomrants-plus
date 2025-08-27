@@ -27,7 +27,7 @@ var chatInputPlaceholders = [
   "Type here to add to the madness.",
   "Share your rant in the chat box.",
   "Enter your message and release the chaos.",
-  "Type your randomest rant here."
+  "Type your randomest rant here.",
 ];
 
 function returnRandomValueFromArray(array) {
@@ -159,7 +159,7 @@ var rightSide = {
               element: "span",
               textContent: "Room Settings",
             },
-          ]
+          ],
         },
         {
           element: "button",

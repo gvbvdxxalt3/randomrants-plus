@@ -124,12 +124,22 @@ async function doRoomSelect() {
       roomSelectChildren.push({
         element: "div",
         className: "roomButton",
+        style: {
+          fontSize: "23px"
+        },
         children: [
           {
             element: "span",
             textContent:
-              "⚠️ You’re not logged in, so room controls are locked. Just logged in? Try refreshing the page to unlock everything.",
+              "⚠️ You’re not logged in, so room controls are locked.",
           },
+          {
+            element: "br"
+          },
+          {
+            element: "span",
+            textContent: "Just logged in? Try refreshing the page to unlock everything."
+          }
         ],
       });
     }
@@ -290,7 +300,7 @@ async function doRoomSelect() {
           },
           {
             element: "div",
-            className: "divButton",
+            className: "divButton roundborder",
             textContent: "Join room",
             eventListeners: [
               {
@@ -310,7 +320,7 @@ async function doRoomSelect() {
           },
           {
             element: "div",
-            className: "divButton",
+            className: "divButton roundborder",
             textContent: "Invite someone to this room",
             eventListeners: [
               {
@@ -351,7 +361,7 @@ async function doRoomSelect() {
           },
           {
             element: "div",
-            className: "divButton",
+            className: "divButton roundborder",
             textContent: "Create join code",
             eventListeners: [
               {
