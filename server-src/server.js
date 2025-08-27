@@ -2525,7 +2525,7 @@ const server = http.createServer(async function (req, res) {
           username: decrypted.username,
           ...stuff,
         };
-		res.setHeader("Access-Control-Allow-Credentials", "true");
+		    res.setHeader("Access-Control-Allow-Credentials", "true");
         res.setHeader(
         	"Set-Cookie",
         	`account=${cookie}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
@@ -2575,10 +2575,10 @@ const server = http.createServer(async function (req, res) {
             values: {},
           });
           res.setHeader("Access-Control-Allow-Credentials", "true");
-		  res.setHeader(
+          res.setHeader(
             "Set-Cookie",
             `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
-		  );
+          );
         }
         res.end(JSON.stringify(stuff));
       });
@@ -3121,9 +3121,9 @@ const server = http.createServer(async function (req, res) {
             password: json.password,
           });
           res.setHeader("Access-Control-Allow-Credentials", "true");
-		  res.setHeader(
-			"Set-Cookie",
-			`account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
+		      res.setHeader(
+			      "Set-Cookie",
+			      `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
           );
         }
         res.end(JSON.stringify(stuff));
@@ -3131,11 +3131,11 @@ const server = http.createServer(async function (req, res) {
       return;
     }
     if (urlsplit[2] == "logout" && req.method == "POST") {
-		res.setHeader("Access-Control-Allow-Credentials", "true");
-		res.setHeader(
-		  "Set-Cookie",
-		  `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
-		);
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader(
+        "Set-Cookie",
+        `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
+      );
       res.end("");
       return;
     }

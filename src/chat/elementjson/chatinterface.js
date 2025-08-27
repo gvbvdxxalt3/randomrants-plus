@@ -27,6 +27,7 @@ var chatInputPlaceholders = [
   "Type here to add to the madness.",
   "Share your rant in the chat box.",
   "Enter your message and release the chaos.",
+  "Type your randomest rant here."
 ];
 
 function returnRandomValueFromArray(array) {
@@ -136,15 +137,8 @@ var rightSide = {
           gid: "showSoundboardButton",
           children: [
             {
-              element: "img",
-              src: "images/audio.svg",
-              style: {
-                height: "17px",
-              },
-            },
-            {
               element: "span",
-              textContent: "Soundboard",
+              textContent: "🔈Soundboard",
             },
           ],
         },
@@ -152,8 +146,20 @@ var rightSide = {
           element: "button",
           className: "roundborder",
           gid: "showRoomSettingsButton",
-          textContent: "Room settings",
           hidden: true,
+          children: [
+            {
+              element: "img",
+              src: "images/settings.svg",
+              style: {
+                height: "17px",
+              },
+            },
+            {
+              element: "span",
+              textContent: "Room Settings",
+            },
+          ]
         },
         {
           element: "button",
