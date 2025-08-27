@@ -1032,7 +1032,7 @@ noRoomWss.on("connection", (ws, request) => {
   );
   var timeout = setTimeout(() => {
     ws.close();
-  }, 1000);
+  }, 4000);
   ws.on("close", () => {
     clearTimeout(timeout);
   });

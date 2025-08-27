@@ -538,11 +538,12 @@ var EMOJISound = null;
 const MAX_EMOJIS = 100;
 const INITIAL_EMOJIS = 70;
 
-function createFloatingEmoji(spawnAnywhere = false) {
+function createFloatingEmoji(spawnAnywhere = false, spawnAt) {
   const emoji = document.createElement("div");
   emoji.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
   emoji.style.position = "absolute";
-  emoji.style.fontSize = `${230 + Math.random() * 40}%`;
+  emoji.style.fontSize = `${180 + Math.random() * 40}%`;
+  emoji.style.textShadow = "#000000 2px 3px 5px";
 
   const startX = Math.random() * window.innerWidth;
   const offsetX = (Math.random() - 0.5) * 100;
@@ -550,6 +551,10 @@ function createFloatingEmoji(spawnAnywhere = false) {
   const startY = spawnAnywhere
     ? Math.random() * window.innerHeight
     : window.innerHeight + 30 + Math.random() * 50;
+  if (spawnAt) {
+    startX = spawnAt.x;
+    startY = spawnAt.y;
+  }
   const endY = -50;
 
   emoji.style.left = `${startX}px`;
@@ -569,10 +574,6 @@ function createFloatingEmoji(spawnAnywhere = false) {
       duration: 350,
       iterations: 1,
       easing: "ease-out",
-    });
-    animationRunning = false;
-    anim.addEventListener("finish", () => {
-      animationRunning = true;
     });
   }
 
