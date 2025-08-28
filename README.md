@@ -3,7 +3,7 @@
 ### Temporary repostory notice
 
 Lost the other github account, so have to wait until I get access to it again.
-This _will_ be deleted when I get it back, so don't try to use this as an permalink.
+This _will_ be deleted and transfered to the original when I get it back, so don't try to use this as an permalink.
 
 ## What is Random Rants +?
 
