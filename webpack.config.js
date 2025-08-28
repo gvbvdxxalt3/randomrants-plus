@@ -1,5 +1,5 @@
 const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const VersionUpdatePlugin = require("./versionstampplugin.js");
 
@@ -87,15 +87,13 @@ module.exports = {
 					chunks: [page],
 				}),
 		),
-		new CopyWebpackPlugin({
-			patterns: [
-				{
-					from: "./wpstatic",
-					to: ".",
-					noErrorOnMissing: true,
-				},
-			],
-		}),
+		new CopyWebpackPlugin([
+			{
+				from: "./wpstatic",
+				to: ".",
+				noErrorOnMissing: true,
+			},
+		]),
 		new VersionUpdatePlugin(),
 	],
 };
