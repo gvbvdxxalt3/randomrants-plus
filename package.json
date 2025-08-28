@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "description": "Random Rants Plus is Random Rants but better in security and account managing, also targeting another layout style.",
   "scripts": {
-    "build": "node updatetime.js && webpack",
+    "build": "webpack",
     "watch": "webpack --watch",
     "dev:server": "nodemon server-src/server-runner.js",
     "dev": "concurrently -k \"npm:watch\" \"npm:dev:server\"",
     "start": "node server-src/server-runner.js",
-    "prestart": "node updatetime.js && webpack",
-    "format": "prettier --write \"server-src/**/*.js\" \"src/**/*.js\""
+    "prestart": "webpack",
+    "format": "prettier --write \"server-src/**/*.js\" \"src/**/*.js\"",
+    "stackblitz": "webpack && node server-src/server-runner.js"
   },
   "devDependencies": {
     "busboy": "^1.6.0",

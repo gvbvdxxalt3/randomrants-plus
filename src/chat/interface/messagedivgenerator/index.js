@@ -18,7 +18,7 @@ function generateMessageDiv(
   }
   var noUndefinedUsername = displayName;
   if (username) {
-    noUndefinedUsername = username;
+    noUndefinedUsername = "Click here to reply to this user";
   }
   var realUserStyles = " ";
   if (username) {

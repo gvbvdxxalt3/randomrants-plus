@@ -1,1 +1,1571 @@
-(self.webpackChunkrandomrants_plus=self.webpackChunkrandomrants_plus||[]).push([[804],{8567:e=>{e.exports="body {\n  background: #b8b8b8;\n  font-family: Arial, sans-serif;\n  margin: 0;\n}\n\n[hidden] {\n  display: none;\n}\n\n/* Menu Bar */\n.menuBar {\n  display: flex;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 40px;\n  background: #b8b8b8;\n  z-index: 10;\n}\n\n.userMenuBar {\n  margin-left: auto;\n}\n\n.menuBarItem,\n.menuBarItemUsername,\n.menuBarItemLogo {\n  color: #000;\n  height: 40px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  user-select: none;\n  padding: 0 8px;\n  transition: background-color 0.2s, color 0.2s;\n}\n\n.menuBarItem:hover {\n  color: #ebebeb;\n}\n\n.menuBarItemUsername:hover {\n  background: #787878;\n  border-radius: 5px;\n}\n\n.menuBarItemLogo:hover {\n  background: #787878;\n  border-radius: 5px;\n  animation: menuBarLogoAnim 0.25s ease-in-out;\n}\n\n@keyframes menuBarLogoAnim {\n  0% {\n    transform: scale(1, 1);\n  }\n  40% {\n    transform: scale(1.1, 0.9);\n  }\n  80% {\n    transform: scale(0.9, 1.1);\n  }\n  100% {\n    transform: scale(1, 1);\n  }\n}\n\n/* Main Center Content */\n.centerHorizontal {\n  text-align: center;\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 1;\n}\n\n.headerText {\n  font-weight: bold;\n  font-size: 32px;\n}\n\n/* Buttons */\n.button {\n  background: #dbdbdb;\n  color: #555;\n  border-radius: 4px;\n  padding: 6px 12px;\n  cursor: pointer;\n  user-select: none;\n  border: none;\n  transition: background 0.05s;\n}\n\n.button:hover {\n  background: #d1d1d1;\n}\n\n.button2 {\n  background: #dbdbdb;\n  color: #555;\n  border-radius: 4px;\n  padding: 6px 12px;\n  cursor: pointer;\n  user-select: none;\n  border: none;\n  transition: background 0.05s;\n  width: fit-content;\n  height: fit-content;\n}\n\n.button2:hover {\n  background: #d1d1d1;\n}\n\n/* Input Boxes */\n.inputText1 {\n  resize: none;\n  border: 1px solid #1f1f1f;\n  background-color: #fff;\n  color: #000;\n  outline: none;\n  font-family: Arial, sans-serif;\n  border-radius: 3px;\n  padding: 4px;\n}\n\n/* Dialogs */\n.centeredDialog {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n\n:root {\n  --popup-dialog-font: Arial, sans-serif;\n  --popup-dialog-background: #fff;\n  --popup-dialog-border-radius: 10px;\n  --popup-dialog-text-color: #000;\n  --popup-dialog-button-background: #5985ff;\n  --popup-dialog-button-hover-background: #4275ff;\n  --popup-dialog-button-text-color: #fff;\n  --popup-dialog-button-radius: 5px;\n  --popup-dialog-input-background: #fff;\n  --popup-dialog-input-border-width: 1.5px;\n  --popup-dialog-input-border-color: #bababa;\n  --popup-dialog-input-text-color: #000;\n  --popup-dialog-message-size: 16px;\n}\n\n.windowDialogContainer {\n  font-family: var(--popup-dialog-font);\n}\n\n.windowDialogBackground {\n  background-color: black;\n  backdrop-filter: blur(2px);\n}\n\n.windowDialogBox {\n  background: var(--popup-dialog-background);\n  border-radius: var(--popup-dialog-border-radius);\n  color: var(--popup-dialog-text-color);\n}\n\n.windowDialogButton {\n  background: var(--popup-dialog-button-background);\n  color: var(--popup-dialog-button-text-color);\n  border-radius: var(--popup-dialog-button-radius);\n  padding: 4px 8px;\n  border: none;\n  cursor: pointer;\n}\n\n.windowDialogButton:hover {\n  background: var(--popup-dialog-button-hover-background);\n}\n\n.windowDialogInput {\n  background: var(--popup-dialog-input-background);\n  border: var(--popup-dialog-input-border-width) solid\n    var(--popup-dialog-input-border-color);\n  color: var(--popup-dialog-input-text-color);\n  outline: none;\n  border-radius: 4px;\n  padding: 4px;\n}\n\n.windowDialogHeader {\n  font-weight: bold;\n  font-size: var(--popup-dialog-message-size);\n}\n\nimg {\n  image-rendering: pixelated;\n}\n\na {\n  color: #4287f5;\n}\na:hover {\n  color: #3267ba;\n  cursor: pointer;\n}\n\n.aboutDivCenter {\n  width: calc(100vw - 400px);\n  height: fit-content;\n  padding: 10px 10px;\n\n  position: absolute;\n  left: 50%;\n  transform: translate(-50%, 0px);\n\n  background: white;\n  border-radius: 5px;\n}\n\n.yellowBoxedText {\n  margin: 8px 0;\n  padding: 10px;\n  background-color: #fff8d1;\n  border: 1px solid #ffd700;\n  border-radius: 6px;\n  font-size: 14px;\n  color: #444;\n  line-height: 1.4;\n}\n\n.button [disabled] {\n  pointer-events: none;\n}\n.button2 [disabled] {\n  pointer-events: none;\n}\n"},4592:e=>{var n=null,t={getAccountCookie(){return this.getCookie("account")},signoutAccountCookie(){return this.setCookie("account","")},setCookie(e,n,t){var o="";if(t){var a=new Date;a.setTime(a.getTime()+24*t*60*60*1e3),o="; expires="+a.toUTCString()}document.cookie=e+"="+(n||"")+o+"; path=/"},getCookie(e){for(var n=e+"=",t=document.cookie.split(";"),o=0;o<t.length;o++){for(var a=t[o];" "==a.charAt(0);)a=a.substring(1,a.length);if(0==a.indexOf(n))return a.substring(n.length,a.length)}return null}};function o(){return new URL(window.location.href).origin}e.exports={cookieManager:t,getServerURL:o,checkSessionCookie:async function(){try{var e=await fetch(o()+"/account/session",{method:"GET"}),t=await e.json();return t.valid?(n=t,t):(n=null,!1)}catch(e){return n=null,!1}},loginToAccount:async function(e,n){var t={username:e,password:n},a=await fetch(o()+"/account/login",{method:"POST",body:JSON.stringify(t)}),r=await a.json();if(!r.valid)throw new Error(r.message)},signupAccount:async function(e,n){var t={username:e,password:n},a=await fetch(o()+"/account/signup",{method:"POST",body:JSON.stringify(t)}),r=await a.json();if(!r.valid)throw new Error(r.message)},logoutOfAccount:async function(){await fetch(o()+"/account/logout",{method:"POST"})},getProfilePictureURL:function(e){return o()+"/account/picture/"+e},loginToAdmin:function(){var e=window.prompt("Admin key:");t.setCookie("admin",e)},openLink:function(e,n){var t=document.createElement("a");t.href=e,n&&(t.target="_blank"),t.click()},hasNewMail:async function(){try{var e=await fetch(o()+"/account/mail");if(e.ok){var n=await e.json();if(n.mail)for(var t of n.mail)if(t.new)return!0;return!1}return!1}catch(e){return!1}},getCurrentValidationState:function(){return n},getJoinedRooms:async function(){var e=await fetch(o()+"/account/myrooms");return e.ok?(await e.json()).rooms:[]},removeJoinedRoom:async function(e){await fetch(o()+"/account/removeroom",{method:"POST",body:JSON.stringify({id:e})})}}},1662:e=>{var n={},t=window.AudioContext||window.webkitAudioContext,o=new t;function a(e){return new Promise(((n,t)=>{try{o.decodeAudioData(e,n,t)}catch(e){n(null)}}))}n.context=o,n.running=!1,setInterval((()=>{"running"!==o.state?(o&&o.close().catch((()=>{})),o=new t,n.context=o,n.running=!1):n.running=!0}),100),n.cloneAudioBuffer=function(e){const n=new AudioBuffer({length:e.length,numberOfChannels:e.numberOfChannels,sampleRate:e.sampleRate});for(let t=0;t<n.numberOfChannels;++t){const o=e.getChannelData(t);n.copyToChannel(o,t)}return n},n.decodeAsync=a,n.loadSoundFromURL=async function(e){try{const n=await fetch(e),t=await n.arrayBuffer();return await a(t)}catch(e){return console.warn(e),null}};class r{constructor(e){this.data=e,this.source=null,this._playbackRate=1,this.playbackRate=1,this.looped=!1,this.loopStart=0,this.loopEnd=0,this.detune=0,this.startVol=1,this.gainNode=null,this.filters=[]}setData(e){this.data=e}set looped(e){this.source&&(this.source.loop=e),this._looped=e}get looped(){return this._looped}set loopStart(e){this.source&&(this.source.loopStart=e),this._loopStart=e}get loopStart(){return this._loopStart}set loopEnd(e){this.source&&(this.source.loopEnd=e),this._loopEnd=e}get loopEnd(){return this._loopEnd}set detune(e){this.source&&(this.source.detune.value=e),this._detune=e}get detune(){return this._detune}loopAt(e,n){this.loopStart=e,this.loopEnd=n}stop(){this.pause()}play(e){if(this.data&&!this.source){const n=o.createBufferSource();this.gainNode=o.createGain(),n.buffer=this.data,n.playbackRate.value=this._playbackRate,n.loop=this._looped,n.loopStart=this._loopStart,n.loopEnd=this._loopEnd,n.detune.value=this._detune;let t=this.gainNode;for(const e of this.filters)t.connect(e),t=e;t.connect(o.destination),this.gainNode.gain.value=this.startVol,n.connect(this.gainNode),n.start(e),this.source=n,n.onended=()=>{this.onended(),this.source=null}}}pause(){this.source&&(this.source.stop(),this.source=null,this.gainNode=null)}remove(){this.pause(),this.filters=[]}setVolume(e){this.gainNode&&(this.gainNode.gain.value=e),this.startVol=e}get volume(){return this.startVol}set volume(e){this.gainNode&&(this.gainNode.gain.value=e),this.startVol=e}getVolume(){return this.gainNode?this.gainNode.gain.value:this.startVol}setPlaybackRate(e){this.playbackRate=e}set playbackRate(e){this._playbackRate=e,this.source&&(this.source.playbackRate.value=e)}get playbackRate(){return this._playbackRate}addFilter(e){(e instanceof BiquadFilterNode||e instanceof GainNode)&&this.filters.push(e)}clearFilters(){this.filters=[]}fadeIn(e){this.gainNode&&(this.gainNode.gain.setValueAtTime(0,o.currentTime),this.gainNode.gain.linearRampToValueAtTime(this.startVol,o.currentTime+e))}fadeOut(e){this.gainNode&&(this.gainNode.gain.setValueAtTime(this.getVolume(),o.currentTime),this.gainNode.gain.linearRampToValueAtTime(0,o.currentTime+e))}applyEqualizer(e=0,n=0,t=0){const a=o.createBiquadFilter();a.type="lowshelf",a.frequency.value=250,a.gain.value=e;const r=o.createBiquadFilter();r.type="peaking",r.frequency.value=1e3,r.Q.value=1,r.gain.value=n;const i=o.createBiquadFilter();i.type="highshelf",i.frequency.value=4e3,i.gain.value=t,this.filters=[a,r,i]}destroy(){this.pause(),this.gainNode&&(this.gainNode.disconnect(),this.gainNode=null);for(const e of this.filters)e.disconnect();this.filters=[],this.data=null,this.onended=null}onended(){}}n.Player=r,n.AudioBufferPlayer=r,e.exports=n},3358:()=>{console.log("%cWARNING: %cPotential Security Risk!\nThe panel you just opened may expose your Random Rants + account to hackers. If you're logged in, avoid sharing any sensitive information like browser cookies or pasting unknown code here. Stay safe!","font-size: 32px; font-weight: bold; font-family: Arial, sans-serif; color: red;","font-size: 20px; font-family: Arial, sans-serif; color: black;")},8149:e=>{var n={styles:{containerClassName:"windowDialogContainer",backgroundClassName:"windowDialogBackground",dialogClassName:"windowDialogBox",buttonClassName:"windowDialogButton",headerClassName:"windowDialogHeader",inputClassName:"windowDialogInput"},texts:{ok:"OK",cancel:"Cancel"},_createDialogBase(){var e=document.createElement("div");e.style.position="fixed",e.style.top="0",e.style.left="0",e.style.width="100vw",e.style.height="100vh",e.style.opacity="0.5",e.className=this.styles.backgroundClassName;var n=document.createElement("div");n.style.position="fixed",n.style.top="50%",n.style.left="50%",n.style.transform="translate(-50%, -50%)",n.style.width="fit-content",n.style.height="fit-content",n.style.padding="20px",n.style.maxWidth="500px",n.style.maxHeight="300px",n.style.minWidth="100px",n.style.minHeight="100px",n.style.overflow="auto",n.className=this.styles.dialogClassName;var t=document.createElement("div");return t.style.zIndex="100",t.className=this.styles.containerClassName,t.append(e),t.append(n),{background:e,dialogBox:n,dialogContainer:t}},_createButtonBase(){var e=document.createElement("div");return e.className=this.styles.buttonClassName,e.style.width="fit-content",e.style.height="fit-content",e.style.minWidth="30px",e.style.minHeight="20px",e.style.padding="3px",e.style.cursor="pointer",e.style.display="inline-block",e},_createHeaderBase(){var e=document.createElement("span");return e.className=this.styles.headerClassName,e},_createColorInputBase(){var e=document.createElement("input");return e.type="color",e},_createBreakBase:()=>document.createElement("br"),_createTextInputBase(){var e=document.createElement("input");return e.type="text",e.className=this.styles.inputClassName,e},_appendHeaders(e,n){var t=e.toString();for(var t of t.split("\n")){var o=this._createHeaderBase();o.textContent=t,n.append(o),n.append(this._createBreakBase())}},displayButtonChooser:function(e,n){var{dialogBox:t,background:o,dialogContainer:a}=this._createDialogBase();return t.focus(),this._appendHeaders(e,t),document.body.append(a),new Promise((e=>{n.forEach(((n,o)=>{var r=this._createButtonBase();r.textContent=n,r.onclick=function(){a.remove(),e(o)},t.append(r)}))}))},alert:function(e){var{dialogBox:n,background:t,dialogContainer:o}=this._createDialogBase();n.focus(),document.body.append(o),this._appendHeaders(e,n);var a=this._createButtonBase();return a.textContent=this.texts.ok,n.append(a),new Promise((e=>{a.onclick=function(){e(),o.remove()}}))},prompt:function(e){var{dialogBox:n,background:t,dialogContainer:o}=this._createDialogBase();n.focus(),document.body.append(o),this._appendHeaders(e,n);var a=this._createTextInputBase();n.append(a),n.append(this._createBreakBase());var r=this._createButtonBase();r.textContent=this.texts.ok,n.append(r);var i=this._createButtonBase();return i.textContent=this.texts.cancel,n.append(i),new Promise((e=>{a.onkeydown=function(e){"Enter"==e.key&&(e.preventDefault(),r.click())},r.onclick=function(){a.value.length<1?e(void 0):e(a.value),o.remove()},i.onclick=function(){e(),o.remove()}}))},confirm:function(e){var{dialogBox:n,background:t,dialogContainer:o}=this._createDialogBase();n.focus(),document.body.append(o),this._appendHeaders(e,n);var a=this._createButtonBase();a.textContent=this.texts.ok,n.append(a);var r=this._createButtonBase();return r.textContent=this.texts.cancel,n.append(r),new Promise((e=>{a.onclick=function(){e(!0),o.remove()},r.onclick=function(){e(!1),o.remove()}}))},colorPrompt:function(e){var{dialogBox:n,background:t,dialogContainer:o}=this._createDialogBase();n.focus(),document.body.append(o),this._appendHeaders(e,n);var a=this._createColorInputBase();n.append(a),n.append(this._createBreakBase());var r=this._createButtonBase();r.textContent=this.texts.ok,n.append(r);var i=this._createButtonBase();return i.textContent=this.texts.cancel,n.append(i),new Promise((e=>{r.onclick=function(){e(a.value),o.remove()},i.onclick=function(){e(),o.remove()}}))},passwordPrompt:function(e){var{dialogBox:n,background:t,dialogContainer:o}=this._createDialogBase();n.focus(),document.body.append(o),this._appendHeaders(e,n);var a=this._createTextInputBase();a.type="password",n.append(a),n.append(this._createBreakBase());var r=this._createButtonBase();r.textContent=this.texts.ok,n.append(r);var i=this._createButtonBase();return i.textContent=this.texts.cancel,n.append(i),new Promise((e=>{a.onkeydown=function(e){"Enter"==e.key&&(e.preventDefault(),r.click())},r.onclick=function(){a.value.length<1?e(void 0):e(a.value),o.remove()},i.onclick=function(){e(),o.remove()}}))}};e.exports=n},7255:e=>{var n={},t={appendElements:function(e,n){for(var t of n)e.append(t)},createElementsFromJSON:function(e){return function e(t){var o=[];for(var a of t)if(a instanceof Element)a&&o.push(a);else if("object"==typeof a){var r=document.createElement(a.element);for(var i of Object.keys(a))if("element"!=i&&"children"!=i){var s=a[i],l=!0;if("gid"==i&&(n[s]=r,l=!1),"style"==i){for(var c of Object.keys(s)){var d=s[c];r.style[c]=d}l=!1}if("innerHTML"==i&&(r.innerHTML=s,l=!1),"textContent"==i&&(r.textContent=s,l=!1),"src"==i&&(r.src=s,l=!1),"srcObject"==i&&(r.srcObject=s,l=!1),"value"==i&&(r.value=s,l=!1),"min"==i&&(r.min=s,l=!1),"max"==i&&(r.max=s,l=!1),"width"==i&&(r.width=s,l=!1),"height"==i&&(r.height=s,l=!1),"className"==i&&(r.className=s,l=!1),"hidden"==i&&(s&&(r.hidden=!0),l=!1),"selected"==i&&(s&&(r.selected=!0),l=!1),"eventListeners"==i){if(Array.isArray(s))for(var u of s)r.addEventListener(u.event,u.func);l=!1}"GPWhenCreated"==i&&(s.bind(r)(r),l=!1),l&&void 0!==r[i]&&(r[i]=s,l=!1),l&&r.setAttribute(i,s)}if(a.children){var p=e(a.children);for(var f of p)r.append(f)}o.push(r)}else o.push(a);return o}(e)},getById:function(e){return document.getElementById(e)},setGPId:function(e,t){return n[t]=e,e},disposeGPId:function(e){n[e]=void 0},getGPId:function(e){return n[e]?n[e]:null},body:document.body,__GP_elements:n};e.exports=t},6313:(e,n,t)=>{var o=t(7255),a=[{element:"div",className:"menuBar",gid:"menu_bar",children:[{element:"div",className:"menuBarItemLogo",children:[{element:"img",src:"images/randomrants-plus.svg",style:{height:"100%"}}],eventListeners:[{event:"click",func:function(){window.location.href="/"}}]},{element:"div",className:"menuBarItem",textContent:"Chat",eventListeners:[{event:"click",func:function(){window.location.href="/chat"}}]},{element:"div",className:"menuBarItem",textContent:"Quick join",eventListeners:[{event:"click",func:function(){window.location.href="/join"}}]},{element:"div",className:"menuBarItem",textContent:"About",eventListeners:[{event:"click",func:function(){window.location.href="/about"}}]}]},{element:"div",style:{width:"100%",height:"40px"}}];o.appendElements(o.body,o.createElementsFromJSON(a)),t(6049)},8563:(e,n,t)=>{var o=t(8567),a=t(7255),r=a.createElementsFromJSON([{element:"style",textContent:o}]);a.appendElements(a.body,r)},472:e=>{e.exports={getSafeHTML:function(e){for(var n="",t=0;t<e.length;){switch(e[t]){case"\n":n+="<br>";break;case" ":n+="&nbsp;";break;case"\t":"\t"!=e[t-1]&&(n+=" ");break;case"&":n+="&amp;";break;case'"':n+="&quot;";break;case">":n+="&gt;";break;case"<":n+="&lt;";break;default:n=e[t]}t+=1}return n},getMessageHTML:function(e,n,t={}){var o,a,r="",i=e.split(" "),s=[];for(var l of i)l.startsWith("data:")||l.startsWith("http://")||l.startsWith("https://")||l.startsWith("file://")||l.startsWith("ws://")||l.startsWith("wss://")||l.startsWith("www.")?l.startsWith("www.")?s.push(`[link url=https://${l}]${l}[/link]`):l.startsWith("data:")?s.push(`[download url=${l}]Data: URL[/download]`):s.push(`[link url=${l}]${l}[/link]`):s.push(l);var c="",d=!1,u=0,p=["#ff0000","#ff6600","#ffb300","#ffe600","#d9ff00","#9dff00","#55ff00","#0dff00","#00ff40","#00ff88","#00ffcc","#00eeff","#00aaff","#0066ff","#0026ff","#3700ff","#8800ff","#dd00ff","#ff00e1","#ff00a6","#ff006a","#ff0033","#ff0000"];if((o=s.join(" ")).length>0){for(r+="",a=0;a<o.length;a++)switch(o[a]){case"\n":"\n"===o[a+1]?(r+="\n",a++):r+="";break;case"[":var f=0,h=o.slice(a,o.length),g="",m="",b="",v=0,k=!1,y=!0,x=!0;for(f+=1,v+=1;f<h.length&&" "!==h[f];){if(f==h.length){y=!1,x=!1;break}if("]"==h[f]){x=!1;break}v+=1,g+=h[f],f+=1}if(x){for(v+=1,f+=1;f<h.length&&"="!==h[f];){if(f==h.length){y=!1,x=!1;break}if("]"==h[f]){x=!1;break}v+=1,m+=h[f],f+=1}if(x)for(v+=1,f+=1;f<h.length&&"]"!==h[f];){if(f==h.length){y=!1,x=!1;break}v+=1,b+=h[f],f+=1}}y&&(n||(t[g]&&(k=!0,r+=t(g,m,b)),"search"==g&&(k=!0,r+=`<a href="https://google.com/search?q=${encodeURIComponent(b)}" style="color: var(--link-text-color);" target="_blank">Google Search "${b}"</a>`),"emoji"==g&&(k=!0,r+=`<img src="${b}" imageisemoji="true" ondragstart="return false;" style="image-rendering:pixelated;object-fit:contain;height:26px;" ondragend="return false;">`),"image"==g&&(k=!0,r+=`<img src="${b}" style="image-rendering:pixelated;">`),"audio"==g&&(k=!0,r+=`<audio src="${b}" controls></audio>`),"video"==g&&(k=!0,r+=`<video src="${b}" controls></video>`),"bold"==g&&(k=!0,r+="<b>",c+="</b>"),"/bold"==g&&(k=!0,r+="</b>"),"color"==g&&(k=!0,r+=`<span style="color:${b};">`),"/color"==g&&(k=!0,r+="</span>"),"font"==g&&(k=!0,r+=`<span style="font-family:${b};">`),"/font"==g&&(k=!0,r+="</span>"),"link"==g&&(k=!0,r+=`<a href="${b}" style="color: var(--link-text-color);" target="_blank">`),"/link"==g&&(k=!0,r+="</a>"),"button"==g&&(k=!0,r+=`<button onclick="var a = document.createElement('a'); a.href='${b}'; a.target = '_blank'; a.click();">`),"/button"==g&&(k=!0,r+="</button>"),"embed"==g&&(k=!0,r+=`<iframe src="${b}" style="image-rendering:pixelated;border:none;resize:both;"></iframe>`),"skull"==g&&(k=!0,r+="💀"),"sus"!=g&&"eyebrow"!=g||(k=!0,r+="🤨"),"br"==g&&(k=!0,r+="<br>"),"nerd"==g&&(k=!0,r+="🤓"),"moai"==g&&(k=!0,r+="🗿"),"cat"==g&&(k=!0,r+="😺"),"cool"!=g&&"sunglasses"!=g||(k=!0,r+="😎"),"blur"==g&&(k=!0,r+="<span style=\"filter: blur(5px);cursor:pointer;\" onclick=\"this.style.filter = '';this.style.cursor = '';\">"),"/blur"==g&&(k=!0,r+="</span>"),"colors"==g&&(k=!0,d=!0,r+="<span>"),"/colors"==g&&(k=!0,d=!1,r+="</span>"),"i"==g&&(k=!0,r+="<i>"),"/i"==g&&(k=!0,r+="</i>")),k?(a+=v,g=g.toLowerCase()):d?((u+=1)>=p.length-1&&(u=0),r+=`<span style="color:${p[u]};">${o[a]}</span>`):r+=o[a]);break;case" ":r+="&nbsp;";break;case"\t":"\t"!=o[a-1]&&(r+=" ");break;case"&":r+="&amp;";break;case'"':r+="&quot;";break;case">":r+="&gt;";break;case"<":r+="&lt;";break;default:d?((u+=1)>=p.length-1&&(u=0),r+=`<span style="color:${p[u]};">${o[a]}</span>`):r+=o[a]}r+=""}return r+c}}},6049:(e,n,t)=>{var o=t(7255),a=t(4592);o.appendElements(o.getGPId("menu_bar"),o.createElementsFromJSON([{element:"div",className:"userMenuBar",gid:"userMenuBar",children:[]}]));var r={element:"div",className:"menuBarItem",textContent:"Sign in",gid:"menu_signIn"},i={element:"div",className:"menuBarItem",textContent:"Sign up",gid:"menu_signUp"},s={element:"div",className:"menuBarItem",gid:"menu_myAccount"};!async function(){var e=await a.checkSessionCookie();e?(s={element:"div",gid:"menu_myAccount",className:"menuBarItemUsername",style:{display:"flex"},children:[{element:"img",style:{outline:"none",borderRadius:"40px",backgroundColor:"#969696",imageRendering:"pixelated",top:"0px",width:"40px",height:"40px"},src:a.getProfilePictureURL(e.username)},{element:"div",style:{display:"flex",flexDirection:"column"},children:[{element:"span",style:{alignContent:"center",fontWeight:"bold",color:e.color||"#000000"},textContent:e.displayName},{element:"span",style:{alignContent:"center",color:e.color||"#000000",fontSize:"10px"},textContent:e.username}]},{element:"div",style:{width:"10px"}}]},o.appendElements(o.getGPId("menu_bar"),o.createElementsFromJSON([s])),o.getGPId("menu_myAccount").addEventListener("click",(()=>{window.location.href="/myaccount"}))):(o.appendElements(o.getGPId("menu_bar"),o.createElementsFromJSON([r,i])),o.getGPId("menu_signIn").addEventListener("click",(()=>{window.location.href="/signin"})),o.getGPId("menu_signUp").addEventListener("click",(()=>{window.location.href="/signup"})))}()}}]);
+(self["webpackChunkrandomrants_plus"] = self["webpackChunkrandomrants_plus"] || []).push([[804],{
+
+/***/ 8567:
+/***/ ((module) => {
+
+module.exports = "body {\n  background: #b8b8b8;\n  font-family: Arial, sans-serif;\n  margin: 0;\n}\n\n[hidden] {\n  display: none;\n}\n\n/* Menu Bar */\n.menuBar {\n  display: flex;\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 40px;\n  background: #b8b8b8;\n  z-index: 10;\n}\n\n.userMenuBar {\n  margin-left: auto;\n}\n\n.menuBarItem,\n.menuBarItemUsername,\n.menuBarItemLogo {\n  color: #000;\n  height: 40px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  user-select: none;\n  padding: 0 8px;\n  transition: background-color 0.2s, color 0.2s;\n}\n\n.menuBarItem:hover {\n  color: #ebebeb;\n}\n\n.menuBarItemUsername:hover {\n  background: #787878;\n  border-radius: 5px;\n}\n\n.menuBarItemLogo:hover {\n  background: #787878;\n  border-radius: 5px;\n  animation: menuBarLogoAnim 0.25s ease-in-out;\n}\n\n@keyframes menuBarLogoAnim {\n  0% {\n    transform: scale(1, 1);\n  }\n  40% {\n    transform: scale(1.1, 0.9);\n  }\n  80% {\n    transform: scale(0.9, 1.1);\n  }\n  100% {\n    transform: scale(1, 1);\n  }\n}\n\n/* Main Center Content */\n.centerHorizontal {\n  text-align: center;\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 1;\n}\n\n.headerText {\n  font-weight: bold;\n  font-size: 32px;\n}\n\n/* Buttons */\n.button {\n  background: #dbdbdb;\n  color: #555;\n  border-radius: 4px;\n  padding: 6px 12px;\n  cursor: pointer;\n  user-select: none;\n  border: none;\n  transition: background 0.05s;\n}\n\n.button:hover {\n  background: #d1d1d1;\n}\n\n.button2 {\n  background: #dbdbdb;\n  color: #555;\n  border-radius: 4px;\n  padding: 6px 12px;\n  cursor: pointer;\n  user-select: none;\n  border: none;\n  transition: background 0.05s;\n  width: fit-content;\n  height: fit-content;\n}\n\n.button2:hover {\n  background: #d1d1d1;\n}\n\n/* Input Boxes */\n.inputText1 {\n  resize: none;\n  border: 1px solid #1f1f1f;\n  background-color: #fff;\n  color: #000;\n  outline: none;\n  font-family: Arial, sans-serif;\n  border-radius: 3px;\n  padding: 4px;\n}\n\n/* Dialogs */\n.centeredDialog {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}\n\n:root {\n  --popup-dialog-font: Arial, sans-serif;\n  --popup-dialog-background: #fff;\n  --popup-dialog-border-radius: 10px;\n  --popup-dialog-text-color: #000;\n  --popup-dialog-button-background: #5985ff;\n  --popup-dialog-button-hover-background: #4275ff;\n  --popup-dialog-button-text-color: #fff;\n  --popup-dialog-button-radius: 5px;\n  --popup-dialog-input-background: #fff;\n  --popup-dialog-input-border-width: 1.5px;\n  --popup-dialog-input-border-color: #bababa;\n  --popup-dialog-input-text-color: #000;\n  --popup-dialog-message-size: 16px;\n}\n\n.windowDialogContainer {\n  font-family: var(--popup-dialog-font);\n}\n\n.windowDialogBackground {\n  background-color: black;\n  backdrop-filter: blur(2px);\n}\n\n.windowDialogBox {\n  background: var(--popup-dialog-background);\n  border-radius: var(--popup-dialog-border-radius);\n  color: var(--popup-dialog-text-color);\n}\n\n.windowDialogButton {\n  background: var(--popup-dialog-button-background);\n  color: var(--popup-dialog-button-text-color);\n  border-radius: var(--popup-dialog-button-radius);\n  padding: 4px 8px;\n  border: none;\n  cursor: pointer;\n}\n\n.windowDialogButton:hover {\n  background: var(--popup-dialog-button-hover-background);\n}\n\n.windowDialogInput {\n  background: var(--popup-dialog-input-background);\n  border: var(--popup-dialog-input-border-width) solid\n    var(--popup-dialog-input-border-color);\n  color: var(--popup-dialog-input-text-color);\n  outline: none;\n  border-radius: 4px;\n  padding: 4px;\n}\n\n.windowDialogHeader {\n  font-weight: bold;\n  font-size: var(--popup-dialog-message-size);\n}\n\nimg {\n  image-rendering: pixelated;\n}\n\na {\n  color: #4287f5;\n}\na:hover {\n  color: #3267ba;\n  cursor: pointer;\n}\n\n.aboutDivCenter {\n  width: calc(100vw - 400px);\n  height: fit-content;\n  padding: 10px 10px;\n\n  position: absolute;\n  left: 50%;\n  transform: translate(-50%, 0px);\n\n  background: white;\n  border-radius: 5px;\n}\n\n.yellowBoxedText {\n  margin: 8px 0;\n  padding: 10px;\n  background-color: #fff8d1;\n  border: 1px solid #ffd700;\n  border-radius: 6px;\n  font-size: 14px;\n  color: #444;\n  line-height: 1.4;\n}\n\n.button [disabled] {\n  pointer-events: none;\n}\n.button2 [disabled] {\n  pointer-events: none;\n}\n";
+
+/***/ }),
+
+/***/ 4592:
+/***/ ((module) => {
+
+var lastValidationState = null;
+var cookieManager = {
+  getAccountCookie() {
+    return this.getCookie("account");
+  },
+  signoutAccountCookie() {
+    return this.setCookie("account", "");
+  },
+  setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  },
+  getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  },
+};
+
+function getServerURL() {
+  return new URL(window.location.href).origin;
+}
+
+async function checkSessionCookie() {
+  try {
+    var request = await fetch(getServerURL() + "/account/session", {
+      method: "GET",
+    });
+    var json = await request.json();
+    if (json.valid) {
+      lastValidationState = json;
+      return json;
+    }
+    lastValidationState = null;
+    return false;
+  } catch (e) {
+    lastValidationState = null;
+    return false;
+  }
+}
+
+async function loginToAccount(username, password) {
+  var sendJSON = {
+    username: username,
+    password: password,
+  };
+  var request = await fetch(getServerURL() + "/account/login", {
+    method: "POST",
+    body: JSON.stringify(sendJSON),
+  });
+  var json = await request.json();
+  if (!json.valid) {
+    throw new Error(json.message);
+  }
+}
+
+async function signupAccount(username, password) {
+  var sendJSON = {
+    username: username,
+    password: password,
+  };
+  var request = await fetch(getServerURL() + "/account/signup", {
+    method: "POST",
+    body: JSON.stringify(sendJSON),
+  });
+  var json = await request.json();
+  if (!json.valid) {
+    throw new Error(json.message);
+  }
+}
+
+async function logoutOfAccount() {
+  var request = await fetch(getServerURL() + "/account/logout", {
+    method: "POST",
+  });
+}
+
+function getProfilePictureURL(username) {
+  return getServerURL() + "/account/picture/" + username;
+}
+
+function loginToAdmin() {
+  var pr = window.prompt("Admin key:");
+  cookieManager.setCookie("admin", pr);
+}
+
+function openLink(href, newTab) {
+  var a = document.createElement("a");
+  a.href = href;
+  if (newTab) {
+    a.target = "_blank";
+  }
+  a.click();
+}
+
+async function getJoinedRooms() {
+  var a = await fetch(getServerURL() + "/account/myrooms");
+  if (a.ok) {
+    var b = await a.json();
+    return b.rooms;
+  } else {
+    return [];
+  }
+}
+
+async function removeJoinedRoom(id) {
+  var a = await fetch(getServerURL() + "/account/removeroom", {
+    method: "POST",
+    body: JSON.stringify({ id }),
+  });
+  return;
+}
+
+async function hasNewMail() {
+  try {
+    var a = await fetch(getServerURL() + "/account/mail");
+    if (a.ok) {
+      var json = await a.json();
+      if (json.mail) {
+        for (var message of json.mail) {
+          if (message.new) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+    return false;
+  } catch (e) {
+    return false;
+  }
+}
+function getCurrentValidationState() {
+  return lastValidationState;
+}
+
+module.exports = {
+  cookieManager,
+  getServerURL,
+  checkSessionCookie,
+  loginToAccount,
+  signupAccount,
+  logoutOfAccount,
+  getProfilePictureURL,
+  loginToAdmin,
+  openLink,
+  hasNewMail,
+  getCurrentValidationState,
+  getJoinedRooms,
+  removeJoinedRoom,
+};
+
+
+/***/ }),
+
+/***/ 1662:
+/***/ ((module) => {
+
+var audioEngine = {};
+
+var AudioContext = window.AudioContext || window.webkitAudioContext; //If running under safari, uses webkitAudioContext.
+
+var audioCTX = new AudioContext();
+audioEngine.context = audioCTX;
+audioEngine.running = false;
+
+setInterval(() => {
+  if (audioCTX.state !== "running") {
+    if (audioCTX) {
+      audioCTX.close().catch(() => {});
+    }
+    audioCTX = new AudioContext();
+    audioEngine.context = audioCTX;
+    audioEngine.running = false;
+  } else {
+    audioEngine.running = true;
+  }
+}, 100);
+
+function cloneAudioBuffer(fromAudioBuffer) {
+  const audioBuffer = new AudioBuffer({
+    length: fromAudioBuffer.length,
+    numberOfChannels: fromAudioBuffer.numberOfChannels,
+    sampleRate: fromAudioBuffer.sampleRate,
+  });
+  for (let channelI = 0; channelI < audioBuffer.numberOfChannels; ++channelI) {
+    const samples = fromAudioBuffer.getChannelData(channelI);
+    audioBuffer.copyToChannel(samples, channelI);
+  }
+  return audioBuffer;
+}
+audioEngine.cloneAudioBuffer = cloneAudioBuffer;
+
+function decodeAsync(data) {
+  return new Promise((resolve, reject) => {
+    try {
+      audioCTX.decodeAudioData(data, resolve, reject);
+    } catch (e) {
+      resolve(null);
+    }
+  });
+}
+audioEngine.decodeAsync = decodeAsync;
+audioEngine.loadSoundFromURL = async function loadSoundURL(url) {
+  try {
+    const response = await fetch(url);
+    const buffer = await response.arrayBuffer();
+    return await decodeAsync(buffer);
+  } catch (e) {
+    console.warn(e);
+    return null;
+  }
+};
+
+class AudioBufferPlayer {
+  constructor(data) {
+    this.data = data;
+    this.source = null;
+    this._playbackRate = 1;
+    this.playbackRate = 1;
+    this.looped = false;
+    this.loopStart = 0;
+    this.loopEnd = 0;
+    this.detune = 0;
+    this.startVol = 1;
+    this.gainNode = null;
+    this.filters = [];
+  }
+
+  setData(data) {
+    this.data = data;
+  }
+
+  set looped(v) {
+    if (this.source) {
+      this.source.loop = v;
+    }
+    this._looped = v;
+  }
+
+  get looped() {
+    return this._looped;
+  }
+
+  set loopStart(v) {
+    if (this.source) {
+      this.source.loopStart = v;
+    }
+    this._loopStart = v;
+  }
+
+  get loopStart() {
+    return this._loopStart;
+  }
+
+  set loopEnd(v) {
+    if (this.source) {
+      this.source.loopEnd = v;
+    }
+    this._loopEnd = v;
+  }
+
+  get loopEnd() {
+    return this._loopEnd;
+  }
+
+  set detune(v) {
+    if (this.source) {
+      this.source.detune.value = v;
+    }
+    this._detune = v;
+  }
+
+  get detune() {
+    return this._detune;
+  }
+
+  loopAt(start, end) {
+    this.loopStart = start;
+    this.loopEnd = end;
+  }
+
+  stop() {
+    this.pause();
+  }
+
+  play(time) {
+    if (this.data) {
+      if (!this.source) {
+        const source = audioCTX.createBufferSource();
+        this.gainNode = audioCTX.createGain();
+        source.buffer = this.data;
+        source.playbackRate.value = this._playbackRate;
+        source.loop = this._looped;
+        source.loopStart = this._loopStart;
+        source.loopEnd = this._loopEnd;
+        source.detune.value = this._detune;
+
+        // Apply filters
+        let currentNode = this.gainNode;
+        for (const filter of this.filters) {
+          currentNode.connect(filter);
+          currentNode = filter;
+        }
+        currentNode.connect(audioCTX.destination);
+
+        this.gainNode.gain.value = this.startVol;
+        source.connect(this.gainNode);
+        source.start(time);
+
+        this.source = source;
+        source.onended = () => {
+          this.onended();
+          this.source = null;
+        };
+      }
+    }
+  }
+
+  pause() {
+    if (this.source) {
+      this.source.stop();
+      this.source = null;
+      this.gainNode = null;
+    }
+  }
+
+  remove() {
+    this.pause();
+    this.filters = [];
+  }
+
+  setVolume(value) {
+    if (this.gainNode) {
+      this.gainNode.gain.value = value;
+    }
+    this.startVol = value;
+  }
+
+  get volume() {
+    return this.startVol;
+  }
+
+  set volume(v) {
+    if (this.gainNode) {
+      this.gainNode.gain.value = v;
+    }
+    this.startVol = v;
+  }
+
+  getVolume() {
+    return this.gainNode ? this.gainNode.gain.value : this.startVol;
+  }
+
+  setPlaybackRate(value) {
+    this.playbackRate = value;
+  }
+
+  set playbackRate(v) {
+    this._playbackRate = v;
+    if (this.source) {
+      this.source.playbackRate.value = v;
+    }
+  }
+
+  get playbackRate() {
+    return this._playbackRate;
+  }
+
+  addFilter(filter) {
+    if (filter instanceof BiquadFilterNode || filter instanceof GainNode) {
+      this.filters.push(filter);
+    }
+  }
+
+  clearFilters() {
+    this.filters = [];
+  }
+
+  fadeIn(duration) {
+    if (this.gainNode) {
+      this.gainNode.gain.setValueAtTime(0, audioCTX.currentTime);
+      this.gainNode.gain.linearRampToValueAtTime(
+        this.startVol,
+        audioCTX.currentTime + duration,
+      );
+    }
+  }
+
+  fadeOut(duration) {
+    if (this.gainNode) {
+      this.gainNode.gain.setValueAtTime(this.getVolume(), audioCTX.currentTime);
+      this.gainNode.gain.linearRampToValueAtTime(
+        0,
+        audioCTX.currentTime + duration,
+      );
+    }
+  }
+
+  applyEqualizer(lowGain = 0, midGain = 0, highGain = 0) {
+    const lowFilter = audioCTX.createBiquadFilter();
+    lowFilter.type = "lowshelf";
+    lowFilter.frequency.value = 250;
+    lowFilter.gain.value = lowGain;
+
+    const midFilter = audioCTX.createBiquadFilter();
+    midFilter.type = "peaking";
+    midFilter.frequency.value = 1000;
+    midFilter.Q.value = 1;
+    midFilter.gain.value = midGain;
+
+    const highFilter = audioCTX.createBiquadFilter();
+    highFilter.type = "highshelf";
+    highFilter.frequency.value = 4000;
+    highFilter.gain.value = highGain;
+
+    this.filters = [lowFilter, midFilter, highFilter];
+  }
+
+  destroy() {
+    // Stop playback
+    this.pause();
+
+    // Disconnect all filters and gain node
+    if (this.gainNode) {
+      this.gainNode.disconnect();
+      this.gainNode = null;
+    }
+    for (const filter of this.filters) {
+      filter.disconnect();
+    }
+    this.filters = [];
+
+    // Clear audio buffer reference
+    this.data = null;
+
+    // Clear event handlers
+    this.onended = null;
+  }
+
+  onended() {
+    // Gets overwritten by the user script
+  }
+}
+
+audioEngine.Player = AudioBufferPlayer;
+audioEngine.AudioBufferPlayer = AudioBufferPlayer;
+
+module.exports = audioEngine;
+
+
+/***/ }),
+
+/***/ 3358:
+/***/ (() => {
+
+console.log(
+  "%cWARNING: %cPotential Security Risk!\n" +
+    "The panel you just opened may expose your Random Rants + account to hackers. If you're logged in, avoid sharing any sensitive information like browser cookies or pasting unknown code here. Stay safe!",
+  "font-size: 32px; font-weight: bold; font-family: Arial, sans-serif; color: red;",
+  "font-size: 20px; font-family: Arial, sans-serif; color: black;",
+);
+
+
+/***/ }),
+
+/***/ 8149:
+/***/ ((module) => {
+
+var dialog = {
+  styles: {
+    //Container (Holds both background and dialog box)
+    containerClassName: "windowDialogContainer",
+    //Background
+    backgroundClassName: "windowDialogBackground",
+    //Dialog
+    dialogClassName: "windowDialogBox",
+    //Button
+    buttonClassName: "windowDialogButton",
+    //Header
+    headerClassName: "windowDialogHeader",
+    //Input (Where you type text)
+    inputClassName: "windowDialogInput",
+  },
+  texts: {
+    ok: "OK",
+    cancel: "Cancel",
+  },
+  _createDialogBase() {
+    var background = document.createElement("div");
+    background.style.position = "fixed";
+    background.style.top = "0";
+    background.style.left = "0";
+    background.style.width = "100vw";
+    background.style.height = "100vh";
+    background.style.opacity = "0.5";
+    background.className = this.styles.backgroundClassName;
+
+    var dialogBox = document.createElement("div");
+    dialogBox.style.position = "fixed";
+    dialogBox.style.top = "50%";
+    dialogBox.style.left = "50%";
+    dialogBox.style.transform = "translate(-50%, -50%)";
+    dialogBox.style.width = "fit-content";
+    dialogBox.style.height = "fit-content";
+    dialogBox.style.padding = "20px";
+    dialogBox.style.maxWidth = "500px";
+    dialogBox.style.maxHeight = "300px";
+    dialogBox.style.minWidth = "100px";
+    dialogBox.style.minHeight = "100px";
+    dialogBox.style.overflow = "auto";
+    dialogBox.className = this.styles.dialogClassName;
+
+    var dialogContainer = document.createElement("div");
+    dialogContainer.style.zIndex = "100";
+    dialogContainer.className = this.styles.containerClassName;
+    dialogContainer.append(background);
+    dialogContainer.append(dialogBox);
+
+    return { background, dialogBox, dialogContainer };
+  },
+  _createButtonBase() {
+    var button = document.createElement("div");
+    button.className = this.styles.buttonClassName;
+    button.style.width = "fit-content";
+    button.style.height = "fit-content";
+    button.style.minWidth = "30px";
+    button.style.minHeight = "20px";
+    button.style.padding = "3px";
+    button.style.cursor = "pointer";
+    button.style.display = "inline-block";
+
+    return button;
+  },
+  _createHeaderBase() {
+    var span = document.createElement("span");
+    span.className = this.styles.headerClassName;
+
+    return span;
+  },
+  _createColorInputBase() {
+    var input = document.createElement("input");
+    input.type = "color";
+
+    return input;
+  },
+  _createBreakBase() {
+    var br = document.createElement("br");
+    return br;
+  },
+  _createTextInputBase() {
+    var input = document.createElement("input");
+    input.type = "text";
+    input.className = this.styles.inputClassName;
+
+    return input;
+  },
+  _appendHeaders(message, dialogBox) {
+    var m = message.toString();
+    for (var m of m.split("\n")) {
+      var header = this._createHeaderBase();
+      header.textContent = m;
+      dialogBox.append(header);
+      dialogBox.append(this._createBreakBase());
+    }
+  },
+  displayButtonChooser: function (message, buttonTexts) {
+    var { dialogBox, background, dialogContainer } = this._createDialogBase();
+
+    dialogBox.focus();
+
+    this._appendHeaders(message, dialogBox);
+
+    document.body.append(dialogContainer);
+
+    return new Promise((accept) => {
+      buttonTexts.forEach((buttonText, index) => {
+        var button = this._createButtonBase();
+        button.textContent = buttonText;
+        button.onclick = function () {
+          dialogContainer.remove();
+          accept(index);
+        };
+        dialogBox.append(button);
+      });
+    });
+  },
+  alert: function (message) {
+    var { dialogBox, background, dialogContainer } = this._createDialogBase();
+
+    dialogBox.focus();
+
+    document.body.append(dialogContainer);
+
+    this._appendHeaders(message, dialogBox);
+
+    var acceptButton = this._createButtonBase();
+    acceptButton.textContent = this.texts.ok;
+    dialogBox.append(acceptButton);
+
+    return new Promise((accept) => {
+      acceptButton.onclick = function () {
+        accept();
+        dialogContainer.remove();
+      };
+    });
+  },
+  prompt: function (message) {
+    var { dialogBox, background, dialogContainer } = this._createDialogBase();
+
+    dialogBox.focus();
+
+    document.body.append(dialogContainer);
+
+    this._appendHeaders(message, dialogBox);
+
+    var input = this._createTextInputBase();
+    dialogBox.append(input);
+
+    dialogBox.append(this._createBreakBase());
+
+    var acceptButton = this._createButtonBase();
+    acceptButton.textContent = this.texts.ok;
+    dialogBox.append(acceptButton);
+
+    var cancelButton = this._createButtonBase();
+    cancelButton.textContent = this.texts.cancel;
+    dialogBox.append(cancelButton);
+
+    return new Promise((accept) => {
+      input.onkeydown = function (e) {
+        if (e.key == "Enter") {
+          e.preventDefault();
+          acceptButton.click();
+        }
+      };
+      acceptButton.onclick = function () {
+        if (input.value.length < 1) {
+          accept(undefined);
+        } else {
+          accept(input.value);
+        }
+        dialogContainer.remove();
+      };
+      cancelButton.onclick = function () {
+        accept();
+        dialogContainer.remove();
+      };
+    });
+  },
+  confirm: function (message) {
+    var { dialogBox, background, dialogContainer } = this._createDialogBase();
+
+    dialogBox.focus();
+
+    document.body.append(dialogContainer);
+
+    this._appendHeaders(message, dialogBox);
+
+    var acceptButton = this._createButtonBase();
+    acceptButton.textContent = this.texts.ok;
+    dialogBox.append(acceptButton);
+
+    var cancelButton = this._createButtonBase();
+    cancelButton.textContent = this.texts.cancel;
+    dialogBox.append(cancelButton);
+
+    return new Promise((accept) => {
+      acceptButton.onclick = function () {
+        accept(true);
+        dialogContainer.remove();
+      };
+      cancelButton.onclick = function () {
+        accept(false);
+        dialogContainer.remove();
+      };
+    });
+  },
+  colorPrompt: function (message) {
+    var { dialogBox, background, dialogContainer } = this._createDialogBase();
+
+    dialogBox.focus();
+
+    document.body.append(dialogContainer);
+
+    this._appendHeaders(message, dialogBox);
+
+    var colorInput = this._createColorInputBase();
+    dialogBox.append(colorInput);
+
+    dialogBox.append(this._createBreakBase());
+
+    var acceptButton = this._createButtonBase();
+    acceptButton.textContent = this.texts.ok;
+    dialogBox.append(acceptButton);
+
+    var cancelButton = this._createButtonBase();
+    cancelButton.textContent = this.texts.cancel;
+    dialogBox.append(cancelButton);
+
+    return new Promise((accept) => {
+      acceptButton.onclick = function () {
+        accept(colorInput.value);
+        dialogContainer.remove();
+      };
+      cancelButton.onclick = function () {
+        accept();
+        dialogContainer.remove();
+      };
+    });
+  },
+  passwordPrompt: function (message) {
+    var { dialogBox, background, dialogContainer } = this._createDialogBase();
+
+    dialogBox.focus();
+
+    document.body.append(dialogContainer);
+
+    this._appendHeaders(message, dialogBox);
+
+    var input = this._createTextInputBase();
+    input.type = "password";
+    dialogBox.append(input);
+
+    dialogBox.append(this._createBreakBase());
+
+    var acceptButton = this._createButtonBase();
+    acceptButton.textContent = this.texts.ok;
+    dialogBox.append(acceptButton);
+
+    var cancelButton = this._createButtonBase();
+    cancelButton.textContent = this.texts.cancel;
+    dialogBox.append(cancelButton);
+
+    return new Promise((accept) => {
+      input.onkeydown = function (e) {
+        if (e.key == "Enter") {
+          e.preventDefault();
+          acceptButton.click();
+        }
+      };
+      acceptButton.onclick = function () {
+        if (input.value.length < 1) {
+          accept(undefined);
+        } else {
+          accept(input.value);
+        }
+        dialogContainer.remove();
+      };
+      cancelButton.onclick = function () {
+        accept();
+        dialogContainer.remove();
+      };
+    });
+  },
+};
+
+module.exports = dialog;
+
+
+/***/ }),
+
+/***/ 7255:
+/***/ ((module) => {
+
+//Webpack compatible version of elements module from gvbvdxx-pack-2
+//With some new updates as well.
+var __GP_elements = {};
+function isDOM(Obj) {
+  return Obj instanceof Element;
+}
+var elements = {
+  appendElements: function (elm, appendArray) {
+    for (var appendElm of appendArray) {
+      elm.append(appendElm);
+    }
+  },
+  createElementsFromJSON: function (jsonelmArray) {
+    //converts an array of json's with element properties to a element list.
+    function runElements(arry) {
+      var myRealElms = [];
+      for (var elm of arry) {
+        if (!isDOM(elm)) {
+          if (typeof elm == "object") {
+            var realElm = document.createElement(elm.element);
+            for (var attriName of Object.keys(elm)) {
+              if (!(attriName == "element" || attriName == "children")) {
+                var attributeValue = elm[attriName];
+                var setattri = true;
+                if (attriName == "gid") {
+                  __GP_elements[attributeValue] = realElm;
+                  setattri = false;
+                }
+                if (attriName == "style") {
+                  for (var styleName of Object.keys(attributeValue)) {
+                    var styleValue = attributeValue[styleName];
+                    realElm.style[styleName] = styleValue;
+                  }
+                  setattri = false;
+                }
+                if (attriName == "innerHTML") {
+                  realElm.innerHTML = attributeValue;
+                  setattri = false;
+                }
+                if (attriName == "textContent") {
+                  realElm.textContent = attributeValue;
+                  setattri = false;
+                }
+                if (attriName == "src") {
+                  realElm.src = attributeValue;
+                  setattri = false;
+                }
+                if (attriName == "srcObject") {
+                  realElm.srcObject = attributeValue;
+                  setattri = false;
+                }
+                if (attriName == "value") {
+                  realElm.value = attributeValue;
+                  setattri = false;
+                }
+                if (attriName == "min") {
+                  realElm.min = attributeValue;
+                  setattri = false;
+                }
+                if (attriName == "max") {
+                  realElm.max = attributeValue;
+                  setattri = false;
+                }
+                if (attriName == "width") {
+                  realElm.width = attributeValue;
+                  setattri = false;
+                }
+                if (attriName == "height") {
+                  realElm.height = attributeValue;
+                  setattri = false;
+                }
+                if (attriName == "className") {
+                  realElm.className = attributeValue;
+                  setattri = false;
+                }
+                if (attriName == "hidden") {
+                  if (attributeValue) {
+                    realElm.hidden = true;
+                  }
+                  setattri = false;
+                }
+                if (attriName == "selected") {
+                  if (attributeValue) {
+                    realElm.selected = true;
+                  }
+                  setattri = false;
+                }
+                if (attriName == "eventListeners") {
+                  if (Array.isArray(attributeValue)) {
+                    for (var event of attributeValue) {
+                      realElm.addEventListener(event.event, event.func);
+                    }
+                  }
+                  setattri = false;
+                }
+                if (attriName == "GPWhenCreated") {
+                  attributeValue.bind(realElm)(realElm); //This seems weird, but first realElm is the "this" value refrence, then the second realElm is for the function value, as well as calling the new binded function.
+                  setattri = false;
+                }
+                if (setattri) {
+                  if (typeof realElm[attriName] !== "undefined") {
+                    realElm[attriName] = attributeValue;
+                    setattri = false;
+                  }
+                }
+                if (setattri) {
+                  realElm.setAttribute(attriName, attributeValue);
+                }
+              }
+            }
+
+            if (elm.children) {
+              var elmsToAppend = runElements(elm.children);
+              for (var elmAppend of elmsToAppend) {
+                realElm.append(elmAppend);
+              }
+            }
+            myRealElms.push(realElm);
+          } else {
+            myRealElms.push(elm);
+          }
+        } else {
+          if (elm) {
+            myRealElms.push(elm);
+          }
+        }
+      }
+      return myRealElms;
+    }
+    return runElements(jsonelmArray);
+  },
+  getById: function (id) {
+    return document.getElementById(id);
+  },
+  setGPId: function (el, id) {
+    __GP_elements[id] = el;
+    return el;
+  },
+  disposeGPId: function (id) {
+    __GP_elements[id] = undefined;
+  },
+  getGPId: function (id) {
+    if (__GP_elements[id]) {
+      return __GP_elements[id];
+    }
+    return null;
+  },
+  body: document.body,
+  __GP_elements: __GP_elements,
+};
+module.exports = elements;
+
+
+/***/ }),
+
+/***/ 6313:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+var elements = __webpack_require__(7255);
+
+var elementJSON = [
+  {
+    element: "div",
+    className: "menuBar",
+    gid: "menu_bar",
+    children: [
+      //Home button
+      {
+        element: "div",
+        className: "menuBarItemLogo",
+        children: [
+          {
+            element: "img",
+            src: "images/randomrants-plus.svg",
+            style: {
+              height: "100%",
+            },
+          },
+        ],
+        eventListeners: [
+          {
+            event: "click",
+            func: function () {
+              window.location.href = "/";
+            },
+          },
+        ],
+      },
+      //Chat button.
+      {
+        element: "div",
+        className: "menuBarItem",
+        textContent: "Chat",
+        eventListeners: [
+          {
+            event: "click",
+            func: function () {
+              window.location.href = "/chat";
+            },
+          },
+        ],
+      },
+      //Quick join button.
+      {
+        element: "div",
+        className: "menuBarItem",
+        textContent: "Quick join",
+        eventListeners: [
+          {
+            event: "click",
+            func: function () {
+              window.location.href = "/join";
+            },
+          },
+        ],
+      },
+      //About button.
+      {
+        element: "div",
+        className: "menuBarItem",
+        textContent: "About",
+        eventListeners: [
+          {
+            event: "click",
+            func: function () {
+              window.location.href = "/about";
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    //Since using position:fixed removes spacing, manually just add it by using a invisible div element.
+    element: "div",
+    style: {
+      width: "100%",
+      height: "40px",
+    },
+  },
+];
+
+elements.appendElements(
+  elements.body,
+  elements.createElementsFromJSON(elementJSON),
+);
+
+__webpack_require__(6049);
+
+
+/***/ }),
+
+/***/ 8563:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+var styles = __webpack_require__(8567);
+var elements = __webpack_require__(7255);
+
+var pageElements = elements.createElementsFromJSON([
+  {
+    element: "style",
+    textContent: styles,
+  },
+]);
+elements.appendElements(elements.body, pageElements);
+
+
+/***/ }),
+
+/***/ 472:
+/***/ ((module) => {
+
+function getSafeHTML(unsafeText) {
+  var safeText = "";
+  var i = 0;
+  while (i < unsafeText.length) {
+    switch (unsafeText[i]) {
+      case "\n":
+        safeText += "<br>";
+        break;
+      case " ":
+        safeText += "&nbsp;";
+        break;
+      case "\t":
+        if (unsafeText[i - 1] != "\t") safeText += " ";
+        break;
+      case "&":
+        safeText += "&amp;";
+        break;
+      case '"':
+        safeText += "&quot;";
+        break;
+      case ">":
+        safeText += "&gt;";
+        break;
+      case "<":
+        safeText += "&lt;";
+        break;
+      default:
+        safeText = unsafeText[i]; //Part of text seems safe to just put plain.
+    }
+    i += 1;
+  }
+  return safeText;
+}
+
+function getMessageHTML(inputstr, noBracketCode, otherBracketCodes = {}) {
+  //This is pretty much the one from the original random rants, here because i don't feel like having to rewrite the whole thing.
+  var input_str; //store input
+  var text_input; //store input after beging trim()med
+  var output_html = ""; //store output
+  var counter;
+
+  var linkfixes = inputstr.split(" ");
+  var newinputstr = [];
+  for (var word of linkfixes) {
+    if (
+      word.startsWith("data:") ||
+      word.startsWith("http://") ||
+      word.startsWith("https://") ||
+      word.startsWith("file://") ||
+      word.startsWith("ws://") ||
+      word.startsWith("wss://") ||
+      word.startsWith("www.")
+    ) {
+      if (word.startsWith("www.")) {
+        newinputstr.push(`[link url=https://${word}]${word}[/link]`);
+      } else {
+        if (word.startsWith("data:")) {
+          newinputstr.push(`[download url=${word}]Data: URL[/download]`);
+        } else {
+          newinputstr.push(`[link url=${word}]${word}[/link]`);
+        }
+      }
+    } else {
+      newinputstr.push(word);
+    }
+  }
+
+  input_str = newinputstr.join(" "); //get input and store it in input_str
+  text_input = input_str;
+
+  var endText = "";
+  var colorsText = false;
+  var colorCount = 0;
+  var colors = [
+    "#ff0000",
+    "#ff6600",
+    "#ffb300",
+    "#ffe600",
+    "#d9ff00",
+    "#9dff00",
+    "#55ff00",
+    "#0dff00",
+    "#00ff40",
+    "#00ff88",
+    "#00ffcc",
+    "#00eeff",
+    "#00aaff",
+    "#0066ff",
+    "#0026ff",
+    "#3700ff",
+    "#8800ff",
+    "#dd00ff",
+    "#ff00e1",
+    "#ff00a6",
+    "#ff006a",
+    "#ff0033",
+    "#ff0000",
+  ];
+  if (text_input.length > 0) {
+    output_html += ""; //begin by creating paragraph
+    for (counter = 0; counter < text_input.length; counter++) {
+      switch (text_input[counter]) {
+        case "\n":
+          if (text_input[counter + 1] === "\n") {
+            output_html += "\n";
+            counter++;
+          } else output_html += "";
+          break;
+
+        case "[":
+          var index = 0;
+          var data = text_input.slice(counter, text_input.length);
+          var type = "";
+          var valname = "";
+          var value = "";
+          var counterOffset = 0;
+          var valid = false;
+          var addHTML = true;
+          var nextCheck = true;
+          index += 1;
+          counterOffset += 1;
+          while (index < data.length && data[index] !== " ") {
+            if (index == data.length) {
+              addHTML = false;
+              nextCheck = false;
+              break;
+            }
+            if (data[index] == "]") {
+              nextCheck = false;
+              break;
+            }
+            counterOffset += 1;
+            type += data[index];
+            index += 1;
+          }
+          if (nextCheck) {
+            counterOffset += 1;
+            index += 1;
+            while (index < data.length && data[index] !== "=") {
+              if (index == data.length) {
+                addHTML = false;
+                nextCheck = false;
+                break;
+              }
+              if (data[index] == "]") {
+                nextCheck = false;
+                break;
+              }
+              counterOffset += 1;
+              valname += data[index];
+              index += 1;
+            }
+            if (nextCheck) {
+              counterOffset += 1;
+              index += 1;
+              while (index < data.length && data[index] !== "]") {
+                if (index == data.length) {
+                  addHTML = false;
+                  nextCheck = false;
+                  break;
+                }
+                counterOffset += 1;
+                value += data[index];
+                index += 1;
+              }
+            }
+          }
+
+          if (addHTML) {
+            if (!noBracketCode) {
+              if (otherBracketCodes[type]) {
+                valid = true;
+                output_html += otherBracketCodes(type, valname, value);
+              }
+              if (type == "search") {
+                valid = true;
+                output_html += `<a href="https://google.com/search?q=${encodeURIComponent(
+                  value,
+                )}" style="color: var(--link-text-color);" target="_blank">Google Search "${value}"</a>`;
+              }
+              if (type == "emoji") {
+                valid = true;
+                output_html += `<img src="${value}" imageisemoji="true" ondragstart="return false;" style="image-rendering:pixelated;object-fit:contain;height:26px;" ondragend="return false;">`;
+              }
+              if (type == "image") {
+                valid = true;
+                output_html += `<img src="${value}" style="image-rendering:pixelated;">`;
+              }
+              if (type == "audio") {
+                valid = true;
+                output_html += `<audio src="${value}" controls></audio>`;
+              }
+              if (type == "video") {
+                valid = true;
+                output_html += `<video src="${value}" controls></video>`;
+              }
+              if (type == "bold") {
+                valid = true;
+                output_html += `<b>`;
+                endText += "</b>";
+              }
+              if (type == "/bold") {
+                valid = true;
+                output_html += `</b>`;
+              }
+              if (type == "color") {
+                valid = true;
+                output_html += `<span style="color:${value};">`;
+              }
+              if (type == "/color") {
+                valid = true;
+                output_html += `</span>`;
+              }
+              if (type == "font") {
+                valid = true;
+                output_html += `<span style="font-family:${value};">`;
+              }
+              if (type == "/font") {
+                valid = true;
+                output_html += `</span>`;
+              }
+              if (type == "link") {
+                valid = true;
+                output_html += `<a href="${value}" style="color: var(--link-text-color);" target="_blank">`;
+              }
+              if (type == "/link") {
+                valid = true;
+                output_html += `</a>`;
+              }
+              if (type == "button") {
+                valid = true;
+                output_html += `<button onclick="var a = document.createElement('a'); a.href='${value}'; a.target = '_blank'; a.click();">`;
+              }
+              if (type == "/button") {
+                valid = true;
+                output_html += `</button>`;
+              }
+              /*if (type == "buttonJavascript") {
+                        valid = true;
+                        output_html += `<button onclick="${value}">`;
+                      }
+                      if (type == "/buttonJavascript") {
+                        valid = true;
+                        output_html += `</button>`;
+                      }*/
+              if (type == "embed") {
+                valid = true;
+                output_html += `<iframe src="${value}" style="image-rendering:pixelated;border:none;resize:both;"></iframe>`;
+              }
+              if (type == "skull") {
+                valid = true;
+                output_html += "💀";
+              }
+              if (type == "sus" || type == "eyebrow") {
+                valid = true;
+                output_html += "🤨";
+              }
+              if (type == "br") {
+                valid = true;
+                output_html += "<br>";
+              }
+              if (type == "nerd") {
+                valid = true;
+                output_html += "🤓";
+              }
+              if (type == "moai") {
+                valid = true;
+                output_html += "🗿";
+              }
+              if (type == "cat") {
+                valid = true;
+                output_html += "😺";
+              }
+              if (type == "cool" || type == "sunglasses") {
+                valid = true;
+                output_html += "😎";
+              }
+
+              if (type == "blur") {
+                valid = true;
+                output_html += `<span style="filter: blur(5px);cursor:pointer;" onclick="this.style.filter = '';this.style.cursor = '';">`;
+              }
+              if (type == "/blur") {
+                valid = true;
+                output_html += `</span>`;
+              }
+
+              if (type == "colors") {
+                valid = true;
+                colorsText = true;
+                output_html += `<span>`;
+              }
+              if (type == "/colors") {
+                valid = true;
+                colorsText = false;
+                output_html += `</span>`;
+              }
+              if (type == "i") {
+                valid = true;
+                output_html += `<i>`;
+              }
+              if (type == "/i") {
+                valid = true;
+                output_html += `</i>`;
+              }
+            }
+
+            if (valid) {
+              counter += counterOffset;
+              //window.alert(`DEBUG: type:${type} value name:${valname} value:${value}`);
+              type = type.toLowerCase();
+            } else {
+              if (colorsText) {
+                colorCount += 1;
+                if (colorCount >= colors.length - 1) {
+                  colorCount = 0;
+                }
+                output_html += `<span style="color:${colors[colorCount]};">${text_input[counter]}</span>`;
+              } else {
+                output_html += text_input[counter];
+              }
+            }
+          }
+          break;
+
+        case " ":
+          output_html += "&nbsp;";
+          break;
+
+        case "\t":
+          if (text_input[counter - 1] != "\t") output_html += " ";
+          break;
+
+        case "&":
+          output_html += "&amp;";
+          break;
+
+        case '"':
+          output_html += "&quot;";
+          break;
+
+        case ">":
+          output_html += "&gt;";
+          break;
+
+        case "<":
+          output_html += "&lt;";
+          break;
+        default:
+          if (colorsText) {
+            colorCount += 1;
+            if (colorCount >= colors.length - 1) {
+              colorCount = 0;
+            }
+            output_html += `<span style="color:${colors[colorCount]};">${text_input[counter]}</span>`;
+          } else {
+            output_html += text_input[counter];
+          }
+      }
+    }
+    output_html += ""; //finally close paragraph
+  }
+  output_html += endText;
+  return output_html; // display output html
+}
+
+module.exports = {
+  getSafeHTML,
+  getMessageHTML,
+};
+
+
+/***/ }),
+
+/***/ 6049:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+var elements = __webpack_require__(7255);
+var accountHelper = __webpack_require__(4592);
+
+var elementJSON = [
+  {
+    element: "div",
+    className: "userMenuBar",
+    gid: "userMenuBar",
+    children: [],
+  },
+];
+
+elements.appendElements(
+  elements.getGPId("menu_bar"),
+  elements.createElementsFromJSON(elementJSON),
+);
+
+var signInButton = {
+  element: "div",
+  className: "menuBarItem",
+  textContent: "Sign in",
+  gid: "menu_signIn",
+};
+var signUpButton = {
+  element: "div",
+  className: "menuBarItem",
+  textContent: "Sign up",
+  gid: "menu_signUp",
+};
+
+var myAccountButton = {
+  element: "div",
+  className: "menuBarItem",
+  gid: "menu_myAccount",
+};
+
+function handleSignedOutAccountButtons() {
+  var signInButton = elements.getGPId("menu_signIn");
+
+  signInButton.addEventListener("click", () => {
+    window.location.href = "/signin";
+  });
+
+  var signUpButton = elements.getGPId("menu_signUp");
+
+  signUpButton.addEventListener("click", () => {
+    window.location.href = "/signup";
+  });
+}
+
+function handleUserAccountButtons() {
+  var myAccountButton = elements.getGPId("menu_myAccount");
+
+  myAccountButton.addEventListener("click", () => {
+    window.location.href = "/myaccount";
+  });
+}
+
+(async function () {
+  var validated = await accountHelper.checkSessionCookie();
+  if (validated) {
+    myAccountButton = {
+      element: "div",
+      gid: "menu_myAccount",
+      className: "menuBarItemUsername",
+      style: {
+        display: "flex",
+      },
+      children: [
+        {
+          element: "img",
+          style: {
+            outline: "none",
+            borderRadius: "40px",
+            backgroundColor: "#969696",
+            imageRendering: "pixelated",
+            top: "0px",
+            width: "40px",
+            height: "40px",
+          },
+          src: accountHelper.getProfilePictureURL(validated.username),
+        },
+        {
+          element: "div",
+          style: {
+            display: "flex",
+            flexDirection: "column",
+          },
+          children: [
+            {
+              element: "span",
+              style: {
+                alignContent: "center",
+                fontWeight: "bold",
+                color: validated.color || "#000000",
+              },
+              textContent: validated.displayName,
+            },
+            {
+              element: "span",
+              style: {
+                alignContent: "center",
+                color: validated.color || "#000000",
+                fontSize: "10px",
+              },
+              textContent: validated.username,
+            },
+          ],
+        },
+        {
+          element: "div",
+          style: {
+            width: "10px",
+          },
+        },
+      ],
+    };
+    elements.appendElements(
+      elements.getGPId("menu_bar"),
+      elements.createElementsFromJSON([myAccountButton]),
+    );
+    handleUserAccountButtons();
+  } else {
+    elements.appendElements(
+      elements.getGPId("menu_bar"),
+      elements.createElementsFromJSON([signInButton, signUpButton]),
+    );
+    handleSignedOutAccountButtons();
+  }
+})();
+
+
+/***/ })
+
+}]);

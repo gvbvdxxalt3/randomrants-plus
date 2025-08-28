@@ -19,11 +19,8 @@ try {
 
 module.exports = {
 	mode: "production",
-	cache: {
-		type: "filesystem",
-	},
-	//Uncomment this to enable recommended devtool.
-	//devtool: 'source-map',
+	cache: false,
+	devtool: false,
 	entry: pages.reduce((acc, page) => {
 		acc[page] = `./src/pages/${page}.js`;
 		return acc;
@@ -33,6 +30,7 @@ module.exports = {
 			chunks: "all",
 			name: "shared",
 		},
+		minimize: false
 	},
 	output: {
 		path: path.resolve(__dirname, "public"),

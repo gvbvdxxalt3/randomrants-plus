@@ -173,9 +173,19 @@ var rightSide = {
           ],
         },
         {
-          element: "button",
-          className: "roundborder chatInterfaceButton",
-          gid: "toggleMessageAndOnlineView",
+          element: "div",
+          style: {
+            display: "flex",
+            flexGrow: "1",
+            width: "100%"
+          },
+          children: [
+            {
+              element: "button",
+              className: "roundborder chatInterfaceButton",
+              gid: "toggleMessageAndOnlineView",
+            }
+          ]
         }
       ],
     },
