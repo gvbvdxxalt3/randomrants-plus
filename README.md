@@ -30,7 +30,7 @@ I recommend using Node.JS 16.x, then either `git clone https://github.com/Random
 
 In the directory of package.json, run `npm install`. After that, use `npm run build` to build the website, and use `npm run start` to start up the server.
 
-If you now want to auto reload when you edit something: Then instead of `npm run start`, use `npm run dev`. Note this works for both building and server code.
+For auto reload: Then instead of `npm run start`, use `npm run development`. Note this works for both building and server code.
 
 Go to `http://localhost:3000/` to see the functional Random Rants + site in action.
 
