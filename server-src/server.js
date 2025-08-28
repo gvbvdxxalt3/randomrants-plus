@@ -3163,7 +3163,7 @@ const server = http.createServer(async function (req, res) {
       res.setHeader("Access-Control-Allow-Credentials", "true");
       res.setHeader(
         "Set-Cookie",
-        `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
+        `account=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`,
       );
       res.end("");
       return;
