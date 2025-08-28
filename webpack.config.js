@@ -87,13 +87,15 @@ module.exports = {
 					chunks: [page],
 				}),
 		),
-		new CopyWebpackPlugin([
-			{
+		new CopyWebpackPlugin({
+			patterns: [
+			  {
 				from: "./wpstatic",
 				to: ".",
 				noErrorOnMissing: true,
-			},
-		]),
+			  },
+			],
+		}),
 		new VersionUpdatePlugin(),
 	],
 };
