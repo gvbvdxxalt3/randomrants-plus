@@ -38,8 +38,6 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, "public"),
 		filename: "[name].bundle.js",
-		clean: true,
-		hashFunction: 'xxhash64'
 	},
 	watchOptions: {
 		ignored: [path.resolve(__dirname, "wpstatic/version.json")], //Ignore version file.
