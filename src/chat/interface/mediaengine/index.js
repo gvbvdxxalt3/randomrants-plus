@@ -551,9 +551,6 @@ async function doMediaSelect() {
             children: [
               {
                 element: "div",
-                style: {
-                  padding: "10px 10px",
-                },
                 children: [
                   {
                     element: "div",

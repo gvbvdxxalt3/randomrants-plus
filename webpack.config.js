@@ -19,7 +19,10 @@ try {
 
 module.exports = {
 	mode: "production",
-	cache: false,
+	cache: {
+		type: 'filesystem',
+		allowCollectingMemory: true,
+	},
 	devtool: false,
 	entry: pages.reduce((acc, page) => {
 		acc[page] = `./src/pages/${page}.js`;
