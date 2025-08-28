@@ -14,6 +14,7 @@ function generateDiv(
   isRealOwner,
   isAbleToChangeOwnership,
   changeOwnershipFunction,
+  forceOwnershipChangable
 ) {
   var pfp = accountHelper.getProfilePictureURL(username);
   if (!username) {
@@ -58,7 +59,7 @@ function generateDiv(
       title: "This person is the real owner of this room.",
     });
   } else {
-    if (isAbleToChangeOwnership && username) {
+    if (isAbleToChangeOwnership && (username || forceOwnershipChangable)) {
       if (isOwner) {
         icons.push({
           element: "div",

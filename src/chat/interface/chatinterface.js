@@ -410,6 +410,7 @@ reconnectingScreen.hidden = true;
               async function (promoting) {
                 await changeOwnershipUser(promoting, username);
               },
+              true
             );
             ownershipUsersContainer.append(onlineUser);
             i += 1;
