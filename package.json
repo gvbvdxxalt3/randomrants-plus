@@ -21,8 +21,8 @@
     "jszip": "^3.10.1",
     "nodemon": "^3.1.10",
     "raw-loader": "^4.0.2",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^6.0.1",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
     "ws": "*"
   },
   "license": "MIT",
