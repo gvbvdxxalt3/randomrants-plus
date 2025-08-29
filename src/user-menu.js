@@ -35,15 +35,24 @@ var myAccountButton = {
 };
 
 function handleSignedOutAccountButtons() {
+  var params = new URLSearchParams(window.location.search);
   var signInButton = elements.getGPId("menu_signIn");
 
   signInButton.addEventListener("click", () => {
+    if (params.get("href")) {
+      window.location.href = "/signin?href=" + params.get("href");
+      return;
+    }
     window.location.href = "/signin";
   });
 
   var signUpButton = elements.getGPId("menu_signUp");
 
   signUpButton.addEventListener("click", () => {
+    if (params.get("href")) {
+      window.location.href = "/signup?href=" + params.get("href");
+      return;
+    }
     window.location.href = "/signup";
   });
 }

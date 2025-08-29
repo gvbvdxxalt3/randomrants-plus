@@ -4,6 +4,13 @@ var menuBar = require("../menu.js");
 var elements = require("../gp2/elements.js");
 var accountHelper = require("../accounthelper");
 var dialog = require("../dialogs.js");
+
+var params = new URLSearchParams(window.location.search);
+var gotoHref = "/myaccount";
+if (params.get("href")) {
+  gotoHref = params.get("href");
+}
+
 var signInArea = {
   element: "div",
   children: [
@@ -111,7 +118,7 @@ async function signUp() {
   goButton.disabled = true;
   try {
     await accountHelper.signupAccount(usernameInput.value, passwordInput.value);
-    window.location.href = "/";
+    window.location.href = gotoHref;
   } catch (e) {
     dialog.alert(e);
   }

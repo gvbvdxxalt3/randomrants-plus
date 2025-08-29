@@ -62,7 +62,7 @@ module.exports = {
             {
               element: "li",
               textContent:
-                'Get private DMs from your homies (or chaos allies).',
+                'Get private DMs from your homies (or chaos allies) with the tap of an username.',
             },
             {
               element: "li",
@@ -77,7 +77,7 @@ module.exports = {
             {
               element: "li",
               textContent:
-                'Build your own chaos rooms. Hand out admin like candy.',
+                'Build your own chaos rooms. Hand out ownership (admin) like candy.',
             },
           ]
         },
@@ -107,7 +107,7 @@ module.exports = {
                 {
                   event: "click",
                   func: function () {
-                    window.location.href = "/signin";
+                    window.location.href = "/signin?href="+encodeURIComponent(window.location.pathname + window.location.hash);
                   }
                 }
               ]
@@ -121,7 +121,7 @@ module.exports = {
                 {
                   event: "click",
                   func: function () {
-                    window.location.href = "/signup";
+                    window.location.href = "/signup?href="+encodeURIComponent(window.location.pathname + window.location.hash);
                   }
                 }
               ]

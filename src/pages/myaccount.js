@@ -71,6 +71,12 @@ function compressImage(oldsrc) {
         {
           element: "div",
           className: "centeredDialog",
+          style: {
+            backgroundColor: "white",
+            borderRadius: "5px",
+            padding: "15px 15px",
+            boxShadow: "0px 0px 20px black"
+          },
           children: [
             {
               element: "div",
@@ -292,6 +298,32 @@ function compressImage(oldsrc) {
                 },
               ],
             },
+            { element: "br" },
+            {
+              element: "div",
+              className: "button",
+              eventListeners: [
+                {
+                  event: "click",
+                  func: function () {
+                    window.location.href = "/chat";
+                  }
+                }
+              ],
+              children: [
+                {
+                  element: "img",
+                  src: "images/chaticon.svg",
+                  style: {
+                    height: "17px",
+                  },
+                },
+                {
+                  element: "span",
+                  textContent: "Start chatting",
+                },
+              ],
+            },
           ],
         },
       ];
@@ -477,6 +509,12 @@ function compressImage(oldsrc) {
         {
           element: "div",
           className: "centeredDialog",
+          style: {
+            backgroundColor: "white",
+            borderRadius: "5px",
+            padding: "15px 15px",
+            boxShadow: "0px 0px 20px black"
+          },
           children: [
             {
               element: "span",
@@ -491,6 +529,49 @@ function compressImage(oldsrc) {
               textContent:
                 "You are not logged in, or you where logged out of your account. If you get this error, someone might have changed your user information. This can also happen if you change your user info on another device.",
             },
+            {
+              element: "br"
+            },
+            {
+              element: "div",
+              style: {
+                display: "flex"
+              },
+              children: [
+                {
+                  element: "div",
+                  className: "button2",
+                  eventListeners: [
+                    {
+                      event: "click",
+                      func: function () {
+                        window.location.href = "/signin?href="+encodeURIComponent(window.location.pathname + window.location.hash);
+                      }
+                    }
+                  ],
+                  textContent: "Sign in"
+                },
+                {
+                  element: "div",
+                  style: {
+                    width: "3px"
+                  }
+                },
+                {
+                  element: "div",
+                  className: "button2",
+                  eventListeners: [
+                    {
+                      event: "click",
+                      func: function () {
+                        window.location.href = "/signup?href="+encodeURIComponent(window.location.pathname + window.location.hash);
+                      }
+                    }
+                  ],
+                  textContent: "Sign up"
+                },
+              ]
+            }
           ],
         },
       ];

@@ -273,4 +273,5 @@ module.exports = [
   "Sharing cursed spreadsheets and forbidden tabs...",
   "Transmitting pixels cursed beyond repair...",
   "Broadcasting your lag in real time...",
+  "Telling your Chromebook how to Wi-Fi..."
 ];

@@ -36,5 +36,12 @@ module.exports = {
       element: "span",
       textContent: "Let the randomness begin. 🎉",
     },
+    { element: "br" },
+    {
+      element: "div",
+      className: "divButton roundborder",
+      textContent: "Manage rooms",
+      gid: "manageRoomsDivButton"
+    },
   ],
 };
