@@ -55,6 +55,7 @@ var elementJSON = [
       bottom: "-20px",
       left: "0px",
       pointerEvents: "none",
+      userSelect: "none"
     },
   },
   {
@@ -67,6 +68,7 @@ var elementJSON = [
       right: "0px",
       transform: "scale(-1, 1)",
       pointerEvents: "none",
+      userSelect: "none"
     },
   },
   {
@@ -106,6 +108,7 @@ var elementJSON = [
       bottom: "-20px",
       left: "0px",
       pointerEvents: "none",
+      userSelect: "none"
     },
   },
   {
@@ -146,6 +149,7 @@ var elementJSON = [
       right: "0px",
       transform: "scale(-1, 1)",
       pointerEvents: "none",
+      userSelect: "none"
     },
   },
   {
