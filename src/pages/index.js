@@ -222,7 +222,7 @@ var elementJSON = [
                       if (!accountHelper.getCurrentValidationState()) {
                         if (
                           await dialogs.confirm(
-                            "Are you sure you want to join without an Random Rants + account?\nYou won't be able to:\nsave rooms in your room manager\ncreate rooms\ncustomize you're display name and display color\nbecome an room ownership member",
+                            "Are you sure you want to chat without an Random Rants + account?",
                           )
                         ) {
                           window.location.href = "/chat";
@@ -245,7 +245,7 @@ var elementJSON = [
                       if (!accountHelper.getCurrentValidationState()) {
                         if (
                           await dialogs.confirm(
-                            "Are you sure you want to join someones room without an Random Rants + account?\nYou won't be able to:\nsave rooms in your room manager\ncreate rooms\ncustomize you're display name and display color\nbecome an room ownership member",
+                            "Are you sure you want to join someones room without an Random Rants + account?",
                           )
                         ) {
                           window.location.href = "/join";
@@ -259,7 +259,6 @@ var elementJSON = [
               },
             ],
           },
-          { element: "br" },
           {
             element: "div",
             gid: "userAccountStuffA",
@@ -299,6 +298,37 @@ var elementJSON = [
                       },
                     ],
                   },
+                ],
+              },
+              { element: "br" },
+            ],
+          },
+          {
+            element: "div",
+            gid: "customizeStuffDiv",
+            hidden: true,
+            children: [
+              {
+                element: "div",
+                style: {
+                  display: "flex",
+                  alignContent: "center",
+                  justifyContent: "center",
+                },
+                children: [
+                  {
+                    element: "div",
+                    className: "button2",
+                    textContent: "My account & customization",
+                    eventListeners: [
+                      {
+                        event: "click",
+                        func: function () {
+                          window.location.href = "/myaccount";
+                        },
+                      },
+                    ],
+                  }
                 ],
               },
               { element: "br" },
@@ -539,15 +569,14 @@ var EMOJISound = null;
   EMOJISound = await audioEngine.loadSoundFromURL(soundURLS.select);
 })();
 
-const MAX_EMOJIS = 100;
-const INITIAL_EMOJIS = 70;
+const MAX_EMOJIS = 60;
+const INITIAL_EMOJIS = 60;
 
 function createFloatingEmoji(spawnAnywhere = false, spawnAt) {
   const emoji = document.createElement("div");
   emoji.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
   emoji.style.position = "absolute";
   emoji.style.fontSize = `${180 + Math.random() * 40}%`;
-  emoji.style.textShadow = "#000000 2px 3px 5px";
 
   const startX = Math.random() * window.innerWidth;
   const offsetX = (Math.random() - 0.5) * 100;
@@ -662,6 +691,7 @@ setInterval(() => {
 
 var userAccountStuffA = elements.getGPId("userAccountStuffA");
 var userAccountStuffB = elements.getGPId("userAccountStuffB");
+var customizeStuffDiv = elements.getGPId("customizeStuffDiv");
 
 function showSignStuff() {
   userAccountStuffA.hidden = false;
@@ -672,5 +702,7 @@ function showSignStuff() {
   var validated = await accountHelper.checkSessionCookie();
   if (!validated) {
     showSignStuff();
+  } else {
+    customizeStuffDiv.hidden = false;
   }
 })();
