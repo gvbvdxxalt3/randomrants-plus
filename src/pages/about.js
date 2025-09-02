@@ -16,13 +16,13 @@ var randomRantsAbout = [
 	},
 	{
 		element: "span",
-		textContent: "Important info about safety, ownership, and privacy",
+		textContent: "The fine print nobody reads but everyone should",
 		children: [],
 	},
 	{
 		element: "p",
 		textContent:
-			"Random Rants + is a browser-based hangout built for voice, video, chat, and enough chaos to keep things interesting — all while letting you pretend you’re being productive.",
+			"Random Rants + is basically your digital chaos cave. Voice, video, chat, soundboard spam, and whatever cursed nonsense your friends cook up. It looks like productivity, but it’s actually just maximum distraction.",
 		style: { fontSize: "1.1em", marginBottom: "1em" },
 		children: [],
 	},
@@ -30,7 +30,7 @@ var randomRantsAbout = [
 	// Features
 	{
 		element: "h2",
-		textContent: "What You Can Do",
+		textContent: "What You Can Do (a.k.a. the fun stuff)",
 		style: { fontSize: "1.5em", marginTop: "1.2em" },
 		children: [],
 	},
@@ -39,43 +39,44 @@ var randomRantsAbout = [
 		children: [
 			{
 				element: "li",
-				textContent: "Voice & Video Chat — Talk, yell, or lurk silently.",
+				textContent:
+					"Voice & Video Chat — Scream, mumble, or silently lurk like a cryptid.",
 				children: [],
 			},
 			{
 				element: "li",
 				textContent:
-					"Screen Sharing — Only one slot per room, so expect friendly battles.",
+					"Screen Sharing — Only one person at a time, so yeah, prepare for screen-share battles.",
 				children: [],
 			},
 			{
 				element: "li",
 				textContent:
-					"Live Chat + Commands — Commands like ;shake and ;popcat are available to owners.",
+					"Chat + Commands — Owners get goofy commands like ;shake and ;popcat. Abuse responsibly (or not).",
 				children: [],
 			},
 			{
 				element: "li",
 				textContent:
-					"Soundboard Spam — Meme sounds, mic peaks, and chaos are part of the fun. Enabled for everyone by default, but owners and ownership users can restrict or disable it.",
+					"Soundboard — Meme noises, earrape, chaos. Everyone can use it, unless the owner shuts it down like a grumpy teacher.",
 				children: [],
 			},
 			{
 				element: "li",
 				textContent:
-					"Owner Privileges — Clear chat, rename rooms, or even nuke (remove) the room.",
+					"Owner Privileges — Rename the room, wipe chat, or just yeet the whole room into the void.",
 				children: [],
 			},
 			{
 				element: "li",
 				textContent:
-					"File Uploads — Anyone can upload files and attach them to chat messages.",
+					"File Uploads — Drop memes, cursed screenshots, or actual useful files. Up to you.",
 				children: [],
 			},
 			{
 				element: "li",
 				textContent:
-					"Camera & Mic — Anyone can enable their camera and microphone independently.",
+					"Camera & Mic — Turn them on, turn them off, forget you left them on… classic.",
 				children: [],
 			},
 		],
@@ -84,14 +85,14 @@ var randomRantsAbout = [
 	// Privacy & Ownership
 	{
 		element: "h2",
-		textContent: "Private & Unlisted Rooms",
+		textContent: "Private & Unlisted Rooms (aka secret bases)",
 		style: { fontSize: "1.5em", marginTop: "1.2em" },
 		children: [],
 	},
 	{
 		element: "p",
 		textContent:
-			"All rooms are private and unlisted. Sharing the room URL (especially the part after the hash) allows others to join. Once someone joins, the room stays in their list until removed or the room is nuked.",
+			"Every room is unlisted. The only way in is the magic URL. Share it, and boom — now your friends (or enemies) are in. Once they’re in, the room sticks in their list until they nuke it.",
 		style: { fontSize: "1em", marginBottom: "0.5em" },
 		children: [],
 	},
@@ -101,21 +102,21 @@ var randomRantsAbout = [
 		children: [
 			{
 				element: "h2",
-				textContent: "Ownership & Control",
+				textContent: "Ownership & Control (cue dramatic music)",
 				style: { fontSize: "1.5em", marginTop: "1.2em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					'You start as the room owner. Owners can give others "ownership" through the online list. Owners and ownership users have equal control — they can rename or even nuke the room, but the original owner cannot be removed.',
+					"You’re the owner when you make a room. You can hand out ‘ownership’ like free candy, but beware: anyone with ownership powers can rename or nuke the room. The one thing they *can’t* do? Take your crown.",
 				style: { fontSize: "1em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"Room name changes only reflect for users who are currently in the room or join afterward.",
+					"Room names only update for people in the room or those who join later. No time machines here.",
 				style: { fontSize: "1em" },
 				children: [],
 			},
@@ -129,28 +130,28 @@ var randomRantsAbout = [
 		children: [
 			{
 				element: "h2",
-				textContent: "No Filters & Limited Moderation",
+				textContent: "No Filters, Barely Any Moderation",
 				style: { fontSize: "1.5em", marginTop: "1.2em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"Random Rants + does not filter or censor messages, display names, or usernames. Usernames may be restricted by allowed characters, but anything typed is shown exactly as-is.",
+					"We don’t censor usernames, chat messages, or display names. If you type it, people see it. Simple as that.",
 				style: { fontSize: "1em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"There is no mute or ban system (yet). Chat messages can only be cleared all at once by an owner or ownership user.",
+					"No mute button. No ban hammer. Owners can only wipe the whole chat like sweeping crumbs off a table. That’s the vibe.",
 				style: { fontSize: "1em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"Only owners and ownership users can use commands like ;shake, ;popcat, or manage room settings.",
+					"Owners (and co-owners) are the only ones who get to mess with commands or settings. Power trip responsibly.",
 				style: { fontSize: "1em" },
 				children: [],
 			},
@@ -164,56 +165,56 @@ var randomRantsAbout = [
 		children: [
 			{
 				element: "h2",
-				textContent: "Open Media & Sharing",
+				textContent: "Open Media & Sharing (a.k.a. chaos theater)",
 				style: { fontSize: "1.5em", marginTop: "1.2em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"Each chat room has an Open Media area visible on desktop and landscape mobile. Only one media can play here at a time — screen sharing, a 'show & tell' camera mode, or an embedded webpage.",
+					"Each room has an ‘Open Media’ zone where one thing plays at a time — screen share, camera show & tell, or an embedded webpage. Yes, you’re basically fighting for the aux cord.",
 				style: { fontSize: "1em", marginBottom: "0.5em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"Anyone can start media in this area by default — no ownership needed. Only owners and ownership users can change this setting to restrict it or disable it entirely.",
+					"By default, anyone can throw stuff in there. Owners can lock it down if they get sick of people spamming Shrek videos.",
 				style: { fontSize: "1em", marginBottom: "0.5em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"Embedded webpages open in everyone’s browser but do NOT sync playback or interaction — just the same page loaded for everyone.",
+					"Embedded sites just open in everyone’s browser. No syncing, no magic — just chaos coordination.",
 				style: { fontSize: "1em", marginBottom: "0.5em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"All camera, mic, and screen sharing streams use peer-to-peer technology (Simple Peer and wrtc) to send your media directly to other users without central servers recording it.",
+					"Streams (cam, mic, screen) go straight to other people’s devices peer-to-peer. No creepy servers storing your awkward face.",
 				style: { fontSize: "1em", marginBottom: "0.5em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"Other communication — chat messages, commands, and user lists — use WebSocket and HTTPS connections.",
+					"Everything else — chat, commands, user lists — goes through WebSocket + HTTPS. Nerdy but safe.",
 				style: { fontSize: "1em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"There are no filters or moderation on embeds or media streams. If you see something inappropriate or unsafe, leave the room and remove it from your room list immediately.",
+					"No filters on embeds or streams. If someone’s being gross, just leave and yeet the room from your list.",
 				style: { fontSize: "1em", marginBottom: "1em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"Warning: Sudden loud sounds can happen from soundboard spam (or some sounds in the soundboard), mic peaks, or other media. Please adjust your volume accordingly. We currently don't have ways to shut off the soundboard other than the volume slider in the soundboard menu.",
+					"⚠️ Loud sounds happen. Soundboard spam, mic peaks, random screams. Adjust volume unless you like surprise tinnitus.",
 				style: {
 					fontSize: "1em",
 					fontWeight: "bold",
@@ -232,42 +233,35 @@ var randomRantsAbout = [
 		children: [
 			{
 				element: "h2",
-				textContent: "About Teen Jokes & Slang",
+				textContent: "Teen Jokes, Slang, & General Goofiness",
 				style: { fontSize: "1.5em", marginTop: "1.2em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"Random Rants + started as a space for pre-teens and middle schoolers to joke around and be playful.",
+					"This place started with middle schoolers joking around, so yeah — expect brain-melting humor.",
 				style: { fontSize: "1em", marginBottom: "0.5em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"You might hear slang, memes, or ‘ayo’-style jokes that can sound silly or wild. Most are just for fun and not meant to offend.",
+					"Slang, cursed memes, ayo moments… it’s all in here. Most of it’s just dumb fun. Don’t take it too seriously.",
 				style: { fontSize: "1em", marginBottom: "0.5em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"If you feel uncomfortable or see something crossing a line, leave the room and avoid that chat.",
+					"If something feels sus or crosses a line, just bounce. No shame in dipping.",
 				style: { fontSize: "1em" },
 				children: [],
 			},
 			{
 				element: "p",
 				textContent:
-					"Humor varies for everyone — try to keep an open mind and respect others, even if their jokes seem goofy.",
-				style: { fontSize: "1em", marginBottom: "1em" },
-				children: [],
-			},
-			{
-				element: "p",
-				textContent:
-					"Note that also sometimes autism can be a little bullied by us. We (as in pre-teens) don't mean that autism is bad, just is funny and goofy sometimes.",
+					"Humor hits different for everyone. Laugh at the silly stuff, roll your eyes at the cringe, and keep scrolling.",
 				style: { fontSize: "1em", marginBottom: "1em" },
 				children: [],
 			},
@@ -277,7 +271,7 @@ var randomRantsAbout = [
 	// Audience
 	{
 		element: "h2",
-		textContent: "Who It’s For",
+		textContent: "Who This Is For",
 		style: { fontSize: "1.5em", marginTop: "1.2em" },
 		children: [],
 	},
@@ -286,29 +280,27 @@ var randomRantsAbout = [
 		children: [
 			{
 				element: "li",
-				textContent: "Students needing a break from schoolwork",
+				textContent: "Students dodging homework like ninjas",
 				children: [],
 			},
 			{
 				element: "li",
-				textContent: "Friends wanting a casual, no-pressure place to hang out",
+				textContent: "Friends who just wanna vibe in low-effort chaos",
 				children: [],
 			},
 			{
 				element: "li",
-				textContent:
-					"People who like a little chaos, but also respect the vibe",
+				textContent: "People who thrive in mild-to-medium mayhem",
 				children: [],
 			},
 			{
 				element: "li",
-				textContent:
-					"Anyone who wants to pretend they’re working while actually goofing off",
+				textContent: "Anyone pretending to ‘study’ while goofing off",
 				children: [],
 			},
 			{
 				element: "li",
-				textContent: "People that want to chat over the internet",
+				textContent: "Literally anyone who wants to chat online",
 				children: [],
 			},
 		],
@@ -316,7 +308,7 @@ var randomRantsAbout = [
 	{
 		element: "p",
 		textContent:
-			"Random Rants + is your place to rant, chill, and sometimes *accidentally* cause digital mayhem — all while keeping the illusion of productivity alive.",
+			"Random Rants + is where productivity goes to die — but in the funniest way possible. Rant, chill, and maybe start a soundboard war while looking like you’re working.",
 		style: { fontSize: "1.1em", marginTop: "1.5em" },
 		children: [],
 	},
@@ -324,7 +316,7 @@ var randomRantsAbout = [
 	// History
 	{
 		element: "h2",
-		textContent: "The Story of Original Random Rants",
+		textContent: "The Origin Story (Random Rants OG)",
 		style: { fontSize: "1.8em", marginTop: "1.2em", marginBottom: "0.5em" },
 		children: [],
 	},
@@ -335,7 +327,7 @@ var randomRantsAbout = [
 			{
 				element: "span",
 				textContent:
-					" was a browser-based chatting and social app originally built to run smoothly on school Chromebooks.",
+					" started as a scrappy chat app that somehow ran on school Chromebooks without bursting into flames.",
 			},
 		],
 		style: { fontSize: "1.1em", marginBottom: "0.5em" },
@@ -345,8 +337,7 @@ var randomRantsAbout = [
 		children: [
 			{
 				element: "em",
-				textContent:
-					"Note: The original Random Rants site is no longer active.",
+				textContent: "(RIP — the original site is gone now, pour one out.)",
 			},
 		],
 		style: { fontSize: "1em", marginBottom: "0.3em" },
@@ -354,55 +345,56 @@ var randomRantsAbout = [
 	{
 		element: "p",
 		textContent:
-			"Random Rants began during my middle school days, back when I was in an elective class. I met someone using Scratch, and we started chatting. I showed him a simple chat site I had made called Macre’s Chat.",
+			"It all started in middle school when I met a guy on Scratch. Showed him a janky chat app I made called Macre’s Chat. Dude liked it.",
 		style: { fontSize: "1.1em", marginBottom: "1em" },
 		children: [],
 	},
 	{
 		element: "p",
 		textContent:
-			"That person was Im_CatmanYT, and he really liked the idea. Soon, I saw him and his friends using the site. When we next met, he suggested I make an improved version — and I agreed.",
+			"That dude was Im_CatmanYT. He vibed with it, got his friends using it, and told me to make a glow-up version. So I did.",
 		style: { fontSize: "1.1em", marginBottom: "1em" },
 		children: [],
 	},
 	{
 		element: "p",
 		textContent:
-			"He recommended a Google Docs–inspired color scheme, but I opted for a neutral gray instead. He also contributed some meme-inspired PNG emojis. And that’s how Random Rants v0.1 was born.",
+			"He wanted Google Docs colors. I gave him grayscale. He dropped meme PNGs. Boom: Random Rants v0.1 was born.",
 		style: { fontSize: "1.1em", marginBottom: "1em" },
 		children: [],
 	},
 	{
 		element: "p",
 		textContent:
-			"From there, we shared ideas through Google Docs, and during school, I often found myself working on the project — sometimes as a welcome distraction. Small updates and tweaks gradually shaped what became the original Random Rants.",
+			"We threw ideas into Google Docs, worked on it during class (sorry teachers), and kept tweaking it until it became the Random Rants people knew.",
 		style: { fontSize: "1.1em", marginBottom: "1.5em" },
 		children: [],
 	},
 
+	// Shutdown
 	{
 		element: "h2",
-		textContent: "Why Random Rants Shut Down",
+		textContent: "Why It Shut Down (the funeral speech)",
 		style: { fontSize: "1.8em", marginTop: "1.2em", marginBottom: "0.5em" },
 		children: [],
 	},
 	{
 		element: "p",
 		textContent:
-			"The original Random Rants was hosted on Glitch, a platform I used for most of my projects. When Glitch stopped hosting projects, the site went offline.",
+			"OG Random Rants lived on Glitch. Then Glitch pulled the plug on free hosting. Boom, dead site.",
 		style: { fontSize: "1.1em", marginBottom: "1em" },
 		children: [],
 	},
 	{
 		element: "p",
 		textContent:
-			"Beyond that, I lost motivation to maintain it. The codebase was outdated and had serious security issues. The app’s global room system allowed anyone to follow users with no privacy controls, which felt unsafe.",
+			"Also, I lost motivation. The code was ancient, full of security holes, and the global rooms system was stalker-bait. Kinda sus.",
 		style: { fontSize: "1.1em", marginBottom: "1em" },
 		children: [],
 	},
 	{
 		element: "p",
-		textContent: "Some main problems included:",
+		textContent: "Main problems included:",
 		style: { fontSize: "1.1em", fontWeight: "bold", marginBottom: "0.5em" },
 		children: [],
 	},
@@ -412,21 +404,190 @@ var randomRantsAbout = [
 		children: [
 			{
 				element: "li",
-				textContent: "No private or unlisted rooms",
+				textContent: "No private rooms — randoms could just barge in",
 				children: [],
 			},
 			{
 				element: "li",
-				textContent: "Anyone could join your room or track your location",
+				textContent: "People could literally track you. Creepy much?",
 				children: [],
 			},
 			{
 				element: "li",
 				textContent:
-					"The auto room selector favored rooms with people, increasing the chance of being followed",
+					"Auto-room system kept throwing you in crowded rooms like matchmaking in the worst game ever",
 				children: [],
 			},
 		],
+	},
+
+	{
+		element: "h2",
+		textContent: "What Came Before (Spaghetti Code Days)",
+		style: { fontSize: "1.8em", marginTop: "1.2em", marginBottom: "0.5em" },
+		children: [],
+	},
+	{
+		element: "p",
+		textContent:
+			"Before Random Rants, everything was hacked together from the same spaghetti code base. GVBVDXX Chat and a few other side projects were basically clones with tweaks. Random Rants was the first big glow-up.",
+		style: { fontSize: "1.1em", marginBottom: "1em" },
+		children: [],
+	},
+	{
+		element: "p",
+		textContent:
+			"Back then, there weren’t even accounts. You’d just type any username, even if someone else in the room already had it, and boom — you were in. The server was a barebones script that just echoed messages back to everyone. Simple, messy, and kinda charming.",
+		style: { fontSize: "1.1em", marginBottom: "1.5em" },
+		children: [],
+	},
+	{
+		element: "p",
+		textContent:
+			"My school even tried to block Random Rants at one point — but they only blocked the old Glitch URL, which was already on its way down. So in the end, the block didn’t really matter. The site was already disappearing because Glitch had stopped hosting apps.",
+		style: { fontSize: "1.1em", marginBottom: "1.5em" },
+		children: [],
+	},
+
+	// The glitch bug rant
+	{
+		element: "div",
+		className: "yellowBoxedText",
+		children: [
+			{
+				element: "h2",
+				textContent: "The Glitch Era: Bugs & 403s",
+				style: { fontSize: "1.5em", marginTop: "1.2em" },
+				children: [],
+			},
+			{
+				element: "p",
+				textContent:
+					"Glitch sometimes went full chaos mode — throwing 403 Forbidden errors or yelling 'Too Many Requests' when people tried to join. It made hopping into rooms a gamble. Later versions patched most of that out, so Random Rants + was way smoother.",
+				style: { fontSize: "1em", marginBottom: "1em" },
+				children: [],
+			},
+		],
+	},
+
+	// Why not Render
+	{
+		element: "h2",
+		textContent: "Why Not Just Reupload to Render?",
+		style: { fontSize: "1.8em", marginTop: "1.2em", marginBottom: "0.5em" },
+		children: [],
+	},
+	{
+		element: "p",
+		textContent:
+			"When Glitch killed free hosting, I could’ve just thrown Random Rants + onto Render. But the truth? The code had some sketchy security gaps. Reuploading it raw would’ve put people at risk. Protecting users mattered more than keeping it limping along.",
+		style: { fontSize: "1.1em", marginBottom: "1.5em" },
+		children: [],
+	},
+
+	// Open source note
+	{
+		element: "p",
+		textContent:
+			"It’s not gone-gone though — the code lives open-source on GitHub. If you’re brave (and know how to run servers), you can still spin it up yourself.",
+		style: { fontSize: "1.1em", marginBottom: "1.5em", fontStyle: "italic" },
+		children: [],
+	},
+
+	// For non-tech folks
+	{
+		element: "div",
+		className: "yellowBoxedText",
+		children: [
+			{
+				element: "h2",
+				textContent: "For Non-Nerds",
+				style: { fontSize: "1.5em", marginTop: "1.2em" },
+				children: [],
+			},
+			{
+				element: "p",
+				textContent:
+					"You don’t need to know what ‘WebSocket’ or ‘HTTP’ means. Just think of it like: one system handled live messages, another handled the normal website stuff. That’s it. Fancy words, simple vibes.",
+				style: { fontSize: "1em" },
+				children: [],
+			},
+		],
+	},
+	// Evolution History
+	{
+		element: "h2",
+		textContent: "How It All Evolved (The Full Lore)",
+		style: { fontSize: "1.8em", marginTop: "1.2em", marginBottom: "0.5em" },
+		children: [],
+	},
+	{
+		element: "p",
+		textContent:
+			"Random Rants didn’t just pop out of nowhere. It’s the result of a messy chain of chat apps, each one built on top of spaghetti code from the last. Here’s the glow-up history:",
+		style: { fontSize: "1.1em", marginBottom: "1em" },
+		children: [],
+	},
+	{
+		element: "ul",
+		style: { fontSize: "1.1em", marginBottom: "1.5em" },
+		children: [
+			{
+				element: "li",
+				children: [
+					{ element: "strong", textContent: "Gvbvdxx Chat", children: [] },
+					{
+						element: "span",
+						textContent:
+							" — The very first version, shared on Scratch. Even the name ‘Gvbvdxx’ came from kid-me just smashing the keyboard in the Scratch username box — and the random jumble stuck with me ever since. People actually hopped on and used it, until one hacker showed up and caused chaos by stealing IPs and posting stuff that wasn’t allowed on Scratch. That ended up getting me banned for a while, but it also inspired me to start adding admin commands and improving things. The code itself was super basic and glitchy, but this was the seed of everything that came later.",
+						children: [],
+					},
+				],
+			},
+			{
+				element: "li",
+				children: [
+					{ element: "strong", textContent: "Macre’s Chat", children: [] },
+					{
+						element: "span",
+						textContent:
+							" — A custom spin-off of gvbvdxx chat made for my friend Macre (we talked on Kosmi and Scratch). He wanted his own version of the chat site, so I built one for him. Still spaghetti, but it was the first ‘friend-requested’ chat app.",
+						children: [],
+					},
+				],
+			},
+			{
+				element: "li",
+				children: [
+					{ element: "strong", textContent: "Random Rants", children: [] },
+					{
+						element: "span",
+						textContent:
+							" — The first version that felt like a real app. It had rooms, commands, and a lot more personality than the old ones. By the mid-final version, it even had real screen sharing, cameras, and microphones — a huge step up from the old ‘fake’ screen sharing trick that just spammed blurry images really slowly. This was also when I finally fixed the old bug from gvbvdxx Chat, so people couldn’t mess with the chat in the same way anymore. Later, after enough begging from people at school, I added the soundboard — at first you triggered sounds by typing things like [vineboom], but eventually the proper soundboard button was added.",
+						children: [],
+					},
+				],
+			},
+			{
+				element: "li",
+				children: [
+					{ element: "strong", textContent: "Random Rants +", children: [] },
+					{
+						element: "span",
+						textContent:
+							" — The big remake. Private rooms were added to stop people from abusing commands, and the soundboard got upgraded with a volume booster. Owners (basically the admins of each room) also got new permissions, like being able to turn the soundboard on or off for everyone. The way the site worked under the hood also got a major upgrade: most commands and messages were handled on the server, usernames had to be unique, and accounts were finally real accounts instead of just a temporary name tag. On top of all that, the vibe changed too — unlike the original Random Rants where I just wrote things normally, Random Rants + ran everything through a kind of ‘rant-ification’ filter, giving the site a whole new personality and style. Security was also a lot better than before, though not perfect: accounts were about 98% safe on locked-down school computers, but a little less safe on personal devices since passwords were still stored in a simple way behind the scenes. Still, it was miles ahead of the original Random Rants in terms of protecting users.",
+						children: [],
+					},
+				],
+			},
+		],
+	},
+	{
+		element: "p",
+		textContent:
+			"Each version carried pieces of the last — sometimes the same spaghetti code, just duct-taped with improvements. Random Rants was the biggest departure, but the DNA of gvbvdxx chat is still buried deep in the history.",
+		style: { fontSize: "1.1em", marginBottom: "1.5em" },
+		children: [],
 	},
 ];
 
