@@ -8,67 +8,67 @@ var dialog = require("../dialogs.js");
 var params = new URLSearchParams(window.location.search);
 var gotoHref = "/myaccount";
 if (params.get("href")) {
-  gotoHref = params.get("href");
+	gotoHref = params.get("href");
 }
 
 var signInArea = {
-  element: "div",
-  children: [
-    {
-      element: "span",
-      textContent: "Username:",
-    },
-    {
-      element: "input",
-      type: "text",
-      gid: "username_input",
-      className: "inputText1",
-      placeholder: "You remember it right?"
-    },
-    { element: "br" },
-    {
-      element: "span",
-      textContent: "Password:",
-    },
-    {
-      element: "input",
-      type: "password",
-      gid: "password_input",
-      className: "inputText1",
-      placeholder: "The password you used to sign up with."
-    },
-    {
-      element: "div",
-      className: "button",
-      textContent: "Get back to the zone",
-      gid: "goButton",
-    },
-  ],
+	element: "div",
+	children: [
+		{
+			element: "span",
+			textContent: "Username:",
+		},
+		{
+			element: "input",
+			type: "text",
+			gid: "username_input",
+			className: "inputText1",
+			placeholder: "You remember it right?",
+		},
+		{ element: "br" },
+		{
+			element: "span",
+			textContent: "Password:",
+		},
+		{
+			element: "input",
+			type: "password",
+			gid: "password_input",
+			className: "inputText1",
+			placeholder: "The password you used to sign up with.",
+		},
+		{
+			element: "div",
+			className: "button",
+			textContent: "Get back to the zone",
+			gid: "goButton",
+		},
+	],
 };
 var elementJSON = [
-  {
-    element: "div",
-    className: "centeredDialog",
-    children: [
-      {
-        element: "span",
-        className: "headerText",
-        textContent: "Sign into your RR+ Account",
-      },
-      { element: "br" },
-      {
-        element: "span",
-        textContent:
-          "Sign in to get back to the chaos, aka chat zone.",
-      },
-      signInArea,
-    ],
-  },
+	{
+		element: "div",
+		className: "centeredDialog",
+		children: [
+			require("./sitenews-notice.js"),
+			{
+				element: "span",
+				className: "headerText",
+				textContent: "Sign into your RR+ Account",
+			},
+			{ element: "br" },
+			{
+				element: "span",
+				textContent: "Sign in to get back to the chaos, aka chat zone.",
+			},
+			signInArea,
+		],
+	},
 ];
 
 elements.appendElements(
-  elements.body,
-  elements.createElementsFromJSON(elementJSON),
+	elements.body,
+	elements.createElementsFromJSON(elementJSON),
 );
 
 var goButton = elements.getGPId("goButton");
@@ -76,29 +76,29 @@ var usernameInput = elements.getGPId("username_input");
 var passwordInput = elements.getGPId("password_input");
 
 async function logIn() {
-  goButton.disabled = true;
-  try {
-    await accountHelper.loginToAccount(
-      usernameInput.value,
-      passwordInput.value,
-    );
-    window.location.href = gotoHref;
-  } catch (e) {
-    dialog.alert(e);
-  }
-  goButton.disabled = false;
+	goButton.disabled = true;
+	try {
+		await accountHelper.loginToAccount(
+			usernameInput.value,
+			passwordInput.value,
+		);
+		window.location.href = gotoHref;
+	} catch (e) {
+		dialog.alert(e);
+	}
+	goButton.disabled = false;
 }
 
 goButton.addEventListener("click", logIn);
 
 usernameInput.addEventListener("keydown", function (e) {
-  if (e.key == "Enter") {
-    passwordInput.focus();
-  }
+	if (e.key == "Enter") {
+		passwordInput.focus();
+	}
 });
 
 passwordInput.addEventListener("keydown", function (e) {
-  if (e.key == "Enter") {
-    logIn();
-  }
+	if (e.key == "Enter") {
+		logIn();
+	}
 });

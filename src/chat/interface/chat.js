@@ -16,14 +16,14 @@ var roomSelect = require("./roomselect.js");
 require("./menubar.js");
 
 if (!currentRoom) {
-  loadingScreen.hidden = true;
-  mainScreen.hidden = false;
-  noCurrentRoom.hidden = false;
-  manageRoomsDivButton.onclick = function () {
-    roomSelect.show();
-  };
-  require("./accountnotice.js");
-  require("./updatecheck.js");
+	loadingScreen.hidden = true;
+	mainScreen.hidden = false;
+	noCurrentRoom.hidden = false;
+	manageRoomsDivButton.onclick = function () {
+		roomSelect.show();
+	};
+	require("./accountnotice.js");
+	require("./updatecheck.js");
 } else {
-  require("./chatinterface.js");
+	require("./chatinterface.js");
 }

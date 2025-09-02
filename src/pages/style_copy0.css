@@ -236,21 +236,3 @@ a:hover {
 .button2 [disabled] {
   pointer-events: none;
 }
-
-.noticeDiv {
-	width: 100%;
-	height: fit-content;
-	display: flex;
-	align-content: center;
-	justify-content: center;
-	align-items: center;
-	background: #ed2424;
-	border-radius: 5px;
-	color: #ffffff;
-	min-height: 40px;
-	font-size: 20px;
-}
-.noticeDiv:hover {
-	text-decoration: underline;
-	cursor: pointer;
-}
