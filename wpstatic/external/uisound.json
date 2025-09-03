@@ -4,8 +4,8 @@
   "select": "https://random-rants-chat.github.io/randomrants-resources/select-sound-121244.mp3",
   "type": "https://random-rants-chat.github.io/randomrants-resources/spacebar-click-keyboard-199448.mp3",
   
-  "error": "uisounds/error.mp3",
-  "notify": "uisounds/pop.mp3",
-  "select": "uisounds/select.mp3",
-  "type": "uisounds/type.mp3"
+  "errorBackup": "uisounds/error.mp3",
+  "notifyBackup": "uisounds/pop.mp3",
+  "selectBackup": "uisounds/select.mp3",
+  "typeBackup": "uisounds/keyboard.mp3"
 }
