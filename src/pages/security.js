@@ -8,14 +8,14 @@ var dialog = require("../dialogs.js");
 var randomRantsSecurity = [
 	{
 		element: "h1",
-		textContent: "Security & Privacy Notice",
+		textContent: "🔒 Security & Privacy (RR+ Style)",
 		style: { fontSize: "2em", marginBottom: "0.5em" },
 		children: [],
 	},
 	{
 		element: "p",
 		textContent:
-			"Random Rants + is still in development, and some security systems are either basic or incomplete. While we do our best to protect your experience, please understand the risks before sharing anything sensitive.",
+			"Random Rants + is made for fun first, not bank-level security. The setup is simple, and it’ll probably stay that way — so here are a few things to know.",
 		style: { fontSize: "1.1em", marginBottom: "1em" },
 		children: [],
 	},
@@ -25,7 +25,7 @@ var randomRantsSecurity = [
 		children: [
 			{
 				element: "h2",
-				textContent: "Current Limitations",
+				textContent: "What to Know",
 				style: { fontSize: "1.5em", marginTop: "0.5em" },
 				children: [],
 			},
@@ -35,37 +35,31 @@ var randomRantsSecurity = [
 					{
 						element: "li",
 						textContent:
-							"Passwords are not stored with strong hashing — don't reuse passwords from other sites.",
+							"Passwords aren’t stored with heavy-duty hashing. Use a unique one just for here.",
 						children: [],
 					},
 					{
 						element: "li",
 						textContent:
-							"Account cookies are not securely signed or encrypted. Avoid using the site on shared devices.",
+							"Cookies aren’t fully locked down — so if you’re on a shared computer, just remember to log out when you’re done using RR+.",
 						children: [],
 					},
 					{
 						element: "li",
 						textContent:
-							"There's no system for reporting or blocking users (yet).",
+							"There’s no block/report button. If someone’s being annoying, just hop to another room.",
 						children: [],
 					},
 					{
 						element: "li",
 						textContent:
-							"Room moderation is manual — owners and ownership users control the environment.",
+							"Room owners run their spaces however they want — so pick rooms that match your vibe.",
 						children: [],
 					},
 					{
 						element: "li",
 						textContent:
-							"The backend server script is over 2000 lines of code. This makes it harder to patch security issues quickly, especially since we rely on scrolling and Ctrl+F to find parts of the code.",
-						children: [],
-					},
-					{
-						element: "li",
-						textContent:
-							"Account recovery is not possible — there is no email or backup system. If you forget your password, you will be locked out of your account.",
+							"No password reset. Forget it = account gone. (Write it down somewhere safe!)",
 						style: { color: "darkred", fontWeight: "bold" },
 						children: [],
 					},
@@ -76,21 +70,14 @@ var randomRantsSecurity = [
 	{
 		element: "p",
 		textContent:
-			"This platform is a personal, experimental project — mostly for fun. Not an platform for impossible to attack security. If you’re worried about privacy or account safety, you might want to wait until stronger security is added.",
+			"This platform is a personal project, meant for chatting, ranting, and sometimes total chaos. Just keep in mind it’s not built for handling sensitive/private info.",
 		style: { fontSize: "1em", fontStyle: "italic", marginTop: "1em" },
 		children: [],
 	},
 	{
 		element: "p",
 		textContent:
-			"We recommend using a unique, throwaway password, and avoiding sensitive topics or private info in chat.",
-		style: { fontSize: "1em", fontWeight: "bold", marginTop: "0.5em" },
-		children: [],
-	},
-	{
-		element: "p",
-		textContent:
-			"Double check your devices for any malware or suspisous extensions, since if they steal your cookies then they might be able to take your account.",
+			"Best move: use a throwaway password and feel free to rant as wildly as you want — just don’t drop personal details you’d regret later.",
 		style: { fontSize: "1em", fontWeight: "bold", marginTop: "0.5em" },
 		children: [],
 	},
