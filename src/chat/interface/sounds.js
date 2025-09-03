@@ -34,10 +34,11 @@ soundManager.load = async function () {
 		if (!data) {
 			data = await audio.loadSoundFromURL(soundURLS[soundName + "Backup"]);
 		}
-		if (!data)
+		if (!data) {
 			console.warn(
 				`❌ UI sound "${soundName}" failed to load from both primary and backup.`,
 			);
+		}
 		sounds[soundName] = data;
 	}
 };
