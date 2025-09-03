@@ -205,4 +205,52 @@ com.funni = async function () {
 		img.remove();
 	};
 };
+
+com.doom = function () {
+	let overlay = document.createElement("div");
+	overlay.innerText = "DOOM INCOMING: 10";
+	overlay.style.cssText = `position: fixed;top: 10px;left: 50%;transform: translateX(-50%);font-size: 2em;font-weight: bold;color: red;text-shadow: 2px 2px black;z-index: 9999;pointer-events: none; /* don't block interaction */`;
+	commandEffectsDiv.appendChild(overlay);
+	let count = 10;
+	let int = setInterval(() => {
+		count--;
+		overlay.innerText = `DOOM INCOMING: ${count}`;
+		if (count <= 0) {
+			overlay.innerText = "💥 GAME OVER 💥";
+			clearInterval(int);
+			setTimeout(() => overlay.remove(), 2000);
+		}
+	}, 1000);
+};
+
+com.spooky = async function () {
+	let overlay = document.createElement("div");
+	overlay.style.position = "fixed";
+	overlay.style.top = "0";
+	overlay.style.left = "0";
+	overlay.style.width = "100vw";
+	overlay.style.height = "100vh";
+	overlay.style.background = "rgba(0,0,0,0.7)";
+	overlay.style.pointerEvents = "none";
+	overlay.style.zIndex = "9999";
+	commandEffectsDiv.append(overlay);
+
+	for (let i = 0; i < 5; i++) {
+		let bat = document.createElement("div");
+		bat.textContent = "🦇";
+		bat.style.position = "absolute";
+		bat.style.left = "-50px";
+		bat.style.top = Math.random() * window.innerHeight + "px";
+		bat.style.fontSize = "2rem";
+		bat.style.transition = "left 3s linear";
+		overlay.append(bat);
+
+		requestAnimationFrame(() => {
+			bat.style.left = window.innerWidth + "px";
+		});
+	}
+
+	setTimeout(() => overlay.remove(), 4000);
+};
+
 module.exports = com;

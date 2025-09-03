@@ -1,293 +1,303 @@
 //Don't question how this is stored.
 var jokes = `
-Created during “focus time.” Sorry, teacher.
-Polished with duct tape and late-night energy.
-Random Rants+: Your Chromebook’s final form.
-Running on friendship, lag, and way too many sound effects.
-A site born from Wi-Fi struggles and hallway legends.
-Crafted by goblins... maintained by students.
-Warning: Side effects may include laughter and detention.
-Built during a group project. Not the actual project, though.
-What happens when the “tech kid” is left unsupervised.
-If it breaks, that’s just a feature.
-Gvbvdxx Chat walked so Random Rants+ could sprint into chaos.
-Like Google Meet, but unhinged.
-Random Rants+: When the substitute doesn’t know how to mute.
-Built on code, fueled by rebellion.
-More fun than Kahoot, less legal than Scratch.
-Silence in the classroom? Not for long.
-Probably causing a Chromebook meltdown near you.
-A school escape room, but digital.
-Powered by Jason Touch™ and student defiance.
-Random Rants+: Because school Wi-Fi deserves a challenge.
-This is what happens when “group project” turns into game dev.
-We regret nothing. Except maybe the crash logs.
-Made entirely during advisory.
-Built on vibes and HTML.
-Originally hosted on glitch.me, because everything needs to have at least one glitch to be good.
-Looked in the crash logs, and saw: "Can't make sense of 'ohio'."
-What happens when the kid that does nothing but tech, pairs up with the kid that scroll through youtube short memes.
-The afterlife of getting banned on scratch is this.
-Better than Discord, but is not Kosmi, Zoom, or whatever.
-This was written during times when I should have done work.
-The code for this app was held on with glue sticks and Scotch tape.
-This website is like Gvbvdxx Chat, but with the fun boost it needed.
-This is the place where productivity dies.
-Better than work.
-Laughter is 100% garenteed!
-Better than your dad jokes!
-Side effects: getting grounded, detention, computer addiction, and broken focus.
-Jason Touch wasn’t a feature. It was a prophecy.
-Rants so random, even ChatGPT gets confused.
-School said “no talking.” We made a platform.
-Banned on Scratch. Thriving here.
-Random Rants+: We interrupt your focus time to bring you chaos.
-Keyboard-smashing turned into code. Somehow it works.
-Loading... because instant chaos would be too easy.
-This is what happens when fun breaks into the codebase.
-"Anything but work" they say.
-Why do work when you can Random Rant?
-This site turns your Chromebook into a distraction machine!
-There is a CSS variable called "doNotTouchThisEver".
-This is a distruction machine to productivity.
-Room renamed to "fart land 9000" by someone with no regrets.
-"Serious room" just became "Crayon warfare zone".
-The room name now includes 4 emojis, 2 typos, and a threat.
-Everyone joined to watch the screen. No one survived.
-They’re presenting a slideshow called "Top 100 Reasons the School Wifi Sucks."
-It’s 3AM. Why are they screensharing jump-scare compilations?
-We’re now watching someone draw Sonic with MS Paint and pure rage.
-They started screen sharing… and revealed their dark browsing history.
-Initiating Jason Touch protocol... please sanitize afterward.
-Lag powered. Chaos delivered.
-Converting “I should be doing homework” into noise.
-Your teacher can't stop this tab. Trust us, they tried.
-Who needs class time when you’ve got Crayon Warfare?
-Random Rants+: Because one tab of Google Docs was too productive.
-This site causes more noise than a dropped Chromebook.
-If it’s educational, it’s accidental.
-Created on a school-issued device. With vengeance.
-The only Wi-Fi drain bigger than YouTube.
-Warning: This site may increase hallway traffic.
-Room name changed to “OhioCore Screaming Fest 2025.”
-Built with forbidden energy and one broken mouse.
-Because silence is the real disruption.
-Your Chromebook fan just started screaming.
-Starting detention protocol... oh wait, that’s just the chat.
-Running on caffeine, defiance, and five lines of working code.
-Shh... don’t tell the IT guy about this site.
-Unmuted, unsupervised, unstoppable.
-Random Rants+: The best mistake you’ll load today.
-If boredom is the villain, this site is the final boss.
-Your Chromebook might not survive, but your boredom won’t either.
-Where “focus mode” goes to cry.
-Class just started, but we’re already in chaos overtime.
-Jason Touch™ certified to cause classroom disturbances.
-Because sometimes, you just need to rename the room to "Toilet Warzone."
-A wild “fart noise” soundboard has appeared!
-Oops, someone pasted a whole anime script into the chat.
-Screen sharing... we hope it’s not Roblox again.
-Detected: Excessive memes and emotional damage.
-Fun is loading... please ignore the Wi-Fi warning.
-Random Rants+: The reason the IT guy sighs.
-If the room is quiet, something’s definitely broken.
-Now entering chaos mode... hold onto your emoji buttons.
-Someone just spammed the “;crashTab” command. May the odds be ever in your RAM.
-This isn’t educational, but it is unforgettable.
-Now playing: “LoFi Screams to Panic In Classrooms To.”
-Random Rants+: The digital equivalent of passing notes but louder.
-This app brought to you by: procrastination and poor decisions.
-Loading the reason your Chromebook is 97°C.
-When memes evolve into a lifestyle.
-Built in 3rd period. Broken by 4th.
-“Jason Touch” isn’t a feature. It’s a side effect.
-100% productivity loss guaranteed.
-This is what happens when Wi-Fi is fast and supervision is slow.
-No tutorials were followed. No regrets were had.
-Just a bunch of students and a dangerously open code editor.
-Someone renamed the room to “Ohio Jump Scare Theater.”
-Sorry, we couldn’t hear you over the 14 soundboards.
-This site broke at least 3 Chromebooks and one soul.
-Your tab just got more cursed. You’re welcome.
-Why yes, we do allow drawing war crimes in MS Paint.
-It's not a bug. It's a hallway feature.
-The moment you hear “popcat,” it’s already too late.
-Random Rants+: Not blocked yet. Miraculously.
-Warning: Chat may contain 90% chaos, 10% keyboard smashing.
-Made during “quiet study time.” The irony is strong.
-This site runs better if you yell into your Chromebook.
-The rules are made up and the volume is maxed.
-Your brain has left the chat.
-Built with JavaScript and hallway trauma.
-Chat filter disabled. Proceed with caution.
-This is why the IT department cries.
-We coded this while the teacher was explaining math.
-Jason Touch enabled: prepare for screen shenanigans.
-This site smells like Hot Cheetos and poor decisions.
-Somehow not banned by your school... yet.
-"Serious mode" lasted 4 seconds. A new record.
-Built from meme dust and sleep deprivation.
-If your teacher asks, this is a research tool.
-The Chromebook battery is begging for mercy.
-Someone just screamed into the mic. That’s the vibe now.
-Built with zero focus and too much sarcasm.
-This room has seen things. It can’t go back.
-“Focus time” more like “chaos upload protocol.”
-Now rendering 10 people talking over each other.
-The code editor said “no,” but we said “lol.”
-Expect glitches. Hope for memes.
-Random Rants+: When chat turns into digital dodgeball.
-Lag detected. Blame Jason.
-The classroom's last shred of silence was here.
-You are now entering the CringeZone.
-How many soundboards is too many? Asking for a friend.
-Where every message turns into a meme war.
-Someone just renamed the room to “Toilet Echo Chamber.”
-Your tab has now been possessed by hallway goblins.
-Built on sleep deprivation and HTML chaos.
-This room has 0 chill and 100% auditory mayhem.
-Just when you thought school couldn’t get louder.
-Someone unmuted… now the entire room is chanting “SKIBIDI.”
-One person started playing a sound. Now we’re in a full-blown audio war.
-It began with one meme. Now the whole room is roleplaying as Minions.
-They asked for silence. The group responded with synchronized screaming.
-Someone typed "Ohio," and the entire chat descended into madness.
-One person said “popcat.” Now it won’t stop. 84 popcats later.
-Someone screen shared a meme. Now 7 people are broadcasting “Shrek 2” in sync.
-One soundboard click. Entire group now reenacting a TikTok trend.
-They were drawing Mario. Now it's a 9-person MS Paint fight.
-Started off calm. Now 6 people are yelling “LIGMA” through broken mics.
-All it took was one “;shake” command. Now everyone’s tabs are doing the Harlem Shake.
-Room started with “Let’s be productive.” 3 minutes later: Sonic fanfiction live reading.
-One person added bass-boosted music. Now it’s a rave with Chromebook lag.
-Started playing “Thomas the Tank Engine” theme. Now the chat’s unrecognizable.
-It started with “Can I screen share?” Now they’re hosting “School’s Got Talent.”
-The teacher stepped out. Now 10 people are playing airhorns at max volume.
-Someone said “Don’t spam.” So of course, the entire room started spamming.
-It was a peaceful chat. Then came the war over the room name.
-They renamed the room to “Scream Chamber.” Everyone complied.
-One sound effect turned into 17. It’s a musical now.
-Everyone was quiet until one kid yelled “FORTNITE BATTLE PASS.”
-A single gif broke the chat. Now we’re all crying from laughter.
-They were doing math. Then someone screen shared “Shrek in 4K.”
-Room started off chill. Now they’re debating Minecraft lore with rage.
-Someone triggered the chaos. The rest? Willingly followed.
-One person typed in all caps. Now it’s a CAPSLOCK REVOLUTION.
-Started off as a group project room. Now it’s an improv comedy show.
-They called it a ‘serious’ room. Now everyone’s roleplaying vegetables.
-Someone yelled “FREE DRAW!” Now it’s just memes and emotional damage.
-Started with one cursed meme. Ended in collective insanity.
-Everyone is trying to talk. Nobody is listening. Absolute perfection.
-Started with one kid going “MEOW.” Now the room’s a virtual zoo.
-They started chanting “TECH KID! TECH KID!” and he hasn’t stopped adding features.
-This is what happens when 12 kids realize the teacher muted themself.
-They’re in the nurse’s office and still causing more damage than everyone combined.
-Joined while hiding behind a stack of Chromebooks in the library.
-They’re in a moving elevator. Somehow still lagging less than you.
-They’re screen sharing a hallway fight over who stole the last mechanical pencil.
-Someone’s broadcasting a hallway argument titled “Milk vs. Orange Juice.”
-They just shared their camera. It's two kids wrestling over a broken Chromebook.
-Live footage: a hallway brawl over the definition of “mid.”
-Hallway cam is up. Someone threw a chair over being called a “Discord mod.”
-They’re fighting in the hallway because someone said Mario could beat Sonic.
-Now showing: hallway chaos over “who made the group project slide look ugly.”
-Camera on. Live hallway fight: “Who took my charger?”
-They're scrapping over who gets the last outlet by the vending machine.
-Broadcasting hallway mayhem because someone touched their stylus.
-Room's now watching a hallway brawl titled “You looked at me funny.”
-They’re streaming hallway combat—apparently someone ate their Takis.
-Live hallway showdown: a battle of “my dad could beat your dad.”
-Why are we watching two kids arm wrestle in the hallway over favorite chips?
-They’re screen sharing a hallway trial about whether Crocs are cool or not.
-Hallway cam is live. There’s a full-on argument over anime filler episodes.
-Fighting over who gets to sit in “their” spot in the hallway.
-Now streaming: hallway fight over who called the math teacher “mom.”
-They went outside to settle if water is wet. It’s escalating.
-Hallway stream: two students beefing over someone skipping the intro in a group video.
-Watching hallway chaos because someone said “Kahoot isn’t fun anymore.”
-Someone’s camera just revealed hallway mayhem. The cause? UNO rules.
-They’re fighting because someone said blue Takis are mid.
-Live hallway feed: students arm-flapping at each other like birds. For dominance.
-Someone yelled “1v1 me IRL” and the hallway cam lit up.
-Now showing: hallway tug-of-war using one poor Chromebook charger.
-They’re live-streaming hallway drama over who has the worst Chromebook.
-Streaming from the hallway. Debate topic: “Is cereal soup?” Fists are flying.
-Someone screamed into the mic. Now we’re all regretting it.
-It started with one scream. Now it’s an echo of chaos.
-One loud scream and the entire room joined in. It’s like a choir of madness.
-Someone screamed. Now we're all trapped in this soundwave of chaos.
-One person screamed, and now everyone's in a panic scream loop. It's contagious.
-The first scream was loud. Now it’s a whole group of them. Help.
-A single scream ignited a room full of chaos. We’re all screaming now.
-Screaming into the mic wasn't enough. Now we all have to join.
-It began with one scream. Now it’s a synchronized cacophony.
-One scream set off a chain reaction. Now the whole room is losing it.
-First, it was one scream. Now it's a digital opera of chaos.
-They screamed into the mic. Now we're all stuck in a scream relay.
-It started as a lone scream. Now it's an unhinged soundboard of madness.
-Screaming into the mic was a mistake. Now the whole room is screaming, and it’s contagious.
-One scream turned the chat into a howling chorus of chaos.
-It only took one person screaming. Now everyone's caught in the madness.
-They screamed, and it triggered a mic-echo frenzy. Now it’s a scream wave.
-Screaming was a bad idea. Now everyone's mic is on and chaos is everywhere.
-One scream. Now everyone’s screaming. This is chaos personified.
-A scream started it all. Now we’re all trapped in this noise loop.
-One person screamed. Now we're all part of the soundtrack to this disaster.
-It only took one loud scream. Now we’re all part of the unholy symphony.
-They screamed, and now we're all stuck in an endless scream loop.
-Just like your Wi-Fi, this site connects only when it feels like it.
-Don’t panic. It’s just the random part of Random Rants+ doing its job.
-Hold tight. We’re still figuring out how to break the internet.
-Random Rants+ isn’t a website. It’s an experience.
-You thought you were ready for this chaos. You weren’t.
-Warning: User may experience spontaneous bursts of energy.
-This isn’t just loading. It’s preparing to disrupt the fabric of reality.
-Some say the chaos will stop. They’re wrong.
-Fun fact: This website is powered by 99% chaos and 1% HTML.
-Brace yourself. The randomness is about to hit.
-This site has a 100% success rate of making you laugh. Don’t ask how.
-Not a bug. Just a feature. Welcome to the Random Rants+ experience.
-Your Chromebook is probably crying right now. Let it.
-Chaos has been summoned. Now we just need to find the button to stop it.
-You’re not just loading a site. You’re loading a vibe.
-It’s not slow. It’s just taking its time to ensure maximum chaos.
-Your productivity is currently on hold. Enjoy the ride.
-Expect the unexpected. Expect the impossible. Expect Random Rants+.
-We don’t know what’s happening, but we know you’re going to love it.
-Chaos is an art form, and this website is a masterpiece.
-Patience is a virtue. Chaos is a requirement.
-Random Rants+: Where chaos isn’t just a feature; it’s the whole point.
-This is what happens when you press ‘start’ on a random idea.
-Just so you know, the site will probably crash again. Don’t worry, it’s normal.
-You thought you were escaping schoolwork? Now you're stuck in a chaos loop.
-Time to leave all logic behind and embrace the madness.
-Behold, the internet in its purest, most chaotic form.
-Every second here is a second not spent doing schoolwork. You’re welcome.
-Currently loading: A better distraction than your class.
-Warning: Random Rants+ can cause extreme boredom to vanish instantly.
-Don’t question it. Just accept the chaos.
-This website doesn’t break the rules. It makes new ones.
-You’re not just visiting a website. You’re stepping into a digital circus.
-What if we told you that chaos is the key to a better internet?
-It’s not loading slowly. It’s savoring the chaos before letting you in.
-Random Rants+: The web’s most unpredictable journey.
-Random Rants+ isn’t a game. It’s a lifestyle choice.
-Caution: Entering this website might cause you to lose track of time and reality.
-Some say ‘perfect chaos’ doesn’t exist. We beg to differ.
-Embrace the chaos. It’s all part of the plan.
-What happens when boredom meets an infinite meme machine? This.
-Every time you refresh, a meme is born. Welcome to Random Rants+.
-You thought it was just a website. It’s a digital wasteland of chaos now.
-We can’t explain what’s happening. We’re just here for the ride.
-Here at Random Rants+, we don’t do ‘normal’. We do chaos.
-Loading in progress: Time to throw all expectations out the window.
-Some say this site is a bug. We say it’s a feature.
-If you can’t handle the chaos, step away now. It only gets wilder from here.
-Loading... while a Chromebook fights for its life.
-Random Rants+: Still more stable than your school’s Wi-Fi.
-Someone yelled “CHROMEBOOK GANG RISE UP” and now it’s war.
-Loading Random Rants+... hopefully before the teacher notices.
-They joined from a school bus. The audio is a mess. Perfect.
-One Chromebook fell asleep. The chaos didn’t.
+[bold]Teacher:[/bold] Where’s your homework? [i]Me:[/i] It’s still buffering.
+ADHD brain = [colors]RAINBOW CHAOS[/colors] + static noises.
+Parents said I’m grounded. My WiFi said [skull].
+I turned in my essay written entirely in [bold]Wingdings[/bold].
+So grounded even [moai] won’t move me.
+Homework? More like [bold]home-whoops[/bold].
+My focus lasted [colors]3.2 seconds[/colors]. New record!
+Parents: "You’re grounded." Me: "Speedrun attempt [bold]failed[/bold]."
+Grounded harder than [bold]airplane mode[/bold].
+My assignment rage quit before I could [nerd] save it.
+Teacher asked for MLA format. I gave them [bold]Major Lack of Assignment[/bold].
+ADHD motto: [colors]"Why not start 6 things at once?"[/colors]
+Parents: "No phone!" Me: "[cat] guess I’ll meow IRL."
+I cleaned my desk, then got distracted by [bold]a single paperclip[/bold].
+Hyperfocused on snacks instead of homework. [nerd] Worth it.
+Started homework… ended up organizing pencils by [colors]vibes[/colors].
+Grounded so bad my calendar just says [skull].
+Parents: "Go outside." Me: "[bold]I’m on house arrest, remember?[/bold]"
+ADHD brain: "Work!" Also brain: "[i]But what if penguins wore hats?[/i]"
+I can’t focus, the wall looks [colors]TEXTURED[/colors].
+Parents unplugged the WiFi. Civilization collapsed [skull].
+Grounded so often I’m basically [moai] a statue now.
+Homework vanished into the [bold]Quantum Realm[/bold].
+My essay? Yeah, it’s written in [colors]invisible ink[/colors].
+Teacher: "Why’s it late?" Me: "[i]Time is relative.[/i]"
+Got distracted, invented a new way to stack Pringles [nerd].
+Grounded edition: [bold]Deluxe with bonus chores[/bold].
+Attention span: shorter than a [colors]rainbow blink[/colors].
+Parents: "Do chores." Me: "Activating [bold]stealth mode[/bold]."
+Started homework, but the pen squeaked [skull].
+Distraction level: naming dust bunnies [i]Sir Fluff III[/i].
+Grounded: [moai] statue life unlocked.
+I put cereal first… then forgot [bold]the milk forever[/bold].
+Parents: "You’re grounded." Me: "[colors]Colorful rebellion![/colors]"
+Grounded IRL, respawning [skull] never.
+Studying online: 10% work, 90% [bold]rabbit holes[/bold].
+My assignment disappeared. [i]Suspect: Bermuda Triangle.[/i]
+Grounded so bad even [cat] stopped visiting me.
+ADHD playlist: 100 tabs, 50 hobbies, [bold]0 progress[/bold].
+Tried to cook ramen… created [colors]lava soup[/colors].
+Parents: "Why are you late?" Me: "Side quest [nerd] completed."
+Started cleaning, ended up building [bold]a pillow fort[/bold].
+Grounded speedrun WR: [colors]0.01s[/colors] after backtalk.
+Parents banned my attitude. [skull] Still got it tho.
+Homework status: [bold]In Spirit Only[/bold].
+My brain said "focus." My hands started [i]drawing dinosaurs.[/i]
+Teacher: "Any questions?" Me: "Yeah, [colors]why exist?[/colors]"
+Grounded so hard I’m mailing [moai] letters to freedom.
+Parents: "Where’s your report?" Me: "[bold]Emotionally complete.[/bold]"
+Started essay… finished with a doodle of [cat].
+Put socks in freezer for science. [nerd] Hypothesis: cold socks.
+Jumped off the couch yelling [bold]"Parkour!"[/bold] Twisted ankle. Worth it.
+Parents: "Grounded forever." Me: "[colors]Challenge accepted[/colors]."
+Parents: "Do your chores." Me: "[bold]Plot twist:[/bold] I am the chore."
+My brain during homework: [colors]Loading…[/colors] stuck at 2%.
+Teacher: "Any volunteers?" My soul: [skull].
+Grounded so long I unlocked the [moai] statue achievement.
+Assignment status: [bold]Lost in the sauce[/bold].
+ADHD idea of studying: highlighting [colors]everything[/colors].
+Parents: "Go to bed." Me: "[cat] nocturnal mode activated."
+Homework vanished faster than my [bold]motivation[/bold].
+I told myself “one more episode.” Now it’s [colors]next week[/colors].
+Teacher: "Where’s your essay?" Me: "[i]Emotionally finished.[/i]"
+So grounded, I’m basically [moai] garden decor now.
+ADHD playlist: [colors]static noises[/colors], memes, and chaos.
+Parents: "Stop daydreaming." Me: "[bold]But that’s my major![/bold]"
+Started cleaning, invented [nerd] Dust Bunny Olympics.
+Homework is like [skull] — it haunts me.
+I promised to focus, but the wall texture said [colors]"hello."[/colors]
+Parents: "Why are your grades low?" Me: "[i]Gravity.[/i]"
+So grounded I should start charging [cat] rent for company.
+ADHD brain: "Do it now!" Also ADHD brain: "[bold]…what was it again?[/bold]"
+Assignment: "Due today." Me: "[colors]I’ll do it yesterday.[/colors]"
+Parents said I’m grounded. My freedom said [skull].
+Hyperfocused on folding socks into [bold]perfect triangles[/bold].
+Teacher: "Use MLA format." Me: "Major [moai] Lack of Assignment."
+Homework status: upgraded to [i]mythical creature.[/i]
+Parents: "Explain your grades." Me: "[colors]Buffering…[/colors]"
+Grounded harder than [bold]dial-up internet.[/bold]
+I told myself “just 5 minutes.” ADHD said [nerd] "plot twist."
+Started math homework… ended up counting [cat] whiskers.
+Parents: "Clean your room!" Me: "[skull] Error 404 motivation not found."
+ADHD hyperfocus unlocked on [colors]the wrong assignment.[/colors]
+Teacher: "This is due tomorrow." Me: "[bold]Define tomorrow.[/bold]"
+Grounded so much, my shadow filed for [moai] separation.
+Homework is a boss fight with [i]infinite respawns.[/i]
+Parents unplugged the WiFi. Civilization said [skull].
+ADHD motto: "[colors]Distraction is my superpower![/colors]"
+Started cleaning my room, ended up building [bold]a Lego empire.[/bold]
+Teacher: "Stop doodling." Me: "[cat] art is survival."
+Grounded forever speedrun: [nerd] completed instantly.
+Assignment status: [bold]Emotionally submitted.[/bold]
+Parents: "Be productive." Me: "[colors]Be realistic.[/colors]"
+So grounded even pigeons stopped visiting my window [moai].
+Homework disappeared like [skull] my social life.
+Teacher asked for a paragraph. I wrote a [bold]tweet instead.[/bold]
+Parents: "Why aren’t you outside?" Me: "[i]Respawn blocked.[/i]"
+ADHD brain: "[colors]One more idea![/colors]" Me: "Please stop."
+Grounded so hard even [cat] won’t cuddle me.
+Assignment: "Print me." Me: "[nerd] But the printer’s out of ink."
+My brain said "study." My hand said [bold]"open snacks."[/bold]
+Parents: "Bedtime." Me: "[colors]Final boss fight begins.[/colors]"
+ADHD brain: "[colors]Let’s reorganize the apps on your phone instead of paying bills.[/colors]"
+I opened YouTube for 5 minutes. [bold]Now it’s next season.[/bold]
+So distracted I forgot what I was ranting abou— [cat]
+Internet went down for 2 minutes. I started writing my [i]apocalypse survival plan.[/i]
+Me: "I’ll clean my desk." Also me: [nerd] invents paper tower skyscraper.
+Why do I hyperfocus on sorting Skittles by [colors]color[/colors] but not on emails?
+Grocery list: [bold]bread, milk, eggs[/bold]. Came home with a [moai] garden gnome.
+My WiFi router blinked twice. That was basically [skull] Morse code for "suffer."
+Started cooking ramen, invented [cat] steam art on accident.
+Me trying to relax: "[colors]New hyperfixation unlocked![/colors]"
+My plants are thriving off my [i]emotional breakdowns[/i].
+I open one tab, ADHD opens [bold]47 more.[/bold]
+So distracted I watched ants do construction for [moai] 2 hours.
+Gaming console: "Low battery." Me: [skull] instant panic.
+Started journaling… ended up [nerd] analyzing handwriting fonts.
+I said I’d take a nap. [colors]7-hour time travel complete.[/colors]
+Phone at 2%: true test of [bold]survival instincts[/bold].
+I told myself "just one cookie." [cat] [cat] [cat] … box empty.
+Me: "I'll meditate." Brain: "[i]But what if raccoons had WiFi?[/i]"
+Every time I sit down, my water bottle teleports [moai] across the room.
+So ADHD that I forget my [bold]passwords[/bold] while typing them.
+Opened fridge, forgot why, [colors]invented a new snack.[/colors]
+The group chat is dead until I’m [skull] trying to sleep.
+Started a rant, lost the plot, now it’s [nerd] a TED Talk.
+Alarm clock: *rings* Me: "[cat] not today, Satan."
+Bought candles for vibes. Accidentally summoned [moai] new responsibilities.
+Laptop fan sounded like [colors]a jet engine[/colors] and I trusted it anyway.
+Went for a walk. Came back with [i]three stray cats following me.[/i]
+Me: "I’ll fold laundry." ADHD: "[bold]But what if sock puppets?[/bold]"
+I open my phone and forget if it was for [skull] work or memes.
+Streaming service: "Are you still watching?" Me: [cat] emotional damage.
+So distracted I forgot my distraction. [nerd] Multitasking complete.
+Parents aren’t home but the fridge still judges [colors]every snack choice.[/colors]
+Brain at 3AM: "[i]What if clouds are just sky pillows?[/i]"
+Started gaming, ended up rage-quitting at [moai] level one.
+Opened notebook for serious thoughts. Wrote [bold]doodles of ducks.[/bold]
+Me: "I’ll budget money." Also me: "[colors]Impulse purchase time![/colors]"
+Every rant I start ends in "[skull] …anyway."
+Dog barked once, ADHD brain: "[cat] must investigate crime scene."
+Told myself I’d stretch for 5 minutes. Accidentally [nerd] invented new yoga.
+Started typing a rant, forgot mid-sentence, [moai].
+Me: "I’ll drink water." Brain: "[bold]But coffee counts, right?[/bold]"
+Opened Spotify. ADHD picked [colors]4 playlists at once.[/colors]
+Neighbors heard me yell at my WiFi. [skull] Social reputation gone.
+Trying to focus but [cat] memes keep spawning.
+Every time I write a list, I lose it in [nerd] 3 seconds.
+Ordered pizza. Forgot about it. [i]Time-travel dinner arrives.[/i]
+Me: "Stop procrastinating." Brain: "[colors]New distraction unlocked![/colors]"
+Soundboard user joins: [colors]ear safety immediately revoked[/colors].
+Mic check guy: "[bold]HELLOOO???[/bold]"  *destroys everyone’s ears*.
+Room owner vanished… so we’re basically [moai] Lord of the Flies now.
+Camera accidentally on: [skull] instant regret.
+Every VC has that one dude with [cat] 7 fans in the background.
+Soundboard spammer thinks they’re [nerd] the DJ of chaos.
+Room owner muted, and now [colors]anarchy begins.[/colors]
+Mic quality so bad it sounds like [i]a potato underwater.[/i]
+Soundboard button labeled "[bold]DO NOT PRESS[/bold]"… gets pressed instantly.
+Camera guy: "Can you see me?" Everyone: [skull] *blinded by ceiling light*.
+VC without background noise is [moai] suspicious.
+Room owner: "Behave." Chat: "[colors]Bet.[/colors]"
+Mic peaking like it’s trying to [bold]summon spirits.[/bold]
+Soundboard dude: plays vine boom [nerd] 34 times.
+Camera pointed at [cat]… best stream content ever.
+Room owner AFK = [colors]free chaos license.[/colors]
+Mic muted the whole rant: [skull].
+Soundboard user joins and instantly drops [moai] fart reverb.
+Random rant begins, 40 minutes later: "[i]Anyway…[/i]"
+Camera guy flexing RGB lights like [bold]Tron cosplay.[/bold]
+Room owner vanished. Democracy replaced with [nerd] shouting contest.
+Mic so scuffed it sounds like [cat] speaking Morse code.
+Soundboard gang war: [colors]BOOM vs. BRUH.[/colors]
+VC energy: one person venting, one person eating [skull] chips.
+Room owner trying to explain rules. Everyone: [moai] ignoring them.
+Camera mic combo: [i]we can hear your fish tank bro.[/i]
+Soundboard spammer kicked… rejoins [bold]instantly.[/bold]
+Room owner muted = [colors]free soundboard trial.[/colors]
+Camera reveal: 80% forehead, 20% [cat].
+Mic static so loud it’s [skull] white noise therapy.
+Room owner: "Don’t spam." Chat: [nerd] *spams harder*.
+Soundboard with echo: [bold]infinite pain loop.[/bold]
+VC rant derailed by someone saying "[colors]pizza rolls.[/colors]"
+Camera guy forgot it’s on: [moai] live-action sitcom.
+Mic delay so bad I heard my joke [i]three times.[/i]
+Soundboard users treat chaos like a [cat] profession.
+Room owner vanished and now it’s [skull] karaoke night.
+VC population chart: 20 joined → 19 left after [bold]one soundboard hit.[/bold]
+Mic quality like [nerd] AM radio inside a blender.
+Camera flex = [colors]LED lights supremacy.[/colors]
+Soundboard spammer got banned, made [moai] alt account instantly.
+VC vibes: ranting passionately with [cat] chewing noises in background.
+Room owner: "Guys stop fighting." Chat: [skull] *fights harder*.
+Mic test guy: "[bold]can u hear me??[/bold]" — everyone already deaf.
+Soundboard triggers random rant like [i]fuel on fire.[/i]
+Camera left on, caught me [colors]questioning my life choices.[/colors]
+Room owner muted us all. Absolute [moai] dictatorship.
+Why is it always the quiet mic that picks up [cat] someone chewing chips from 3 rooms away?
+My camera fell over mid-call… now everyone knows my carpet lore [skull].
+Soundboard users treat “serious talk” like [colors]open mic night.[/colors]
+Room owner muted everyone. Democracy replaced with [moai] absolute monarchy.
+Someone ranted for 10 minutes with their mic muted… [bold]legendary performance.[/bold]
+Every online chat: one guy oversharing, one guy eating, one guy [nerd] fixing their mic.
+Soundboard button labeled “DO NOT PRESS” was pressed [colors]instantly.[/colors]
+Mic so scuffed it sounds like [i]a lawnmower underwater.[/i]
+Random rant started as “anyway hi” and ended with [skull] existential crisis.
+VC chaos: 3 soundboards, 2 cameras, and 1 [cat] meowing into the mic.
+Room owner leaves → chat transforms into [bold]absolute anarchy.[/bold]
+Camera reveal: 90% forehead, 10% [colors]existential dread.[/colors]
+Mic delay so bad I laughed at my joke [nerd] 10 seconds late.
+Soundboard spammer = [skull] natural disaster simulator.
+Why do rants always start with "ok but listen" and end with [moai] philosophy?
+Someone said “brb” 2 hours ago. We’re planning [cat] a search party.
+Room owner tries to keep order. Chat replies with [colors]"CHAOS."[/colors]
+Camera guy flexing RGB setup like [bold]sci-fi cosplay.[/bold]
+Mic so broken it sounds like [i]ancient prophecy whispers.[/i]
+Soundboard spam during rant = [skull] instant ragequit.
+VC rant derailed by someone casually saying "[cat] pizza rolls."
+Random rant: 30% point, 70% [nerd] side quests.
+Room owner banned the soundboard guy. He rejoined [colors]immediately.[/colors]
+Every chat has that one person who only speaks in [moai] background noises.
+Mic test user: "Can you hear me now?" Everyone: [skull].
+Soundboard button mash = [bold]chaos symphony orchestra.[/bold]
+Camera left on mid-rant… caught me [cat] arguing with myself.
+Room owner muted = free [colors]soundboard trial.[/colors]
+Why do online rants feel like [i]therapy sessions with witnesses?[/i]
+Someone’s dog barked once, now it’s [moai] part of the VC lore.
+Soundboard guy thinks reverb fart = [skull] comedy peak.
+Mic quality lottery: crisp 4K or [nerd] walkie-talkie in a cave.
+Camera reveal: "Don’t mind the mess." [bold]The mess is the main character.[/bold]
+Room owner said “chill” but chat typed [colors]LOUDER.[/colors]
+Every rant starts small then becomes [cat] a community debate.
+Soundboard spammer kicked → joins with alt account [skull].
+Mic so sensitive it picked up [moai] the neighbor sneezing.
+Camera turned on = everyone instantly [i]fixes hair like influencers.[/i]
+VC moment: one person ranting, one person gaming, one [nerd] updating drivers.
+Room owner rage quits → [colors]permanent vacation vibes.[/colors]
+Soundboard chaos so loud even [cat] left the room.
+Mic static so heavy it’s basically [skull] white noise radio.
+Camera reveal: “Sorry my room’s messy.” It’s [moai] a landfill cosplay.
+VC rant peaked when someone asked [bold]"What were we talking about?"[/bold]
+Room owner’s rules exist only as [colors]decoration.[/colors]
+Every random rant ends with "[i]…but that’s just me though.[/i]"
+Mic peaking = unofficial [skull] air raid siren.
+Soundboard spammers treat chaos like a [nerd] full-time job.
+Camera angle so cursed it looks like [cat] found footage horror.
+Room owner: “Stop fighting.” Chat: [moai] “fight louder.”
+VC quiet moment: perfect time for someone’s [colors]soundboard jump scare.[/colors]
+Room owner vanished for 3 hours but still [bold]yelling at us in chat.[/bold]
+Owner muted everyone just to argue with [cat] themselves.
+Room rules say “no chaos” but the owner runs a [colors]soundboard circus.[/colors]
+Owner turned on their mic just to [skull] sneeze and leave.
+Room description: [i]"Safe space"[/i]. Owner: bans people for breathing.
+Owner flexes admin power like [moai] it’s a Marvel superpower.
+Owner: “Don’t spam.” Also owner: [nerd] spams their own links.
+Owner AFK = chat descends into [colors]absolute anarchy.[/colors]
+Room owner forgot to mute and we all heard [cat] karaoke night.
+Owner said “family friendly” then played [skull] the worst soundboard clip.
+Owner’s camera on: 90% forehead, 10% [moai] ceiling fan.
+Room owner rage quit… and promoted the [nerd] soundboard guy.
+Owner mic quality so bad it sounds like [i]a toaster screaming.[/i]
+Owner set 20 rules, broke [bold]all of them first.[/bold]
+Owner’s dog is basically [cat] co-host of the VC.
+Owner keeps editing rules mid-rant like [colors]patch notes.[/colors]
+Owner muted themselves, forgot, and kept talking for [skull] 15 minutes.
+Owner went AFK, chat instantly turned into [moai] Thunderdome.
+Owner’s idea of moderation is [nerd] rolling dice.
+Owner: “No memes.” Also owner: spams [cat] cursed memes daily.
+Owner tried to host karaoke… mic peaked into [bold]nuclear siren mode.[/bold]
+Owner flexed their new RGB setup… camera froze [colors]instantly.[/colors]
+Owner bans random people but keeps [moai] trolls for “content.”
+Owner rules: “No noise.” Owner: [skull] blasting Spotify in mic.
+Owner locked the channel and forgot the password [nerd].
+Owner AFK so long the room became [i]archaeological ruins.[/i]
+Owner started a rant, left mid-sentence, [cat] never returned.
+Owner’s camera reveal looked like [colors]a found footage horror film.[/colors]
+Owner says “serious chat only” while spamming [moai] fart reverb.
+Owner muted us all just to explain [bold]their dream lore.[/bold]
+Owner left mid-rant and gave mod to [skull] the wrong guy.
+Owner treats mute/unmute powers like [nerd] a light switch toy.
+Owner forgot push-to-talk, now we hear [cat] every keyboard slam.
+Owner rages about order but starts [colors]chaos tournaments.[/colors]
+Owner’s mic delay is so bad they’re [i]arguing with the past.[/i]
+Owner banned someone for memes, then posted [skull] worse memes.
+Owner’s soundboard folder is [moai] 100% cursed audio.
+Owner rules: “No food in VC.” Owner: [cat] crunching chips nonstop.
+Owner ragequit, came back like [bold]nothing happened.[/bold]
+Owner tells everyone “calm down” while [colors]yelling louder than all of us.[/colors]
+Owner puts rules in caps lock like [nerd] prophecy scrolls.
+Owner’s camera flex was just [cat] their laundry pile.
+Owner mic test lasted [skull] 40 minutes.
+Owner: “Don’t derail the topic.” Also owner: [moai] starts conspiracy rant.
+Owner banned someone for echo but uses [i]speaker mic from 1999.[/i]
+Owner muted the whole VC… then started [colors]a solo podcast.[/colors]
+Owner AFK so long the bot became [bold]the new leader.[/bold]
+Owner’s only rule: “Respect me.” Chat: [skull] ignores instantly.
 `;
-module.exports = jokes.trim().split("\n");
+module.exports = jokes
+	.trim()
+	.split("\n")
+	.filter((line) => line.trim().length > 0);

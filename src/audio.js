@@ -7,16 +7,10 @@ audioEngine.context = audioCTX;
 audioEngine.running = false;
 
 setInterval(() => {
-	if (audioCTX.state !== "running") {
-		if (audioCTX) {
-			audioCTX.close().catch(() => {});
-		}
-		audioCTX = new AudioContext();
-		audioEngine.context = audioCTX;
-		audioEngine.running = false;
-	} else {
-		audioEngine.running = true;
+	if (audioCTX.state === "suspended") {
+		audioCTX.resume().catch(() => {});
 	}
+	audioEngine.running = audioCTX.state === "running";
 }, 100);
 
 function cloneAudioBuffer(fromAudioBuffer) {
@@ -152,10 +146,19 @@ class AudioBufferPlayer {
 
 				this.source = source;
 				source.onended = () => {
-					this.onended();
+					this._callOnEnded();
 					this.source = null;
 				};
+				this._endedCalled = false;
 			}
+		}
+	}
+
+	_callOnEnded() {
+		if (this._endedCalled) return; // prevent double firing
+		this._endedCalled = true;
+		if (typeof this.onended === "function") {
+			this.onended();
 		}
 	}
 
@@ -164,12 +167,12 @@ class AudioBufferPlayer {
 			this.source.stop();
 			this.source = null;
 			this.gainNode = null;
+			this._callOnEnded();
 		}
 	}
 
 	remove() {
-		this.pause();
-		this.filters = [];
+		this.destory();
 	}
 
 	setVolume(value) {

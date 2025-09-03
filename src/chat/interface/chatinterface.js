@@ -112,6 +112,8 @@ reconnectingScreen.hidden = true;
 		var externalThings = await fetchUtils.fetchAsJSON("external/other.json");
 
 		rrLoadingStatusText.textContent = "Injecting WebRTC chaos modules...";
+		var webrtcError =
+			"📡 WebRTC bailed on us.\nNo screen sharing, no chaos cams, and your mic is officially muted by fate.";
 		try {
 			var rtcScripts = await fetchUtils.fetchAsJSON(
 				"external/webrtc-helper.json",
@@ -120,26 +122,40 @@ reconnectingScreen.hidden = true;
 				await addScript(script);
 			}
 		} catch (e) {
-			dialogs.alert(
-				"WebRTC scripts refused to load.\nThat means no screen sharing, no live chaos cams, and no mic mayhem.",
-			);
+			dialogs.alert(webrtcError);
 		}
 
 		rrLoadingStatusText.textContent = "Unpacking UI bleeps and bloops...";
-		await sounds.load();
+		try {
+			await sounds.load();
+		} catch (e) {
+			dialogs.alert(
+				"🔇 UI sounds flatlined. Congrats, you’ve unlocked Silent-Rants Mode™ — it’s like Random Rants+, but quieter… and way more awkward.",
+			);
+		}
 
-		rrLoadingStatusText.textContent = "Loading soundboard insanity...";
-		await soundboard.load(
-			externalThings.soundboardURL,
-			function (current, max) {
-				var percent = (current / max) * 100;
-				rrLoadingStatusText.textContent =
-					"Prepping soundboard overload… (" + Math.round(percent) + "%)";
-			},
-		);
+		try {
+			rrLoadingStatusText.textContent = "Loading soundboard insanity...";
+			await soundboard.load(
+				externalThings.soundboardURL,
+				function (current, max) {
+					var percent = (current / max) * 100;
+					rrLoadingStatusText.textContent =
+						"Prepping soundboard overload… (" + Math.round(percent) + "%)";
+				},
+			);
+		} catch (e) {
+			dialogs.alert(
+				"Soundboard failed to load (GitHub.io blocked).\nThat means no chaos buttons. Blame your school firewall.\nText + UI sounds still work though. Welcome to Half-Rants+ Edition™.",
+			);
+		}
 
 		rrLoadingStatusText.textContent =
 			"Staring intensely at the websocket handshake...";
+
+		if (!window.screenShareClient) {
+			dialogs.alert(webrtcError);
+		}
 
 		setInterval(() => {
 			microphones.tick();

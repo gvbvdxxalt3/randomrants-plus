@@ -544,6 +544,7 @@ var randomRantsAbout = [
 					},
 				],
 			},
+			{ element: "br" },
 			{
 				element: "li",
 				children: [
@@ -556,6 +557,7 @@ var randomRantsAbout = [
 					},
 				],
 			},
+			{ element: "br" },
 			{
 				element: "li",
 				children: [
@@ -568,6 +570,7 @@ var randomRantsAbout = [
 					},
 				],
 			},
+			{ element: "br" },
 			{
 				element: "li",
 				children: [
@@ -591,7 +594,6 @@ var randomRantsAbout = [
 	},
 ];
 
-
 var elementJSON = [
 	{
 		element: "div",
@@ -602,4 +604,3 @@ var elementJSON = [
 
 var pageElements = elements.createElementsFromJSON(elementJSON);
 elements.appendElements(elements.body, pageElements);
-
