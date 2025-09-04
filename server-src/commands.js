@@ -348,7 +348,7 @@ class CommandHandler {
       function (args, userInfo, senderClient) {
         var foundClients = searchUsersByKey(args[0], senderClient);
         foundClients.forEach((otherClient) => {
-          sendClientCommand(otherClient, "xperrors");
+          sendClientCommand(otherClient, "bsod");
         });
       },
       "<Username>[br]Summons a bunch of fake errors and does BSOD on the username.",

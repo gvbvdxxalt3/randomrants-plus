@@ -244,10 +244,15 @@ com.bandicam = function () {
 	top: 5px;
 	left: 50%;
 	transform: translateX(-50%);
+  padding: 4px;
 	font-size: 16px;
 	font-weight: bold;
 	color: white;
-	text-shadow: 2px 2px 3px rgba(0,0,0,0.75);
+	text-shadow: 1px 1px 2px rgba(0,0,0,1), 
+  -1px -1px 2px rgba(0,0,0,1), 
+  -1px 1px 2px rgba(0,0,0,1), 
+  1px -1px 2px rgba(0,0,0,1), 
+  0px 0px 3px rgba(0,0,0,1);
 	opacity: 0.85;
 	font-family: Arial, sans-serif;
 	z-index: 9999;
@@ -257,6 +262,7 @@ com.bandicam = function () {
 
   setTimeout(() => overlay.remove(), 10000);
 };
+
 
 com.spooky = async function () {
   let overlay = document.createElement("div");
@@ -288,15 +294,15 @@ com.spooky = async function () {
   setTimeout(() => overlay.remove(), 4000);
 };
 
-var bsodStopped = true;
 com.bsod = function () {
-  if (!bsodStopped) return;
-  bsodStopped = false;
+  var bsodStopped = false;
 
-  let errors = []; // store all error icons
+  var errors = []; // store all error icons
 
   function spawnError() {
-    if (!bsodStopped) return;
+    if (bsodStopped) {
+      return;
+    }
 
     // play XP error sound
     var player = new audio.Player(xpErrorSound);
@@ -308,19 +314,19 @@ com.bsod = function () {
     // spawn error icon randomly on screen
     var img = document.createElement("img");
     img.src =
-      "images/commands/error.png";
+      "/images/commands/error.png";
     img.style.position = "fixed";
     img.style.top = Math.random() * 90 + "%";
     img.style.left = Math.random() * 90 + "%";
-    img.style.width = "40px";
-    img.style.height = "40px";
-    img.style.zIndex = 9998;
-    document.body.appendChild(img);
-
+    img.style.width = "190px";
+    img.style.height = "100px";
+    img.style.zIndex = 99999;
+    commandEffectsDiv.appendChild(img);
+    
     errors.push(img); // track it
 
     // keep spawning chaos
-    setTimeout(spawnError, 500);
+    setTimeout(spawnError, 1000/30);
   }
 
   spawnError();
@@ -329,10 +335,6 @@ com.bsod = function () {
   document.addEventListener("click", function handler(e) {
     e.preventDefault();
 
-    // clear all floating errors
-    errors.forEach((err) => err.remove());
-    errors = [];
-
     var bsod = document.createElement("div");
     bsod.style.cssText = `
       position: fixed;
@@ -340,17 +342,23 @@ com.bsod = function () {
       left: 0;
       width: 100%;
       height: 100vh;
-      background: url('images/commands/bluescreen.png') center/cover no-repeat;
+      background: url('/images/commands/bluescreen.png') center/cover no-repeat;
       z-index: 99999;
     `;
-    document.body.appendChild(bsod);
+    commandEffectsDiv.appendChild(bsod);
+    // clear all floating errors
+    errors.forEach((err) => {
+      err.remove();
+    });
+    errors = [];
+    
+    bsodStopped = true;
 
     // fade out after 3 seconds instead of reloading
     setTimeout(() => {
       bsod.style.transition = "opacity 1s";
       bsod.style.opacity = "0";
       setTimeout(() => bsod.remove(), 1000);
-      bsodStopped = true;
     }, 3000);
 
     document.removeEventListener("click", handler);
