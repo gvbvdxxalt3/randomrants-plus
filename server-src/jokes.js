@@ -298,6 +298,6 @@ Owner AFK so long the bot became [bold]the new leader.[/bold]
 Owner’s only rule: “Respect me.” Chat: [skull] ignores instantly.
 `;
 module.exports = jokes
-	.trim()
-	.split("\n")
-	.filter((line) => line.trim().length > 0);
+  .trim()
+  .split("\n")
+  .filter((line) => line.trim().length > 0);

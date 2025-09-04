@@ -8,107 +8,107 @@ var dialog = require("../dialogs.js");
 var params = new URLSearchParams(window.location.search);
 var gotoHref = "/myaccount";
 if (params.get("href")) {
-	gotoHref = params.get("href");
+  gotoHref = params.get("href");
 }
 
 var signInArea = {
-	element: "div",
-	children: [
-		{
-			element: "span",
-			textContent: "Username:",
-		},
-		{
-			element: "input",
-			type: "text",
-			gid: "username_input",
-			className: "inputText1",
-			placeholder: "Your username, no spaces.",
-		},
-		{ element: "br" },
-		{
-			element: "span",
-			textContent: "Password:",
-		},
-		{
-			element: "input",
-			type: "password",
-			gid: "password_input",
-			className: "inputText1",
-			placeholder: "Your password, make it secure and short",
-		},
-		{
-			element: "div",
-			className: "button",
-			textContent: "Lets go",
-			gid: "goButton",
-		},
-	],
+  element: "div",
+  children: [
+    {
+      element: "span",
+      textContent: "Username:",
+    },
+    {
+      element: "input",
+      type: "text",
+      gid: "username_input",
+      className: "inputText1",
+      placeholder: "Your username, no spaces.",
+    },
+    { element: "br" },
+    {
+      element: "span",
+      textContent: "Password:",
+    },
+    {
+      element: "input",
+      type: "password",
+      gid: "password_input",
+      className: "inputText1",
+      placeholder: "Your password, make it secure and short",
+    },
+    {
+      element: "div",
+      className: "button",
+      textContent: "Lets go",
+      gid: "goButton",
+    },
+  ],
 };
 var elementJSON = [
-	{
-		element: "div",
-		className: "centeredDialog",
-		children: [
-			require("./sitenews-notice.js"),
-			{
-				element: "span",
-				className: "headerText",
-				textContent: "Create Your RR+ Account",
-			},
-			{ element: "br" },
-			{
-				element: "span",
-				textContent:
-					"Join to save rooms, customize your profile, and chat with people — whenever class gets boring.",
-			},
-			{
-				element: "p",
-				style: {
-					fontSize: "0.9em",
-					color: "#b22222",
-					marginTop: "0.5em",
-					marginBottom: "1em",
-				},
-				children: [
-					{
-						element: "span",
-						textContent: "Take a quick look at the ",
-					},
-					{
-						element: "a",
-						href: "/about",
-						target: "_blank",
-						rel: "noopener noreferrer",
-						textContent: "About & Safety page",
-						style: { color: "#b22222", textDecoration: "underline" },
-					},
-					{
-						element: "span",
-						textContent: " and ",
-					},
-					{
-						element: "a",
-						href: "/security",
-						target: "_blank",
-						rel: "noopener noreferrer",
-						textContent: "Security & Privacy Notice",
-						style: { color: "#b22222", textDecoration: "underline" },
-					},
-					{
-						element: "span",
-						textContent: " so you know what’s up.",
-					},
-				],
-			},
-			signInArea,
-		],
-	},
+  {
+    element: "div",
+    className: "centeredDialog",
+    children: [
+      require("./sitenews-notice.js"),
+      {
+        element: "span",
+        className: "headerText",
+        textContent: "Create Your RR+ Account",
+      },
+      { element: "br" },
+      {
+        element: "span",
+        textContent:
+          "Join to save rooms, customize your profile, and chat with people — whenever class gets boring.",
+      },
+      {
+        element: "p",
+        style: {
+          fontSize: "0.9em",
+          color: "#b22222",
+          marginTop: "0.5em",
+          marginBottom: "1em",
+        },
+        children: [
+          {
+            element: "span",
+            textContent: "Take a quick look at the ",
+          },
+          {
+            element: "a",
+            href: "/about",
+            target: "_blank",
+            rel: "noopener noreferrer",
+            textContent: "About & Safety page",
+            style: { color: "#b22222", textDecoration: "underline" },
+          },
+          {
+            element: "span",
+            textContent: " and ",
+          },
+          {
+            element: "a",
+            href: "/security",
+            target: "_blank",
+            rel: "noopener noreferrer",
+            textContent: "Security & Privacy Notice",
+            style: { color: "#b22222", textDecoration: "underline" },
+          },
+          {
+            element: "span",
+            textContent: " so you know what’s up.",
+          },
+        ],
+      },
+      signInArea,
+    ],
+  },
 ];
 
 elements.appendElements(
-	elements.body,
-	elements.createElementsFromJSON(elementJSON),
+  elements.body,
+  elements.createElementsFromJSON(elementJSON),
 );
 
 var goButton = elements.getGPId("goButton");
@@ -116,26 +116,26 @@ var usernameInput = elements.getGPId("username_input");
 var passwordInput = elements.getGPId("password_input");
 
 async function signUp() {
-	goButton.disabled = true;
-	try {
-		await accountHelper.signupAccount(usernameInput.value, passwordInput.value);
-		window.location.href = gotoHref;
-	} catch (e) {
-		dialog.alert(e);
-	}
-	goButton.disabled = false;
+  goButton.disabled = true;
+  try {
+    await accountHelper.signupAccount(usernameInput.value, passwordInput.value);
+    window.location.href = gotoHref;
+  } catch (e) {
+    dialog.alert(e);
+  }
+  goButton.disabled = false;
 }
 
 goButton.addEventListener("click", signUp);
 
 usernameInput.addEventListener("keydown", function (e) {
-	if (e.key == "Enter") {
-		passwordInput.focus();
-	}
+  if (e.key == "Enter") {
+    passwordInput.focus();
+  }
 });
 
 passwordInput.addEventListener("keydown", function (e) {
-	if (e.key == "Enter") {
-		signUp();
-	}
+  if (e.key == "Enter") {
+    signUp();
+  }
 });

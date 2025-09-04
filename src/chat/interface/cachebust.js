@@ -1,7 +1,7 @@
 var cacheBuster = "?v=" + Date.now();
 
 function cacheBust(url) {
-	return url + cacheBuster;
+  return url + cacheBuster;
 }
 
 module.exports = cacheBust;

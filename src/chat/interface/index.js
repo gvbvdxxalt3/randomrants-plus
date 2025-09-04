@@ -3,6 +3,6 @@ var accountHelper = require("../../accounthelper");
 require("./loadingscreen.js");
 
 (async function () {
-	var validated = await accountHelper.checkSessionCookie();
-	require("./chat.js");
+  var validated = await accountHelper.checkSessionCookie();
+  require("./chat.js");
 })();

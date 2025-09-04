@@ -3,37 +3,37 @@ var sounds = require("./sounds.js");
 const clickableClasses = ["divButton"]; //Handling for div button styles.
 
 document.addEventListener("click", (e) => {
-	let el = e.target;
+  let el = e.target;
 
-	while (el && el !== document.body) {
-		const style = getComputedStyle(el);
-		const isClickable =
-			typeof el.onclick === "function" ||
-			el.getAttribute("onclick") !== null ||
-			style.cursor === "pointer" ||
-			el.getAttribute("role") === "button" ||
-			clickableClasses.some((cls) => el.classList.contains(cls)) ||
-			el.tabIndex >= 0;
+  while (el && el !== document.body) {
+    const style = getComputedStyle(el);
+    const isClickable =
+      typeof el.onclick === "function" ||
+      el.getAttribute("onclick") !== null ||
+      style.cursor === "pointer" ||
+      el.getAttribute("role") === "button" ||
+      clickableClasses.some((cls) => el.classList.contains(cls)) ||
+      el.tabIndex >= 0;
 
-		if (isClickable) {
-			sounds.play("select", 1);
-			return;
-		}
+    if (isClickable) {
+      sounds.play("select", 1);
+      return;
+    }
 
-		el = el.parentElement;
-	}
+    el = el.parentElement;
+  }
 });
 
 // Global input listener for typing sound
 document.addEventListener("input", (e) => {
-	const el = e.target;
+  const el = e.target;
 
-	// Check if typing is happening in editable fields
-	const isTypingTarget =
-		el.matches("input[type='text'], textarea, input[type='search']") ||
-		el.isContentEditable;
+  // Check if typing is happening in editable fields
+  const isTypingTarget =
+    el.matches("input[type='text'], textarea, input[type='search']") ||
+    el.isContentEditable;
 
-	if (isTypingTarget) {
-		sounds.play("type", 1);
-	}
+  if (isTypingTarget) {
+    sounds.play("type", 1);
+  }
 });

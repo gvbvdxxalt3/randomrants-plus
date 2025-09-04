@@ -7,5 +7,5 @@ var sws = require("./sharedwebsocket.js");
 var noWifiScreen = elements.getGPId("offlineErrorScreen");
 
 setInterval(() => {
-	noWifiScreen.hidden = navigator.onLine;
+  noWifiScreen.hidden = navigator.onLine;
 }, 100);

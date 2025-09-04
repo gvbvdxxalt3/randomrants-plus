@@ -6,9 +6,9 @@ var noAccountNoticeDialog = elements.getGPId("noAccountNoticeDialog");
 var continueAsGuestButton = elements.getGPId("continueAsGuestButton");
 
 if (!accountHelper.getCurrentValidationState()) {
-	noAccountNoticeDialog.hidden = false;
+  noAccountNoticeDialog.hidden = false;
 }
 
 continueAsGuestButton.addEventListener("click", () => {
-	noAccountNoticeDialog.hidden = true;
+  noAccountNoticeDialog.hidden = true;
 });

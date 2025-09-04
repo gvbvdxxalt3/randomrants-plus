@@ -14,199 +14,199 @@ var validState = accountHelper.getCurrentValidationState();
 var soundboardVolume = 100;
 var soundboardMutliplier = 0;
 var soundboardMultipliers = [
-	{
-		label: "1x",
-		mult: 1,
-	},
-	{
-		label: "2x",
-		mult: 2,
-	},
-	{
-		label: "5x",
-		mult: 5,
-	},
-	{
-		label: "10x",
-		mult: 10,
-	},
-	{
-		label: "15x",
-		mult: 15,
-	},
-	{
-		label: "20x",
-		mult: 20,
-	},
-	{
-		label: "50x",
-		mult: 50,
-	},
-	{
-		label: "100x",
-		mult: 100,
-	},
+  {
+    label: "1x",
+    mult: 1,
+  },
+  {
+    label: "2x",
+    mult: 2,
+  },
+  {
+    label: "5x",
+    mult: 5,
+  },
+  {
+    label: "10x",
+    mult: 10,
+  },
+  {
+    label: "15x",
+    mult: 15,
+  },
+  {
+    label: "20x",
+    mult: 20,
+  },
+  {
+    label: "50x",
+    mult: 50,
+  },
+  {
+    label: "100x",
+    mult: 100,
+  },
 ];
 var playingSounds = [];
 
 if (localStorage.getItem("soundboardVolume")) {
-	soundboardVolume = Number(localStorage.getItem("soundboardVolume"));
+  soundboardVolume = Number(localStorage.getItem("soundboardVolume"));
 }
 
 var dialogDiv = document.createElement("div");
 var dom = elements.createElementsFromJSON([
-	//Background
-	{
-		element: "div",
-		className: "dialogBackground",
-	},
-	//Dialog box
-	{
-		element: "div",
-		className: "soundboardDialog popupDialogAnimation",
-		children: [
-			{
-				element: "div",
-				style: {
-					width: "100%",
-					height: "100%",
-				},
-				className: "centerHorizontal",
-				children: [
-					{
-						element: "br",
-					},
-					{
-						element: "span",
-						style: {
-							fontWeight: "bold",
-							fontSize: "30px",
-						},
-						textContent: "🔊 Chaos Soundboard 🔥",
-					},
-					{
-						element: "br",
-					},
-					{
-						element: "span",
-						textContent:
-							"Play sounds for the whole room. No regrets. No refunds.",
-					},
-					{
-						element: "br",
-					},
-					{
-						element: "button",
-						gid: "soundboardMuteButton",
-						GPWhenCreated: function (elm) {
-							//Load soundboard volume state.
-							if (localStorage.getItem("soundboardUnmuteState") == "N") {
-								//Use off (The value N) so that if no value is set then it defaults to on.
-								soundboardVolume = 0;
-							} else {
-								soundboardVolume = 100;
-							}
+  //Background
+  {
+    element: "div",
+    className: "dialogBackground",
+  },
+  //Dialog box
+  {
+    element: "div",
+    className: "soundboardDialog popupDialogAnimation",
+    children: [
+      {
+        element: "div",
+        style: {
+          width: "100%",
+          height: "100%",
+        },
+        className: "centerHorizontal",
+        children: [
+          {
+            element: "br",
+          },
+          {
+            element: "span",
+            style: {
+              fontWeight: "bold",
+              fontSize: "30px",
+            },
+            textContent: "🔊 Chaos Soundboard 🔥",
+          },
+          {
+            element: "br",
+          },
+          {
+            element: "span",
+            textContent:
+              "Play sounds for the whole room. No regrets. No refunds.",
+          },
+          {
+            element: "br",
+          },
+          {
+            element: "button",
+            gid: "soundboardMuteButton",
+            GPWhenCreated: function (elm) {
+              //Load soundboard volume state.
+              if (localStorage.getItem("soundboardUnmuteState") == "N") {
+                //Use off (The value N) so that if no value is set then it defaults to on.
+                soundboardVolume = 0;
+              } else {
+                soundboardVolume = 100;
+              }
 
-							//Update text.
-							if (soundboardVolume == 0) {
-								elm.textContent = "Unmute";
-							} else {
-								elm.textContent = "Mute";
-							}
-						},
-						eventListeners: [
-							{
-								event: "click",
-								func: function () {
-									//Unmute or mute.
-									if (soundboardVolume == 100) {
-										soundboardVolume = 0;
-										localStorage.setItem("soundboardUnmuteState", "N");
-									} else {
-										soundboardVolume = 100;
-										localStorage.setItem("soundboardUnmuteState", "Y");
-									}
+              //Update text.
+              if (soundboardVolume == 0) {
+                elm.textContent = "Unmute";
+              } else {
+                elm.textContent = "Mute";
+              }
+            },
+            eventListeners: [
+              {
+                event: "click",
+                func: function () {
+                  //Unmute or mute.
+                  if (soundboardVolume == 100) {
+                    soundboardVolume = 0;
+                    localStorage.setItem("soundboardUnmuteState", "N");
+                  } else {
+                    soundboardVolume = 100;
+                    localStorage.setItem("soundboardUnmuteState", "Y");
+                  }
 
-									//Update text
-									if (soundboardVolume == 0) {
-										this.textContent = "Unmute";
-									} else {
-										this.textContent = "Mute";
-									}
-								},
-							},
-						],
-					},
-					{
-						element: "br",
-					},
-					{
-						element: "span",
-						textContent: "Soundboard Boost:",
-					},
-					{
-						element: "button",
-						className: "roundborder",
-						title: "Click to make it louder (and probably regret it)",
-						textContent: soundboardMultipliers[soundboardMutliplier].label,
-						eventListeners: [
-							{
-								event: "click",
-								func: function () {
-									soundboardMutliplier += 1;
-									if (soundboardMutliplier > soundboardMultipliers.length - 1) {
-										soundboardMutliplier = 0;
-									}
-									this.textContent =
-										soundboardMultipliers[soundboardMutliplier].label;
-								},
-							},
-						],
-					},
-					{ element: "br" },
-					{
-						element: "button",
-						className: "roundborder",
-						eventListeners: [
-							{
-								event: "click",
-								func: function () {
-									dialogDiv.hidden = true;
-								},
-							},
-						],
-						textContent: "Close",
-					},
-					{ element: "hr" },
-					{
-						element: "div",
-						className: "soundboardButtons",
-						gid: "soundboardButtonsContainer",
-						children: [
-							{
-								element: "div",
-								className: "soundboardButtonStop",
-								children: [
-									{
-										element: "span",
-										textContent: "🛑 Stop the chaos",
-									},
-								],
-								eventListeners: [
-									{
-										event: "click",
-										func: function () {
-											sb.onSoundStopClick();
-										},
-									},
-								],
-							},
-						],
-					},
-				],
-			},
-		],
-	},
+                  //Update text
+                  if (soundboardVolume == 0) {
+                    this.textContent = "Unmute";
+                  } else {
+                    this.textContent = "Mute";
+                  }
+                },
+              },
+            ],
+          },
+          {
+            element: "br",
+          },
+          {
+            element: "span",
+            textContent: "Soundboard Boost:",
+          },
+          {
+            element: "button",
+            className: "roundborder",
+            title: "Click to make it louder (and probably regret it)",
+            textContent: soundboardMultipliers[soundboardMutliplier].label,
+            eventListeners: [
+              {
+                event: "click",
+                func: function () {
+                  soundboardMutliplier += 1;
+                  if (soundboardMutliplier > soundboardMultipliers.length - 1) {
+                    soundboardMutliplier = 0;
+                  }
+                  this.textContent =
+                    soundboardMultipliers[soundboardMutliplier].label;
+                },
+              },
+            ],
+          },
+          { element: "br" },
+          {
+            element: "button",
+            className: "roundborder",
+            eventListeners: [
+              {
+                event: "click",
+                func: function () {
+                  dialogDiv.hidden = true;
+                },
+              },
+            ],
+            textContent: "Close",
+          },
+          { element: "hr" },
+          {
+            element: "div",
+            className: "soundboardButtons",
+            gid: "soundboardButtonsContainer",
+            children: [
+              {
+                element: "div",
+                className: "soundboardButtonStop",
+                children: [
+                  {
+                    element: "span",
+                    textContent: "🛑 Stop the chaos",
+                  },
+                ],
+                eventListeners: [
+                  {
+                    event: "click",
+                    func: function () {
+                      sb.onSoundStopClick();
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ]);
 dialogDiv.hidden = true;
 elements.appendElements(dialogDiv, dom);
@@ -216,225 +216,225 @@ sb.onSoundButtonClick = function () {};
 sb.onSoundStopClick = function () {};
 
 function createSoundboardButtonDiv(sound, index) {
-	var dom = elements.createElementsFromJSON([
-		{
-			element: "div",
-			className: "soundboardButton",
-			children: [
-				{
-					element: "div",
-					style: {
-						display: "flex",
-					},
-					children: [
-						{
-							element: "div",
-							className: "soundboardButtonDisplayNames",
-							gid: "sbButtonDisplayNames_" + index,
-							children: [],
-						},
-					],
-				},
-				{
-					element: "span",
-					textContent: sound.name,
-				},
-			],
-			gid: "sbButton_" + index,
-			eventListeners: [
-				{
-					event: "click",
-					func: function () {
-						sb.onSoundButtonClick(
-							index,
-							soundboardMultipliers[soundboardMutliplier].mult,
-						);
-					},
-				},
-			],
-		},
-	]);
-	return dom[0];
+  var dom = elements.createElementsFromJSON([
+    {
+      element: "div",
+      className: "soundboardButton",
+      children: [
+        {
+          element: "div",
+          style: {
+            display: "flex",
+          },
+          children: [
+            {
+              element: "div",
+              className: "soundboardButtonDisplayNames",
+              gid: "sbButtonDisplayNames_" + index,
+              children: [],
+            },
+          ],
+        },
+        {
+          element: "span",
+          textContent: sound.name,
+        },
+      ],
+      gid: "sbButton_" + index,
+      eventListeners: [
+        {
+          event: "click",
+          func: function () {
+            sb.onSoundButtonClick(
+              index,
+              soundboardMultipliers[soundboardMutliplier].mult,
+            );
+          },
+        },
+      ],
+    },
+  ]);
+  return dom[0];
 }
 
 var soundboardButtonsContainer = elements.getGPId("soundboardButtonsContainer");
 
 async function showSoundboardDialog() {
-	try {
-		dialogDiv.hidden = false;
-	} catch (e) {
-		dialog.alert(e);
-	}
+  try {
+    dialogDiv.hidden = false;
+  } catch (e) {
+    dialog.alert(e);
+  }
 }
 
 sb.show = showSoundboardDialog;
 
 sb.load = function (soundboardURL, onProgress) {
-	if (!onProgress) {
-		onProgress = () => {};
-	}
+  if (!onProgress) {
+    onProgress = () => {};
+  }
 
-	const MAX_CONCURRENT_LOADS = 5;
+  const MAX_CONCURRENT_LOADS = 5;
 
-	return new Promise((accept, reject) => {
-		fetchUtils
-			.fetchAsJSON(soundboardURL)
-			.then((sounds) => {
-				let soundsLoaded = 0;
-				let currentIndex = 0;
-				let activeLoads = 0;
-				const loadedPromises = [];
+  return new Promise((accept, reject) => {
+    fetchUtils
+      .fetchAsJSON(soundboardURL)
+      .then((sounds) => {
+        let soundsLoaded = 0;
+        let currentIndex = 0;
+        let activeLoads = 0;
+        const loadedPromises = [];
 
-				const tryLoadNext = () => {
-					if (currentIndex >= sounds.length) {
-						if (activeLoads === 0) {
-							// All sounds are done loading
-							Promise.all(loadedPromises)
-								.then(() => accept())
-								.catch(reject);
-						}
-						return;
-					}
+        const tryLoadNext = () => {
+          if (currentIndex >= sounds.length) {
+            if (activeLoads === 0) {
+              // All sounds are done loading
+              Promise.all(loadedPromises)
+                .then(() => accept())
+                .catch(reject);
+            }
+            return;
+          }
 
-					while (
-						activeLoads < MAX_CONCURRENT_LOADS &&
-						currentIndex < sounds.length
-					) {
-						const sound = sounds[currentIndex];
-						const index = currentIndex;
-						currentIndex++;
-						activeLoads++;
+          while (
+            activeLoads < MAX_CONCURRENT_LOADS &&
+            currentIndex < sounds.length
+          ) {
+            const sound = sounds[currentIndex];
+            const index = currentIndex;
+            currentIndex++;
+            activeLoads++;
 
-						const soundPromise = audioEngine
-							.loadSoundFromURL(sound.url)
-							.then((soundData) => {
-								soundsLoaded++;
-								onProgress(soundsLoaded, sounds.length);
-								sound.data = soundData;
-							})
-							.catch(reject)
-							.finally(() => {
-								activeLoads--;
-								tryLoadNext();
-							});
+            const soundPromise = audioEngine
+              .loadSoundFromURL(sound.url)
+              .then((soundData) => {
+                soundsLoaded++;
+                onProgress(soundsLoaded, sounds.length);
+                sound.data = soundData;
+              })
+              .catch(reject)
+              .finally(() => {
+                activeLoads--;
+                tryLoadNext();
+              });
 
-						loadedPromises.push(soundPromise);
+            loadedPromises.push(soundPromise);
 
-						const button = createSoundboardButtonDiv(sound, index);
-						soundboardButtonsContainer.append(button);
-					}
-				};
+            const button = createSoundboardButtonDiv(sound, index);
+            soundboardButtonsContainer.append(button);
+          }
+        };
 
-				tryLoadNext();
+        tryLoadNext();
 
-				loadedSounds = sounds;
-				sb.loadedSounds = sounds;
-			})
-			.catch(reject);
-	});
+        loadedSounds = sounds;
+        sb.loadedSounds = sounds;
+      })
+      .catch(reject);
+  });
 };
 
 var soundIdCounter = 0;
 
 sb.playSound = function (index, mult = 1, displayName) {
-	var sound = loadedSounds[index];
+  var sound = loadedSounds[index];
 
-	if (sound) {
-		var player = new audioEngine.Player(sound.data);
-		player.volume = (soundboardVolume / 100) * mult;
-		soundIdCounter += 1;
-		player._id = soundIdCounter;
-		player._mult = mult;
-		player._fromDisplayName = displayName;
-		player._index = index;
+  if (sound) {
+    var player = new audioEngine.Player(sound.data);
+    player.volume = (soundboardVolume / 100) * mult;
+    soundIdCounter += 1;
+    player._id = soundIdCounter;
+    player._mult = mult;
+    player._fromDisplayName = displayName;
+    player._index = index;
 
-		if (displayName) {
-			for (var otherPlayer of playingSounds) {
-				if (
-					otherPlayer._fromDisplayName == displayName &&
-					otherPlayer._index == index
-				) {
-					player._element = otherPlayer._element;
-					break;
-				}
-			}
-			if (!player._element) {
-				var displayNamesDiv = elements.getGPId("sbButtonDisplayNames_" + index);
-				var displayNameDiv = document.createElement("div");
-				displayNameDiv.className = "soundboardActiveText";
-				displayNameDiv.textContent = displayName;
-				displayNamesDiv.append(displayNameDiv);
-				player._element = displayNameDiv;
+    if (displayName) {
+      for (var otherPlayer of playingSounds) {
+        if (
+          otherPlayer._fromDisplayName == displayName &&
+          otherPlayer._index == index
+        ) {
+          player._element = otherPlayer._element;
+          break;
+        }
+      }
+      if (!player._element) {
+        var displayNamesDiv = elements.getGPId("sbButtonDisplayNames_" + index);
+        var displayNameDiv = document.createElement("div");
+        displayNameDiv.className = "soundboardActiveText";
+        displayNameDiv.textContent = displayName;
+        displayNamesDiv.append(displayNameDiv);
+        player._element = displayNameDiv;
 
-				displayNameDiv.animate(
-					[
-						{
-							opacity: 0,
-						},
-						{},
-					],
-					{
-						easing: "ease-in",
-						duration: 50,
-					},
-				);
-			}
-		}
+        displayNameDiv.animate(
+          [
+            {
+              opacity: 0,
+            },
+            {},
+          ],
+          {
+            easing: "ease-in",
+            duration: 50,
+          },
+        );
+      }
+    }
 
-		player.onended = function () {
-			var newPlayingSounds = [];
-			for (var otherPlayer of playingSounds) {
-				if (otherPlayer._id !== player._id) {
-					newPlayingSounds.push(otherPlayer);
-				}
-			}
-			playingSounds = newPlayingSounds;
-			if (player._element) {
-				var isLast = true;
-				for (var otherPlayer of playingSounds) {
-					if (
-						otherPlayer._fromDisplayName == displayName &&
-						otherPlayer._index == index
-					) {
-						isLast = false;
-						break;
-					}
-				}
-				if (isLast) {
-					var animation = player._element.animate(
-						[
-							{},
-							{
-								opacity: 0,
-							},
-						],
-						{
-							easing: "ease-in",
-							duration: 50,
-						},
-					);
-					animation.addEventListener("finish", () => {
-						player._element.remove();
-					});
-				}
-			}
-		};
-		player.play();
+    player.onended = function () {
+      var newPlayingSounds = [];
+      for (var otherPlayer of playingSounds) {
+        if (otherPlayer._id !== player._id) {
+          newPlayingSounds.push(otherPlayer);
+        }
+      }
+      playingSounds = newPlayingSounds;
+      if (player._element) {
+        var isLast = true;
+        for (var otherPlayer of playingSounds) {
+          if (
+            otherPlayer._fromDisplayName == displayName &&
+            otherPlayer._index == index
+          ) {
+            isLast = false;
+            break;
+          }
+        }
+        if (isLast) {
+          var animation = player._element.animate(
+            [
+              {},
+              {
+                opacity: 0,
+              },
+            ],
+            {
+              easing: "ease-in",
+              duration: 50,
+            },
+          );
+          animation.addEventListener("finish", () => {
+            player._element.remove();
+          });
+        }
+      }
+    };
+    player.play();
 
-		playingSounds.push(player);
-	}
+    playingSounds.push(player);
+  }
 };
 
 sb.stopAll = function () {
-	for (var player of playingSounds) {
-		player.pause();
-	}
+  for (var player of playingSounds) {
+    player.pause();
+  }
 };
 
 setInterval(() => {
-	for (var player of playingSounds) {
-		player.volume = (soundboardVolume / 100) * player._mult;
-	}
+  for (var player of playingSounds) {
+    player.volume = (soundboardVolume / 100) * player._mult;
+  }
 }, 1000 / 30);
 
 module.exports = sb;
