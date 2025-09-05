@@ -20,7 +20,7 @@ module.exports = {
             fontSize: "30px",
             fontWeight: "bold",
           },
-          textContent: "This room does not allow guest users",
+          textContent: "🚪 No Guests Allowed 🚪",
         },
         {
           element: "br",
@@ -28,7 +28,28 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "Sign in or sign up to a Random Rants + account to join this room.",
+            "This room kicked guest mode out of the chat. You’ll need a Random Rants + account to sneak in.",
+        },
+        {
+          element: "br",
+        },
+        {
+          element: "span",
+          textContent:
+            "Why though? Could be because:",
+        },
+        {
+          element: "ul",
+          children: [
+            {
+              element: "li",
+              textContent: "The room owner flipped the big red switch: 🚫 No Guests Mode 🚫"
+            },
+            {
+              element: "li",
+              textContent: "The room owner locked it down to their exclusive chaos club 🔒",
+            }
+          ]
         },
         {
           element: "br",
@@ -36,8 +57,28 @@ module.exports = {
         {
           element: "div",
           className: "divButton roundborder",
-          textContent: "Go to home.",
-          gid: "goToHome",
+          textContent: "Sign in",
+          eventListeners: [
+            {
+              event: "click",
+              func: function () {
+                window.location.href = "/signin";
+              }
+            }
+          ]
+        },
+        {
+          element: "div",
+          className: "divButton roundborder",
+          textContent: "Sign up",
+          eventListeners: [
+            {
+              event: "click",
+              func: function () {
+                window.location.href = "/signup";
+              }
+            }
+          ]
         },
       ],
     },

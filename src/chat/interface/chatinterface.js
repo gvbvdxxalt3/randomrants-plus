@@ -21,6 +21,8 @@ var userState = require("./userstate.js");
 var roomSettings = require("./roomsettings.js");
 var shtml = require("../../safehtmlencode.js");
 var typingnotice = require("./typingnotice.js");
+var bannedUserDivGen = require("./banneduserdiv.js");
+var allowUserDivGen = require("./allowuserdiv.js");
 
 if (!isSecure()) {
   console.warn(
@@ -53,6 +55,9 @@ var addOwnershipUsernameButton = elements.getGPId("addOwnershipUsernameButton");
 var showSoundboardButton = elements.getGPId("showSoundboardButton");
 var toggleCameraButton = elements.getGPId("toggleCameraButton");
 var roomErrorScreen = elements.getGPId("roomErrorScreen");
+var guestErrorScreen = elements.getGPId("guestErrorScreen");
+var banRoomError = elements.getGPId("banRoomError");
+var notAllowedError = elements.getGPId("notAllowedError");
 
 var userOnlineViewBox = elements.getGPId("userOnlineViewBox");
 var toggleMessageAndOnlineView = elements.getGPId("toggleMessageAndOnlineView");
@@ -61,6 +66,12 @@ var toggleMessageAndOnlineViewText = elements.getGPId(
 );
 
 var showRoomSettingsButton = elements.getGPId("showRoomSettingsButton");
+
+var addBanUserButton = elements.getGPId("addBanUserButton");
+var blockedUsersContainer = elements.getGPId("blockedUsersContainer");
+var addAllowUserButton = elements.getGPId("addAllowUserButton");
+var allowedUsersContainer = elements.getGPId("allowedUsersContainer");
+var ownerEditOnlyStuffContainer = elements.getGPId("ownerEditOnlyStuffContainer");
 
 var toggleOnlineView = false;
 var isOffline = false;
@@ -163,7 +174,7 @@ reconnectingScreen.hidden = true;
 
     async function changeOwnershipUser(promoting, username) {
       if (promoting) {
-        await fetch(
+        var response = await fetch(
           accountHelper.getServerURL() + "/rooms/addowner/" + currentRoom,
           {
             body: JSON.stringify({
@@ -172,8 +183,11 @@ reconnectingScreen.hidden = true;
             method: "POST",
           },
         );
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
       } else {
-        await fetch(
+        var response = await fetch(
           accountHelper.getServerURL() + "/rooms/removeowner/" + currentRoom,
           {
             body: JSON.stringify({
@@ -182,6 +196,69 @@ reconnectingScreen.hidden = true;
             method: "POST",
           },
         );
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+      }
+    }
+    
+    async function changeBanUser(banning, username) {
+      if (banning) {
+        var response = await fetch(
+          accountHelper.getServerURL() + "/rooms/addban/" + currentRoom,
+          {
+            body: JSON.stringify({
+              username,
+            }),
+            method: "POST",
+          },
+        );
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+      } else {
+        var response = await fetch(
+          accountHelper.getServerURL() + "/rooms/removeban/" + currentRoom,
+          {
+            body: JSON.stringify({
+              username,
+            }),
+            method: "POST",
+          },
+        );
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+      }
+    }
+    
+    async function changeAllowListUser(allowing, username) {
+      if (allowing) {
+        var response = await fetch(
+          accountHelper.getServerURL() + "/rooms/addallowlist/" + currentRoom,
+          {
+            body: JSON.stringify({
+              username,
+            }),
+            method: "POST",
+          },
+        );
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+      } else {
+        var response = await fetch(
+          accountHelper.getServerURL() + "/rooms/removeallowlist/" + currentRoom,
+          {
+            body: JSON.stringify({
+              username,
+            }),
+            method: "POST",
+          },
+        );
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
       }
     }
 
@@ -251,12 +328,53 @@ reconnectingScreen.hidden = true;
 
     addOwnershipUsernameButton.addEventListener("click", async function () {
       var response = await dialogs.prompt(
-        "Who do you want to give ownership to?\nDrop their username below:",
+        "Who do you want to give ownership (admin powers) to?\nDrop their username below:",
       );
       if (!response) {
         return;
       }
-      await changeOwnershipUser(true, response);
+      try{
+      	await changeOwnershipUser(true, response);
+      }catch(e){
+        dialogs.alert(
+          "❌ Failed to give ownership (admin powers). Please try again later and check your spelling.\n"+e,
+        );
+        console.error(e);
+      }
+    });
+    
+    addBanUserButton.addEventListener("click", async function () {
+      var response = await dialogs.prompt(
+        "Who do you want to block/ban?\nDrop their username below:",
+      );
+      if (!response) {
+        return;
+      }
+      try{
+      	await changeBanUser(true, response);
+      }catch(e){
+        dialogs.alert(
+          "❌ Failed to block/ban user, please try again later and check your spelling.\n"+e,
+        );
+        console.error(e);
+      }
+    });
+    
+    addAllowUserButton.addEventListener("click", async function () {
+      var response = await dialogs.prompt(
+        "Who do you want to add to the allow list?\nDrop their username below:",
+      );
+      if (!response) {
+        return;
+      }
+      try{
+      	await changeAllowListUser(true, response);
+      }catch(e){
+        dialogs.alert(
+          "❌ Failed to edit the allow list, please try again later and check your spelling.\n"+e,
+        );
+        console.error(e);
+      }
     });
 
     function onMessage(e) {
@@ -303,11 +421,17 @@ reconnectingScreen.hidden = true;
           reconnectingScreen.hidden = true;
           userState.isOwner = false;
           addOwnershipUsernameButton.hidden = true;
+          addBanUserButton.hidden = true;
+          addAllowUserButton.hidden = true;
+          ownerEditOnlyStuffContainer.hidden = true;
         }
         if (json.type == "isOwner") {
           userState.isOwner = json.isOwner;
           showRoomSettingsButton.hidden = !json.isOwner;
           addOwnershipUsernameButton.hidden = !json.isOwner;
+          addBanUserButton.hidden = !json.isOwner;
+          addAllowUserButton.hidden = !json.isOwner;
+          ownerEditOnlyStuffContainer.hidden = false;
         }
         if (json.type == "messages") {
           //This also clears messages and rewrites them.
@@ -364,6 +488,24 @@ reconnectingScreen.hidden = true;
             await accountHelper.removeJoinedRoom(currentRoom);
           })();
         }
+        if (json.type == "notInAllowList") {
+          notAllowedError.hidden = false;
+          sws.close();
+          (async function () {
+            await accountHelper.removeJoinedRoom(currentRoom);
+          })();
+        }
+        if (json.type == "banned") {
+          banRoomError.hidden = false;
+          sws.close();
+          (async function () {
+            await accountHelper.removeJoinedRoom(currentRoom);
+          })();
+        }
+        if (json.type == "noGuests") {
+          guestErrorScreen.hidden = false;
+          sws.close();
+        }
         if (json.type == "roomStillLoading") {
           rrLoadingStatusText.textContent =
             "The server is trying to catch up with the chaos...";
@@ -396,6 +538,20 @@ reconnectingScreen.hidden = true;
           for (var e of a) {
             e.remove();
           }
+          var a = [];
+          for (var e of blockedUsersContainer.children) {
+            a.push(e);
+          }
+          for (var e of a) {
+            e.remove();
+          }
+          var a = [];
+          for (var e of allowedUsersContainer.children) {
+            a.push(e);
+          }
+          for (var e of a) {
+            e.remove();
+          }
           json.list.forEach((userInfo) => {
             var onlineUser = onlineUserElementGenerator(
               userInfo.username,
@@ -413,8 +569,7 @@ reconnectingScreen.hidden = true;
             );
             usersOnlineContainer.append(onlineUser);
           });
-          var i = 0;
-          json.owners.forEach((username) => {
+          json.owners.forEach((username, i) => {
             var onlineUser = onlineUserElementGenerator(
               null,
               username,
@@ -431,8 +586,36 @@ reconnectingScreen.hidden = true;
               true,
             );
             ownershipUsersContainer.append(onlineUser);
-            i += 1;
           });
+          json.bans.forEach((username, i) => {
+            var funct = async function () {
+              await changeBanUser(false, username);
+            };
+            if (!userState.isOwner) {
+              funct = null;
+            }
+            var bannedUser = bannedUserDivGen(
+              username,
+              funct
+            );
+            blockedUsersContainer.append(bannedUser);
+          });
+          json.allowed.forEach((username, i) => {
+            var funct = async function () {
+              await changeAllowListUser(false, username);
+            };
+            if (!userState.isOwner) {
+              funct = null;
+            }
+            var allowedUser = allowUserDivGen(username, funct);
+            allowedUsersContainer.append(allowedUser);
+          });
+          if (json.allowed.length < 1) {
+            allowedUsersContainer.textContent = "The allowlist is empty — doors wide open for everyone!";
+          }
+          if (json.bans.length < 1) {
+            blockedUsersContainer.textContent = "Ban list is squeaky clean ✨";
+          }
         }
         if (json.type == "media") {
           mediaEngine.onMessage(json);

@@ -1109,6 +1109,55 @@ async function startRoomWSS(roomid) {
     return false;
   }
   wss._rrHasPermission = hasPermission; //For the command handler.
+  function checkBanAndUserList(ws) {
+    if (!ws._rrUsername) {
+      var blockGuest = info.blockGuests || info.allowList.length > 0;
+      if (blockGuest) {
+        ws.send(JSON.stringify({
+          type:"noGuests"
+        }));
+        ws._rrBlockedConnection = true;
+        ws.terminate();
+        return true;
+      }
+    }
+    
+    var banned = false;
+    if (info.banList.indexOf(ws._rrUsername) > -1) {
+      banned = true;
+    }
+    if (ws._rrIsRealOwner) {
+      banned = false;
+    } 
+    if (banned) {
+      ws.send(JSON.stringify({
+        type:"banned"
+      }));
+      ws._rrBlockedConnection = true;
+      ws.terminate();
+      return true;
+    }
+    return false;
+    
+    var allowed = true;
+    if (info.allowList.indexOf(ws._rrUsername) < 0) {
+      allowed = false;
+    }
+    if (info.allowList.length < 1) {
+      allowed = true;
+    }
+    if (ws._rrIsRealOwner) {
+      allowed = true;
+    }
+    if (!allowed) {
+      ws.send(JSON.stringify({
+        type:"notInAllowList"
+      }));
+      ws._rrBlockedConnection = true;
+      ws.terminate();
+      return true;
+    }
+  }
   function sendOnlineList() {
     var userlist = [];
     for (var cli of wss.clients) {
@@ -1138,8 +1187,13 @@ async function startRoomWSS(roomid) {
       type: "onlineList",
       list: userlist,
       owners: info.owners, //First owner can't be removed.
+      allowed: info.allowList,
+      bans: info.banList,
     });
     wss.clients.forEach((cli) => {
+      if (!cli._rrIsReady) {
+        return;
+      }
       cli.send(onlist);
     });
   }
@@ -1154,6 +1208,9 @@ async function startRoomWSS(roomid) {
     }
     wss._rrRoomMessages = wss._rrRoomMessages.slice(-100);
     wss.clients.forEach((cli) => {
+      if (!cli._rrIsReady) {
+        return;
+      }
       cli.send(
         JSON.stringify({
           type: "newMessage",
@@ -1236,7 +1293,7 @@ async function startRoomWSS(roomid) {
           var userOnlineSockets = usersOnlineSockets[ws._rrUsername];
           var isArray = Array.isArray(userOnlineSockets);
           if (isArray) {
-            if (userOnlineSockets.length >= cons.MAX_SOCKETS_PER_USER) {
+            if (usersOnlineSockets[ws._rrUsername].length >= cons.MAX_SOCKETS_PER_USER) {
               ws.send(
                 JSON.stringify({
                   type: "tooManyConnections",
@@ -1269,6 +1326,11 @@ async function startRoomWSS(roomid) {
       ws._rrOtherCams = {};
       ws._rrMicCode = null;
       ws._rrOtherMics = {};
+      
+      if (checkBanAndUserList(ws)) {
+        return; //If the function returns true, then it terminates the connection.
+      }
+      
       ws._rrIsReady = true;
       ws.send(
         JSON.stringify({
@@ -1392,6 +1454,9 @@ async function startRoomWSS(roomid) {
               currentScreensharingWebsocket = null;
               currentMediaEmbedURL = null;
               wss.clients.forEach((cli) => {
+                if (!cli._rrIsReady) {
+                  return;
+                }
                 var fromSelf = false;
                 if (cli == ws) {
                   fromSelf = true;
@@ -1412,6 +1477,9 @@ async function startRoomWSS(roomid) {
               currentScreenshareCode = json.code;
               currentScreensharingWebsocket = ws._rrConnectionID;
               wss.clients.forEach((cli) => {
+                if (!cli._rrIsReady) {
+                  return;
+                }
                 cli.send(
                   JSON.stringify({
                     type: "media",
@@ -1433,6 +1501,9 @@ async function startRoomWSS(roomid) {
               }
               currentMediaEmbedURL = json.url;
               wss.clients.forEach((cli) => {
+                if (!cli._rrIsReady) {
+                  return;
+                }
                 cli.send(
                   JSON.stringify({
                     type: "media",
@@ -1445,6 +1516,9 @@ async function startRoomWSS(roomid) {
           }
           if (json.type == "isTyping") {
             wss.clients.forEach((cli) => {
+              if (!cli._rrIsReady) {
+                return;
+              }
               cli.send(
                 JSON.stringify({
                   type: "userIsTyping",
@@ -1497,6 +1571,9 @@ async function startRoomWSS(roomid) {
               });
               var wasSent = false;
               wss.clients.forEach((cli) => {
+                if (!cli._rrIsReady) {
+                  return;
+                }
                 if (cli._rrUsername == targetUser) {
                   if (cli._rrUsername !== ws._rrUsername) {
                     cli.send(messageJson);
@@ -1543,6 +1620,9 @@ async function startRoomWSS(roomid) {
               });
               wss._rrRoomMessages = wss._rrRoomMessages.slice(-100);
               wss.clients.forEach((cli) => {
+                if (!cli._rrIsReady) {
+                  return;
+                }
                 cli.send(
                   JSON.stringify({
                     type: "newMessage",
@@ -1629,6 +1709,9 @@ async function startRoomWSS(roomid) {
           currentScreenshareCode = null;
           currentScreensharingWebsocket = null;
           wss.clients.forEach((cli) => {
+            if (!cli._rrIsReady) {
+              return;
+            }
             cli.send(
               JSON.stringify({
                 type: "media",
@@ -1739,8 +1822,14 @@ async function startRoomWSS(roomid) {
     info = applyNewRoomPermissionValues(info);
     wss._rrRoomPermissions = info.permissions;
 
-    //Send permission data.
+    //Send permission data and check ban and user lists.
     wss.clients.forEach((ws) => {
+      if (!ws._rrIsReady) {
+        return;
+      }
+      if (checkBanAndUserList(ws)) {
+        return;
+      }
       sendPermData(ws);
     });
 
@@ -1859,6 +1948,16 @@ function applyNewRoomPermissionValues(roomInfo) {
     }
 
     roomInfo.permissions = roomPerms; //Actually set the value.
+  }
+  
+  //Allow and ban list need to be defined as array type.
+  
+  if (!Array.isArray(roomInfo.allowList)) {
+    roomInfo.allowList = [];
+  }
+  
+  if (!Array.isArray(roomInfo.banList)) {
+    roomInfo.banList = [];
   }
 
   return roomInfo; //Return it just because.
@@ -2427,6 +2526,397 @@ const server = http.createServer(async function (req, res) {
       })();
       return;
     }
+    if (urlsplit[2] == "addban" && req.method == "POST") {
+      (async function () {
+        try {
+          var body = await waitForBody(req);
+          var json = JSON.parse(body.toString());
+          var id = urlsplit[3];
+          
+          if (!decryptedUserdata) {
+            res.statusCode = 401;
+            res.end("You aren't signed in");
+            return;
+          }
+
+          if (typeof id !== "string") {
+            res.statusCode = 400;
+            res.end("Room ID must be string");
+            return;
+          }
+          if (defaultRooms.indexOf(id) > -1) {
+            res.statusCode = 400;
+            res.end(
+              "Room ID is from a default room ID, these can't be edited!",
+            );
+            return;
+          }
+
+          if (typeof json.username !== "string") {
+            res.statusCode = 400;
+            res.end("Username must be type string");
+            return;
+          }
+          
+          var targetUsername = json.username.toLowerCase().trim();
+          
+          if (!checkUsername(targetUsername)) {
+            res.statusCode = 400;
+            res.end("Username isn't valid.");
+            return;
+          }
+          
+          if (!(await doesUsernameExist(targetUsername))) {
+            res.statusCode = 404;
+            res.end("User not found.");
+            return;
+          }
+          
+          var roomBuffer = await storage.downloadFile(
+            `room-${id}-info.json`,
+          );
+          var roomData = JSON.parse(roomBuffer.toString());
+          if (roomData.owners.indexOf(decryptedUserdata.username) > -1) {
+            roomData = applyNewRoomPermissionValues(roomData); //Get up-to-date room permission data. (so code below does not fail)
+            
+            if (roomData.owners[0] == targetUsername) {
+              res.statusCode = 400;
+              res.end("The room owner can't be banned");
+              return;
+            }
+            
+            roomData.banList.push(targetUsername);
+
+            await storage.uploadFile(
+              `room-${id}-info.json`,
+              JSON.stringify(roomData),
+              "application/json",
+            );
+            if (roomWebsockets[id.toLowerCase()]) {
+              roomWebsockets[id.toLowerCase()]._rrUpdateRoomInfo();
+            }
+            res.end("");
+          } else {
+            res.statusCode = 401;
+            res.end("You don't have ownership or owner.");
+            return;
+          }
+        } catch (e) {
+          res.statusCode = 500;
+          res.end("Technical server error");
+          console.log(e);
+        }
+      })();
+      return;
+    }
+    if (urlsplit[2] == "removeban" && req.method == "POST") {
+      (async function () {
+        try {
+          var body = await waitForBody(req);
+          var json = JSON.parse(body.toString());
+          var id = urlsplit[3];
+          
+          if (!decryptedUserdata) {
+            res.statusCode = 401;
+            res.end("You aren't signed in");
+            return;
+          }
+
+          if (typeof id !== "string") {
+            res.statusCode = 400;
+            res.end("Room ID must be string");
+            return;
+          }
+          if (defaultRooms.indexOf(id) > -1) {
+            res.statusCode = 400;
+            res.end(
+              "Room ID is from a default room ID, these can't be edited!",
+            );
+            return;
+          }
+
+          if (typeof json.username !== "string") {
+            res.statusCode = 400;
+            res.end("Username must be type string");
+            return;
+          }
+          
+          var targetUsername = json.username.toLowerCase().trim();
+          
+          if (!checkUsername(targetUsername)) {
+            res.statusCode = 400;
+            res.end("Username isn't valid.");
+            return;
+          }
+          
+          if (!(await doesUsernameExist(targetUsername))) {
+            res.statusCode = 404;
+            res.end("User not found.");
+            return;
+          }
+          
+          var roomBuffer = await storage.downloadFile(
+            `room-${id}-info.json`,
+          );
+          var roomData = JSON.parse(roomBuffer.toString());
+          if (roomData.owners.indexOf(decryptedUserdata.username) > -1) {
+            roomData = applyNewRoomPermissionValues(roomData); //Get up-to-date room permission data. (so code below does not fail)
+            
+            var banIndex = roomData.banList.indexOf(targetUsername);
+            if (banIndex > -1) {
+            	roomData.banList.splice(banIndex, 1);
+            }
+            
+            
+            await storage.uploadFile(
+              `room-${id}-info.json`,
+              JSON.stringify(roomData),
+              "application/json",
+            );
+            if (roomWebsockets[id.toLowerCase()]) {
+              roomWebsockets[id.toLowerCase()]._rrUpdateRoomInfo();
+            }
+            res.end("");
+          } else {
+            res.statusCode = 401;
+            res.end("You don't have ownership or owner.");
+            return;
+          }
+        } catch (e) {
+          res.statusCode = 500;
+          res.end("Technical server error.");
+          console.log(e);
+        }
+      })();
+      return;
+    }
+    if (urlsplit[2] == "changeallowguests" && req.method == "POST") {
+      (async function () {
+        try {
+          var body = await waitForBody(req);
+          var json = JSON.parse(body.toString());
+          var id = urlsplit[3];
+          
+          if (!decryptedUserdata) {
+            res.statusCode = 401;
+            res.end("You aren't signed in");
+            return;
+          }
+
+          if (typeof id !== "string") {
+            res.statusCode = 400;
+            res.end("Room ID must be string");
+            return;
+          }
+          if (defaultRooms.indexOf(id) > -1) {
+            res.statusCode = 400;
+            res.end(
+              "Room ID is from a default room ID, these can't be edited!",
+            );
+            return;
+          }
+
+          if (typeof json.allowGuests !== "boolean") {
+            res.statusCode = 400;
+            res.end("allowGuests must be type boolean");
+            return;
+          }
+          
+          var roomBuffer = await storage.downloadFile(
+            `room-${id}-info.json`,
+          );
+          var roomData = JSON.parse(roomBuffer.toString());
+          if (roomData.owners.indexOf(decryptedUserdata.username) > -1) {
+            roomData = applyNewRoomPermissionValues(roomData); //Get up-to-date room permission data. (so code below does not fail)
+            
+            roomData.allowGuests = json.allowGuests;
+
+            await storage.uploadFile(
+              `room-${id}-info.json`,
+              JSON.stringify(roomData),
+              "application/json",
+            );
+            if (roomWebsockets[id.toLowerCase()]) {
+              roomWebsockets[id.toLowerCase()]._rrUpdateRoomInfo();
+            }
+            res.end("");
+          } else {
+            res.statusCode = 401;
+            res.end("You don't have ownership or owner.");
+            return;
+          }
+        } catch (e) {
+          res.statusCode = 500;
+          res.end("Technical server error");
+          console.log(e);
+        }
+      })();
+      return;
+    }
+    if (urlsplit[2] == "addallowlist" && req.method == "POST") {
+      (async function () {
+        try {
+          var body = await waitForBody(req);
+          var json = JSON.parse(body.toString());
+          var id = urlsplit[3];
+          
+          if (!decryptedUserdata) {
+            res.statusCode = 401;
+            res.end("You aren't signed in");
+            return;
+          }
+
+          if (typeof id !== "string") {
+            res.statusCode = 400;
+            res.end("Room ID must be string");
+            return;
+          }
+          if (defaultRooms.indexOf(id) > -1) {
+            res.statusCode = 400;
+            res.end(
+              "Room ID is from a default room ID, these can't be edited!",
+            );
+            return;
+          }
+
+          if (typeof json.username !== "string") {
+            res.statusCode = 400;
+            res.end("Username must be type string");
+            return;
+          }
+          
+          var targetUsername = json.username.toLowerCase().trim();
+          
+          if (!checkUsername(targetUsername)) {
+            res.statusCode = 400;
+            res.end("Username isn't valid.");
+            return;
+          }
+          
+          if (!(await doesUsernameExist(targetUsername))) {
+            res.statusCode = 404;
+            res.end("User not found.");
+            return;
+          }
+          
+          var roomBuffer = await storage.downloadFile(
+            `room-${id}-info.json`,
+          );
+          var roomData = JSON.parse(roomBuffer.toString());
+          if (roomData.owners.indexOf(decryptedUserdata.username) > -1) {
+            roomData = applyNewRoomPermissionValues(roomData); //Get up-to-date room permission data. (so code below does not fail)
+            
+            if (roomData.owners[0] == targetUsername) {
+              res.statusCode = 400;
+              res.end("The room owner is always allowed, no need to add it!");
+              return;
+            }
+            
+            roomData.allowList.push(targetUsername);
+
+            await storage.uploadFile(
+              `room-${id}-info.json`,
+              JSON.stringify(roomData),
+              "application/json",
+            );
+            if (roomWebsockets[id.toLowerCase()]) {
+              roomWebsockets[id.toLowerCase()]._rrUpdateRoomInfo();
+            }
+            res.end("");
+          } else {
+            res.statusCode = 401;
+            res.end("You don't have ownership or owner.");
+            return;
+          }
+        } catch (e) {
+          res.statusCode = 500;
+          res.end("Technical server error");
+          console.log(e);
+        }
+      })();
+      return;
+    }
+    if (urlsplit[2] == "removeallowlist" && req.method == "POST") {
+      (async function () {
+        try {
+          var body = await waitForBody(req);
+          var json = JSON.parse(body.toString());
+          var id = urlsplit[3];
+          
+          if (!decryptedUserdata) {
+            res.statusCode = 401;
+            res.end("You aren't signed in");
+            return;
+          }
+
+          if (typeof id !== "string") {
+            res.statusCode = 400;
+            res.end("Room ID must be string");
+            return;
+          }
+          if (defaultRooms.indexOf(id) > -1) {
+            res.statusCode = 400;
+            res.end(
+              "Room ID is from a default room ID, these can't be edited!",
+            );
+            return;
+          }
+
+          if (typeof json.username !== "string") {
+            res.statusCode = 400;
+            res.end("Username must be type string");
+            return;
+          }
+          
+          var targetUsername = json.username.toLowerCase().trim();
+          
+          if (!checkUsername(targetUsername)) {
+            res.statusCode = 400;
+            res.end("Username isn't valid.");
+            return;
+          }
+          
+          if (!(await doesUsernameExist(targetUsername))) {
+            res.statusCode = 404;
+            res.end("User not found.");
+            return;
+          }
+          
+          var roomBuffer = await storage.downloadFile(
+            `room-${id}-info.json`,
+          );
+          var roomData = JSON.parse(roomBuffer.toString());
+          if (roomData.owners.indexOf(decryptedUserdata.username) > -1) {
+            roomData = applyNewRoomPermissionValues(roomData); //Get up-to-date room permission data. (so code below does not fail)
+            
+            var banIndex = roomData.allowList.indexOf(targetUsername);
+            if (banIndex > -1) {
+            	roomData.allowList.splice(banIndex, 1);
+            }
+            
+            
+            await storage.uploadFile(
+              `room-${id}-info.json`,
+              JSON.stringify(roomData),
+              "application/json",
+            );
+            if (roomWebsockets[id.toLowerCase()]) {
+              roomWebsockets[id.toLowerCase()]._rrUpdateRoomInfo();
+            }
+            res.end("");
+          } else {
+            res.statusCode = 401;
+            res.end("You don't have ownership or owner.");
+            return;
+          }
+        } catch (e) {
+          res.statusCode = 500;
+          res.end("Technical server error.");
+          console.log(e);
+        }
+      })();
+      return;
+    }
     if (urlsplit[2] == "destroy" && req.method == "POST") {
       (async function () {
         try {
@@ -2480,35 +2970,29 @@ const server = http.createServer(async function (req, res) {
     if (urlsplit[2] == "addowner" && req.method == "POST") {
       (async function () {
         try {
-          if (!decryptedUserdata) {
-            runStaticStuff(req, res, {
-              status: 403,
-            });
-            return;
-          }
           var body = await waitForBody(req);
           var json = JSON.parse(body.toString());
 
           if (typeof json.who !== "string") {
             res.statusCode = 400;
-            res.end("");
+            res.end("The property who must be string");
             return;
           }
           var id = urlsplit[3];
           if (!id) {
             res.statusCode = 400;
-            res.end("");
+            res.end("Room id not provided");
             return;
           }
           if (defaultRooms.indexOf(id) > -1) {
             res.statusCode = 400;
-            res.end("");
+            res.end("Room is one of the default rooms");
             return;
           }
 
           if (!decryptedUserdata) {
             res.statusCode = 401;
-            res.end("");
+            res.end("You aren't logged in");
             return;
           }
           var roomBuffer = await storage.downloadFile(`room-${id}-info.json`);
@@ -2543,13 +3027,13 @@ const server = http.createServer(async function (req, res) {
             res.end("");
           } else {
             res.statusCode = 401;
-            res.end("");
+            res.end("You aren't an owner or have ownership.");
             return;
           }
         } catch (e) {
           console.log(e);
           res.statusCode = 500;
-          res.end("");
+          res.end("Technical server error");
         }
       })();
       return;
@@ -2557,35 +3041,29 @@ const server = http.createServer(async function (req, res) {
     if (urlsplit[2] == "removeowner" && req.method == "POST") {
       (async function () {
         try {
-          if (!decryptedUserdata) {
-            runStaticStuff(req, res, {
-              status: 403,
-            });
-            return;
-          }
           var body = await waitForBody(req);
           var json = JSON.parse(body.toString());
 
           if (typeof json.who !== "string") {
             res.statusCode = 400;
-            res.end("");
+            res.end("Property who must be string");
             return;
           }
           var id = urlsplit[3];
           if (!id) {
             res.statusCode = 400;
-            res.end("");
+            res.end("Room Id is not valid");
             return;
           }
           if (defaultRooms.indexOf(id) > -1) {
             res.statusCode = 400;
-            res.end("");
+            res.end("Room can't be one of default room");
             return;
           }
 
           if (!decryptedUserdata) {
             res.statusCode = 401;
-            res.end("");
+            res.end("You aren't signed in");
             return;
           }
           var roomBuffer = await storage.downloadFile(`room-${id}-info.json`);
@@ -2612,13 +3090,13 @@ const server = http.createServer(async function (req, res) {
             res.end("");
           } else {
             res.statusCode = 401;
-            res.end("");
+            res.end("You don't have ownership or is the owner of this room.");
             return;
           }
         } catch (e) {
           console.log(e);
           res.statusCode = 500;
-          res.end("");
+          res.end("Technical server error");
         }
       })();
       return;

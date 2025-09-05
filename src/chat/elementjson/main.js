@@ -40,6 +40,8 @@ module.exports = [
       require("./usernameerror.js"),
       require("./roomerror.js"),
       require("./noguests.js"),
+      require("./notallowed.js"),
+      require("./banned.js"),
       require("./update.js"),
       require("./offlineerror.js"),
     ],
