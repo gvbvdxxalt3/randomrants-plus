@@ -431,7 +431,7 @@ reconnectingScreen.hidden = true;
           addOwnershipUsernameButton.hidden = !json.isOwner;
           addBanUserButton.hidden = !json.isOwner;
           addAllowUserButton.hidden = !json.isOwner;
-          ownerEditOnlyStuffContainer.hidden = false;
+          ownerEditOnlyStuffContainer.hidden = !json.isOwner;
         }
         if (json.type == "messages") {
           //This also clears messages and rewrites them.
