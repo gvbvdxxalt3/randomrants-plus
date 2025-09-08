@@ -589,25 +589,19 @@ a {
   border-radius: 5px;
 }
 
-.menuBarItemLogo:hover {
-  background: #787878;
-  border-radius: 5px;
-  animation: menuBarLogoAnim 0.25s ease-in-out;
+.menuBarItemLogo { transition: background .2s ease, border-radius .2s ease; }
+.menuBarItemLogo.is-bouncing { 
+  animation: menuBarLogoAnim .45s cubic-bezier(.28,.84,.42,1); 
+  will-change: transform;
 }
+.menuBarItemLogo.returning { transition: transform .1s ease-out; }
 
 @keyframes menuBarLogoAnim {
-  0% {
-    transform: scale(1, 1);
-  }
-  40% {
-    transform: scale(1.1, 0.9);
-  }
-  80% {
-    transform: scale(0.9, 1.1);
-  }
-  100% {
-    transform: scale(1, 1);
-  }
+  0% { transform: scale(1); }
+  30% { transform: scale(1.15, .85); }
+  50% { transform: scale(.9, 1.1); }
+  70% { transform: scale(1.05, .95); }
+  100% { transform: scale(1); }
 }
 
 .selectObj {

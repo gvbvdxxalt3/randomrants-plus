@@ -598,6 +598,7 @@ function createFloatingEmoji(spawnAnywhere = false, spawnAt) {
   emoji.style.cursor = "pointer";
   emoji.style.userSelect = "none";
   emoji.style.outline = "none";
+  emoji.style.willChange = "transform, top, left";
   var animationRunning = true;
   if (spawnAnywhere) {
     var anim = emoji.animate(
@@ -657,10 +658,10 @@ function createFloatingEmoji(spawnAnywhere = false, spawnAt) {
     const distanceMoved = (elapsed / 1000) * SPEED;
     const currentY = startY - distanceMoved;
     const currentX = startX + offsetX * (elapsed / duration);
-    emoji.style.transform = `rotate(${Math.sin(elapsed / 400 + offset) * 10}deg)`;
 
     emoji.style.left = `${currentX}px`;
     emoji.style.top = `${currentY}px`;
+    emoji.style.transform = `rotate(${Math.sin(elapsed / 400 + offset) * 10}deg)`;
 
     if (currentY < endY) {
       emoji.remove();
