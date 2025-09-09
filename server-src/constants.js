@@ -16,6 +16,6 @@ e.ROOM_CLEANUP_TIMEOUT = 60000 * 2; // 2 minutes
 e.MAX_MESSAGE_SIZE = 400; //400 characters.
 e.MAX_SOCKETS_PER_USER = 12; //Maximum of 12 clients per signed in user.
 e.MAX_GUEST_SOCKETS = 20; //Maximum of 20 sockets per user.
-e.MAX_REQUESTS_PER_SECOND = 30; //Maximum of 30 requests per second for user or ip.
+e.MAX_REQUESTS_PER_SECOND = 40; //Maximum of 40 requests per second for user or ip.
 e.MAX_REQUESTS_TIMEOUT = 15000; //Time it takes to timeout requests.
 module.exports = e;

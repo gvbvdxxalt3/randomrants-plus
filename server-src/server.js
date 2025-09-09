@@ -1183,18 +1183,26 @@ async function startRoomWSS(roomid) {
         });
       }
     }
-    var onlist = JSON.stringify({
+    var onlist = JSON.stringify({ //this verison of the message is sent to owners.
       type: "onlineList",
       list: userlist,
       owners: info.owners, //First owner can't be removed.
       allowed: info.allowList,
       bans: info.banList,
     });
+    var onlistNonOwner = JSON.stringify({
+      type: "onlineList",
+      list: userlist,
+    });
     wss.clients.forEach((cli) => {
       if (!cli._rrIsReady) {
         return;
       }
-      cli.send(onlist);
+      if (cli._rrIsOwner) {
+        cli.send(onlist);
+      } else {
+        cli.send(onlistNonOwner);
+      }
     });
   }
   function sendRoomChatMessage(displayName, message, dontStore) {

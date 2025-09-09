@@ -589,19 +589,26 @@ a {
   border-radius: 5px;
 }
 
-.menuBarItemLogo { transition: background .2s ease, border-radius .2s ease; }
+.menuBarItemLogo {
+  transition: 0.2s background;
+  border-radius: 5px;
+}
+.menuBarItemLogo:hover {
+  background: #787878;
+}
 .menuBarItemLogo.is-bouncing { 
   animation: menuBarLogoAnim .45s cubic-bezier(.28,.84,.42,1); 
   will-change: transform;
 }
-.menuBarItemLogo.returning { transition: transform .1s ease-out; }
+.menuBarItemLogo.returning {
+  transition: 0.2s background, transform .1s ease-out;
+}
 
 @keyframes menuBarLogoAnim {
-  0% { transform: scale(1); }
-  30% { transform: scale(1.15, .85); }
-  50% { transform: scale(.9, 1.1); }
-  70% { transform: scale(1.05, .95); }
-  100% { transform: scale(1); }
+  10% { transform: scale(1.15, .85);  }
+  30% { transform: scale(.9, 1.1); }
+  50% { transform: scale(1.05, .95); }
+  80% { transform: scale(1); }
 }
 
 .selectObj {
@@ -970,8 +977,9 @@ a {
 
 @keyframes popupDialog {
   0% {
-    transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0, 0);
     opacity: 0;
+    filter: blur(30px);
   }
   100% {
     transform: translate(-50%, -50%) scale(1);
@@ -1056,4 +1064,12 @@ a {
 .replyableUsernameSpan:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.usersContainerRoomSettings {
+  background: #919191;
+  color: #fcfcfc;
+  font-size: 20px;
+  padding: 15px 30px;
+  border-radius: 3px;
 }

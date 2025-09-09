@@ -15,6 +15,7 @@ function generateDiv(
   isAbleToChangeOwnership,
   changeOwnershipFunction,
   forceOwnershipChangable,
+  blockUserFunction
 ) {
   var pfp = accountHelper.getProfilePictureURL(username);
   if (!username) {
@@ -59,6 +60,42 @@ function generateDiv(
       title: "This person is the real owner of this room.",
     });
   } else {
+    if ((isAbleToChangeOwnership || forceOwnershipChangable) && blockUserFunction) {
+      icons.push({
+        element: "div",
+        style: {
+          height: "23px",
+        },
+        className: "divButton roundborder",
+        title: "Click to block/ban this user.",
+        children: [
+          {
+            element: "img",
+            style: {
+              height: "100%",
+            },
+            src: "images/redcancel.svg",
+          },
+          {
+            element: "span",
+            textContent: "Block/Ban",
+          },
+        ],
+        eventListeners: [
+          {
+            event: "click",
+            func: function () {
+              blockUserFunction();
+              this.disabled = true;
+              this.innerHTML = "";
+              this.className = "loader";
+              this.src = "";
+              this.style.width = "23px";
+            },
+          },
+        ],
+      });
+    }
     if (isAbleToChangeOwnership && (username || forceOwnershipChangable)) {
       if (isOwner) {
         icons.push({

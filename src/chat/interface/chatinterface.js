@@ -566,55 +566,73 @@ reconnectingScreen.hidden = true;
               async function (promoting) {
                 await changeOwnershipUser(promoting, userInfo.username);
               },
+              false,
+              async function () {
+                await changeBanUser(true, userInfo.username);
+              }
             );
             usersOnlineContainer.append(onlineUser);
           });
-          json.owners.forEach((username, i) => {
-            var onlineUser = onlineUserElementGenerator(
-              null,
-              username,
-              "",
-              "#000000",
-              true,
-              false,
-              false,
-              i == 0, //If first one than its true owner.
-              userState.isOwner,
-              async function (promoting) {
-                await changeOwnershipUser(promoting, username);
-              },
-              true,
-            );
-            ownershipUsersContainer.append(onlineUser);
-          });
-          json.bans.forEach((username, i) => {
-            var funct = async function () {
-              await changeBanUser(false, username);
-            };
-            if (!userState.isOwner) {
-              funct = null;
-            }
-            var bannedUser = bannedUserDivGen(
-              username,
-              funct
-            );
-            blockedUsersContainer.append(bannedUser);
-          });
-          json.allowed.forEach((username, i) => {
-            var funct = async function () {
-              await changeAllowListUser(false, username);
-            };
-            if (!userState.isOwner) {
-              funct = null;
-            }
-            var allowedUser = allowUserDivGen(username, funct);
-            allowedUsersContainer.append(allowedUser);
-          });
-          if (json.allowed.length < 1) {
-            allowedUsersContainer.textContent = "The allowlist is empty — doors wide open for everyone!";
+          if (json.owners) {
+            json.owners.forEach((username, i) => {
+              var onlineUser = onlineUserElementGenerator(
+                null,
+                username,
+                "",
+                "#000000",
+                true,
+                false,
+                false,
+                i == 0, //If first one than its true owner.
+                userState.isOwner,
+                async function (promoting) {
+                  await changeOwnershipUser(promoting, username);
+                },
+                true,
+              );
+              ownershipUsersContainer.append(onlineUser);
+            });
           }
-          if (json.bans.length < 1) {
-            blockedUsersContainer.textContent = "Ban list is squeaky clean ✨";
+          if (json.bans) {
+            if (json.bans.length < 1) {
+              var span = document.createElement("span");
+              span.textContent = "Ban list is squeaky clean ✨";
+              blockedUsersContainer.append(span);
+            }
+            json.bans.forEach((username, i) => {
+              var funct = async function () {
+                await changeBanUser(false, username);
+              };
+              if (!userState.isOwner) {
+                funct = null;
+              }
+              var bannedUser = bannedUserDivGen(
+                username,
+                funct
+              );
+              blockedUsersContainer.append(bannedUser);
+            });
+          }
+          if (json.allowed) {
+            if (json.allowed.length < 1) {
+              var span = document.createElement("span");
+              span.textContent = "The allowlist is empty — doors wide open for everyone!";
+              allowedUsersContainer.append(span);
+            } else {
+              var span = document.createElement("span");
+              span.textContent = "Only these users and the room owner can join the room:";
+              allowedUsersContainer.append(span);
+            }
+            json.allowed.forEach((username, i) => {
+              var funct = async function () {
+                await changeAllowListUser(false, username);
+              };
+              if (!userState.isOwner) {
+                funct = null;
+              }
+              var allowedUser = allowUserDivGen(username, funct);
+              allowedUsersContainer.append(allowedUser);
+            });
           }
         }
         if (json.type == "media") {

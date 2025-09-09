@@ -254,6 +254,144 @@ var dom = elements.createElementsFromJSON([
 
       {
         element: "div",
+        children: [
+          {
+            element: "div",
+            className: "sep1",
+          },
+          {
+            element: "span",
+            style: {
+              fontWeight: "bold",
+              fontSize: "20px",
+            },
+            textContent: "Users with admin/ownership:",
+          },
+          {
+            element: "br",
+          },
+          {
+            element: "div",
+            style: {
+              height: "23px",
+            },
+            className: "divButton roundborder",
+            title: "Click to add ownership via a username.",
+            gid: "addOwnershipUsernameButton",
+            children: [
+              {
+                element: "img",
+                style: {
+                  height: "100%",
+                },
+                src: "images/promote.svg",
+              },
+              {
+                element: "span",
+                textContent: "Promote from username",
+              },
+            ],
+          },
+          {
+            element: "br",
+          },
+          { element: "div", gid: "ownershipUsersContainer", className: "usersContainerRoomSettings" },
+          {
+            element: "br",
+          },
+          {
+            element: "div",
+            className: "sep1",
+          },
+          {
+            element: "span",
+            style: {
+              fontWeight: "bold",
+              fontSize: "20px",
+            },
+            textContent: "Blocked users:",
+          },
+          {
+            element: "br",
+          },
+          {
+            element: "div",
+            style: {
+              height: "23px",
+            },
+            className: "divButton roundborder",
+            title: "Click to block a user from this room.",
+            gid: "addBanUserButton",
+            children: [
+              {
+                element: "img",
+                style: {
+                  height: "100%",
+                },
+                src: "images/redcancel.svg",
+              },
+              {
+                element: "span",
+                textContent: "Block from username",
+              },
+            ],
+          },
+          {
+            element: "br",
+          },
+          { element: "div", gid: "blockedUsersContainer", className: "usersContainerRoomSettings" },
+          {
+            element: "br",
+          },
+          {
+            element: "div",
+            className: "sep1",
+          },
+          {
+            element: "span",
+            style: {
+              fontWeight: "bold",
+              fontSize: "20px",
+            },
+            textContent: "Allow list:",
+          },
+          {
+            element: "br",
+          },
+          {
+            element: "div",
+            style: {
+              height: "23px",
+            },
+            className: "divButton roundborder",
+            title: "Click to add a user to the allow list.",
+            gid: "addAllowUserButton",
+            children: [
+              {
+                element: "img",
+                style: {
+                  height: "100%",
+                },
+                src: "images/check.svg",
+              },
+              {
+                element: "span",
+                textContent: "Allow from username",
+              },
+            ],
+          },
+          {
+            element: "br",
+          },
+          { element: "div", gid: "allowedUsersContainer", className: "usersContainerRoomSettings" },
+          {
+            element: "br",
+          },
+        ]
+      },
+
+      {
+        element: "div",
         className: "sep1",
       },
 
