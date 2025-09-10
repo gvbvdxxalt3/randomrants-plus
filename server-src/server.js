@@ -1467,10 +1467,13 @@ async function startRoomWSS(roomid) {
             roomWebsockets[roomid.toString()] = undefined;
           }
           if (json.type == "media") {
-            if (json.command == "mediaResetRequest") {
+            function resetMediaValues() {
               currentScreenshareCode = null;
               currentScreensharingWebsocket = null;
               currentMediaEmbedURL = null;
+            }
+            if (json.command == "mediaResetRequest") {
+              resetMediaValues();
               wss.clients.forEach((cli) => {
                 if (!cli._rrIsReady) {
                   return;
@@ -1492,8 +1495,10 @@ async function startRoomWSS(roomid) {
               json.command == "screenshareRunning" &&
               hasPermission("media", ws)
             ) {
+              resetMediaValues();
               currentScreenshareCode = json.code;
               currentScreensharingWebsocket = ws._rrConnectionID;
+              currentMediaEmbedURL = null;
               wss.clients.forEach((cli) => {
                 if (!cli._rrIsReady) {
                   return;
@@ -1517,6 +1522,11 @@ async function startRoomWSS(roomid) {
               if (json.url.length < 1) {
                 return;
               }
+              if (json.url.length > 500) {
+                return;
+              }
+              resetMediaValues();
+              currentScreenshareCode = null;
               currentMediaEmbedURL = json.url;
               wss.clients.forEach((cli) => {
                 if (!cli._rrIsReady) {
