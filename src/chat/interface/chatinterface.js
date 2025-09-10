@@ -380,6 +380,9 @@ reconnectingScreen.hidden = true;
     function onMessage(e) {
       try {
         var json = JSON.parse(e.data);
+        if (json.type == "allowGuests") {
+          roomSettings.updateAllowGuests(json.allow);
+        }
         if (json.type == "roomPermissions") {
           //Room permissions recieved, update the user state to reflect them.
           var perms = json.perms;

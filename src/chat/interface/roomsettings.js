@@ -2,6 +2,7 @@ var elements = require("../../gp2/elements.js");
 var dialogs = require("../../dialogs.js");
 var accountHelper = require("../../accounthelper");
 var userState = require("./userstate.js");
+const dialog = require("../../dialogs.js");
 
 var rs = {};
 
@@ -24,14 +25,31 @@ var roomPermissionOptions = [
 ];
 
 async function updatePermissionSetting(name, level) {
-  var response = await fetch(accountHelper.getServerURL() + "/rooms/perms", {
-    method: "POST",
-    body: JSON.stringify({
-      id: userState.roomID,
-      type: name,
-      level: level,
-    }),
-  });
+  try{
+    var response = await fetch(accountHelper.getServerURL() + "/rooms/perms", {
+      method: "POST",
+      body: JSON.stringify({
+        id: userState.roomID,
+        type: name,
+        level: level,
+      }),
+    });
+  }catch(e){
+    console.error(e);
+  }
+}
+
+async function updateAllowGuests(allow) {
+  try{
+    var response = await fetch(accountHelper.getServerURL() + "/rooms/changeallowguests/"+userState.roomID, {
+      method: "POST",
+      body: JSON.stringify({
+        allowGuests: allow
+      }),
+    });
+  }catch(e){
+    console.error(e);
+  }
 }
 
 var dialogDiv = document.createElement("div");
@@ -375,6 +393,29 @@ var dom = elements.createElementsFromJSON([
             textContent: "Allow list:",
           },
           {
+            element: "br"
+          },
+          {
+            element: "span",
+            textContent: "Allow guest users:",
+          },
+          {
+            element: "input",
+            type: "checkbox",
+            checked: true,
+            gid: "roomSettingAllowGuests",
+            eventListeners: [
+              {
+                event: "change",
+                func: async function () {
+                  this.disabled = true;
+                  await updateAllowGuests(this.checked);
+                  this.disabled = false;
+                }
+              }
+            ]
+          },
+          {
             element: "br",
           },
           {
@@ -548,6 +589,12 @@ rs.changeRoomName = function (name) {
 
 rs.updatePermission = function (name, value) {
   elements.getGPId("roomPerms_" + name).value = value;
+};
+
+var roomSettingAllowGuests = elements.getGPId("roomSettingAllowGuests");
+
+rs.updateAllowGuests = function (value) {
+  roomSettingAllowGuests.checked = value;
 };
 
 module.exports = rs;

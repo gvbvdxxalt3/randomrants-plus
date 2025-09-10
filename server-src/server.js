@@ -1111,8 +1111,7 @@ async function startRoomWSS(roomid) {
   wss._rrHasPermission = hasPermission; //For the command handler.
   function checkBanAndUserList(ws) {
     if (!ws._rrUsername) {
-      var blockGuest = info.blockGuests || info.allowList.length > 0;
-      if (blockGuest) {
+      if (!info.allowGuests) {
         ws.send(JSON.stringify({
           type:"noGuests"
         }));
@@ -1687,6 +1686,13 @@ async function startRoomWSS(roomid) {
 
       ws.send(
         JSON.stringify({
+          type: "allowGuests",
+          allow: info.allowGuests,
+        }),
+      );
+
+      ws.send(
+        JSON.stringify({
           type: "roomName",
           name: info.name,
           id: roomid,
@@ -1851,6 +1857,12 @@ async function startRoomWSS(roomid) {
         return;
       }
       sendPermData(ws);
+      ws.send(
+        JSON.stringify({
+          type: "allowGuests",
+          allow: info.allowGuests,
+        }),
+      );
     });
 
     sendOnlineList();
@@ -1978,6 +1990,12 @@ function applyNewRoomPermissionValues(roomInfo) {
   
   if (!Array.isArray(roomInfo.banList)) {
     roomInfo.banList = [];
+  }
+
+  //Allow guests is enabled by default.
+
+  if (typeof roomInfo.allowGuests !== "boolean") {
+    roomInfo.allowGuests = true;
   }
 
   return roomInfo; //Return it just because.

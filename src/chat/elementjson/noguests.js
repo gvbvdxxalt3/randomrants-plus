@@ -62,7 +62,11 @@ module.exports = {
             {
               event: "click",
               func: function () {
-                window.location.href = "/signin";
+                window.location.href =
+                "/signin?href=" +
+                encodeURIComponent(
+                  window.location.pathname + window.location.hash,
+                );
               }
             }
           ]
@@ -75,7 +79,11 @@ module.exports = {
             {
               event: "click",
               func: function () {
-                window.location.href = "/signup";
+                window.location.href =
+                "/signup?href=" +
+                encodeURIComponent(
+                  window.location.pathname + window.location.hash,
+                );
               }
             }
           ]
