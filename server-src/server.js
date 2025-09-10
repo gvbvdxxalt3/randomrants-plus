@@ -1283,6 +1283,10 @@ async function startRoomWSS(roomid) {
       ws._rrUserColor = "#000000";
       if (usercookie) {
         var decryptedUserdata = encryptor.decrypt(usercookie);
+        var validation = await validateUser(
+          decryptedUserdata.username,
+          decryptedUserdata.password,
+        );
         for (var cli of wss.clients) {
           if (cli._rrUsername && cli._rrLoggedIn) {
             if (cli._rrUsername.toLowerCase() == decryptedUserdata.username) {
@@ -1292,10 +1296,6 @@ async function startRoomWSS(roomid) {
             }
           }
         }
-        var validation = await validateUser(
-          decryptedUserdata.username,
-          decryptedUserdata.password,
-        );
         if (validation.valid) {
           ws._rrLoggedIn = true;
           displayName = validation.displayName;
