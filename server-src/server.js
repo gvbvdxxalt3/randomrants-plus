@@ -1117,7 +1117,7 @@ async function startRoomWSS(roomid) {
           type:"noGuests"
         }));
         ws._rrBlockedConnection = true;
-        ws.terminate();
+        ws._rrCloseAndTerminate();
         return true;
       }
     }
@@ -1134,7 +1134,7 @@ async function startRoomWSS(roomid) {
         type:"banned"
       }));
       ws._rrBlockedConnection = true;
-      ws.terminate();
+      ws._rrCloseAndTerminate();
       return true;
     }
     return false;
@@ -1154,7 +1154,7 @@ async function startRoomWSS(roomid) {
         type:"notInAllowList"
       }));
       ws._rrBlockedConnection = true;
-      ws.terminate();
+      ws._rrCloseAndTerminate();
       return true;
     }
   }
@@ -1260,6 +1260,17 @@ async function startRoomWSS(roomid) {
   var connectionIDCount = 0;
   wss._rrCommandHandler = new commandHandler(wss);
   wss.on("connection", (ws, request) => {
+    ws._rrCloseAndTerminate = function () {
+      try{
+        var terminateTimeout = setTimeout(() => {
+      		ws.terminate();
+        },70);
+        ws.on("close", () => {
+          clearTimeout(terminateTimeout);
+        });
+      	ws.close();
+      }catch(e){}
+    };
     ws._rrConnectionID = connectionIDCount;
     ws._rrLastMessageTime = Date.now();
     connectionIDCount += 1;
@@ -1764,7 +1775,7 @@ async function startRoomWSS(roomid) {
 
   wss._rrStopRoom = function () {
     for (var client of wss.clients) {
-      client.terminate();
+      client._rrCloseAndTerminate();
     }
     wss.close();
     clearInterval(wss._rrKeepAliveInterval);
@@ -1772,6 +1783,7 @@ async function startRoomWSS(roomid) {
       //Avoid any double timeouts.
       clearTimeout(wss._rrEndRoomTimeout);
     }
+    roomWebsockets[roomid.toString()] = undefined;
   };
 
   wss._rrReloadUserlist = function () {
@@ -2600,8 +2612,8 @@ const server = http.createServer(async function (req, res) {
               JSON.stringify(roomData),
               "application/json",
             );
-            if (roomWebsockets[id.toLowerCase()]) {
-              roomWebsockets[id.toLowerCase()]._rrUpdateRoomInfo();
+            if (roomWebsockets[id]) {
+              roomWebsockets[id]._rrUpdateRoomInfo();
             }
             res.end("");
           } else {
@@ -2681,8 +2693,8 @@ const server = http.createServer(async function (req, res) {
               JSON.stringify(roomData),
               "application/json",
             );
-            if (roomWebsockets[id.toLowerCase()]) {
-              roomWebsockets[id.toLowerCase()]._rrUpdateRoomInfo();
+            if (roomWebsockets[id]) {
+              roomWebsockets[id]._rrUpdateRoomInfo();
             }
             res.end("");
           } else {
@@ -2744,8 +2756,8 @@ const server = http.createServer(async function (req, res) {
               JSON.stringify(roomData),
               "application/json",
             );
-            if (roomWebsockets[id.toLowerCase()]) {
-              roomWebsockets[id.toLowerCase()]._rrUpdateRoomInfo();
+            if (roomWebsockets[id]) {
+              roomWebsockets[id]._rrUpdateRoomInfo();
             }
             res.end("");
           } else {
@@ -2827,8 +2839,8 @@ const server = http.createServer(async function (req, res) {
               JSON.stringify(roomData),
               "application/json",
             );
-            if (roomWebsockets[id.toLowerCase()]) {
-              roomWebsockets[id.toLowerCase()]._rrUpdateRoomInfo();
+            if (roomWebsockets[id]) {
+              roomWebsockets[id]._rrUpdateRoomInfo();
             }
             res.end("");
           } else {
@@ -2908,8 +2920,8 @@ const server = http.createServer(async function (req, res) {
               JSON.stringify(roomData),
               "application/json",
             );
-            if (roomWebsockets[id.toLowerCase()]) {
-              roomWebsockets[id.toLowerCase()]._rrUpdateRoomInfo();
+            if (roomWebsockets[id]) {
+              roomWebsockets[id]._rrUpdateRoomInfo();
             }
             res.end("");
           } else {
