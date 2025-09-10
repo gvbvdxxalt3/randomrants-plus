@@ -78,6 +78,25 @@ var dom = elements.createElementsFromJSON([
           "💡 Tips: Rename your room to something cool and easy to remember. " +
           "Destroying the room nukes everything inside, so use it wisely!",
       },
+      
+      {
+        element: "div",
+        className: "divButton roundborder",
+        textContent: "Close",
+        eventListeners: [
+          {
+            event: "click",
+            func: function () {
+              dialogDiv.hidden = true;
+            },
+          },
+        ],
+      },
+      
+      {
+        element: "br"
+      },
+      
       {
         element: "div",
         className: "sep1",

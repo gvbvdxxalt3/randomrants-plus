@@ -60,7 +60,7 @@ function generateDiv(
       title: "This person is the real owner of this room.",
     });
   } else {
-    if ((isAbleToChangeOwnership || forceOwnershipChangable) && blockUserFunction) {
+    if (((isAbleToChangeOwnership || forceOwnershipChangable) && blockUserFunction) && username) {
       icons.push({
         element: "div",
         style: {

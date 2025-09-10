@@ -2606,6 +2606,11 @@ const server = http.createServer(async function (req, res) {
             }
             
             roomData.banList.push(targetUsername);
+            
+            var ownerindex = roomData.owners.indexOf(targetUsername); //Remove ownership if banning an ownership user.
+            if (ownerindex > -1) {
+            	roomData.owners.splice(ownerindex, 1);
+            }
 
             await storage.uploadFile(
               `room-${id}-info.json`,
