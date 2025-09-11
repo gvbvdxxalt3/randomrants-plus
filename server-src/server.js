@@ -3922,6 +3922,23 @@ const server = http.createServer(async function (req, res) {
   }
 });
 
+var invalidRoomIdWss = wss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
+
+invalidRoomIdWss.on("connection", (ws, request) => {
+  ws.send(JSON.stringify({type: "invalidRoomId",}));
+  var timeout = setTimeout(() => {
+    ws.close();
+  }, 1000);
+  ws.on("close", () => {
+  	clearTimeout(timeout);
+  });
+});
+
+var directCloseWss  = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
+wss.on("connection", (ws, request) => {
+  ws.close();
+});
+
 server.on("upgrade", async function upgrade(request, socket, head) {
   var url = decodeURIComponent(request.url);
   var urlsplit = url.split("/");
@@ -3938,33 +3955,21 @@ server.on("upgrade", async function upgrade(request, socket, head) {
           wss = roomWs;
         }
       } else {
-        wss = await startRoomWSS(id);
+        roomWebsockets[id] = roomStillLoadingWss;
+        try{
+        	wss = await startRoomWSS(id);
+        	roomWebsockets[id] = wss;
+        }catch(e){
+          console.log("Room failed to load: ",e);
+          wss = directCloseWss;
+        }
       }
     } else {
-      wss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
-
-      wss.on("connection", (ws, request) => {
-        ws.send(
-          JSON.stringify({
-            type: "invalidRoomId",
-          }),
-        );
-
-        var timeout = setTimeout(() => {
-          ws.close();
-        }, 1000);
-        ws.on("close", () => {
-          clearTimeout(timeout);
-        });
-      });
+      wss = invalidRoomIdWss;
     }
   } catch (e) {
     console.log("Got strange error from processing websocket request: ", e);
-    wss = new ws.WebSocketServer({ noServer: true, ...wssServerOptions });
-
-    wss.on("connection", (ws, request) => {
-      ws.close();
-    });
+    wss = directCloseWss;
   }
 
   wss.handleUpgrade(request, socket, head, function done(ws) {
