@@ -63,6 +63,7 @@ var dom = elements.createElementsFromJSON([
   {
     element: "div",
     className: "whiteBox centerMiddle popupDialogAnimation",
+    gid: "roomSettingsDialogBox",
     style: {
       overflowY: "auto",
       maxHeight: "calc(100vh - 100px)",
@@ -79,6 +80,21 @@ var dom = elements.createElementsFromJSON([
         },
         textContent: "Room settings",
       },
+      
+      {
+        element: "div",
+        className: "divButton roundborder",
+        textContent: "Close",
+        eventListeners: [
+          {
+            event: "click",
+            func: function () {
+              dialogDiv.hidden = true;
+            },
+          },
+        ],
+      },
+      
       {
         element: "div",
         style: {
@@ -92,22 +108,35 @@ var dom = elements.createElementsFromJSON([
           width: "fit-content",
           height: "fit-content",
         },
-        textContent:
-          "💡 Tips: Rename your room to something cool and easy to remember. " +
-          "Destroying the room nukes everything inside, so use it wisely!",
-      },
-      
-      {
-        element: "div",
-        className: "divButton roundborder",
-        textContent: "Close",
-        eventListeners: [
+        children: [
           {
-            event: "click",
-            func: function () {
-              dialogDiv.hidden = true;
-            },
+            element: "p",
+            textContent: "💡 Tips: Rename your room to something cool and easy to remember. "
           },
+          {
+            element: "p",
+            textContent: "Destroying the room nukes everything inside, so use it wisely! "
+          },
+          {
+            element: "p",
+            textContent: "Guests are people that aren't signed in, you can turn allow guest users off if you don't want them in this room."
+          },
+          {
+            element: "p",
+            textContent: "Owner and ownership get the same permissions, also ownership behaves like admins or co-owners. "
+          },
+          {
+            element: "p",
+            textContent: "If someones got ownership. They can do the same thing as a room owner, but they can't take permissions from the room owner. "
+          },
+          {
+            element: "p",
+            textContent: "The block list lets you ban, or block people from your room (even if they are on the allow or ownership list). Use this if you end up with someone you don't want in your room. "
+          },
+          {
+            element: "p",
+            textContent: "The allow list (if not empty) lets you allow only certian user. You can also turn off guest users if you don't want them in. "
+          }
         ],
       },
       
@@ -291,6 +320,7 @@ var dom = elements.createElementsFromJSON([
 
       {
         element: "div",
+        gid: "roomSettingsPermissionSettings",
         children: [
           {
             element: "div",
@@ -575,10 +605,20 @@ dialogDiv.hidden = true;
 elements.appendElements(dialogDiv, dom);
 document.body.append(dialogDiv);
 
+var roomSettingsDialogBox = elements.getGPId("roomSettingsDialogBox");
+
 var showRoomSettingsButton = elements.getGPId("showRoomSettingsButton");
 
 showRoomSettingsButton.addEventListener("click", function () {
+  roomSettingsDialogBox.scrollTo(0,0);
   dialogDiv.hidden = false;
+});
+
+var showRoomSettingsButton2 = elements.getGPId("showRoomSettingsButton2");
+var roomSettingsPermissionSettings = elements.getGPId("roomSettingsPermissionSettings");
+showRoomSettingsButton2.addEventListener("click", function () {
+  dialogDiv.hidden = false;
+    roomSettingsDialogBox.scrollTo(0,roomSettingsPermissionSettings.offsetTop);
 });
 
 var roomSettingsNameInput = elements.getGPId("roomSettingsName");

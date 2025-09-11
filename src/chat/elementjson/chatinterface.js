@@ -286,11 +286,23 @@ var rightSide = {
         },
         { element: "hr" },
         { element: "div", gid: "usersOnlineContainer" },
+        { element: "hr" },
         {
-          element: "div",
-          gid: "ownerEditOnlyStuffContainer",
-          children: []
-        }
+          element: "button",
+          className: "roundborder chatInterfaceButton",
+          gid: "showRoomSettingsButton2",
+          hidden: true,
+          children: [
+            {
+              element: "img",
+              src: "images/settings.svg",
+            },
+            {
+              element: "span",
+              textContent: "More permission settings",
+            },
+          ],
+        },
       ],
     },
   ],

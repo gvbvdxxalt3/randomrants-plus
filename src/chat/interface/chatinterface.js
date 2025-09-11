@@ -66,12 +66,12 @@ var toggleMessageAndOnlineViewText = elements.getGPId(
 );
 
 var showRoomSettingsButton = elements.getGPId("showRoomSettingsButton");
+var showRoomSettingsButton2 = elements.getGPId("showRoomSettingsButton2");
 
 var addBanUserButton = elements.getGPId("addBanUserButton");
 var blockedUsersContainer = elements.getGPId("blockedUsersContainer");
 var addAllowUserButton = elements.getGPId("addAllowUserButton");
 var allowedUsersContainer = elements.getGPId("allowedUsersContainer");
-var ownerEditOnlyStuffContainer = elements.getGPId("ownerEditOnlyStuffContainer");
 
 var toggleOnlineView = false;
 var isOffline = false;
@@ -426,7 +426,7 @@ reconnectingScreen.hidden = true;
           addOwnershipUsernameButton.hidden = true;
           addBanUserButton.hidden = true;
           addAllowUserButton.hidden = true;
-          ownerEditOnlyStuffContainer.hidden = true;
+          showRoomSettingsButton2.hidden = true;
         }
         if (json.type == "isOwner") {
           userState.isOwner = json.isOwner;
@@ -434,7 +434,7 @@ reconnectingScreen.hidden = true;
           addOwnershipUsernameButton.hidden = !json.isOwner;
           addBanUserButton.hidden = !json.isOwner;
           addAllowUserButton.hidden = !json.isOwner;
-          ownerEditOnlyStuffContainer.hidden = !json.isOwner;
+          showRoomSettingsButton2.hidden = !json.isOwner;
         }
         if (json.type == "messages") {
           //This also clears messages and rewrites them.
