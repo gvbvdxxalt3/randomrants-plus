@@ -750,6 +750,7 @@ reconnectingScreen.hidden = true;
 
     require("./chatappinterface.js");
     require("./accountnotice.js");
+    require("./installapp.js");
   } catch (e) {
     handleErrors(e);
   }

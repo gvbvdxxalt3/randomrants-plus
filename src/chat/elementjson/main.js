@@ -44,6 +44,7 @@ module.exports = [
       require("./banned.js"),
       require("./update.js"),
       require("./offlineerror.js"),
+      require("./installappdialog.js")
     ],
   },
 ];
