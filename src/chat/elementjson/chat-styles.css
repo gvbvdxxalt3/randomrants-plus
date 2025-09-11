@@ -707,7 +707,7 @@ a {
 
 .chatInterfaceMessagesBox {
   width: 100%;
-  height: calc(100% - 130px);
+  height: calc(calc(100% - 130px) - 30px);
   background: var(--messages-bg-color);
   color: var(--messages-text-color);
   font-size: 20px;
@@ -719,7 +719,7 @@ a {
 
 .chatInterfaceOnlineViewBox {
   width: 100%;
-  height: calc(100% - 100px);
+  height: calc(100% - 130px);
   background: var(--messages-bg-color);
   color: var(--messages-text-color);
   font-size: 20px;
@@ -729,7 +729,7 @@ a {
 
 .chatInterfaceButtonBox {
   width: 100%;
-  height: 100px;
+  height: 130px;
   display: flex;
   flex-wrap: wrap;
   overflow: auto;
