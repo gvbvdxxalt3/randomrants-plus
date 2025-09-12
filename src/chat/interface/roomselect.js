@@ -51,7 +51,7 @@ function doJoinCodeScreen(code) {
             fontSize: "30px",
             fontWeight: "bold",
           },
-          textContent: "⚡ ZOOM into the room!",
+          textContent: "Hop into this dudes room!",
         },
         {
           element: "br",
@@ -71,7 +71,7 @@ function doJoinCodeScreen(code) {
         {
           element: "span",
           textContent:
-            "Someone just dropped a fresh join code into the multiverse. Hit that link to blast into their chaos zone!",
+            "Someone dropped a new fresh join code. Go to the link above or click \"Quick join\" on your menu bar and type this wacky code.",
         },
         {
           element: "br",
@@ -79,7 +79,7 @@ function doJoinCodeScreen(code) {
         {
           element: "span",
           textContent:
-            "⏳ This code self-destructs in 10 minutes. Use it or lose it.",
+            "This code will self destruct in 10 minutes, use it or lose it.",
         },
         {
           element: "br",
@@ -87,7 +87,7 @@ function doJoinCodeScreen(code) {
         {
           element: "div",
           className: "divButton roundborder",
-          textContent: "Nah I'm out",
+          textContent: "Close",
           eventListeners: [
             {
               event: "click",
