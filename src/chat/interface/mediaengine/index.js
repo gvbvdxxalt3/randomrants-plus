@@ -5,26 +5,17 @@ var userState = require("../userstate.js");
 var uploadFileAsURL = require("../uploadfiles.js");
 
 var movingMediaTexts = [
-  "Broadcasting at 144p, just kidding... or are we?",
-  "Your tabs are now everyone's business",
-  "Don’t alt-tab into your search history!",
-  "Lag is temporary, screenshots are forever",
-  "Pixel-perfect judgment is happening now",
-  "Trying not to stream your homework folder...",
-  "Your screen is loud and proud",
-  "Hope you closed that other tab",
-  "Stream stabilized... for now",
-  "Initializing RantVision™ tech",
-  "Zooming in on your chaos",
-  "Deploying screen-sharing goblins",
-  "Everyone is judging your cursor speed",
-  "Virtual popcorn ready",
-  "Screencast engaged. Panic level: 2",
-  "Loading pixel juice...",
-  "Building lag-resistant warp tunnel",
-  "Beaming your gameplay to the universe",
-  "Calibrating chaos stream",
-  "Tapping into the multi-screenverse",
+  "Loading up the shrek videos...",
+  "Finishing up with Jason touch...",
+  "Turning on the virtual televisions...",
+  "Loading in the cat videos...",
+  "Getting the virtual popcorn ready...",
+  "Depolying your video frames...",
+  "Loading 100 virtual adapters...",
+  "Booting the one server that breaks after 1 second...",
+  "Starting entertainment overloads...",
+  "Loading the scribble masterpeice...",
+  "Starting a war against the server and your computer...",
 ];
 
 var noInstantPlayNotice =
@@ -416,14 +407,14 @@ function doLoadingMediaScreen() {
             fontSize: "30px",
             fontWeight: "bold",
           },
-          textContent: "Hold up 🎬",
+          textContent: "Starting up",
         },
         {
           element: "br",
         },
         {
           element: "span",
-          textContent: "Media’s spinning up... grab some Fanta 🍊",
+          textContent: "Your content is starting soon... While that is happening you should grab some virtual popcorn.",
         },
         {
           element: "br",
@@ -536,8 +527,8 @@ async function doMediaSelect() {
               lineHeight: "1.4",
             },
             textContent:
-              "💡 Tip: Only one media option can be active at a time in a room.\n" +
-              "Choose a method that fits what you want to share.",
+              "Tip: This area can only play one thing at a time.\n" +
+              "Choose a app or method that best fits what you want to share.",
           },
           {
             element: "div",
