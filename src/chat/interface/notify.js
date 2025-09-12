@@ -13,7 +13,6 @@ notify.sendIfOnScreen = function (tag, message) {
     }
     lastNotifcation = new Notification("Random Rants +", {
       icon: "favicon.png",
-      vibrate: [150, 60, 150],
       tag: tag,
       body: message,
     });
