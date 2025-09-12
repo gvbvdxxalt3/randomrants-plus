@@ -1,38 +1,14 @@
-[font css=Georgia][color css=crimson][i]"Built for chill. Hijacked by chaos."[/i][/color][/font]
-[font css=Verdana][color css=royalblue][i]"What started as vibes turned into volume."[/i][/color][/font]
-[font css=Tahoma][color css=seagreen][i]"First it was quiet. Then someone asked for fart noises."[/i][/color][/font]
-[font css=Arial][color css=royalblue][i]"From chill Chromebook hangout → to the loudest tab in class."[/i][/color][/font]
-[font css=Courier New][color css=darkorange][i]"Step 1: rant. Step 2: soundboard war."[/i][/color][/font]
-[font css=Georgia][color css=royalblue][i]"Started for background vibes, adopted by class clowns."[/i][/color][/font]
-[font css=Tahoma][color css=hotpink][i]"Originally for chilling. Now it's detention-bait."[/i][/color][/font]
-[font css=Arial][color css=royalblue][i]"The app that went from hiding to headlining."[/i][/color][/font]
-[font css=Cursive][color css=midnightblue][i]"A chill spot until the chaos crew showed up."[/i][/color][/font]
-[font css=Verdana][color css=royalblue][i]"One app, two audiences: the chill kids and the chaos kids."[/i][/color][/font]
-[font css=Tahoma][color css=orangered][i]"Homework ignored. Soundboard tested."[/i][/color][/font]
-[font css=Arial][color css=royalblue][i]"This is what happens when people beg for sounds."[/i][/color][/font]
-[font css=Georgia][color css=darkslategray][i]"Silence was never an option."[/i][/color][/font]
-[font css="Lucida Console"][color css=royalblue][i]"Accidentally built for noise complaints."[/i][/color][/font]
-[font css=Courier][color css=teal][i]"Class clowns finally got their soundtrack."[/i][/color][/font]
-[font css=Georgia][color css=crimson][i]"Built out of boredom. Perfect for chaos."[/i][/color][/font]
-[font css=Verdana][color css=royalblue][i]"Grounded? More like inventing chaos time."[/i][/color][/font]
-[font css=Tahoma][color css=seagreen][i]"Punishment made the app. Chaos made it famous."[/i][/color][/font]
-[font css=Arial][color css=royalblue][i]"Grounded kids don’t sulk — they make noise."[/i][/color][/font]
-[font css=Courier New][color css=darkgoldenrod][i]"Assigned to focus. Chose to build Random Rants +."[/i][/color][/font]
-[font css=Tahoma][color css=royalblue][i]"Focus time: where chaos was accidentally born."[/i][/color][/font]
-[font css=Arial][color css=midnightblue][i]"0% study. 100% soundboard testing."[/i][/color][/font]
-[font css=Verdana][color css=royalblue][i]"Other kids wrote essays. I wrote rants."[/i][/color][/font]
-[font css=Georgia][color css=deeppink][i]"From Discord mod jokes → to the kid with the site."[/i][/color][/font]
-[font css=Courier][color css=royalblue][i]"Didn’t get admin in class. Became admin of chaos."[/i][/color][/font]
-[font css=Arial][color css=tomato][i]"Forget homework. I gave people chaos homework."[/i][/color][/font]
-[font css=Verdana][color css=royalblue][i]"Cool kids had the answers. I had the unblocked link."[/i][/color][/font]
-[font css=Georgia][color css=crimson][b]"Homework dodged. Chaos engaged."[/b][/color][/font]
-[font css=Georgia][color css=darkred][i]"Math test tomorrow, soundboard war tonight."[/i][/color][/font]
-[font css=Courier][color css=royalblue][i]"Silent in class, loud in Random Rants +."[/i][/color][/font]
-[font css=Verdana][color css=seagreen][i]"Homework? Blocked. Random Rants +? Unblocked."[/i][/color][/font]
-[font css=Arial][color css=firebrick][i]"One button away from classroom chaos."[/i][/color][/font]
-[font css=Georgia][color css=royalblue][b]"Built chill. Broken by the soundboard."[/b][/color][/font]
-[font css=Courier New][color css=darkcyan][i]"Why type a joke when you can blast it?"[/i][/color][/font]
-[font css=Tahoma][color css=darkslateblue][i]"Every button = a new bad decision."[/i][/color][/font]
-[font css=Verdana][color css=crimson][i]"Normal volume wasn’t enough."[/i][/color][/font]
-[font css=Georgia][color css=royalblue][b]"Warning: 100x volume may cause teacher rage quits."[/b][/color][/font]
-[font css=Cursive][color css=orange][i]"Headphones required. Sanity optional."[/i][/color][/font]
+"Class Work? Nah. More like: Online chat chaos"
+"The best way towards group chat on your school Chromebook."
+"Went from normal chat, to absolute chaos, in a few months."
+"Play a sound, and probally regret it."
+"Teachers hate it, students love it"
+"The site that students love."
+"The gateway to maximum group distraction."
+"Group chat? More like group distraction."
+"More random, with more rants"
+[colors]"The Chromebook party starts now"[/colors]
+"The best way for infinite Chromebook distraction"
+"Clickity Clackity, but with louder Clicks"
+"Where forever grounded kids have fun again"
+"Now with more laughs"
