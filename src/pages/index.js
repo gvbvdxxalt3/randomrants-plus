@@ -21,6 +21,32 @@ function returnRandomValueFromArray(array) {
   return array[Math.round(Math.random() * (array.length - 1))];
 }
 
+var rainbow = [
+  "#ff0000",
+  "#ff6600",
+  "#ffb300",
+  "#ffe600",
+  "#d9ff00",
+  "#9dff00",
+  "#55ff00",
+  "#0dff00",
+  "#00ff40",
+  "#00ff88",
+  "#00ffcc",
+  "#00eeff",
+  "#00aaff",
+  "#0066ff",
+  "#0026ff",
+  "#3700ff",
+  "#8800ff",
+  "#dd00ff",
+  "#ff00e1",
+  "#ff00a6",
+  "#ff006a",
+  "#ff0033",
+  "#ff0000",
+];
+
 var elementJSON = [
   {
     element: "div",
@@ -162,6 +188,7 @@ var elementJSON = [
       backgroundColor: "#ffffff",
       borderRadius: "5px",
       boxShadow: "0 0px 30px black",
+      padding: "15px 15px"
     },
     children: [
       require("./sitenews-notice.js"),
@@ -170,15 +197,8 @@ var elementJSON = [
         className: "fadeIn",
         gid: "mainCenter",
         style: {
-          width: "calc(100vw - 200px)",
           minWidth: "300px",
-          textWrap: "balance", // Only works in Chromium browsers
           textAlign: "center",
-          overflowWrap: "break-word",
-          wordBreak: "break-word",
-          hyphens: "auto",
-          padding: "1rem", // Optional: gives breathing room
-          boxSizing: "border-box",
         },
         children: [
           {
@@ -186,7 +206,7 @@ var elementJSON = [
             className: "fadeIn delay-3",
             style: {
               fontSize: "40px",
-              color: "black",
+              color: returnRandomValueFromArray(rainbow),
             },
             innerHTML: shtml.getMessageHTML(
               returnRandomValueFromArray(randomQuotes).trim(),
