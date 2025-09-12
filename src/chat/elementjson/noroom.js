@@ -17,24 +17,24 @@ module.exports = {
     { element: "br" },
     {
       element: "span",
-      textContent: "Welcome to the chaos zone! (a.k.a. Random Rants +)",
+      textContent: "Welcome to Random Rants +",
     },
     { element: "br" },
     {
       element: "span",
       textContent:
-        'To get started, hit the "Manage rooms" button in the menu bar above.',
+        'To get started, press the button below, or hit "Manage rooms" on the menu bar above.',
     },
     { element: "br" },
     {
       element: "span",
       textContent:
-        "From there, you can create a new room or hop into an existing one.",
+        "From there, you could hop into rooms you've already joined, and recieve invites from there.",
     },
     { element: "br" },
     {
       element: "span",
-      textContent: "Let the randomness begin. 🎉",
+      textContent: "Start ranting, random ranter!",
     },
     { element: "br" },
     {
