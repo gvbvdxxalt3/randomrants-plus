@@ -131,7 +131,7 @@ async function doRoomSelect() {
           {
             element: "span",
             textContent:
-              "⚠️ You’re not logged in, so room controls are locked.",
+              "You're not signed in, so you can't save or make rooms.",
           },
           {
             element: "br",
@@ -139,7 +139,7 @@ async function doRoomSelect() {
           {
             element: "span",
             textContent:
-              "Just logged in? Try refreshing the page to unlock everything.",
+              "Just signed in? Refresh this page to unlock everything here.",
           },
         ],
       });
@@ -169,7 +169,7 @@ async function doRoomSelect() {
     rooms.forEach((room) => {
       var removeButton = {
         element: "div",
-        className: "divButton",
+        className: "divButton roundborder",
         textContent: "Remove from list",
         eventListeners: [
           {
@@ -330,7 +330,7 @@ async function doRoomSelect() {
                   e.preventDefault();
                   try {
                     var inviteTarget = await dialog.prompt(
-                      "👥 Who do you want to invite to this room?\nType their username and bring them in!",
+                      "Who do you want to invite to this room?\nType their username to bring them in!",
                     );
                     if (!inviteTarget) {
                       return;
@@ -348,7 +348,7 @@ async function doRoomSelect() {
                     );
                     if (!response.ok) {
                       dialog.alert(
-                        "❌ Invite flop. That username doesn’t exist... or maybe it escaped through a portal. Check it and try again!",
+                        "Invite error. That username doesn’t exist... or maybe it escaped through a portal. Check it and try again!"+"\n"+"Server said: "+response.status,
                       );
                     }
                   } catch (e) {
@@ -441,25 +441,25 @@ async function doRoomSelect() {
               {
                 element: "li",
                 textContent:
-                  'Click "🚪 Summon a room" to create your own room.',
+                  'Click "🚪 Summon a room" to create your very own room.',
               },
               {
                 element: "li",
-                textContent: "Click Join room to hop into a chat.",
+                textContent: "Click \"Join room\" to hop into a room.",
               },
               {
                 element: "li",
-                textContent: "Use Invite someone to bring a friend in.",
-              },
-              {
-                element: "li",
-                textContent:
-                  "Hit Remove from list if a room’s no longer your vibe.",
+                textContent: "Use \"Invite someone\" to bring a friend in via username.",
               },
               {
                 element: "li",
                 textContent:
-                  'Want to invite without typing your friends username? Click "Create join code".',
+                  "Hit \"Remove from list\" to remove that room from the list.",
+              },
+              {
+                element: "li",
+                textContent:
+                  'Use "Create join code" to bring friends in through a join code.',
               },
             ],
           },
@@ -482,12 +482,12 @@ async function doRoomSelect() {
                       window.location.reload();
                     } else {
                       dialog.alert(
-                        "❗ Couldn’t create the room.\nYou might need to log in or sign up first.",
+                        "Couldn't create the room, maybe sign in or sign up first?",
                       );
                     }
                   } catch (e) {
                     dialog.alert(
-                      `💥 Room launch explosion! Something went wrong: ${e}`,
+                      `Something went wrong: ${e}`,
                     );
                     console.error(e);
                   }
