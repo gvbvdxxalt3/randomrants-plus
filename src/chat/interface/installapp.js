@@ -82,5 +82,4 @@ installAppDialogCloseButtonNoShow.addEventListener("click", (e) => {
   installAppDialog.hidden = true;
   showDialog = false;
   localStorage.setItem("dontShowInstallApp",true);
-  console.log("Fine. We’ll shut up about the icon forever.");
 });

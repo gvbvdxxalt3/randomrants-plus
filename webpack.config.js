@@ -13,6 +13,7 @@ const pages = [
   "about",
   "security",
   "sitenews",
+  "history"
 ];
 try {
   require("fs").rmSync("./public", { recursive: true });
