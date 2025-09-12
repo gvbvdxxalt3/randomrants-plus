@@ -1,6 +1,3 @@
-var fortunes = require("./fortunes.js");
-var jokes = require("./jokes.js");
-
 class CommandHandler {
   constructor(wss) {
     if (!wss) {
@@ -268,31 +265,6 @@ class CommandHandler {
       },
       "<Username>[br]Flashes the screen background for a moment.",
       true,
-    );
-
-    addCommand(
-      "fortune",
-      function (args, userInfo, senderClient) {
-        const randomFortune =
-          fortunes[Math.floor(Math.random() * fortunes.length)];
-        const fortuneMessage = `[color css=lightblue][Fortune for ${userInfo.displayName}]: ${randomFortune}[/color]`;
-
-        _this.sendFeedbackGlobal(fortuneMessage);
-      },
-      "Tells everyone your questionable fortune.",
-      false,
-    );
-
-    addCommand(
-      "joke",
-      function (args, userInfo, senderClient) {
-        const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-        const jokeMessage = `[color css=yellow]${randomJoke}[/color]`;
-
-        _this.sendFeedbackGlobal(jokeMessage);
-      },
-      "Tells everyone your probaly questionable joke.",
-      false,
     );
 
     addCommand(
