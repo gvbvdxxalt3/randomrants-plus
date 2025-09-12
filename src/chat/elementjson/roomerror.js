@@ -20,7 +20,7 @@ module.exports = {
             fontSize: "30px",
             fontWeight: "bold",
           },
-          textContent: "Oops! This room vanished into the void.",
+          textContent: "This room no longer exists, or has never existed at all!",
         },
         {
           element: "div",
@@ -49,7 +49,7 @@ module.exports = {
                 {
                   element: "span",
                   textContent:
-                    "Maybe it just poofed, or maybe it was never really here. 👻",
+                    "Maybe this room was never here.",
                 },
                 {
                   element: "br",
@@ -57,8 +57,8 @@ module.exports = {
                 {
                   element: "span",
                   textContent:
-                    "If you used Quick Join, the room might've been nuked moments ago. " +
-                    "If you were hanging out in there and see this, well... RIP room. 💥",
+                    "If you used quick join, the room was existing but then disapeared right after." +
+                    "If you're seeing this inside a room, then it must of been destroyed moments ago.",
                 },
                 {
                   element: "br",
@@ -72,7 +72,7 @@ module.exports = {
                     marginBottom: "10px",
                   },
                   textContent:
-                    "This room was removed from your room list. Hopefully you don't run into this error ever again!",
+                    "This room was (hopefully) removed from your room list.",
                 },
                 {
                   element: "br",
@@ -81,7 +81,6 @@ module.exports = {
                   element: "div",
                   className: "divButton roundborder",
                   textContent: "Find another room",
-                  title: "Back to chat home—go explore other chaos zones!",
                   eventListeners: [
                     {
                       event: "click",
