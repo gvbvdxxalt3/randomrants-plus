@@ -26,9 +26,7 @@ var allowUserDivGen = require("./allowuserdiv.js");
 
 if (!isSecure()) {
   console.warn(
-    "[INSECURE PROTOCOL DETECTED] If you are using the link from a deployment, add https:// to the begining and not http://. \n" +
-      "This is because Random Rants + relies on secure content for parts of the site, please change your protocol to HTTPS if possible/" +
-      "\nRandom Rants + is may not work correctly with the http protocol unless changes to the site settings are made.",
+    "It seems your using HTTP, if you're using localhost then you can safely ignore this.\nIf you're using a deploy service, then its better to use HTTPS.",
   );
 }
 
@@ -122,9 +120,9 @@ reconnectingScreen.hidden = true;
 
     var externalThings = await fetchUtils.fetchAsJSON("external/other.json");
 
-    rrLoadingStatusText.textContent = "Injecting WebRTC chaos modules...";
+    rrLoadingStatusText.textContent = "Installing WebRTC goofyness...";
     var webrtcError =
-      "📡 WebRTC bailed on us.\nNo screen sharing, no chaos cams, and your mic is officially muted by fate.";
+      "WebRTC logic failed - No goofy cameras, microphones, or screenshares will ever happen.\nTry reloading if you need them, else they probaly blocked for you.";
     try {
       var rtcScripts = await fetchUtils.fetchAsJSON(
         "external/webrtc-helper.json",
@@ -136,33 +134,33 @@ reconnectingScreen.hidden = true;
       dialogs.alert(webrtcError);
     }
 
-    rrLoadingStatusText.textContent = "Unpacking UI bleeps and bloops...";
+    rrLoadingStatusText.textContent = "Loading in the UI beeps and boops...";
     try {
       await sounds.load();
     } catch (e) {
       dialogs.alert(
-        "🔇 UI sounds flatlined. Congrats, you’ve unlocked Silent-Rants Mode™ — it’s like Random Rants+, but quieter… and way more awkward.",
+        "UI Sounds gave up. No more clicks, beeps and boops, just plain silence.",
       );
     }
 
     try {
-      rrLoadingStatusText.textContent = "Loading soundboard insanity...";
+      rrLoadingStatusText.textContent = "Loading sound goofyness...";
       await soundboard.load(
         externalThings.soundboardURL,
         function (current, max) {
           var percent = (current / max) * 100;
           rrLoadingStatusText.textContent =
-            "Prepping soundboard overload… (" + Math.round(percent) + "%)";
+            "Loading in the goofy sounds (" + Math.round(percent) + "%)";
         },
       );
     } catch (e) {
       dialogs.alert(
-        "Soundboard failed to load (GitHub.io blocked).\nThat means no chaos buttons. Blame your school firewall.\nText + UI sounds still work though. Welcome to Half-Rants+ Edition™.",
+        "Soundboard completley failed to load, no more goofy sounds for you! Blame your schools firewall.",
       );
     }
 
     rrLoadingStatusText.textContent =
-      "Staring intensely at the websocket handshake...";
+      "Waiting for the goofy websocket handshake to finish...";
 
     if (!window.screenShareClient) {
       dialogs.alert(webrtcError);
@@ -511,7 +509,7 @@ reconnectingScreen.hidden = true;
         }
         if (json.type == "roomStillLoading") {
           rrLoadingStatusText.textContent =
-            "The server is trying to catch up with the chaos...";
+            "Waiting for the server to actually finish...";
         }
         if (json.type == "roomName") {
           roomSettings.changeRoomName(json.name);
@@ -599,7 +597,7 @@ reconnectingScreen.hidden = true;
           if (json.bans) {
             if (json.bans.length < 1) {
               var span = document.createElement("span");
-              span.textContent = "Ban list is squeaky clean ✨";
+              span.textContent = "Nobodys banned, add \"misbehaving\" users here.";
               blockedUsersContainer.append(span);
             }
             json.bans.forEach((username, i) => {
@@ -619,7 +617,7 @@ reconnectingScreen.hidden = true;
           if (json.allowed) {
             if (json.allowed.length < 1) {
               var span = document.createElement("span");
-              span.textContent = "The allowlist is empty — doors wide open for everyone!";
+              span.textContent = "The allow list is empty - Everyone could join in!";
               allowedUsersContainer.append(span);
             } else {
               var span = document.createElement("span");
