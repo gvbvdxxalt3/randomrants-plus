@@ -7,27 +7,11 @@ function surroundFlexboxDiv(c) {
 }
 
 var chatInputPlaceholders = [
-  "Type your rant message here...",
-  "Write a quick rant to send...",
-  "Enter your chaotic chat message...",
-  "What’s your random thought? Type here.",
-  "Say something loud and proud...",
-  "Write your message and hit Enter.",
-  "Type your next wild rant here.",
-  "Send your random thoughts now.",
-  "Write something for the chat...",
-  "Type your text and press send.",
-  "Write your message — no filters needed.",
-  "Tell us what’s on your mind here.",
-  "Type your rant and make it spicy.",
-  "Write a message everyone will regret reading.",
-  "Enter your unfiltered chat message.",
-  "Say it loud: type your message here.",
-  "Write your next chaotic message.",
-  "Type here to add to the madness.",
-  "Share your rant in the chat box.",
-  "Enter your message and release the chaos.",
-  "Type your randomest rant here.",
+  "Enter your random thought here",
+  "Type a rant and make it spicy",
+  "Type a rant to tell us",
+  "Type a rant that everyone regrets reading",
+  "Write a random rant here."
 ];
 
 function returnRandomValueFromArray(array) {
