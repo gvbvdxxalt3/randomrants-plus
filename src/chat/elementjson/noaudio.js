@@ -4,5 +4,5 @@ module.exports = {
   gid: "noAudioMessage",
   hidden: true,
   textContent:
-    "Audio is still inactive, click or do something to activate it.",
+    "Audio is still inactive - click or do something to activate it.",
 };
