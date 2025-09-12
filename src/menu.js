@@ -95,6 +95,20 @@ var elementJSON = [
           },
         ],
       },
+      //News button.
+      {
+        element: "div",
+        className: "menuBarItem",
+        textContent: "Site News",
+        eventListeners: [
+          {
+            event: "click",
+            func: function () {
+              window.location.href = "/sitenews";
+            },
+          },
+        ],
+      },
     ],
   },
   {
