@@ -20,7 +20,7 @@ module.exports = {
             fontSize: "30px",
             fontWeight: "bold",
           },
-          textContent: "🚪 No Guests Allowed 🚪",
+          textContent: "No guest users are allowed here",
         },
         {
           element: "br",
@@ -28,7 +28,7 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "This room kicked guest mode out of the chat. You’ll need a Random Rants + account to sneak in.",
+            "This room doesn't want any guests in it. You'll need a Random Rants + account to get in.",
         },
         {
           element: "br",
@@ -36,20 +36,7 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "Why though? Could be because:",
-        },
-        {
-          element: "ul",
-          children: [
-            {
-              element: "li",
-              textContent: "The room owner flipped the big red switch: 🚫 No Guests Mode 🚫"
-            },
-            {
-              element: "li",
-              textContent: "The room owner locked it down to their exclusive chaos club 🔒",
-            }
-          ]
+            "Why? Someone must have turned off \"Allow Guest users\" in the room settings.",
         },
         {
           element: "br",
