@@ -529,13 +529,13 @@ var dom = elements.createElementsFromJSON([
       {
         element: "div",
         className: "divButton roundborder",
-        textContent: "💥 Destroy Room",
+        textContent: "Destroy Room",
         eventListeners: [
           {
             event: "click",
             func: async function () {
               const dialogResponse = await dialogs.confirm(
-                "⚠️ You're about to nuke the room. This *will* make everyone vanish. Are you really sure?\n\nClick OK to unleash chaos, or Cancel if your conscience kicks in.",
+                "This WILL make the room vanish. Click \"Ok\" to destroy.",
               );
 
               if (dialogResponse) {
@@ -555,8 +555,8 @@ var dom = elements.createElementsFromJSON([
 
                   if (!response.ok) {
                     dialogs.alert(
-                      `🚫 Room self-destruct failed! Server said: ${response.status}.\n` +
-                        "Maybe someone demoted you behind your back, or your session poofed.",
+                      `Room destorying failed, the server said: ${response.status}.\n` +
+                        "Maybe someone demoted you without you knowing, or your session got expired.",
                     );
                     return;
                   }
@@ -564,7 +564,7 @@ var dom = elements.createElementsFromJSON([
                 } catch (e) {
                   console.error("Room destroy error:", e);
                   dialogs.alert(
-                    "💥 The room failed to explode due to an unknown error:\n" +
+                    "The room failed to destroy with this weird error:\n" +
                       e,
                   );
                 }
