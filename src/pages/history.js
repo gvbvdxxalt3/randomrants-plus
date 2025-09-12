@@ -38,7 +38,7 @@ var randomRantsHistory = [
   {
     element: "p",
     textContent:
-      "I met a person in middle school, in my elective class. Saw him using scratch, and I was like \"yeah I use it too,\" and then switched topics and showed him an site called Macre's Chat.",
+      "I met a person in middle school (during 7th grade), in my elective class. Saw him using scratch, and I was like \"yeah I use it too,\" and then switched topics and showed him an site called Macre's Chat.",
     style: { fontSize: "1.1em", marginBottom: "1em" },
     children: [],
   },
@@ -52,15 +52,43 @@ var randomRantsHistory = [
   {
     element: "p",
     textContent:
-      "He gave me a google doc with a list of things to do. I did those during class.", //
+      "He gave me a google doc with a list of things to do. I did those during class, (Sorry & Not-Sorry teachers) and slowly it became what he called Random Rants.",
     style: { fontSize: "1.1em", marginBottom: "1em" },
     children: [],
   },
   {
     element: "p",
     textContent:
-      "We threw ideas into Google Docs, worked on it during class (sorry teachers), and kept tweaking it until it became the Random Rants people knew.",
-    style: { fontSize: "1.1em", marginBottom: "1.5em" },
+      "The next grade (8th), is when it became truly popular around my school, but it was more like a spike - it went up, then dropped back down very quickly to barely nobody.",
+    style: { fontSize: "1.1em", marginBottom: "1em" },
+    children: [],
+  },
+  {
+    element: "p",
+    textContent:
+      "People started to ask for more sound triggers, these were done by using things like [vineboom] in chat. Later I added an whole soundboard, everyone could trigger the sounds on everyones chromebook at once in sync, without posting chat messages flodded with [vineboom].",
+    style: { fontSize: "1.1em", marginBottom: "1em" },
+    children: [],
+  },
+  {
+    element: "p",
+    textContent:
+      "The time it got popular is when I started so share it with the \"Cool kids\", usually they called me a \"Discord moderator\", but then were shut up about that stuff when they learned I'm the \"Coolest computer site programmer\".",
+    style: { fontSize: "1.1em", marginBottom: "1em" },
+    children: [],
+  },
+  {
+    element: "p",
+    textContent:
+      "Also the popular spike happened again sometime again during 8th grade, but this time it was different, instead of enjoyment, it was a big spam of people flipping off other people, not expected.",
+    style: { fontSize: "1.1em", marginBottom: "1em" },
+    children: [],
+  },
+  {
+    element: "p",
+    textContent:
+      "", //
+    style: { fontSize: "1.1em", marginBottom: "1em" },
     children: [],
   },
 
