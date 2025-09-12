@@ -4,5 +4,5 @@ module.exports = {
   gid: "noAudioMessage",
   hidden: true,
   textContent:
-    "🔇 Audio's still snoozing—tap or click anywhere to wake it up and get the chaos rolling.",
+    "Audio is still inactive, click or do something to activate it.",
 };
