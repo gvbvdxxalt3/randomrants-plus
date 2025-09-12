@@ -16,13 +16,13 @@ var randomRantsAbout = [
   },
   {
     element: "span",
-    textContent: "The fine print nobody reads but everyone should",
+    textContent: "The page nobody reads, but you should.",
     children: [],
   },
   {
     element: "p",
     textContent:
-      "Random Rants + is basically your digital chaos cave. Voice, video, chat, soundboard spam, and whatever cursed nonsense your friends cook up. It looks like productivity, but it’s actually just maximum distraction.",
+      "Random Rants + is the goofy little site that lets you hang out with your friends online. Its made for both for school escape, and online chatting.",
     style: { fontSize: "1.1em", marginBottom: "1em" },
     children: [],
   },
@@ -30,7 +30,7 @@ var randomRantsAbout = [
   // Features
   {
     element: "h2",
-    textContent: "What You Can Do (a.k.a. the fun stuff)",
+    textContent: "Things you can do",
     style: { fontSize: "1.5em", marginTop: "1.2em" },
     children: [],
   },
@@ -40,45 +40,39 @@ var randomRantsAbout = [
       {
         element: "li",
         textContent:
-          "Voice & Video Chat — Scream, mumble, or silently lurk like a cryptid.",
+          "Video & Voice chat - Scream loud, and make goofy faces. Just like your adverage online chats.",
         children: [],
       },
       {
         element: "li",
         textContent:
-          "Screen Sharing — Only one person at a time, so yeah, prepare for screen-share battles.",
+          "Screen Sharing — Only one screenshare per room, so expect battles between screensharing content.",
         children: [],
       },
       {
         element: "li",
         textContent:
-          "Chat + Commands — Owners get goofy commands like ;shake and ;popcat. Abuse responsibly (or not).",
+          "Chat + Commands — Owners and users with ownership get special commands, list them all with \";help\".",
         children: [],
       },
       {
         element: "li",
         textContent:
-          "Soundboard — Meme noises, earrape, chaos. Everyone can use it, unless the owner shuts it down like a grumpy teacher.",
+          "Soundboard — Meme sounds, and goofy noises. Its all you need for laughter, unless the owner shuts it down.",
         children: [],
       },
       {
         element: "li",
         textContent:
-          "Owner Privileges — Rename the room, wipe chat, or just yeet the whole room into the void.",
+          "Owner & Ownership permissions — Owners can give out ownership. Ownership has the same permissions as owner. Owner permissions let you edit the room settings, and run commands. Ownership users can't remove the room owner. The room owner gets to keep their permissions.",
         children: [],
       },
       {
         element: "li",
         textContent:
-          "File Uploads — Drop memes, cursed screenshots, or actual useful files. Up to you.",
+          "File Uploads — Drop anything you want, memes or cursed content. Whatever it is, its up to you.",
         children: [],
-      },
-      {
-        element: "li",
-        textContent:
-          "Camera & Mic — Turn them on, turn them off, forget you left them on… classic.",
-        children: [],
-      },
+      }
     ],
   },
 
