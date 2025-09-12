@@ -20,7 +20,7 @@ module.exports = {
             fontSize: "30px",
             fontWeight: "bold",
           },
-          textContent: "Chaos Update Incoming!",
+          textContent: "Updates are incoming!",
         },
         {
           element: "div",
@@ -49,7 +49,7 @@ module.exports = {
                 {
                   element: "span",
                   textContent:
-                    "Yo! Fresh Random Rants + updates just dropped. Reload now to catch all the new madness and maybe some sneaky bugs.",
+                    "Random Rants + updates have just been dropped! Click reload to see these new crazy updates.",
                 },
                 {
                   element: "br",
@@ -57,7 +57,7 @@ module.exports = {
                 {
                   element: "span",
                   textContent:
-                    "If this keeps showing up, we’re probably still syncing stuff or just having too much fun tweaking chaos.",
+                    "If this keeps appearing, then things must be syncing or we're having too much fun tweaking Random Rants +!",
                 },
                 {
                   element: "br",
@@ -70,7 +70,7 @@ module.exports = {
                   children: [
                     {
                       element: "span",
-                      textContent: "This update hit the scene ",
+                      textContent: "This update was dropped ",
                     },
                     {
                       element: "span",
@@ -88,13 +88,12 @@ module.exports = {
                 {
                   element: "div",
                   className: "divButton roundborder",
-                  textContent: "Reload and vibe",
-                  title: "Reload and vibe",
+                  textContent: "Reload now",
                   eventListeners: [
                     {
                       event: "click",
                       func: function () {
-                        this.textContent = "Reloading… 🔃";
+                        this.textContent = "Reloading…";
                         this.disabled = true;
                         window.location.reload();
                       },
