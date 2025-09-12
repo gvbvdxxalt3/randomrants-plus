@@ -82,7 +82,7 @@ var dom = elements.createElementsFromJSON([
               fontWeight: "bold",
               fontSize: "30px",
             },
-            textContent: "🔊 Chaos Soundboard 🔥",
+            textContent: "Soundboard",
           },
           {
             element: "br",
@@ -90,7 +90,7 @@ var dom = elements.createElementsFromJSON([
           {
             element: "span",
             textContent:
-              "Play sounds for the whole room. No regrets. No refunds.",
+              "Play sounds that sync for the whole room.",
           },
           {
             element: "br",
@@ -147,7 +147,7 @@ var dom = elements.createElementsFromJSON([
           {
             element: "button",
             className: "roundborder",
-            title: "Click to make it louder (and probably regret it)",
+            title: "Click it to make your sounds louder",
             textContent: soundboardMultipliers[soundboardMutliplier].label,
             eventListeners: [
               {
@@ -189,7 +189,7 @@ var dom = elements.createElementsFromJSON([
                 children: [
                   {
                     element: "span",
-                    textContent: "🛑 Stop the chaos",
+                    textContent: "Stop all sounds",
                   },
                 ],
                 eventListeners: [
