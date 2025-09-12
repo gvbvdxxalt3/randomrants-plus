@@ -111,11 +111,11 @@ var dom = elements.createElementsFromJSON([
         children: [
           {
             element: "p",
-            textContent: "💡 Tips: Rename your room to something cool and easy to remember. "
+            textContent: "Tips: Rename your room to something quick and easy to remember. "
           },
           {
             element: "p",
-            textContent: "Destroying the room nukes everything inside, so use it wisely! "
+            textContent: "Destorying the room will remove it, so use it wisely! "
           },
           {
             element: "p",
