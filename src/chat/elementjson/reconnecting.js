@@ -39,7 +39,7 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "We lost our grip on reality — and the connection. Trying to reattach the chaos tether...",
+            "Looks like Random Rants + lost its connection.",
         },
         {
           element: "br",
@@ -47,7 +47,7 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "This could be a momentary glitch, an unstable Wi-Fi ghost, or the Server/Service is throttling the project into oblivion.",
+            "This could appear if your internet connection is bad, or we're updating things behind the scenes.",
         },
         {
           element: "br",
@@ -55,7 +55,7 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "If this screen keeps popping up, Random Rants+ might be updating or the Server/Service is rate-limiting your soul.",
+            "If this keeps popping up, you may be getting rate limited, or our hosting service is still trying to catch up.",
         },
       ],
     },
