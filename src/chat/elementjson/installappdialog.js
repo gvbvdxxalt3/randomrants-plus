@@ -22,7 +22,7 @@ module.exports = {
               fontWeight: "bold",
               fontSize: "30px",
             },
-            textContent: "Wanna pin RR+ to your life?",
+            textContent: "Wanna drop the icon onto your device?",
           },
           {
             element: "div",
@@ -31,21 +31,21 @@ module.exports = {
           {
             element: "p",
             textContent:
-              "Install the icon so Random Rants + lives on your home screen like an intrusive roommate. One tap away from chaos, every time.",
+              "You could install the icon to access Random Rants + faster.",
           },
           ...(isWindows
             ? [
                 {
                   element: "p",
                   style: { fontSize: "12px", opacity: 0.7 },
-                  textContent: "Random Rants + may get a Windows app… someday, if the stars align or pigs fly. Translation: don’t hold your breath.",
+                  textContent: "Dear Windows users: You may get an RR+ app someday, but just don't hold your breath.",
                 },
               ]
             : []),
           {
             element: "button",
             className: "roundborder divButton",
-            textContent: "Yes, give me the shiny icon",
+            textContent: "Give me the icon",
             gid: "installAppIconButton"
           },
           {
@@ -55,13 +55,13 @@ module.exports = {
           {
             element: "div",
             className: "divButton",
-            textContent: "Nah, I’ll keep suffering",
+            textContent: "I don't want it",
             gid: "installAppDialogCloseButton"
           },
           {
             element: "div",
             className: "divButton",
-            textContent: "Never ask me again (seriously)",
+            textContent: "Never ask me again",
             gid: "installAppDialogCloseButtonNoShow"
           },
         ],
