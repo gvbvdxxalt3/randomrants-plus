@@ -20,7 +20,7 @@ module.exports = {
             fontSize: "30px",
             fontWeight: "bold",
           },
-          textContent: "⛔ You’re not on the allow list",
+          textContent: "You're not on this rooms allow list",
         },
         {
           element: "br",
@@ -28,7 +28,7 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "This room has its own VIP-only list, and your username isn’t on it.",
+            "This room has an Allow list, and it seems you didn't make it there. :/",
         },
         {
           element: "br",
@@ -36,7 +36,7 @@ module.exports = {
         {
           element: "div",
           className: "divButton roundborder",
-          textContent: "Find other rooms 🔍",
+          textContent: "Join another room",
           eventListeners: [
             {
               event: "click",
