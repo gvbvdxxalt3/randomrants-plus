@@ -37,15 +37,14 @@ installAppIconButton.addEventListener("click", (e) => {
     return;
   }
   if (!deferredPrompt) {
-    // install not supported (probably admin-blocked Chromebook)
-    installAppIconButton.textContent = "Blocked by your school. RIP.";
+    installAppIconButton.textContent = "Blocked by your school probaly.";
     installAppIconButton.disabled = true;
     return;
   }
   if (isChromebook()) {
-    installAppIconButton.textContent = "Look top-right → and smash 'Install'";
+    installAppIconButton.textContent = "Look for a popup and click Install.";
   } else {
-    installAppIconButton.textContent = "Now hit the *real* install button ↑";
+    installAppIconButton.textContent = "Now hit the REAL install button";
   }
   allowClicks = false;
   // Show the prompt
@@ -53,14 +52,14 @@ installAppIconButton.addEventListener("click", (e) => {
   // Wait for the user to respond to the prompt
   deferredPrompt.userChoice.then((choiceResult) => {
     if (choiceResult.outcome === "accepted") {
-      installAppIconButton.textContent = "Boom. Icon secured.";
+      installAppIconButton.textContent = "Icon installed!";
       setTimeout(() => {
         installAppDialog.hidden = true;
         installAppIconButton.textContent = installText;
         allowClicks = true;
       }, 1200);
     } else {
-      installAppIconButton.textContent = "You closed it. Ghosted by your own browser.";
+      installAppIconButton.textContent = "You've closed it, click here to try again.";
       setTimeout(() => {
         installAppIconButton.textContent = installText;
         allowClicks = true;
@@ -68,8 +67,7 @@ installAppIconButton.addEventListener("click", (e) => {
     }
     deferredPrompt = null;
   }).catch(() => {
-    // covers case where .prompt() is blocked silently
-    installAppIconButton.textContent = "Yeah… your device said 'no'.";
+    installAppIconButton.textContent = "Your device really said 'no'.";
     setTimeout(() => {
       installAppIconButton.textContent = installText;
       allowClicks = false;
