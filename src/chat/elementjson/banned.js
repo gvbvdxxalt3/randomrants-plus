@@ -28,7 +28,7 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "This room’s ban list has your name on it. That means you can’t join—or stay—in here right now.",
+            "The owner or someone with ownership decided to block you from this room.",
         },
         {
           element: "br",
@@ -36,7 +36,7 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "If it’s a mistake, you’ll have to ask the room owner (or whoever holds the ban hammer) to undo it.",
+            "If it was a mistake, then ask the person that owns the ban hammer to undo the ban.",
         },
         {
           element: "br",
@@ -44,7 +44,7 @@ module.exports = {
         {
           element: "div",
           className: "divButton roundborder",
-          textContent: "Find another room 🔍",
+          textContent: "Find another room",
           eventListeners: [
             {
               event: "click",
