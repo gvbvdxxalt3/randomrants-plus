@@ -20,7 +20,7 @@ module.exports = {
             fontWeight: "bold",
             fontSize: "30px",
           },
-          textContent: "Yo! Wanna unlock the true chaos?",
+          textContent: "Want to unlock more features?",
         },
         {
           element: "div",
@@ -29,7 +29,7 @@ module.exports = {
         {
           element: "span",
           textContent:
-            "Sign in if you're already part of the crew. New here? Smash sign up (it's free & easy).",
+            "Already here? Sign in to get all features. New Here? Sign up to join the rest of the ranters.",
         },
         {
           element: "br",
@@ -39,7 +39,7 @@ module.exports = {
           style: {
             fontSize: "13px",
           },
-          textContent: "(No email. No phone. No nonsense.)",
+          textContent: "No email or phone number required! Its all free!",
         },
         {
           element: "br",
@@ -49,7 +49,7 @@ module.exports = {
         },
         {
           element: "span",
-          textContent: "What do you get? Straight-up perks:",
+          textContent: "What do you get?",
         },
 
         {
@@ -58,27 +58,27 @@ module.exports = {
             {
               element: "li",
               textContent:
-                "Auto-save rooms you join — bounce back anytime, no stress.",
+                "Auto-save rooms you join - Quickly hop into rooms that you have joined already.",
             },
             {
               element: "li",
               textContent:
-                "Get private DMs from your homies (or chaos allies) with the tap of an username.",
+                "Get private messages sent to you in rooms - People can click your display name in your messages to send messages you will only see",
             },
             {
               element: "li",
               textContent:
-                "Drip out your profile with custom pics, names, and wild name colors.",
+                "Customize your account - Customize and tell who exactly you are with username colors, display names, and profile pictures.",
             },
             {
               element: "li",
               textContent:
-                "Room owners can pass you the AUX (admin powers, baby).",
+                "Room owners can give you ownership - Get owner powers from people that trust you in their rooms, do everything an owner can! (Except steal the true room owners powers)",
             },
             {
               element: "li",
               textContent:
-                "Build your own chaos rooms. Hand out ownership (admin) like candy.",
+                "Make your own rooms - Invite friends (or whoever) you want to talk to, and give out ownership to people that you trust.",
             },
           ],
         },
@@ -91,7 +91,7 @@ module.exports = {
         {
           element: "div",
           className: "divButton roundborder",
-          textContent: "Nah, let me vibe as guest",
+          textContent: "Let me stay as guest",
           gid: "continueAsGuestButton",
         },
         {
