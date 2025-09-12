@@ -21,15 +21,12 @@ function sendMessageFromTextBox() {
     var privateMessage = splitMessage.slice(1).join(" ");
 
     if (!targetUsername) {
-      dialogs.alert("You need to type a username, example: @someone hello!");
       return;
     }
     if (!privateMessage) {
-      dialogs.alert("The private message was empty");
       return;
     }
     if (privateMessage.trim().length < 1) {
-      dialogs.alert("The private message was empty");
       return;
     }
 
