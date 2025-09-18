@@ -1,5 +1,7 @@
 require("../cookiewarning");
 require("./stylesheet.js");
+require("./navigate-loader.js");
+
 var menuBar = require("../menu.js"); //Menu bar.
 var elements = require("../gp2/elements.js"); //Based on gvbvdxx-pack-2's element module.
 var accountHelper = require("../accounthelper/index.js"); //Utilites for accounts.

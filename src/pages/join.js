@@ -4,6 +4,7 @@ var menuBar = require("../menu.js"); //Menu bar.
 var elements = require("../gp2/elements.js"); //Based on gvbvdxx-pack-2's element module.
 var accountHelper = require("../accounthelper/index.js"); //Utilites for accounts.
 var dialog = require("../dialogs.js"); //Dialog boxes.
+require("./navigate-loader.js");
 
 var elementJSON = [
   {
@@ -76,13 +77,13 @@ var joinCodeButton = elements.getGPId("joinCodeButton");
 
 async function joinToRoom() {
   var response = await fetch(
-    accountHelper.getServerURL() + "/quickjoin/code/" + joinCodeInput.value,
+    accountHelper.getServerURL() + "/quickjoin/code/" + joinCodeInput.value
   );
   if (!response.ok) {
     dialog.alert(
       "💥 Error " +
         response.status +
-        "! That code might’ve exploded or expired.",
+        "! That code might’ve exploded or expired."
     );
     return;
   }

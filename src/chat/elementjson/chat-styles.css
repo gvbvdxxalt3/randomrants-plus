@@ -1082,3 +1082,55 @@ a {
   padding: 15px 30px;
   border-radius: 3px;
 }
+
+.loader2 {
+  width: 72px;
+  height: 72px;
+  animation-name: newLoaderAnim;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+
+  position: absolute;
+
+  background-image: url("images/appicon.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  transform-origin: bottom;
+}
+
+@keyframes newLoaderAnim {
+  0% {
+    transform: translate(-5px, -70px) rotate(-5deg);
+    animation-timing-function: ease-in;
+  }
+  25% {
+    transform: translate(0, 0) scale(1, 1);
+    animation-timing-function: linear;
+  }
+  28% {
+    transform: translate(0, 0) scale(1.4, 0.6);
+    animation-timing-function: ease-out;
+  }
+  50% {
+    transform: translate(5px, -70px) rotate(5deg);
+    animation-timing-function: ease-in;
+  }
+  75% {
+    transform: translate(0, 0) scale(1, 1);
+    animation-timing-function: linear;
+  }
+  78% {
+    transform: translate(0, 0) scale(1.4, 0.6);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translate(-5px, -70px) rotate(-5deg);
+    animation-timing-function: ease-in;
+  }
+}
+
+.loader2Container {
+  width: 72px;
+  height: 72px;
+}

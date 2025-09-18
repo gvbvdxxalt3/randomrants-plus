@@ -1,5 +1,7 @@
 require("../cookiewarning");
 require("./stylesheet.js");
+require("./navigate-loader.js");
+
 var menuBar = require("../menu.js");
 var elements = require("../gp2/elements.js");
 var accountHelper = require("../accounthelper/index.js");

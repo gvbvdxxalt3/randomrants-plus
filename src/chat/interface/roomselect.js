@@ -147,10 +147,13 @@ async function doRoomSelect() {
 
     var dialogBG = document.createElement("div");
     var loadingSpinnerDiv = document.createElement("div");
+    var loadingSpinnerContainerDiv = document.createElement("div");
     var loadingSpinnerCDiv = document.createElement("div");
+    loadingSpinnerContainerDiv.className = "loader2Container";
     dialogBG.className = "dialogBackground";
-    loadingSpinnerDiv.className = "loader";
-    loadingSpinnerCDiv.append(loadingSpinnerDiv);
+    loadingSpinnerDiv.className = "loader2";
+    loadingSpinnerContainerDiv.append(loadingSpinnerDiv);
+    loadingSpinnerCDiv.append(loadingSpinnerContainerDiv);
     loadingSpinnerCDiv.className = "centerMiddle";
     dialogBG.append(loadingSpinnerCDiv);
     document.body.append(dialogBG);
@@ -177,7 +180,7 @@ async function doRoomSelect() {
             func: async function (e) {
               e.preventDefault();
               var accepted = await dialog.confirm(
-                "Remove this room?\nThis room will NOT be deleted from the site.",
+                "Remove this room?\nThis room will NOT be deleted from the site."
               );
               if (accepted) {
                 try {
@@ -330,7 +333,7 @@ async function doRoomSelect() {
                   e.preventDefault();
                   try {
                     var inviteTarget = await dialog.prompt(
-                      "Who do you want to invite to this room?\nType their username to bring them in!",
+                      "Who do you want to invite to this room?\nType their username to bring them in!"
                     );
                     if (!inviteTarget) {
                       return;
@@ -344,19 +347,19 @@ async function doRoomSelect() {
                           name: room.name,
                           username: inviteTarget,
                         }),
-                      },
+                      }
                     );
                     if (!response.ok) {
                       dialog.alert(
                         "Invite error. That username doesn’t exist... or maybe it escaped through a portal. Check it and try again!" +
                           "\n" +
                           "Server said: " +
-                          response.status,
+                          response.status
                       );
                     }
                   } catch (e) {
                     dialog.alert(
-                      "Failed to invite a user to room. Error Message: ${e}",
+                      "Failed to invite a user to room. Error Message: ${e}"
                     );
                   }
                 },
@@ -380,13 +383,13 @@ async function doRoomSelect() {
                         body: JSON.stringify({
                           id: room.id,
                         }),
-                      },
+                      }
                     );
                     if (!response.ok) {
                       dialog.alert(
                         "Got error " +
                           response.status +
-                          ". Unable to create join code, maybe the room was just deleted?",
+                          ". Unable to create join code, maybe the room was just deleted?"
                       );
                       return;
                     }
@@ -394,7 +397,7 @@ async function doRoomSelect() {
                     doJoinCodeScreen(json.code);
                   } catch (e) {
                     dialog.alert(
-                      "Failed to create join code. Error Message: ${e}",
+                      "Failed to create join code. Error Message: ${e}"
                     );
                   }
                 },
@@ -478,7 +481,7 @@ async function doRoomSelect() {
                   try {
                     var a = await fetch(
                       accountHelper.getServerURL() + "/rooms/create",
-                      { method: "POST" },
+                      { method: "POST" }
                     );
                     if (a.ok) {
                       var json = await a.json();
@@ -486,7 +489,7 @@ async function doRoomSelect() {
                       window.location.reload();
                     } else {
                       dialog.alert(
-                        "Couldn't create the room, maybe sign in or sign up first?",
+                        "Couldn't create the room, maybe sign in or sign up first?"
                       );
                     }
                   } catch (e) {

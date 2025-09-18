@@ -5,7 +5,13 @@ module.exports = [
     children: [
       {
         element: "div",
-        className: "loader",
+        className: "loader2Container",
+        children: [
+          {
+            element: "div",
+            className: "loader2",
+          },
+        ],
       },
       {
         element: "span",

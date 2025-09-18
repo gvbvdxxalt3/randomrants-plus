@@ -1,6 +1,9 @@
 var elements = require("../gp2/elements.js");
 var dialog = require("../dialogs.js");
 
+var preloadedLoader = new Image();
+preloadedLoader.src = "images/appicon.svg";
+
 function doLoadingScreen() {
   var div = document.createElement("div");
   var stopAnimating = null;
@@ -10,15 +13,27 @@ function doLoadingScreen() {
     {
       element: "div",
       className: "dialogBackground",
+      style: {
+        zIndex: "9999999999",
+      },
     },
     //Dialog box
     {
       element: "div",
       className: "centerMiddle",
+      style: {
+        zIndex: "9999999999",
+      },
       children: [
         {
           element: "div",
-          className: "loader",
+          className: "loader2Container",
+          children: [
+            {
+              element: "div",
+              className: "loader2",
+            },
+          ],
         },
       ],
     },
@@ -26,11 +41,7 @@ function doLoadingScreen() {
   elements.appendElements(div, dom);
   document.body.append(div);
 
-  return {
-    remove: function () {
-      div.remove();
-    },
-  };
+  return div;
 }
 
 module.exports = {

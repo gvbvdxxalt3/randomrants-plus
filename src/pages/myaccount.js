@@ -5,6 +5,7 @@ var elements = require("../gp2/elements.js"); //Based on gvbvdxx-pack-2's elemen
 var accountHelper = require("../accounthelper/index.js");
 var dialog = require("../dialogs.js");
 var loader = require("./loadingscreen.js");
+require("./navigate-loader.js");
 
 function compressImage(oldsrc) {
   return new Promise((resolve, reject) => {
@@ -56,7 +57,7 @@ function compressImage(oldsrc) {
     };
     oldImg.onerror = function () {
       reject(
-        "Unable to load this image to compress and resize, maybe your browser doesn't support that format.",
+        "Unable to load this image to compress and resize, maybe your browser doesn't support that format."
       );
     };
   });
@@ -244,7 +245,7 @@ function compressImage(oldsrc) {
                   event: "click",
                   func: function () {
                     var usernameColorInput = elements.getGPId(
-                      "username_color_input",
+                      "username_color_input"
                     );
                     usernameColorInput.click();
                   },
@@ -381,19 +382,19 @@ function compressImage(oldsrc) {
                 } catch (e) {
                   dialog.alert(
                     "Image resizing and compression hit an error. Try another image?\nTechnical error: " +
-                      e,
+                      e
                   );
                   return;
                 }
 
                 await fetch(
                   accountHelper.getServerURL() + "/account/picture/",
-                  { method: "POST", body: newImage.split(",").pop() },
+                  { method: "POST", body: newImage.split(",").pop() }
                 );
                 loadImage(newImage);
               } catch (e) {
                 dialog.alert(
-                  `Couldn't upload your profile picture\nTry doing it again when you're ready.\nTechnical error: ${e}`,
+                  `Couldn't upload your profile picture\nTry doing it again when you're ready.\nTechnical error: ${e}`
                 );
               }
             };
@@ -407,7 +408,7 @@ function compressImage(oldsrc) {
         resetPFP.disabled = true;
 
         var accepted = await dialog.confirm(
-          "Are you sure to reset your picture? Once its gone, its gone forever!",
+          "Are you sure to reset your picture? Once its gone, its gone forever!"
         );
 
         if (!accepted) {
@@ -461,11 +462,11 @@ function compressImage(oldsrc) {
             body: JSON.stringify({
               displayName,
             }),
-          },
+          }
         );
         if (!response.ok) {
           dialog.alert(
-            "This name is too goofy or long, make it something shorter.",
+            "This name is too goofy or long, make it something shorter."
           );
           displayNameInput.disabled = false;
           return;
@@ -481,14 +482,14 @@ function compressImage(oldsrc) {
         changePasswordButton.disabled = true;
         if (await dialog.confirm(confirmPasswordMessage)) {
           var oldPassword = await dialog.passwordPrompt(
-            "Type your old password, just to confirm its you.",
+            "Type your old password, just to confirm its you."
           );
           if (!oldPassword) {
             dialog.alert("Password change canceled, nothing has been changed.");
             return;
           }
           var newPassword = await dialog.passwordPrompt(
-            "Make a new password, make sure its unique to other sites you use.",
+            "Make a new password, make sure its unique to other sites you use."
           );
           if (!newPassword) {
             dialog.alert("Password change canceled, nothing has been changed.");
@@ -503,17 +504,17 @@ function compressImage(oldsrc) {
                 newPassword,
                 oldPassword,
               }),
-            },
+            }
           );
           loadingScreen.remove();
           if (!response.ok) {
             dialog.alert(
-              "Something went wrong while changing your password. Maybe try again?",
+              "Something went wrong while changing your password. Maybe try again?"
             );
             return;
           }
           dialog.alert(
-            "Password was changed! All other devices have been signed out until you change the password back again.",
+            "Password was changed! All other devices have been signed out until you change the password back again."
           );
         }
         changePasswordButton.disabled = false;
@@ -563,7 +564,7 @@ function compressImage(oldsrc) {
                         window.location.href =
                           "/signin?href=" +
                           encodeURIComponent(
-                            window.location.pathname + window.location.hash,
+                            window.location.pathname + window.location.hash
                           );
                       },
                     },
@@ -586,7 +587,7 @@ function compressImage(oldsrc) {
                         window.location.href =
                           "/signup?href=" +
                           encodeURIComponent(
-                            window.location.pathname + window.location.hash,
+                            window.location.pathname + window.location.hash
                           );
                       },
                     },

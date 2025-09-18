@@ -1,5 +1,7 @@
 require("../cookiewarning");
 require("./stylesheet.js");
+require("./navigate-loader.js");
+
 var menuBar = require("../menu.js");
 var elements = require("../gp2/elements.js");
 var accountHelper = require("../accounthelper");
@@ -68,7 +70,7 @@ var elementJSON = [
 
 elements.appendElements(
   elements.body,
-  elements.createElementsFromJSON(elementJSON),
+  elements.createElementsFromJSON(elementJSON)
 );
 
 var loader = require("./loadingscreen.js");
@@ -83,7 +85,7 @@ async function logIn() {
   try {
     await accountHelper.loginToAccount(
       usernameInput.value,
-      passwordInput.value,
+      passwordInput.value
     );
     window.location.href = gotoHref;
   } catch (e) {

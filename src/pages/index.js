@@ -6,6 +6,7 @@ var shtml = require("../safehtmlencode.js");
 var audioEngine = require("../audio.js");
 var accountHelper = require("../accounthelper/index.js");
 var dialogs = require("../dialogs.js");
+require("./navigate-loader.js");
 
 var randomDialogText = require("../randomquotes.txt");
 var randomQuotes = randomDialogText.trim().split("\n");
