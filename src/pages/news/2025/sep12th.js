@@ -11,6 +11,25 @@ module.exports = [
   },
   {
     element: "p",
+    textContent: "Note from September 18th, 2025:",
+    style: {
+      fontSize: "19px",
+      fontWeight: "bold",
+      textAlign: "center",
+    },
+  },
+  {
+    element: "p",
+    style: {
+      marginLeft: "40px",
+    },
+    textContent: "Google Gemini works fine, so I've been using that, but some of this stuff still applies."
+  },
+  {
+    element: "br"
+  },
+  {
+    element: "p",
     textContent:
       "The site will now mostly be personalized in tone, with only Me (Gvbvdxx). (And also Eli, if he ever gets on the google doc again)",
     style: {
