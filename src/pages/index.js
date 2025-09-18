@@ -322,6 +322,19 @@ var elementJSON = [
                   },
                 ],
               },
+              {
+                element: "div",
+                className: "button2",
+                textContent: "About us",
+                eventListeners: [
+                  {
+                    event: "click",
+                    func: async function () {
+                      window.location.href = "/about";
+                    },
+                  },
+                ],
+              },
             ],
           },
           {
@@ -404,7 +417,7 @@ var elementJSON = [
             className: "fadeIn delay-1",
             gid: "description1",
             textContent:
-              "Random Rants +, made both for maximum goofyness and your digital escape from school.",
+              "Random Rants +, made both for maximum goofiness and your digital escape from school.",
           },
           { element: "br" },
           {
@@ -645,7 +658,7 @@ p2Animation.addEventListener("finish", () => {
 
 const emojiContainer = elements.getGPId("emojiContainer");
 
-const EMOJIS = ["😂", "🤣", "💀", "🤨", "😎", "🤪", "🤯", "🤡", "👀", "🚀"];
+const EMOJIS = ["😂", "🤣", "💀", "🤨", "😎", "🤪", "🤨", "😭", "🤫", "😝"];
 var EMOJISound = null;
 
 (async function () {
