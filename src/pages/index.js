@@ -198,6 +198,7 @@ var elementJSON = [
 
       maxWidth: "90vw", // Set a maximum width based on viewport width (e.g., 90% of the viewport)
       maxHeight: "90vh",
+      minWidth: "325px",
     },
     children: [
       {
