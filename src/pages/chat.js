@@ -1,0 +1,2 @@
+require("../cookiewarning");
+require("../chat");

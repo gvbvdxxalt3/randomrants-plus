@@ -1,0 +1,16 @@
+.glitchdotcom.json
+.node-gyp
+.env
+.glitch-assets
+.wget-hsts
+.git
+.data
+.config
+package-lock.json
+yarn.lock
+goorm.manifest
+
+node_modules
+counters
+crashlogs
+usermedia
