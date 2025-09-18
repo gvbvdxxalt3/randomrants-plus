@@ -332,7 +332,7 @@ var randomRantsAbout = [
       {
         element: "p",
         textContent:
-          "Humor is different for everyone, laugh at what you think is funny, and roast the cringe stuff.",
+          "Humor is different for everyone, laugh at what you think is funny, and keep scrolling past the cringe stuff.",
         style: { fontSize: "1em", marginBottom: "1em" },
         children: [],
       },
