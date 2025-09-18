@@ -1,8 +1,16 @@
 var loader = require("./loadingscreen.js");
 
-var isLoading = false;
+var isLoading = true;
 var loadingScreen = loader.doLoadingScreen();
-loadingScreen.remove(); //Do loading screen will append right to body when called, so just remove it for now.
+
+document.addEventListener("DOMContentLoaded", () => {
+  window.addEventListener("load", () => {
+    if (isLoading) {
+      isLoading = false;
+      loadingScreen.remove();
+    }
+  });
+});
 
 navigation.addEventListener("navigate", (event) => {
   var destinationUrl = event.destination.url;
