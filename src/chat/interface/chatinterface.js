@@ -120,7 +120,7 @@ reconnectingScreen.hidden = true;
 
     var externalThings = await fetchUtils.fetchAsJSON("external/other.json");
 
-    rrLoadingStatusText.textContent = "Installing WebRTC goofyness...";
+    rrLoadingStatusText.textContent = "Loading WebRTC mayhem...";
     var webrtcError =
       "WebRTC logic failed - No goofy cameras, microphones, or screenshares will ever happen.\nTry reloading if you need them, else they probaly blocked for you.";
     try {
@@ -144,13 +144,13 @@ reconnectingScreen.hidden = true;
     }
 
     try {
-      rrLoadingStatusText.textContent = "Loading sound goofyness...";
+      rrLoadingStatusText.textContent = "Initializing meme sounds...";
       await soundboard.load(
         externalThings.soundboardURL,
         function (current, max) {
           var percent = (current / max) * 100;
           rrLoadingStatusText.textContent =
-            "Loading in the goofy sounds (" + Math.round(percent) + "%)";
+            "Loading meme sounds (" + Math.round(percent) + "%)";
         },
       );
     } catch (e) {
@@ -160,7 +160,7 @@ reconnectingScreen.hidden = true;
     }
 
     rrLoadingStatusText.textContent =
-      "Waiting for the goofy websocket handshake to finish...";
+      "Connecting to the rant room...";
 
     if (!window.screenShareClient) {
       dialogs.alert(webrtcError);
