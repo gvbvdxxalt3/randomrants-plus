@@ -21,7 +21,7 @@ module.exports = [
   {
     element: "p",
     style: {
-      marginLeft: "40px",
+      textAlign: "center"
     },
     textContent: "Google Gemini works fine, so I've been using that, but some of this stuff still applies."
   },
