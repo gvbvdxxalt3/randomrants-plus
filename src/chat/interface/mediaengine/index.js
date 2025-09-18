@@ -60,7 +60,7 @@ function stopScreenshareStream() {
     });
   } catch (e) {
     console.warn(
-      `Failed to stop screenshare stream, screenshare stream must be closed manually.`,
+      `Failed to stop screenshare stream, screenshare stream must be closed manually.`
     );
   }
   screenshareStream = null;
@@ -103,7 +103,7 @@ function getMediaPlayingMenuBar() {
                 JSON.stringify({
                   type: "media",
                   command: "mediaResetRequest",
-                }),
+                })
               );
               stopScreenshareStream();
             },
@@ -199,7 +199,7 @@ function createMediaScreenshareVideo(code) {
       videoElement.pause();
       videoElement.remove();
       mediaVideo = null;
-    },
+    }
   );
 
   elements.appendElements(div, dom);
@@ -290,7 +290,7 @@ async function startScreenshareButton(stream) {
               setTimeout(() => {
                 loadScreenshare();
               }, 500);
-            },
+            }
           );
           await (function () {
             return new Promise((accept) => {
@@ -308,7 +308,7 @@ async function startScreenshareButton(stream) {
                   JSON.stringify({
                     type: "media",
                     command: "mediaResetRequest",
-                  }),
+                  })
                 );
               });
             });
@@ -319,7 +319,7 @@ async function startScreenshareButton(stream) {
               type: "media",
               command: "screenshareRunning",
               code: screenshare.host.key,
-            }),
+            })
           );
           if (force) {
             screenshareRunning = true;
@@ -336,18 +336,18 @@ async function startScreenshareButton(stream) {
         JSON.stringify({
           type: "media",
           command: "mediaResetRequest",
-        }),
+        })
       );
       loadScreenshare(true);
       screenshareCode = null;
     } catch (e) {
       dialog.alert(
-        "Screenshare failed, does your current web browser support screen sharing?",
+        "Screenshare failed, does your current web browser support screen sharing?"
       );
     }
   } else {
     dialog.alert(
-      "The external screenshare runtime script is currently unavailible, please refresh your page to fix this error.",
+      "The external screenshare runtime script is currently unavailible, please refresh your page to fix this error."
     );
   }
 }
@@ -402,6 +402,21 @@ function doLoadingMediaScreen() {
       className: "whiteBox centerMiddle popupDialogAnimation",
       children: [
         {
+          element: "div",
+          style: {
+            position: "fixed",
+            width: "75px",
+            height: "75px",
+            transform: "translate(0px, -100%)",
+          },
+          children: [
+            {
+              element: "div",
+              className: "loader2",
+            },
+          ],
+        },
+        {
           element: "span",
           style: {
             fontSize: "30px",
@@ -415,7 +430,7 @@ function doLoadingMediaScreen() {
         {
           element: "span",
           textContent:
-            "Your content is starting soon... While that is happening you should grab some virtual popcorn.",
+            "Your content is starting soon... While that is happening you should grab some virtual (or real) popcorn.",
         },
         {
           element: "br",
@@ -433,31 +448,19 @@ function doLoadingMediaScreen() {
               stopped = true;
             };
             function loopAnimation() {
-              anim = elm.animate(
-                [
-                  { opacity: "1" },
-                  { opacity: "0", transform: "translateY(-6px)" },
-                ],
-                {
-                  duration: 200,
-                  iterations: 1,
-                  easing: "ease-out",
-                },
-              );
+              anim = elm.animate([{ opacity: "1" }, { opacity: "0" }], {
+                duration: 200,
+                iterations: 1,
+                easing: "ease-out",
+              });
 
               anim.addEventListener("finish", () => {
                 elm.textContent = returnRandomValueFromArray(movingMediaTexts);
-                anim = elm.animate(
-                  [
-                    { opacity: "0", transform: "translateY(6px)" },
-                    { opacity: "1" },
-                  ],
-                  {
-                    duration: 200,
-                    iterations: 1,
-                    easing: "ease-out",
-                  },
-                );
+                anim = elm.animate([{ opacity: "0" }, { opacity: "1" }], {
+                  duration: 200,
+                  iterations: 1,
+                  easing: "ease-out",
+                });
 
                 anim.addEventListener("finish", () => {
                   if (!stopped) {
@@ -559,7 +562,7 @@ async function doMediaSelect() {
                             startScreenshareButton(stream);
                           } catch (e) {
                             dialog.alert(
-                              "Camera request failed, does your current browser support camera?\nCheck and see if your camera is blocked.",
+                              "Camera request failed, does your current browser support camera?\nCheck and see if your camera is blocked."
                             );
                           }
                         },
@@ -611,7 +614,7 @@ async function doMediaSelect() {
                             startScreenshareButton(stream);
                           } catch (e) {
                             dialog.alert(
-                              "Screenshare failed, does your current web browser support screen sharing?",
+                              "Screenshare failed, does your current web browser support screen sharing?"
                             );
                           }
                         },
@@ -726,21 +729,21 @@ async function doMediaSelect() {
                           div.remove();
                           div = null;
                           var embedURL = await dialog.prompt(
-                            "Type a link to embed to.\nCertian websites may block embedding for security purposes.\nClick cancel or type nothing to cancel.",
+                            "Type a link to embed to.\nCertian websites may block embedding for security purposes.\nClick cancel or type nothing to cancel."
                           );
                           if (embedURL) {
                             sws.send(
                               JSON.stringify({
                                 type: "media",
                                 command: "mediaResetRequest",
-                              }),
+                              })
                             );
                             sws.send(
                               JSON.stringify({
                                 type: "media",
                                 command: "mediaEmbedRunning",
                                 url: embedURL,
-                              }),
+                              })
                             );
                           }
                         },
@@ -783,14 +786,14 @@ async function doMediaSelect() {
                                   JSON.stringify({
                                     type: "media",
                                     command: "mediaResetRequest",
-                                  }),
+                                  })
                                 );
                                 sws.send(
                                   JSON.stringify({
                                     type: "media",
                                     command: "mediaEmbedRunning",
                                     url: url,
-                                  }),
+                                  })
                                 );
                               }
                             }
