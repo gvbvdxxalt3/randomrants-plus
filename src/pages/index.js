@@ -657,7 +657,7 @@ p2Animation.addEventListener("finish", () => {
 
 const emojiContainer = elements.getGPId("emojiContainer");
 
-const EMOJIS = ["😂", "🤣", "💀", "🤨", "😎", "🤪", "🤨", "😭", "🤫"];
+const EMOJIS = ["😂", "🤣", "💀", "🤨", "😎", "🤪", "🤨", "😭", "🤫", "😝"];
 var EMOJISound = null;
 
 (async function () {
