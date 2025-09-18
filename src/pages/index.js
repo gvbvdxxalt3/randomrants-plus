@@ -83,6 +83,7 @@ var elementJSON = [
       left: "0px",
       pointerEvents: "none",
       userSelect: "none",
+      filter: "drop-shadow(4px 4px 3px rgba(0, 0, 0, 0.2))",
     },
   },
   {
@@ -96,6 +97,7 @@ var elementJSON = [
       transform: "scale(-1, 1)",
       pointerEvents: "none",
       userSelect: "none",
+      filter: "drop-shadow(4px 4px 3px rgba(0, 0, 0, 0.2))",
     },
   },
   {
@@ -136,6 +138,7 @@ var elementJSON = [
       left: "0px",
       pointerEvents: "none",
       userSelect: "none",
+      filter: "drop-shadow(4px 4px 3px rgba(0, 0, 0, 0.2))",
     },
   },
   {
@@ -177,6 +180,7 @@ var elementJSON = [
       transform: "scale(-1, 1)",
       pointerEvents: "none",
       userSelect: "none",
+      filter: "drop-shadow(4px 4px 3px rgba(0, 0, 0, 0.2))",
     },
   },
   {
@@ -213,6 +217,7 @@ var elementJSON = [
               userSelect: "none",
               transform: "translate(-50%, -100%)",
               transformOrigin: "bottom",
+              filter: "drop-shadow(4px 4px 3px rgba(0, 0, 0, 0.2))",
             },
             GPWhenCreated: function (elm) {
               elm.animate(
