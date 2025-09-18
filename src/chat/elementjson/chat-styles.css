@@ -564,6 +564,9 @@ a {
   background: var(--header-color);
   width: 100vw;
   height: 40px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: hidden;
 }
 
 .menuBarItem,

@@ -110,7 +110,7 @@ var elementJSON = [
           duration: 700,
           iterations: 1,
           easing: "ease-out",
-        },
+        }
       );
       anim.addEventListener("finish", () => {
         elm.animate(
@@ -124,7 +124,7 @@ var elementJSON = [
             duration: 600,
             iterations: Infinity,
             easing: "ease-out",
-          },
+          }
         );
       });
     },
@@ -150,7 +150,7 @@ var elementJSON = [
           duration: 800,
           iterations: 1,
           easing: "ease-out",
-        },
+        }
       );
       anim.addEventListener("finish", () => {
         elm.animate(
@@ -164,7 +164,7 @@ var elementJSON = [
             duration: 800,
             iterations: Infinity,
             easing: "ease-out",
-          },
+          }
         );
       });
     },
@@ -183,18 +183,56 @@ var elementJSON = [
     style: {
       transform: "translate(-50%, -50%)",
       position: "fixed",
-      top: "50%",
+      top: "calc(50% + 50px)",
       left: "50%",
       backgroundColor: "#ffffff",
       borderRadius: "5px",
       boxShadow: "0 0px 30px black",
       padding: "15px 15px",
-      
+      zIndex: "100",
+
       maxWidth: "90vw", // Set a maximum width based on viewport width (e.g., 90% of the viewport)
-      maxHeight: "90vh", // Set a maximum height based on viewport height
-      overflowY: "auto",
+      maxHeight: "90vh",
     },
     children: [
+      {
+        element: "div",
+        style: {
+          position: "fixed",
+        },
+        children: [
+          {
+            element: "img",
+            src: "images/person3.svg", //Two random rant characters (just for the home page) looking down at the text below.
+            style: {
+              position: "fixed",
+              left: "50%",
+              top: "1px",
+              pointerEvents: "none",
+              userSelect: "none",
+              transform: "translate(-50%, -100%)",
+              transformOrigin: "bottom",
+            },
+            GPWhenCreated: function (elm) {
+              elm.animate(
+                [
+                  {
+                    transform: "translate(-50%, -100%) scale(0, 5)",
+                    opacity: 0,
+                  },
+                  {
+                    transform: "translate(-50%, -100%) scale(1, 1)",
+                  },
+                ],
+                {
+                  duration: 1500,
+                  easing: "ease-out",
+                }
+              );
+            },
+          },
+        ],
+      },
       require("./sitenews-notice.js"),
       {
         element: "div",
@@ -214,7 +252,7 @@ var elementJSON = [
               wordBreak: "break-word",
             },
             innerHTML: shtml.getMessageHTML(
-              returnRandomValueFromArray(randomQuotes).trim(),
+              returnRandomValueFromArray(randomQuotes).trim()
             ),
           },
           {
@@ -248,7 +286,7 @@ var elementJSON = [
                       if (!accountHelper.getCurrentValidationState()) {
                         if (
                           await dialogs.confirm(
-                            "Are you sure you want to chat without an Random Rants + account?",
+                            "Are you sure you want to chat without an Random Rants + account?"
                           )
                         ) {
                           window.location.href = "/chat";
@@ -271,7 +309,7 @@ var elementJSON = [
                       if (!accountHelper.getCurrentValidationState()) {
                         if (
                           await dialogs.confirm(
-                            "Are you sure you want to join someones room without an Random Rants + account?",
+                            "Are you sure you want to join someones room without an Random Rants + account?"
                           )
                         ) {
                           window.location.href = "/join";
@@ -417,7 +455,7 @@ var elementJSON = [
 
 elements.appendElements(
   elements.body,
-  elements.createElementsFromJSON(elementJSON),
+  elements.createElementsFromJSON(elementJSON)
 );
 
 var style = document.createElement("style");
@@ -433,6 +471,10 @@ style.textContent = `
     transform: translateY(20px);
     animation: fadeInUp 1s forwards;
   }
+  .fadeInNoTranslate {
+    opacity: 0;
+    animation: fadeInNoTranslateAnim 3s forwards;
+  }
   .bounceIn {
     animation: bounceIn 1.2s;
   }
@@ -444,6 +486,15 @@ style.textContent = `
   }
   .delay-3 {
     animation-delay: 1.5s;
+  }
+
+  @keyframes fadeInNoTranslateAnim {
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   @keyframes fadeInUp {
@@ -540,7 +591,7 @@ var p1Animation = person1.animate(
     duration: 700,
     iterations: 1,
     easing: "ease-out",
-  },
+  }
 );
 p1Animation.addEventListener("finish", () => {
   person1.animate(
@@ -554,7 +605,7 @@ p1Animation.addEventListener("finish", () => {
       duration: 700,
       iterations: Infinity,
       easing: "ease-out",
-    },
+    }
   );
 });
 
@@ -570,7 +621,7 @@ var p2Animation = person2.animate(
     duration: 900,
     iterations: 1,
     easing: "ease-out",
-  },
+  }
 );
 
 p2Animation.addEventListener("finish", () => {
@@ -585,7 +636,7 @@ p2Animation.addEventListener("finish", () => {
       duration: 800,
       iterations: Infinity,
       easing: "ease-out",
-    },
+    }
   );
 });
 
@@ -593,7 +644,7 @@ p2Animation.addEventListener("finish", () => {
 
 const emojiContainer = elements.getGPId("emojiContainer");
 
-const EMOJIS = ["😂", "🤣", "💀", "🤨", "😎", "🤪"];
+const EMOJIS = ["😂", "🤣", "💀", "🤨", "😎", "🤪", "🤯", "🤡", "👀", "🚀"];
 var EMOJISound = null;
 
 (async function () {
@@ -638,7 +689,7 @@ function createFloatingEmoji(spawnAnywhere = false, spawnAt) {
         duration: 350,
         iterations: 1,
         easing: "ease-out",
-      },
+      }
     );
   }
 
@@ -659,7 +710,7 @@ function createFloatingEmoji(spawnAnywhere = false, spawnAt) {
         duration: 350,
         iterations: 1,
         easing: "ease-out",
-      },
+      }
     );
     animation.addEventListener("finish", () => {
       emoji.remove();
