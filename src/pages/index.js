@@ -189,6 +189,10 @@ var elementJSON = [
       borderRadius: "5px",
       boxShadow: "0 0px 30px black",
       padding: "15px 15px",
+      
+      maxWidth: "90vw", // Set a maximum width based on viewport width (e.g., 90% of the viewport)
+      maxHeight: "90vh", // Set a maximum height based on viewport height
+      overflowY: "auto",
     },
     children: [
       require("./sitenews-notice.js"),
@@ -197,7 +201,6 @@ var elementJSON = [
         className: "fadeIn",
         gid: "mainCenter",
         style: {
-          minWidth: "300px",
           textAlign: "center",
         },
         children: [
@@ -207,6 +210,8 @@ var elementJSON = [
             style: {
               fontSize: "40px",
               color: returnRandomValueFromArray(rainbow),
+              display: "inline-block",
+              wordBreak: "break-word",
             },
             innerHTML: shtml.getMessageHTML(
               returnRandomValueFromArray(randomQuotes).trim(),
