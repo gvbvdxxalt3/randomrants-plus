@@ -51,7 +51,7 @@ function doJoinCodeScreen(code) {
             fontSize: "30px",
             fontWeight: "bold",
           },
-          textContent: "Hop into this room!",
+          textContent: "Join this room!",
         },
         {
           element: "br",
@@ -71,7 +71,7 @@ function doJoinCodeScreen(code) {
         {
           element: "span",
           textContent:
-            'Someone dropped a new fresh join code. Go to the link above or click "Quick join" on your menu bar and type this wacky code.',
+            'Someone dropped a fresh join code. Go to the link above or click "Quick join" on your menu bar and type this wacky code.',
         },
         {
           element: "br",
