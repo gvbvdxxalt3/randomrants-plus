@@ -16,6 +16,21 @@ module.exports = {
       children: [
         {
           element: "div",
+          style: {
+            position: "fixed",
+            width: "75px",
+            height: "75px",
+            transform: "translate(0px, -100%)",
+          },
+          children: [
+            {
+              element: "div",
+              className: "loader2",
+            },
+          ],
+        },
+        {
+          element: "div",
           style: { display: "flex" },
           children: [
             {
@@ -25,11 +40,6 @@ module.exports = {
                 fontWeight: "bold",
               },
               textContent: "Reconnecting...",
-            },
-            {
-              element: "div",
-              className: "loader",
-              style: { width: "15px", height: "15px" },
             },
           ],
         },

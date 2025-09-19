@@ -52,7 +52,7 @@ module.exports = [
           }, 4000);
         },
         textContent:
-          "ℹ Long loading times are normal if some of the servers are still spinning up.",
+          "Note: Long loading times are normal if some of our servers are still spinning up.",
       },
     ],
   },

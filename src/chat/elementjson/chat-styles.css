@@ -1088,7 +1088,7 @@ a {
   width: 72px;
   height: 72px;
   animation-name: newLoaderAnim;
-  animation-duration: 1.5s;
+  animation-duration: 1.3s;
   animation-iteration-count: infinite;
 
   position: absolute;
@@ -1103,33 +1103,37 @@ a {
 }
 
 @keyframes newLoaderAnim {
+  /* Bounce */
   0% {
-    transform: translate(-10px, -70px) rotate(-8deg);
-    animation-timing-function: ease-in;
+    transform: translate(0, 0) scale(1, 1);
+    animation-timing-function: ease-in-out;
   }
+  5% {
+    transform: translate(0, 0) scale(1.6, 0.4);
+    animation-timing-function: ease-out;
+  }
+  /* Outwards left*/
   25% {
-    transform: translate(0, 0) scale(1, 1);
-    animation-timing-function: linear;
+    transform: translate(-10px, -70px) rotate(-10deg);
+    animation-timing-function: ease-in;
   }
-  28% {
-    transform: translate(0, 0) scale(1.4, 0.4);
-    animation-timing-function: ease-out;
-  }
+  /* Bounce */
   50% {
-    transform: translate(10px, -70px) rotate(8deg);
-    animation-timing-function: ease-in;
-  }
-  75% {
     transform: translate(0, 0) scale(1, 1);
-    animation-timing-function: linear;
+    animation-timing-function: ease-in-out;
   }
-  78% {
-    transform: translate(0, 0) scale(1.4, 0.4);
+  55% {
+    transform: translate(0, 0) scale(1.6, 0.4);
     animation-timing-function: ease-out;
   }
-  100% {
-    transform: translate(-10px, -70px) rotate(-8deg);
+  /* Outwards right */
+  75% {
+    transform: translate(10px, -70px) rotate(10deg);
     animation-timing-function: ease-in;
+  }
+  /* Go back to start (repeat) */
+  100% {
+    transform: translate(0, 0) scale(1, 1);
   }
 }
 
