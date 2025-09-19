@@ -51,7 +51,7 @@ function doJoinCodeScreen(code) {
             fontSize: "30px",
             fontWeight: "bold",
           },
-          textContent: "Hop into this dudes room!",
+          textContent: "Hop into this room!",
         },
         {
           element: "br",
