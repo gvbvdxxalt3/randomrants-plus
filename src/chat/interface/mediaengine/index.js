@@ -405,8 +405,8 @@ function doLoadingMediaScreen() {
           element: "div",
           style: {
             position: "fixed",
-            width: "75px",
-            height: "75px",
+            width: "32px",
+            height: "32px",
             transform: "translate(0px, -100%)",
           },
           children: [

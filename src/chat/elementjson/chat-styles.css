@@ -1085,13 +1085,15 @@ a {
 }
 
 .loader2 {
-  width: 72px;
-  height: 72px;
+  width: 100%;
+  height: 100%;
   animation-name: newLoaderAnim;
   animation-duration: 1.3s;
   animation-iteration-count: infinite;
 
-  position: absolute;
+  position: relative;
+  top: 0;
+  left: 0;
 
   background-image: url("images/appicon.svg");
   background-repeat: no-repeat;
@@ -1114,7 +1116,7 @@ a {
   }
   /* Outwards left*/
   25% {
-    transform: translate(-10px, -70px) rotate(-10deg);
+    transform: translate(-20%, -150%) rotate(-10deg);
     animation-timing-function: ease-in;
   }
   /* Bounce */
@@ -1128,7 +1130,7 @@ a {
   }
   /* Outwards right */
   75% {
-    transform: translate(10px, -70px) rotate(10deg);
+    transform: translate(20%, -150%) rotate(10deg);
     animation-timing-function: ease-in;
   }
   /* Go back to start (repeat) */
