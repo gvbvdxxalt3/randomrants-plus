@@ -662,9 +662,9 @@ p2Animation.addEventListener("finish", () => {
 
 //Floating emojis and behaivor
 
-const emojiContainer = elements.getGPId("emojiContainer");
+var emojiContainer = elements.getGPId("emojiContainer");
 
-const EMOJIS = ["😂", "🤣", "💀", "🤨", "😎", "🤪", "🤨", "😭", "🤫", "😝"];
+var EMOJIS = ["😂", "🤣", "💀", "🤨", "😎", "🤪", "🤨", "😭", "🤫", "😝"];
 var EMOJISound = null;
 
 (async function () {
@@ -672,26 +672,25 @@ var EMOJISound = null;
   EMOJISound = await audioEngine.loadSoundFromURL(soundURLS.select);
 })();
 
-const MAX_EMOJIS = 250;
-const INITIAL_EMOJIS = 60;
+var INITIAL_EMOJIS = 150;
 
 function createFloatingEmoji(spawnAnywhere = false, spawnAt) {
-  const emoji = document.createElement("div");
+  var emoji = document.createElement("div");
   emoji.textContent = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
   emoji.style.position = "absolute";
   emoji.style.fontSize = `${200 + Math.random() * 100}%`;
 
-  const startX = Math.random() * window.innerWidth;
-  const offsetX = (Math.random() - 0.5) * 100;
+  var startX = Math.random() * window.innerWidth;
+  var offsetX = (Math.random() - 0.5) * 100;
 
-  const startY = spawnAnywhere
+  var startY = spawnAnywhere
     ? Math.random() * window.innerHeight
     : window.innerHeight + 30 + Math.random() * 50;
   if (spawnAt) {
     startX = spawnAt.x;
     startY = spawnAt.y;
   }
-  const endY = -50;
+  var endY = -50;
 
   emoji.style.left = `${startX}px`;
   emoji.style.top = `${startY}px`;
@@ -739,27 +738,28 @@ function createFloatingEmoji(spawnAnywhere = false, spawnAt) {
 
   emojiContainer.appendChild(emoji);
 
-  let startTime = performance.now();
-  let lastTimestamp = startTime;
-  const duration = 3000 + Math.random() * 1000;
-  const SPEED = 100;
+  var startTime = performance.now();
+  var now = performance.now();
+  var lastTimestamp = startTime;
+  var duration = 1000 + Math.random() * 2000;
+  var SPEED = 120;
   var offset = Math.random() * 5;
+  var lastTime = performance.now();
+  var elapsedFrameTime = 0;
+  var elapsed = 0;
 
   function animate() {
     if (!animationRunning) {
       return;
     }
-    if (document.visibilityState !== "visible") {
-      // pause and wait until visible again
-      requestAnimationFrame(animate);
-      return;
+    elapsedFrameTime = performance.now() - lastTime;
+    lastTime = performance.now();
+    if (elapsedFrameTime < 250) {
+      elapsed += elapsedFrameTime;
     }
-
-    const now = performance.now();
-    const elapsed = now - startTime;
-    const distanceMoved = (elapsed / 1000) * SPEED;
-    const currentY = startY - distanceMoved;
-    const currentX = startX + offsetX * (elapsed / duration);
+    var distanceMoved = (elapsed / 1000) * SPEED;
+    var currentY = startY - distanceMoved;
+    var currentX = startX + offsetX * (elapsed / duration);
 
     emoji.style.left = `${currentX}px`;
     emoji.style.top = `${currentY}px`;
@@ -782,13 +782,20 @@ for (let i = 0; i < INITIAL_EMOJIS; i++) {
 
 // New emojis rise from the bottom after
 setInterval(() => {
-  if (
-    document.visibilityState === "visible" &&
-    emojiContainer.children.length < MAX_EMOJIS
-  ) {
-    createFloatingEmoji(false);
+  if (document.visibilityState !== "visible") {
+    return;
   }
-}, 100);
+  var x = 0;
+  while (x < window.innerWidth) {
+    if (document.visibilityState === "visible") {
+      createFloatingEmoji(false, {
+        x,
+        y: window.innerHeight + 30 + Math.random() * 70,
+      });
+    }
+    x += 120;
+  }
+}, 400);
 
 //Sign in and sign up stuff shows when not logged in.
 
