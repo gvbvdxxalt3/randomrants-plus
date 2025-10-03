@@ -361,7 +361,7 @@ a:hover {
   }
   /* Outwards left*/
   25% {
-    transform: translate(-20%, -150%) rotate(-10deg);
+    transform: translate(-25%, -200%) rotate(-10deg);
     animation-timing-function: ease-in;
   }
   /* Bounce */
@@ -375,7 +375,7 @@ a:hover {
   }
   /* Outwards right */
   75% {
-    transform: translate(20%, -150%) rotate(10deg);
+    transform: translate(25%, -200%) rotate(10deg);
     animation-timing-function: ease-in;
   }
   /* Go back to start (repeat) */

@@ -1,3 +1,5 @@
+document.title = "Random Rants + | History";
+
 require("../cookiewarning");
 require("./stylesheet.js");
 var menuBar = require("../menu.js");

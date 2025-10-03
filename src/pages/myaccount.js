@@ -1,3 +1,5 @@
+window.title = "Random Rants + | My account";
+
 require("../cookiewarning");
 require("./stylesheet.js");
 var menuBar = require("../menu.js"); //Menu bar.

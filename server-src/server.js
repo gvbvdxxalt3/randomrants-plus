@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({silent: true, quiet: true});
 require("./initcounters.js");
 var Busboy = require("busboy");
 var http = require("http");
@@ -38,6 +38,23 @@ var wss = wssHandler.wss;
 var messageChatNumber = 0;
 var commandHandler = require("./commands.js");
 var usernameSafeChars = cons.USERNAME_CHAR_SET;
+function closeUserFromUserSocket (username) { //Since the site has auto reconnect, this is basically a reload function.
+  try{
+  	var sockets = usersOnlineSockets[username.toLowerCase().trim()];
+  	if (sockets) {
+  		sockets.forEach((socket) => {
+        if (socket._rrIsReady) {
+          socket.send(JSON.stringify({
+    				type: "userInfoChanged"
+    			}));
+    			socket.close(); //Ghost sockets would be closed anyways.
+        }
+  		});
+  	}
+  }catch(e){
+    console.log(e);
+  }
+}
 async function checkServer() {
   try {
     try {
@@ -1299,6 +1316,7 @@ async function startRoomWSS(roomid) {
     ws._rrLastMessageTime = Date.now();
     connectionIDCount += 1;
     (async function () {
+      ws.server = wss;
       ws._rrWsID = generateWebsocketID();
       ws._rrIsOwner = false;
       ws._rrIsRealOwner = false;
@@ -1477,11 +1495,6 @@ async function startRoomWSS(roomid) {
             if (ws._rrMicCode !== lastMicCode) {
               sendOnlineList();
               lastMicCode = ws._rrMicCode;
-            }
-          }
-          if (json.type == "changeColor") {
-            if (typeof json.color == "string") {
-              ws._rrUserColor = json.color;
             }
           }
           if (json.type == "refresh" && ws._rrIsOwner) {
@@ -1736,7 +1749,7 @@ async function startRoomWSS(roomid) {
       sendOnlineList();
       sendPermData(ws);
       sendRoomChatMessage(
-        "[Random Rants +]",
+        "[Notice]",
         `${displayName} has joined the room.`,
         true
       );
@@ -1761,7 +1774,7 @@ async function startRoomWSS(roomid) {
         }
         sendOnlineList();
         sendRoomChatMessage(
-          "[Random Rants +]",
+          "[Notice]",
           `${displayName} has left the room.`,
           true
         );
@@ -2149,7 +2162,7 @@ const server = http.createServer(async function (req, res) {
   if (usercookie) {
     var decryptedUserdata = encryptor.decrypt(usercookie);
     if (!decryptedUserdata) {
-      res.setHeader("Set-Cookie", "account=; Max-Age=0; Path=/;");
+      res.setHeader("Set-Cookie", "account=; Max-Age=0; Path=/; SameSite=None");
     }
   }
 
@@ -2171,7 +2184,7 @@ const server = http.createServer(async function (req, res) {
     if (hasInvalid) {
       res.setHeader(
         "Set-Cookie",
-        `account=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`
+        `account=; Path=/; HttpOnly; Secure; Max-Age=999999999; SameSite=None`
       );
       decryptedUserdata = null;
     }
@@ -2210,14 +2223,14 @@ const server = http.createServer(async function (req, res) {
           var roomBuffer = await storage.downloadFile(
             `room-${json.id}-info.json`
           );
-          var qjCode = generateSafeJoinCode();
+          var qjCode = generateSafeJoinCode().toLowerCase();
           quickJoinRooms[qjCode] = json.id;
           setTimeout(
             () => {
               quickJoinRooms[qjCode] = undefined;
             },
-            10 * 60 * 1000
-          ); //Ten minutes before code expires.
+            20 * 60 * 1000
+          ); //20 minutes before code expires.
           res.end(
             JSON.stringify({
               code: qjCode,
@@ -3149,7 +3162,7 @@ const server = http.createServer(async function (req, res) {
               try {
                 await roomWebsockets[id]._rrUpdateRoomInfo();
                 roomWebsockets[id]._rrSendChatMessage(
-                  "[Random Rants +]",
+                  "[Notice]",
                   `${json.who} is now an owner.`
                 );
               } catch (e) {}
@@ -3223,7 +3236,7 @@ const server = http.createServer(async function (req, res) {
               try {
                 await roomWebsockets[id]._rrUpdateRoomInfo();
                 roomWebsockets[id]._rrSendChatMessage(
-                  "[Random Rants +]",
+                  "[Notice]",
                   `${json.who} is no longer an owner.`
                 );
               } catch (e) {}
@@ -3299,7 +3312,7 @@ const server = http.createServer(async function (req, res) {
         res.setHeader("Access-Control-Allow-Credentials", "true");
         res.setHeader(
           "Set-Cookie",
-          `account=${usercookie}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`
+          `account=${usercookie}; Path=/; HttpOnly; Secure; Max-Age=999999999; SameSite=None`
         );
         res.end(JSON.stringify(infoJson));
         return;
@@ -3344,7 +3357,7 @@ const server = http.createServer(async function (req, res) {
           res.setHeader("Access-Control-Allow-Credentials", "true");
           res.setHeader(
             "Set-Cookie",
-            `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`
+            `account=${value}; Path=/; HttpOnly; Secure; Max-Age=999999999; SameSite=None`
           );
         }
         res.end(
@@ -3690,6 +3703,7 @@ const server = http.createServer(async function (req, res) {
               JSON.stringify(profilejson),
               "application/json"
             );
+			closeUserFromUserSocket(decryptedUserdata.username);
             res.end("");
           } catch (e) {
             runStaticStuff(req, res, {
@@ -3745,6 +3759,7 @@ const server = http.createServer(async function (req, res) {
               JSON.stringify(profilejson),
               "application/json"
             );
+			closeUserFromUserSocket(decryptedUserdata.username);
             res.end("");
           } catch (e) {
             runStaticStuff(req, res, {
@@ -3841,7 +3856,7 @@ const server = http.createServer(async function (req, res) {
           res.setHeader("Access-Control-Allow-Credentials", "true");
           res.setHeader(
             "Set-Cookie",
-            `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`
+            `account=${value}; Path=/; HttpOnly; Secure; Max-Age=999999999; SameSite=None`
           );
         }
         res.end(JSON.stringify(stuff));
@@ -3856,7 +3871,7 @@ const server = http.createServer(async function (req, res) {
             res.setHeader("Access-Control-Allow-Credentials", "true");
             res.setHeader(
               "Set-Cookie",
-              `account=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`
+              `account=; Path=/; HttpOnly; Secure; Max-Age=999999999; SameSite=None`
             );
             res.end("Successfully & safely logged out.");
           } catch (e) {
@@ -3945,8 +3960,9 @@ const server = http.createServer(async function (req, res) {
           res.setHeader("Access-Control-Allow-Credentials", "true");
           res.setHeader(
             "Set-Cookie",
-            `account=${value}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=999999999`
+            `account=${value}; Path=/; HttpOnly; Secure; Max-Age=999999999; SameSite=None`
           );
+          closeUserFromUserSocket();
 
           res.end(JSON.stringify({ success: true }));
 

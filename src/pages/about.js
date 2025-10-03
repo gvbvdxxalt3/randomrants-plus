@@ -2,6 +2,8 @@ require("../cookiewarning");
 require("./stylesheet.js");
 require("./navigate-loader.js");
 
+document.title = "Random Rants + | About";
+
 var menuBar = require("../menu.js");
 var elements = require("../gp2/elements.js");
 var accountHelper = require("../accounthelper/index.js");
@@ -334,7 +336,7 @@ var randomRantsAbout = [
       {
         element: "p",
         textContent:
-          "Humor is different for everyone, laugh at what you think is funny, and keep scrolling past the cringe stuff.",
+          "Humor is different for everyone, laugh at what you think is funny, and keep rolling your eyes at the cringe stuff.",
         style: { fontSize: "1em", marginBottom: "1em" },
         children: [],
       },

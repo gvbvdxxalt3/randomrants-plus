@@ -1,3 +1,5 @@
+document.title = "Random Rants + | Security & Privacy Notice";
+
 require("../cookiewarning");
 require("./stylesheet.js");
 require("./navigate-loader.js");

@@ -1,3 +1,5 @@
+document.title = "Random Rants + | Quick Join";
+
 require("../cookiewarning");
 require("./stylesheet.js");
 var menuBar = require("../menu.js"); //Menu bar.
@@ -15,7 +17,7 @@ var elementJSON = [
       {
         element: "span",
         className: "headerText",
-        textContent: "🚪 Quick Join Portal",
+        textContent: "Quick Join",
       },
       {
         element: "br",
@@ -52,7 +54,7 @@ var elementJSON = [
           {
             element: "div",
             className: "button2",
-            textContent: "Beam me in",
+            textContent: "Join this code",
             gid: "joinCodeButton",
           },
         ],
@@ -63,7 +65,7 @@ var elementJSON = [
       {
         element: "span",
         textContent:
-          "Type the wacky code from your friend's screen to teleport into their chaos chamber (aka chat room). No time to explain—GO!",
+          "Type the wacky code from your friends screen to join their room. The code would destruct in 20 minutes after its creation, so think fast!",
       },
     ],
   },

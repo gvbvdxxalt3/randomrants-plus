@@ -79,7 +79,7 @@ function doJoinCodeScreen(code) {
         {
           element: "span",
           textContent:
-            "This code will self destruct in 10 minutes, use it or lose it.",
+            "This code will self destruct in 20 minutes, use it or lose it.",
         },
         {
           element: "br",

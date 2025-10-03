@@ -1,3 +1,5 @@
+document.title = "Random Rants + | Site news";
+
 require("../cookiewarning");
 require("./stylesheet.js");
 require("./navigate-loader.js");

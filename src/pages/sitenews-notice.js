@@ -13,11 +13,11 @@ if (enabled) {
       },
     ],
     title:
-      "Important news about RR+ development (Short story + long story inside)",
+      "Click to read Important News",
     children: [
       {
         element: "span",
-        textContent: "⚡ RR+ Dev News — Click to Read",
+        textContent: "Important News - Click to read",
       },
     ],
   };

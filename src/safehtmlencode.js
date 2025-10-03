@@ -340,6 +340,11 @@ function getMessageHTML(inputstr, noBracketCode, otherBracketCodes = {}) {
                 colorsText = false;
                 output_html += `</span>`;
               }
+							if (type == "year") {
+                valid = true;
+                colorsText = false;
+                output_html += (new Date()).getFullYear();
+              }
               if (type == "i") {
                 valid = true;
                 output_html += `<i>`;
@@ -387,7 +392,6 @@ function getMessageHTML(inputstr, noBracketCode, otherBracketCodes = {}) {
         case ">":
           output_html += "&gt;";
           break;
-
         case "<":
           output_html += "&lt;";
           break;

@@ -16,6 +16,8 @@ var movingMediaTexts = [
   "Starting entertainment overloads...",
   "Loading the scribble masterpeice...",
   "Starting a war against the server and your computer...",
+  "Starting the anti-grounder... Failed - grounded too soon.",
+  "Streaming videos at 0.01 FPS..."
 ];
 
 var noInstantPlayNotice =
@@ -935,3 +937,5 @@ userState.on("permissionUpdate", (name, value) => {
 });
 
 module.exports = mediaHelper;
+
+//var loadingMediaDiv = doLoadingMediaScreen();

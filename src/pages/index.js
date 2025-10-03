@@ -1,3 +1,5 @@
+window.title = "Random Rants +";
+
 require("../cookiewarning");
 require("./stylesheet.js");
 var menuBar = require("../menu.js");
@@ -676,7 +678,7 @@ var INITIAL_EMOJIS = 150;
 var MAX_SAFE_LIMIT = 600;
 
 function createFloatingEmoji(spawnAnywhere = false, spawnAt) {
-  if (MAX_SAFE_LIMIT > emojiContainer.children.length) {
+  if (MAX_SAFE_LIMIT < emojiContainer.children.length) {
     return;
   }
   var emoji = document.createElement("div");
