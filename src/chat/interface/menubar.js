@@ -83,3 +83,5 @@ var menuItems = [
 
 var menuDOM = elements.createElementsFromJSON(menuItems);
 elements.appendElements(menuBar, menuDOM);
+
+require("./usermenu.js");

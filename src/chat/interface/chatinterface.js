@@ -26,7 +26,7 @@ var allowUserDivGen = require("./allowuserdiv.js");
 
 if (!isSecure()) {
   console.warn(
-    "It seems your using HTTP, if you're using localhost then you can safely ignore this.\nIf you're using a deploy service, then its better to use HTTPS.",
+    "It seems your using HTTP, if you're using localhost then you can safely ignore this.\nIf you're using a deploy service, then its better to use HTTPS."
   );
 }
 
@@ -60,7 +60,7 @@ var notAllowedError = elements.getGPId("notAllowedError");
 var userOnlineViewBox = elements.getGPId("userOnlineViewBox");
 var toggleMessageAndOnlineView = elements.getGPId("toggleMessageAndOnlineView");
 var toggleMessageAndOnlineViewText = elements.getGPId(
-  "toggleMessageAndOnlineViewText",
+  "toggleMessageAndOnlineViewText"
 );
 
 var showRoomSettingsButton = elements.getGPId("showRoomSettingsButton");
@@ -106,7 +106,7 @@ updateToggleOnlineViewText();
 
 toggleMessageAndOnlineView.addEventListener(
   "click",
-  toggleMessageAndOnlineViewClicked,
+  toggleMessageAndOnlineViewClicked
 );
 
 reconnectingScreen.hidden = true;
@@ -120,12 +120,13 @@ reconnectingScreen.hidden = true;
 
     var externalThings = await fetchUtils.fetchAsJSON("external/other.json");
 
-    rrLoadingStatusText.textContent = "Loading WebRTC mayhem...";
+    rrLoadingStatusText.textContent =
+      "Loading realtime video & audio mayhem...";
     var webrtcError =
-      "WebRTC logic failed - No goofy cameras, microphones, or screenshares will ever happen.\nTry reloading if you need them, else they probaly blocked for you.";
+      "Realtime video & audio logic failed - No goofy cameras, microphones, or screenshares will ever happen.\nTry reloading if you need them, else they probably blocked for you.";
     try {
       var rtcScripts = await fetchUtils.fetchAsJSON(
-        "external/webrtc-helper.json",
+        "external/webrtc-helper.json"
       );
       for (var script of rtcScripts) {
         await addScript(script);
@@ -139,7 +140,7 @@ reconnectingScreen.hidden = true;
       await sounds.load();
     } catch (e) {
       dialogs.alert(
-        "UI Sounds gave up. No more clicks, beeps and boops, just plain silence.",
+        "UI Sounds gave up. No more clicks, beeps and boops, just plain silence."
       );
     }
 
@@ -151,16 +152,15 @@ reconnectingScreen.hidden = true;
           var percent = (current / max) * 100;
           rrLoadingStatusText.textContent =
             "Loading meme sounds (" + Math.round(percent) + "%)";
-        },
+        }
       );
     } catch (e) {
       dialogs.alert(
-        "Soundboard completley failed to load, no more goofy sounds for you! Blame your schools firewall.",
+        "Soundboard completley failed to load, no more goofy sounds for you! Blame your schools firewall."
       );
     }
 
-    rrLoadingStatusText.textContent =
-      "Connecting to the rant room...";
+    rrLoadingStatusText.textContent = "Connecting to the rant room...";
 
     if (!window.screenShareClient) {
       dialogs.alert(webrtcError);
@@ -179,7 +179,7 @@ reconnectingScreen.hidden = true;
               who: username,
             }),
             method: "POST",
-          },
+          }
         );
         if (!response.ok) {
           throw new Error(await response.text());
@@ -192,7 +192,7 @@ reconnectingScreen.hidden = true;
               who: username,
             }),
             method: "POST",
-          },
+          }
         );
         if (!response.ok) {
           throw new Error(await response.text());
@@ -209,7 +209,7 @@ reconnectingScreen.hidden = true;
               username,
             }),
             method: "POST",
-          },
+          }
         );
         if (!response.ok) {
           throw new Error(await response.text());
@@ -222,7 +222,7 @@ reconnectingScreen.hidden = true;
               username,
             }),
             method: "POST",
-          },
+          }
         );
         if (!response.ok) {
           throw new Error(await response.text());
@@ -239,7 +239,7 @@ reconnectingScreen.hidden = true;
               username,
             }),
             method: "POST",
-          },
+          }
         );
         if (!response.ok) {
           throw new Error(await response.text());
@@ -254,7 +254,7 @@ reconnectingScreen.hidden = true;
               username,
             }),
             method: "POST",
-          },
+          }
         );
         if (!response.ok) {
           throw new Error(await response.text());
@@ -269,7 +269,7 @@ reconnectingScreen.hidden = true;
       isNew,
       isServerMessage,
       userColor,
-      recent = true,
+      recent = true
     ) {
       var willScroll = false;
       if (
@@ -284,7 +284,7 @@ reconnectingScreen.hidden = true;
         displayName,
         shtml.getMessageHTML(message),
         isServerMessage,
-        userColor,
+        userColor
       );
       userMessagesContainer.append(messageElement);
 
@@ -297,7 +297,7 @@ reconnectingScreen.hidden = true;
           {
             duration: 120,
             easing: "ease-in",
-          },
+          }
         );
       }
 
@@ -328,7 +328,7 @@ reconnectingScreen.hidden = true;
 
     addOwnershipUsernameButton.addEventListener("click", async function () {
       var response = await dialogs.prompt(
-        "Who do you want to give ownership (admin powers) to?\nDrop their username below:",
+        "Who do you want to give ownership (admin powers) to?\nDrop their username below:"
       );
       if (!response) {
         return;
@@ -338,7 +338,7 @@ reconnectingScreen.hidden = true;
       } catch (e) {
         dialogs.alert(
           "❌ Failed to give ownership (admin powers). Please try again later and check your spelling.\n" +
-            e,
+            e
         );
         console.error(e);
       }
@@ -346,7 +346,7 @@ reconnectingScreen.hidden = true;
 
     addBanUserButton.addEventListener("click", async function () {
       var response = await dialogs.prompt(
-        "Who do you want to block/ban?\nDrop their username below:",
+        "Who do you want to block/ban?\nDrop their username below:"
       );
       if (!response) {
         return;
@@ -356,7 +356,7 @@ reconnectingScreen.hidden = true;
       } catch (e) {
         dialogs.alert(
           "❌ Failed to block/ban user, please try again later and check your spelling.\n" +
-            e,
+            e
         );
         console.error(e);
       }
@@ -364,7 +364,7 @@ reconnectingScreen.hidden = true;
 
     addAllowUserButton.addEventListener("click", async function () {
       var response = await dialogs.prompt(
-        "Who do you want to add to the allow list?\nDrop their username below:",
+        "Who do you want to add to the allow list?\nDrop their username below:"
       );
       if (!response) {
         return;
@@ -374,7 +374,7 @@ reconnectingScreen.hidden = true;
       } catch (e) {
         dialogs.alert(
           "❌ Failed to edit the allow list, please try again later and check your spelling.\n" +
-            e,
+            e
         );
         console.error(e);
       }
@@ -414,7 +414,7 @@ reconnectingScreen.hidden = true;
               json.code,
               json.displayName,
               json.color,
-              json.isSelf,
+              json.isSelf
             ); //Add isSelf so the audio will not play for yourself to avoid interference.
           } else {
             microphones.end(json.id);
@@ -456,7 +456,7 @@ reconnectingScreen.hidden = true;
               false,
               messageData.isServer,
               messageData.color,
-              false,
+              false
             );
           }
         }
@@ -465,7 +465,7 @@ reconnectingScreen.hidden = true;
             JSON.stringify({
               type: "keepAlive",
               timestamp: Date.now(),
-            }),
+            })
           );
         }
         if (json.type == "newMessage") {
@@ -475,12 +475,12 @@ reconnectingScreen.hidden = true;
             json.message,
             true,
             json.isServer,
-            json.color,
+            json.color
           );
           sounds.play("notify", 1);
           notify.sendIfOnScreen(
             "New message!",
-            `${json.displayName}: ${json.message}`,
+            `${json.displayName}: ${json.message}`
           );
         }
         if (json.type == "usernameExists") {
@@ -514,7 +514,7 @@ reconnectingScreen.hidden = true;
         }
         if (json.type == "roomStillLoading") {
           rrLoadingStatusText.textContent =
-            "Waiting for the server to actually finish...";
+            "The server isn't ready yet, still connecting to rant room...";
         }
         if (json.type == "roomName") {
           roomSettings.changeRoomName(json.name);
@@ -575,7 +575,7 @@ reconnectingScreen.hidden = true;
               false,
               async function () {
                 await changeBanUser(true, userInfo.username);
-              },
+              }
             );
             usersOnlineContainer.append(onlineUser);
           });
@@ -594,7 +594,7 @@ reconnectingScreen.hidden = true;
                 async function (promoting) {
                   await changeOwnershipUser(promoting, username);
                 },
-                true,
+                true
               );
               ownershipUsersContainer.append(onlineUser);
             });
@@ -662,13 +662,13 @@ reconnectingScreen.hidden = true;
           typingnotice.activateTypingMessage(
             json.username,
             json.displayName,
-            json.color,
+            json.color
           );
         }
       } catch (e) {
         console.error(e);
         dialogs.alert(
-          `Websocket server message decode or handling event error!${"\n"}Please tell the developer to fix, or try reloading page if this error presists. Error message: ${e}`,
+          `Websocket server message decode or handling event error!${"\n"}Please tell the developer to fix, or try reloading page if this error presists. Error message: ${e}`
         );
       }
     }
@@ -684,7 +684,7 @@ reconnectingScreen.hidden = true;
           type: "playSoundboard",
           index,
           mult,
-        }),
+        })
       );
     };
 
@@ -697,7 +697,7 @@ reconnectingScreen.hidden = true;
       sws.send(
         JSON.stringify({
           type: "stopSoundboard",
-        }),
+        })
       );
     };
 
@@ -725,7 +725,7 @@ reconnectingScreen.hidden = true;
           currentRoom,
         onMessage,
         onOpen,
-        onCloseReconnect,
+        onCloseReconnect
       );
     }
     if (!isOffline) {

@@ -78,8 +78,10 @@ var joinCodeInput = elements.getGPId("joinCodeInput");
 var joinCodeButton = elements.getGPId("joinCodeButton");
 
 async function joinToRoom() {
+  var joinCodeString = joinCodeInput.value.toUpperCase();
+
   var response = await fetch(
-    accountHelper.getServerURL() + "/quickjoin/code/" + joinCodeInput.value
+    accountHelper.getServerURL() + "/quickjoin/code/" + joinCodeString
   );
   if (!response.ok) {
     dialog.alert(
@@ -97,6 +99,10 @@ joinCodeInput.addEventListener("keydown", (event) => {
   if (event.key == "Enter") {
     joinToRoom();
   }
+});
+
+joinCodeInput.addEventListener("input", (event) => {
+  joinCodeInput.value = joinCodeInput.value.toUpperCase();
 });
 
 joinCodeButton.addEventListener("click", () => {

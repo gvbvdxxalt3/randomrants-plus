@@ -20,7 +20,7 @@ module.exports = {
             fontSize: "30px",
             fontWeight: "bold",
           },
-          textContent: "Updates are incoming!",
+          textContent: "Incoming Updates!",
         },
         {
           element: "div",
@@ -49,7 +49,7 @@ module.exports = {
                 {
                   element: "span",
                   textContent:
-                    "Random Rants + updates have just been dropped! Click reload to see these new crazy updates.",
+                    "Some new crazy Random Rants + updates have been dropped! To get those you must press the reload button below.",
                 },
                 {
                   element: "br",
@@ -57,7 +57,7 @@ module.exports = {
                 {
                   element: "span",
                   textContent:
-                    "If this keeps appearing, then things must be syncing or we're having too much fun tweaking Random Rants +!",
+                    "If this keeps appearing, then things must be syncing or we're having too much fun tweaking things!",
                 },
                 {
                   element: "br",
@@ -93,7 +93,7 @@ module.exports = {
                     {
                       event: "click",
                       func: function () {
-                        this.textContent = "Reloading…";
+                        this.textContent = "Reloading...";
                         this.disabled = true;
                         window.location.reload();
                       },

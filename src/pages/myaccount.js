@@ -329,6 +329,30 @@ function compressImage(oldsrc) {
                 },
               ],
             },
+            {
+              element: "br",
+            },
+            {
+              element: "br",
+            },
+            {
+              element: "div",
+              className: "button",
+              gid: "destroyAccountButton",
+              children: [
+                {
+                  element: "img",
+                  src: "images/redcancel.svg",
+                  style: {
+                    height: "17px",
+                  },
+                },
+                {
+                  element: "span",
+                  textContent: "Deactivate account",
+                },
+              ],
+            },
           ],
         },
       ];

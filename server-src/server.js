@@ -1,4 +1,4 @@
-require("dotenv").config({silent: true, quiet: true});
+require("dotenv").config({ silent: true, quiet: true });
 require("./initcounters.js");
 var Busboy = require("busboy");
 var http = require("http");
@@ -38,20 +38,23 @@ var wss = wssHandler.wss;
 var messageChatNumber = 0;
 var commandHandler = require("./commands.js");
 var usernameSafeChars = cons.USERNAME_CHAR_SET;
-function closeUserFromUserSocket (username) { //Since the site has auto reconnect, this is basically a reload function.
-  try{
-  	var sockets = usersOnlineSockets[username.toLowerCase().trim()];
-  	if (sockets) {
-  		sockets.forEach((socket) => {
+function closeUserFromUserSocket(username) {
+  //Since the site has auto reconnect, this is basically a reload function.
+  try {
+    var sockets = usersOnlineSockets[username.toLowerCase().trim()];
+    if (sockets) {
+      sockets.forEach((socket) => {
         if (socket._rrIsReady) {
-          socket.send(JSON.stringify({
-    				type: "userInfoChanged"
-    			}));
-    			socket.close(); //Ghost sockets would be closed anyways.
+          socket.send(
+            JSON.stringify({
+              type: "userInfoChanged",
+            })
+          );
+          socket.close(); //Ghost sockets would be closed anyways.
         }
-  		});
-  	}
-  }catch(e){
+      });
+    }
+  } catch (e) {
     console.log(e);
   }
 }
@@ -2050,6 +2053,7 @@ function applyNewRoomPermissionValues(roomInfo) {
 }
 
 var quickJoinRooms = {};
+var quickJoinRoomTimeouts = {};
 var quickJoinCodeNumber = 0;
 function generateSafeJoinCode(length = 8) {
   const safeCharacters = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
@@ -2223,14 +2227,15 @@ const server = http.createServer(async function (req, res) {
           var roomBuffer = await storage.downloadFile(
             `room-${json.id}-info.json`
           );
-          var qjCode = generateSafeJoinCode().toLowerCase();
+          var qjCode = generateSafeJoinCode();
           quickJoinRooms[qjCode] = json.id;
-          setTimeout(
+          quickJoinRoomTimeouts[qjCode] = setTimeout(
             () => {
               quickJoinRooms[qjCode] = undefined;
+              quickJoinRoomTimeouts[qjCode] = null;
             },
-            20 * 60 * 1000
-          ); //20 minutes before code expires.
+            8 * 60 * 1000
+          ); //8 minutes before code expires.
           res.end(
             JSON.stringify({
               code: qjCode,
@@ -2247,6 +2252,14 @@ const server = http.createServer(async function (req, res) {
     if (urlsplit[2] == "code" && urlsplit[3]) {
       var code = urlsplit[3];
       if (quickJoinRooms[code]) {
+        clearTimeout(quickJoinRoomTimeouts[qjCode]);
+        quickJoinRoomTimeouts[qjCode] = setTimeout(
+          () => {
+            quickJoinRooms[qjCode] = undefined;
+            quickJoinRoomTimeouts[qjCode] = null;
+          },
+          8 * 60 * 1000
+        );
         res.end(quickJoinRooms[code]);
       } else {
         res.statusCode = 404;
@@ -3703,7 +3716,7 @@ const server = http.createServer(async function (req, res) {
               JSON.stringify(profilejson),
               "application/json"
             );
-			closeUserFromUserSocket(decryptedUserdata.username);
+            closeUserFromUserSocket(decryptedUserdata.username);
             res.end("");
           } catch (e) {
             runStaticStuff(req, res, {
@@ -3759,7 +3772,7 @@ const server = http.createServer(async function (req, res) {
               JSON.stringify(profilejson),
               "application/json"
             );
-			closeUserFromUserSocket(decryptedUserdata.username);
+            closeUserFromUserSocket(decryptedUserdata.username);
             res.end("");
           } catch (e) {
             runStaticStuff(req, res, {

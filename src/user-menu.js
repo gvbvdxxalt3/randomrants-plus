@@ -12,7 +12,7 @@ var elementJSON = [
 
 elements.appendElements(
   elements.getGPId("menu_bar"),
-  elements.createElementsFromJSON(elementJSON),
+  elements.createElementsFromJSON(elementJSON)
 );
 
 var signInButton = {
@@ -80,7 +80,7 @@ function handleUserAccountButtons() {
           element: "img",
           style: {
             outline: "none",
-            borderRadius: "40px",
+            borderRadius: "20px",
             backgroundColor: "#969696",
             imageRendering: "pixelated",
             top: "0px",
@@ -126,13 +126,13 @@ function handleUserAccountButtons() {
     };
     elements.appendElements(
       elements.getGPId("menu_bar"),
-      elements.createElementsFromJSON([myAccountButton]),
+      elements.createElementsFromJSON([myAccountButton])
     );
     handleUserAccountButtons();
   } else {
     elements.appendElements(
       elements.getGPId("menu_bar"),
-      elements.createElementsFromJSON([signInButton, signUpButton]),
+      elements.createElementsFromJSON([signInButton, signUpButton])
     );
     handleSignedOutAccountButtons();
   }
