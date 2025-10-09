@@ -268,10 +268,28 @@ var elementJSON = [
             element: "br",
           },
           {
-            element: "span",
-            className: "headerText bounceIn",
-            gid: "mainHeader",
-            textContent: "Welcome to Random Rants +",
+            element: "div",
+            style: {
+              //display: "flex",
+              alignContent: "center",
+              textAlign: "center",
+              justifyContent: "center",
+            },
+            className: "headerText",
+            children: [
+              {
+                element: "span",
+                textContent: "Welcome to ",
+              },
+              {
+                element: "img",
+                src: "images/randomrants-plus-text.svg",
+                style: {
+                  height: "70px",
+                  transform: "translate(0%, 5px)",
+                },
+              },
+            ],
           },
           { element: "br" },
           //For people that always look at the center of the site for stuff, here is some "useful" links that you may need.

@@ -102,8 +102,9 @@ async function doesUsernameExist(username) {
   if (typeof username !== "string") {
     return false;
   }
-  username = username.trim();
-  var username = username.toLowerCase();
+  if (username.trim().toLowerCase() !== username) {
+    return false;
+  }
   var i = 0;
   while (i < username.length) {
     if (usernameSafeChars.indexOf(username[i]) < 0) {
@@ -112,7 +113,12 @@ async function doesUsernameExist(username) {
     i += 1;
   }
   try {
-    await storage.getFileStatus(`user-${username}.json`);
+    var json = JSON.parse(
+      (await storage.downloadFile(`user-${username}.json`)).toString()
+    );
+    if (json.destroyed) {
+      return false;
+    }
     return true;
   } catch (e) {
     return false;
@@ -287,6 +293,13 @@ async function validateUserCookie(decryptedUserdata) {
     }
     var data = await storage.downloadFile(`user-${username}.json`);
     var json = JSON.parse(data);
+    if (json.destroyed) {
+      return {
+        success: false,
+        error: true,
+        message: "This account was deactivated!",
+      };
+    }
 
     var color = "#000000";
     if (typeof json.color == "string") {
@@ -481,6 +494,14 @@ async function validateUser(username, password) {
     var data = await storage.downloadFile(`user-${username}.json`);
     var json = JSON.parse(data);
 
+    if (json.destroyed) {
+      return {
+        success: false,
+        error: true,
+        message: "This account was deactivated!",
+      };
+    }
+
     if (await bcrypt.compare(password, json.password)) {
       var sessionString = generateSessionId();
       var newSession = generateSessionObject(sessionString);
@@ -637,6 +658,124 @@ async function createUser(username, password) {
     };
   }
 }
+
+async function validateUserCookiePassword(decryptedUserdata, password) {
+  if (!decryptedUserdata) {
+    return {
+      success: false,
+      error: true,
+      message: "Not signed in or account cookie is invalid",
+    };
+  }
+
+  if (!checkUsername(decryptedUserdata.username)) {
+    return {
+      success: false,
+      error: true,
+      message: "Username isn't valid",
+    };
+  }
+
+  if (!decryptedUserdata.session) {
+    return {
+      success: false,
+      error: true,
+      message: "No session",
+    };
+  }
+
+  var username = decryptedUserdata.username.trim().toLowerCase();
+
+  try {
+    try {
+      await storage.getFileStatus(`user-${username}.json`);
+    } catch (e) {
+      return {
+        success: false,
+        error: true,
+        message:
+          "Account user does not exist, or there was an internal server error.",
+      };
+    }
+    var data = await storage.downloadFile(`user-${username}.json`);
+    var json = JSON.parse(data);
+
+    if (json.destroyed) {
+      return {
+        success: false,
+        error: true,
+        message: "This account was deactivated!",
+      };
+    }
+
+    var color = "#000000";
+    if (typeof json.color == "string") {
+      color = json.color;
+    }
+    var displayName = username;
+    if (typeof json.displayName == "string") {
+      displayName = json.displayName;
+    }
+
+    if (!Array.isArray(json.sessions)) {
+      json.sessions = [];
+    }
+    const currentSessionToken = decryptedUserdata.session;
+    const isValidSession = json.sessions.some(
+      (session) => session.id === currentSessionToken
+    );
+    if (isValidSession) {
+      if (await bcrypt.compare(password, json.password)) {
+        return {
+          color,
+          displayName,
+          success: true,
+          valid: true,
+        };
+      } else {
+        return {
+          success: false,
+          error: true,
+          message: "Password is invalid",
+        };
+      }
+    } else {
+      return {
+        success: false,
+        error: true,
+        message: "Session cookie is invalid.",
+      };
+    }
+  } catch (e) {
+    console.log(`Error validating session cookie ${e}.`);
+    return {
+      success: false,
+      error: true,
+      message: "Unknown server error.",
+    };
+  }
+}
+
+async function destroyAccount(username) {
+  var data = await storage.downloadFile(`user-${username}.json`);
+  var json = JSON.parse(data);
+
+  json.destroyed = true;
+  json.color = "#d40000";
+  json.displayName = "[DEACTIVATED]";
+  json.password = "";
+  json.sessions = [];
+
+  await storage.uploadFile(
+    `user-${username}.json`,
+    JSON.stringify(json),
+    "application/json"
+  );
+  try {
+    await storage.deleteFile(`user-${username}-profile`);
+  } catch (e) {}
+}
+
 async function updateUserPassword(username, newPassword, oldPassword) {
   var data = await storage.downloadFile(`user-${username}.json`);
   var json = JSON.parse(data);
@@ -2762,12 +2901,6 @@ const server = http.createServer(async function (req, res) {
             return;
           }
 
-          if (!(await doesUsernameExist(targetUsername))) {
-            res.statusCode = 404;
-            res.end("User not found.");
-            return;
-          }
-
           var roomBuffer = await storage.downloadFile(`room-${id}-info.json`);
           var roomData = JSON.parse(roomBuffer.toString());
           if (roomData.owners.indexOf(decryptedUserdata.username) > -1) {
@@ -3010,12 +3143,6 @@ const server = http.createServer(async function (req, res) {
           if (!checkUsername(targetUsername)) {
             res.statusCode = 400;
             res.end("Username isn't valid.");
-            return;
-          }
-
-          if (!(await doesUsernameExist(targetUsername))) {
-            res.statusCode = 404;
-            res.end("User not found.");
             return;
           }
 
@@ -3897,6 +4024,89 @@ const server = http.createServer(async function (req, res) {
       })();
       return;
     }
+    if (urlsplit[2] == "destroy" && req.method == "POST") {
+      (async function () {
+        try {
+          var body = await waitForBody(req);
+          if (!decryptedUserdata) {
+            res.statusCode = 400;
+            res.end(
+              JSON.stringify({
+                success: false,
+                error: true,
+                message: "No session was provided",
+              })
+            );
+            return;
+          }
+          var validation = await validateUserCookie(decryptedUserdata);
+          if (!validation.valid) {
+            res.statusCode = 403;
+            res.end(
+              JSON.stringify({
+                success: false,
+                error: true,
+                message: "Session isn't valid.",
+              })
+            );
+            return;
+          }
+
+          var json = JSON.parse(body.toString());
+          if (typeof json.password !== "string") {
+            res.statusCode = 400;
+            res.end(
+              JSON.stringify({
+                success: false,
+                error: true,
+                message: "password must be string.",
+              })
+            );
+            return;
+          }
+
+          var session = await validateUserCookiePassword(
+            decryptedUserdata,
+            json.password
+          );
+
+          if (!session) {
+            res.statusCode = 400;
+            res.end(
+              JSON.stringify({
+                success: false,
+                error: true,
+                message: "Password isn't correct.",
+              })
+            );
+            return;
+          }
+
+          await destroyAccount(decryptedUserdata.username);
+
+          res.setHeader("Access-Control-Allow-Credentials", "true");
+          res.setHeader(
+            "Set-Cookie",
+            `account=; Path=/; HttpOnly; Secure; Max-Age=999999999; SameSite=None`
+          );
+          closeUserFromUserSocket(decryptedUserdata.username);
+
+          res.end(JSON.stringify({ success: true }));
+
+          return;
+        } catch (e) {
+          res.statusCode = 500;
+          res.end(
+            JSON.stringify({
+              success: false,
+              error: true,
+              message: "Unknown server error",
+            })
+          );
+        }
+      })();
+      return;
+    }
     if (urlsplit[2] == "passwordchange" && req.method == "POST") {
       (async function () {
         try {
@@ -3975,7 +4185,7 @@ const server = http.createServer(async function (req, res) {
             "Set-Cookie",
             `account=${value}; Path=/; HttpOnly; Secure; Max-Age=999999999; SameSite=None`
           );
-          closeUserFromUserSocket();
+          closeUserFromUserSocket(decryptedUserdata.username);
 
           res.end(JSON.stringify({ success: true }));
 

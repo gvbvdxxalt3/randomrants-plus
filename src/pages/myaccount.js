@@ -333,6 +333,13 @@ function compressImage(oldsrc) {
               element: "br",
             },
             {
+              element: "b",
+              style: {
+                color: "red",
+              },
+              textContent: "Dangerous actions:",
+            },
+            {
               element: "br",
             },
             {
@@ -544,6 +551,58 @@ function compressImage(oldsrc) {
           );
         }
         changePasswordButton.disabled = false;
+      };
+
+      var destroyAccountButton = elements.getGPId("destroyAccountButton");
+      destroyAccountButton.onclick = async function () {
+        destroyAccountButton.setAttribute("disabled", "");
+
+        try {
+          var destroyConfirm = await dialog.confirm(
+            "Deactivating your account will:\n" +
+              "- Make your account no longer accessible.\n" +
+              "- You or someone else can't sign up with the same username.\n" +
+              "- Rooms you own won't be deleted, they can still be accessed.\n" +
+              "- Your profile picture and some info would be deleted to save database space.\n" +
+              "- People that try to refrence your username would get an error.\n" +
+              "Deactivate your account now? You can't undo this action!"
+          );
+          if (!destroyConfirm) {
+            dialog.alert("Deactivation canceled.");
+            destroyAccountButton.removeAttribute("disabled");
+            return;
+          }
+          var destroyPassword = await dialog.passwordPrompt(
+            "To make sure its actually you, enter your password:"
+          );
+          if (!destroyPassword) {
+            dialog.alert("Deactivation canceled.");
+            return;
+          }
+          var destroyResponse = await fetch(
+            accountHelper.getServerURL() + "/account/destroy/",
+            {
+              method: "POST",
+              body: JSON.stringify({
+                password: destroyPassword,
+              }),
+            }
+          );
+          if (!destroyResponse.ok) {
+            dialog.alert(
+              "Deactivation had an error. Error: " +
+                (await destroyResponse.json()).message
+            );
+            return;
+          }
+          dialog.alert("Your account was successfully deactivated!");
+          window.location.href = "/";
+        } catch (e) {
+          console.error(e);
+          dialog.alert("Error when trying to destroy account: " + e);
+        }
+
+        destroyAccountButton.removeAttribute("disabled");
       };
     } else {
       var elementJSON = [

@@ -15,6 +15,21 @@ elements.appendElements(
   elements.createElementsFromJSON(elementJSON)
 );
 
+var customizeButton = {
+  element: "div",
+  className: "menuBarItem",
+  textContent: "Customise",
+  gid: "menu_customize",
+  eventListeners: [
+    {
+      event: "click",
+      func: () => {
+        window.location.href = "/myaccount";
+      },
+    },
+  ],
+};
+
 var signInButton = {
   element: "div",
   className: "menuBarItem",
@@ -73,7 +88,6 @@ if (validated) {
     className: "menuBarItemUsername",
     style: {
       display: "flex",
-      marginLeft: "auto",
     },
     children: [
       {
@@ -126,7 +140,7 @@ if (validated) {
   };
   elements.appendElements(
     elements.getGPId("menuBar"),
-    elements.createElementsFromJSON([myAccountButton])
+    elements.createElementsFromJSON([customizeButton, myAccountButton])
   );
   handleUserAccountButtons();
 } else {
