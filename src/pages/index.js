@@ -226,15 +226,14 @@ var elementJSON = [
               elm.animate(
                 [
                   {
-                    transform: "translate(-50%, -100%) scale(0, 5)",
-                    opacity: 0,
+                    transform: "translate(-50%, -100%) scale(1.2, 0)",
                   },
                   {
                     transform: "translate(-50%, -100%) scale(1, 1)",
                   },
                 ],
                 {
-                  duration: 1500,
+                  duration: 900,
                   easing: "ease-out",
                 }
               );
@@ -680,7 +679,21 @@ p2Animation.addEventListener("finish", () => {
 
 var emojiContainer = elements.getGPId("emojiContainer");
 
-var EMOJIS = ["😂", "🤣", "💀", "🤨", "😎", "🤪", "🤨", "😭", "🤫", "😝"];
+var EMOJIS = [
+  "😂",
+  "🤣",
+  "💀",
+  "🤨",
+  "😎",
+  "🤪",
+  "🤨",
+  "😭",
+  "🤫",
+  "😝",
+  "🗣️",
+  "🔊",
+  "🎙️",
+];
 var EMOJISound = null;
 
 (async function () {
@@ -720,6 +733,7 @@ function createFloatingEmoji(spawnAnywhere = false, spawnAt) {
   emoji.style.userSelect = "none";
   emoji.style.outline = "none";
   emoji.style.willChange = "transform, top, left";
+  emoji.style.filter = "drop-shadow(rgba(0, 0, 0, 0.2) 4px 4px 3px)";
   var animationRunning = true;
   if (spawnAnywhere) {
     var anim = emoji.animate(
