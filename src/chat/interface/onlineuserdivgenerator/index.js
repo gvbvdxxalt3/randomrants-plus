@@ -8,6 +8,7 @@ function generateDiv(
   displayName,
   time,
   userColor,
+  userFont,
   isOwner,
   camEnabled,
   micEnabled,
@@ -15,7 +16,7 @@ function generateDiv(
   isAbleToChangeOwnership,
   changeOwnershipFunction,
   forceOwnershipChangable,
-  blockUserFunction,
+  blockUserFunction
 ) {
   var pfp = accountHelper.getProfilePictureURL(username);
   if (!username) {
@@ -214,6 +215,7 @@ function generateDiv(
                   className: "usernameSpan",
                   style: {
                     color: userColor,
+                    fontFamily: userFont || "Arial",
                   },
                   textContent: displayName,
                 },
@@ -222,6 +224,7 @@ function generateDiv(
                   style: {
                     color: userColor,
                     fontSize: "10px",
+                    fontFamily: userFont || "Arial",
                   },
                   textContent: username,
                 },

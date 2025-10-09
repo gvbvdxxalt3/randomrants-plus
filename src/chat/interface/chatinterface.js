@@ -269,6 +269,7 @@ reconnectingScreen.hidden = true;
       isNew,
       isServerMessage,
       userColor,
+      userFont,
       recent = true
     ) {
       var willScroll = false;
@@ -284,7 +285,8 @@ reconnectingScreen.hidden = true;
         displayName,
         shtml.getMessageHTML(message),
         isServerMessage,
-        userColor
+        userColor,
+        userFont
       );
       userMessagesContainer.append(messageElement);
 
@@ -456,6 +458,7 @@ reconnectingScreen.hidden = true;
               false,
               messageData.isServer,
               messageData.color,
+              messageData.font,
               false
             );
           }
@@ -475,7 +478,8 @@ reconnectingScreen.hidden = true;
             json.message,
             true,
             json.isServer,
-            json.color
+            json.color,
+            json.font
           );
           sounds.play("notify", 1);
           notify.sendIfOnScreen(
@@ -564,6 +568,7 @@ reconnectingScreen.hidden = true;
               userInfo.displayName,
               userInfo.time,
               userInfo.color,
+              userInfo.font,
               userInfo.isOwner,
               userInfo.camEnabled,
               userInfo.micEnabled,
@@ -586,6 +591,7 @@ reconnectingScreen.hidden = true;
                 username,
                 "",
                 "#000000",
+                "Arial",
                 true,
                 false,
                 false,

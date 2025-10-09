@@ -121,6 +121,8 @@ function compressImage(oldsrc) {
                         color: userColor,
                         border: "none",
                         background: "none",
+                        fontFamily: session.font,
+                        width: "380px",
                       },
                       gid: "displayNameInput",
                       value: session.displayName,
@@ -132,6 +134,7 @@ function compressImage(oldsrc) {
                         fontSize: "16px",
                         color: userColor,
                         padding: "3px 3px",
+                        fontFamily: session.font,
                       },
                       gid: "usernameSpan",
                       textContent: session.username,
@@ -149,14 +152,52 @@ function compressImage(oldsrc) {
                   style: {
                     alignContent: "center",
                   },
-                  title:
-                    "Click this to change your usernames color, appears in chat as well!",
                   children: [
                     {
                       element: "input",
                       type: "color",
                       value: userColor,
                       gid: "username_color_input",
+                      style: {
+                        width: "100%",
+                      },
+                    },
+                    {
+                      element: "select",
+                      className: "inputText1",
+                      gid: "fontInput",
+                      style: {
+                        width: "100%",
+                        fontSize: "10px",
+                      },
+                      children: [
+                        {
+                          element: "option",
+                          textContent: "Arial",
+                          value: "Arial",
+                          selected: true,
+                        },
+                        {
+                          element: "option",
+                          textContent: "Beach Day",
+                          value: "BeachDay",
+                        },
+                        {
+                          element: "option",
+                          textContent: "Child Hood",
+                          value: "ChildHood",
+                        },
+                        {
+                          element: "option",
+                          textContent: "Mochibop",
+                          value: "Mochibop",
+                        },
+                        {
+                          element: "option",
+                          textContent: "SNESS",
+                          value: "SNESS",
+                        },
+                      ],
                     },
                   ],
                 },
@@ -173,19 +214,52 @@ function compressImage(oldsrc) {
             { element: "br" },
             {
               element: "div",
-              className: "button",
-              gid: "changeDisplayNameButton",
+              style: {
+                display: "flex",
+              },
               children: [
                 {
-                  element: "img",
-                  src: "images/text.svg",
+                  element: "div",
+                  className: "button",
+                  gid: "changeDisplayNameButton",
                   style: {
-                    height: "17px",
+                    flexGrow: "1",
                   },
+                  children: [
+                    {
+                      element: "img",
+                      src: "images/text.svg",
+                      style: {
+                        height: "17px",
+                      },
+                    },
+                    {
+                      element: "span",
+                      textContent: "Change display name",
+                    },
+                  ],
                 },
                 {
-                  element: "span",
-                  textContent: "Change display name",
+                  element: "div",
+                  className: "button",
+                  gid: "changeDisplayNameFontButton",
+                  hidden: true,
+                  style: {
+                    width: "fit-content",
+                  },
+                  children: [
+                    {
+                      element: "img",
+                      src: "images/text.svg",
+                      style: {
+                        height: "17px",
+                      },
+                    },
+                    {
+                      element: "span",
+                      textContent: "Change font",
+                    },
+                  ],
                 },
               ],
             },
@@ -370,8 +444,12 @@ function compressImage(oldsrc) {
       var queryNumber = 0;
       var pfp = elements.getGPId("profilePicture_account");
       var usernameColorInput = elements.getGPId("username_color_input");
+      var usernameFontInput = elements.getGPId("fontInput");
       var usernameSpan = elements.getGPId("usernameSpan");
       var changeDisplayNameButton = elements.getGPId("changeDisplayNameButton");
+      var changeDisplayNameFontButton = elements.getGPId(
+        "changeDisplayNameFontButton"
+      );
       var displayNameInput = elements.getGPId("displayNameInput");
       var changePasswordButton = elements.getGPId("changePasswordButton");
 
@@ -389,6 +467,13 @@ function compressImage(oldsrc) {
         }
       }
       loadImage();
+
+      changeDisplayNameFontButton.onclick = function () {
+        //var event;
+        //event = document.createEvent("MouseEvents");
+        //event.initMouseEvent("mousedown", true, true, window);
+        //usernameFontInput.dispatchEvent(event);
+      };
 
       var signOutButton = elements.getGPId("signOutButton");
 
@@ -425,6 +510,9 @@ function compressImage(oldsrc) {
                   { method: "POST", body: newImage.split(",").pop() }
                 );
                 loadImage(newImage);
+                dialog.alert(
+                  "Profile picture upload success!\nReload all chatrooms to apply the new profile picture."
+                );
               } catch (e) {
                 dialog.alert(
                   `Couldn't upload your profile picture\nTry doing it again when you're ready.\nTechnical error: ${e}`
@@ -472,6 +560,18 @@ function compressImage(oldsrc) {
           }),
         });
       };
+
+      usernameFontInput.onchange = async function () {
+        displayNameInput.style.fontFamily = usernameFontInput.value;
+        usernameSpan.style.fontFamily = usernameFontInput.value;
+        await fetch(accountHelper.getServerURL() + "/account/setfont/", {
+          method: "POST",
+          body: JSON.stringify({
+            font: usernameFontInput.value,
+          }),
+        });
+      };
+      usernameFontInput.value = session.font;
 
       changeDisplayNameButton.onclick = async function () {
         displayNameInput.focus();

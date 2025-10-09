@@ -9,6 +9,7 @@ function generateMessageDiv(
   messageHTML,
   isServerMessage,
   userColor,
+  userFont
 ) {
   var pfp = accountHelper.getProfilePictureURL(username);
   var color = userColor;
@@ -49,6 +50,7 @@ function generateMessageDiv(
               title: noUndefinedUsername,
               style: {
                 color: color,
+                fontFamily: userFont || "Arial",
               },
               eventListeners: [
                 {

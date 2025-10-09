@@ -121,6 +121,7 @@ if (validated) {
               fontWeight: "bold",
               color: validated.color || "#000000",
               fontSize: "15px",
+              fontFamily: validated.font,
             },
             textContent: validated.displayName,
           },

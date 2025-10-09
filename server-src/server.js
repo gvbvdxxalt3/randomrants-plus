@@ -305,6 +305,10 @@ async function validateUserCookie(decryptedUserdata) {
     if (typeof json.color == "string") {
       color = json.color;
     }
+    var font = "Arial";
+    if (typeof json.font == "string") {
+      font = json.font;
+    }
     var displayName = username;
     if (typeof json.displayName == "string") {
       displayName = json.displayName;
@@ -320,6 +324,7 @@ async function validateUserCookie(decryptedUserdata) {
     if (isValidSession) {
       return {
         color,
+        font,
         displayName,
         success: true,
         valid: true,
@@ -1358,6 +1363,7 @@ async function startRoomWSS(roomid) {
           displayName: cli._rrDisplayName,
           time: cli._rrJoinTime,
           color: cli._rrUserColor,
+          font: cli._rrUserFont,
           isOwner: cli._rrIsOwner,
           isRealOwner: cli._rrIsRealOwner,
           micEnabled: isMicEnabled,
@@ -1465,6 +1471,7 @@ async function startRoomWSS(roomid) {
       var usercookie = getCookie("account", getCookieFromRequest(request));
       var displayName = generateGuestUsername();
       ws._rrUserColor = "#000000";
+      ws._rrUserFont = "Arial";
       if (usercookie) {
         var decryptedUserdata = encryptor.decrypt(usercookie);
         var validation = await validateUserCookie(decryptedUserdata);
@@ -1484,6 +1491,8 @@ async function startRoomWSS(roomid) {
           ws._rrUserData = decryptedUserdata;
           ws._rrUsername = decryptedUserdata.username;
           ws._rrUserColor = validation.color;
+          ws._rrUserFont = validation.font;
+          console.log(ws._rrUserFont);
           if (info.owners.indexOf(decryptedUserdata.username) > -1) {
             ws._rrIsOwner = true;
             if (info.owners.indexOf(decryptedUserdata.username) == 0) {
@@ -1585,6 +1594,7 @@ async function startRoomWSS(roomid) {
                   username: ws._rrUsername,
                   displayName: ws._rrDisplayName,
                   color: ws._rrUserColor,
+                  font: ws._rrUserFont,
                 })
               );
             }
@@ -1733,6 +1743,7 @@ async function startRoomWSS(roomid) {
                   displayName: displayName,
                   username: ws._rrUsername,
                   color: ws._rrUserColor,
+                  font: ws._rrUserFont,
                 })
               );
             });
@@ -1776,6 +1787,7 @@ async function startRoomWSS(roomid) {
                 username: ws._rrUsername,
                 displayName: displayName,
                 color: ws._rrUserColor,
+                font: ws._rrUserFont,
               });
               var wasSent = false;
               wss.clients.forEach((cli) => {
@@ -1825,6 +1837,7 @@ async function startRoomWSS(roomid) {
                 username: ws._rrUsername,
                 message: json.message,
                 color: ws._rrUserColor,
+                font: ws._rrUserFont,
               });
               wss._rrRoomMessages = wss._rrRoomMessages.slice(-100);
               wss.clients.forEach((cli) => {
@@ -1838,6 +1851,7 @@ async function startRoomWSS(roomid) {
                     username: ws._rrUsername,
                     displayName: displayName,
                     color: ws._rrUserColor,
+                    font: ws._rrUserFont,
                   })
                 );
               });
@@ -2084,6 +2098,7 @@ async function startRoomWSS(roomid) {
                   displayName: client2._rrDisplayName,
                   username: client2._rrUsername,
                   color: client2._rrUserColor,
+                  font: client2._rrUserFont,
                   isSelf: isSelf,
                 })
               );
@@ -2102,6 +2117,7 @@ async function startRoomWSS(roomid) {
                   displayName: client2._rrDisplayName,
                   username: client2._rrUsername,
                   color: client2._rrUserColor,
+                  font: client2._rrUserFont,
                   isSelf: isSelf,
                 })
               );
@@ -3611,6 +3627,7 @@ const server = http.createServer(async function (req, res) {
                   username: cli._rrUsername,
                   display: cli._rrDisplayName,
                   color: cli._rrUserColor,
+                  font: cli._rrUserFont,
                 });
               }
             }
@@ -3826,6 +3843,11 @@ const server = http.createServer(async function (req, res) {
               res.end("");
               return;
             }
+            if (json.color.length > 20) {
+              res.statusCode = 400;
+              res.end("");
+              return;
+            }
 
             var stuff = await validateUserCookie(decryptedUserdata);
             if (!stuff.valid) {
@@ -3838,6 +3860,55 @@ const server = http.createServer(async function (req, res) {
             var profileRaw = await storage.downloadFile(profileFile);
             var profilejson = JSON.parse(profileRaw.toString());
             profilejson.color = json.color;
+            await storage.uploadFile(
+              profileFile,
+              JSON.stringify(profilejson),
+              "application/json"
+            );
+            closeUserFromUserSocket(decryptedUserdata.username);
+            res.end("");
+          } catch (e) {
+            runStaticStuff(req, res, {
+              status: 500,
+            });
+          }
+        } else {
+          runStaticStuff(req, res, {
+            status: 403,
+          });
+        }
+      })();
+      return;
+    }
+    if (urlsplit[2] == "setfont" && req.method == "POST") {
+      (async function () {
+        if (decryptedUserdata) {
+          try {
+            var body = await waitForBody(req);
+            var json = JSON.parse(body.toString());
+
+            if (typeof json.font !== "string") {
+              res.statusCode = 400;
+              res.end("");
+              return;
+            }
+            if (json.font.length > 20) {
+              res.statusCode = 400;
+              res.end("");
+              return;
+            }
+
+            var stuff = await validateUserCookie(decryptedUserdata);
+            if (!stuff.valid) {
+              runStaticStuff(req, res, {
+                status: 403,
+              });
+              return;
+            }
+            var profileFile = `user-${decryptedUserdata.username}.json`;
+            var profileRaw = await storage.downloadFile(profileFile);
+            var profilejson = JSON.parse(profileRaw.toString());
+            profilejson.font = json.font;
             await storage.uploadFile(
               profileFile,
               JSON.stringify(profilejson),
