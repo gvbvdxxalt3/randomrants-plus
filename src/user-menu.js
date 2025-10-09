@@ -109,6 +109,7 @@ function handleUserAccountButtons() {
           style: {
             display: "flex",
             flexDirection: "column",
+            marginLeft: "5px",
           },
           children: [
             {
@@ -117,6 +118,7 @@ function handleUserAccountButtons() {
                 alignContent: "center",
                 fontWeight: "bold",
                 color: validated.color || "#000000",
+                fontSize: "15px",
               },
               textContent: validated.displayName,
             },
@@ -124,10 +126,10 @@ function handleUserAccountButtons() {
               element: "span",
               style: {
                 alignContent: "center",
-                color: validated.color || "#000000",
-                fontSize: "10px",
+                color: "#000000",
+                fontSize: "9.5px",
               },
-              textContent: validated.username,
+              textContent: "Account Settings & Customization",
             },
           ],
         },
@@ -141,7 +143,7 @@ function handleUserAccountButtons() {
     };
     elements.appendElements(
       elements.getGPId("menu_bar"),
-      elements.createElementsFromJSON([customizeButton, myAccountButton])
+      elements.createElementsFromJSON([myAccountButton])
     );
     handleUserAccountButtons();
   } else {

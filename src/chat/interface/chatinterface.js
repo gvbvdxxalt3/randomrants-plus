@@ -626,7 +626,7 @@ reconnectingScreen.hidden = true;
             } else {
               var span = document.createElement("span");
               span.textContent =
-                "Only these users and the room owner can join the room:";
+                "Only these users and the room creator can join the room:";
               allowedUsersContainer.append(span);
             }
             json.allowed.forEach((username, i) => {

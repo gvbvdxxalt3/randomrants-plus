@@ -325,7 +325,7 @@ function compressImage(oldsrc) {
                 },
                 {
                   element: "span",
-                  textContent: "Start chatting",
+                  textContent: "Start ranting!",
                 },
               ],
             },

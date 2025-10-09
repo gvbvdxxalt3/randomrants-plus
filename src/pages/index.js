@@ -278,15 +278,11 @@ var elementJSON = [
             className: "headerText",
             children: [
               {
-                element: "span",
-                textContent: "Welcome to ",
-              },
-              {
                 element: "img",
-                src: "images/randomrants-plus-text.svg",
+                src: "images/welcometo.svg",
                 style: {
-                  height: "70px",
-                  transform: "translate(0%, 5px)",
+                  maxHeight: "70px",
+                  width: "100%",
                 },
               },
             ],
@@ -305,7 +301,7 @@ var elementJSON = [
               {
                 element: "div",
                 className: "button2",
-                textContent: "Chat now!!",
+                textContent: "Rant now!!",
                 eventListeners: [
                   {
                     event: "click",
@@ -313,7 +309,7 @@ var elementJSON = [
                       if (!accountHelper.getCurrentValidationState()) {
                         if (
                           await dialogs.confirm(
-                            "Are you sure you want to chat without an Random Rants + account?"
+                            "Are you sure you want to enter chat without an Random Rants + account?"
                           )
                         ) {
                           window.location.href = "/chat";

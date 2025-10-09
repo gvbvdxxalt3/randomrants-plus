@@ -108,6 +108,7 @@ if (validated) {
         style: {
           display: "flex",
           flexDirection: "column",
+          marginLeft: "5px",
         },
         children: [
           {
@@ -116,6 +117,7 @@ if (validated) {
               alignContent: "center",
               fontWeight: "bold",
               color: validated.color || "#000000",
+              fontSize: "15px",
             },
             textContent: validated.displayName,
           },
@@ -123,10 +125,10 @@ if (validated) {
             element: "span",
             style: {
               alignContent: "center",
-              color: validated.color || "#000000",
-              fontSize: "10px",
+              color: "#000000",
+              fontSize: "9.5px",
             },
-            textContent: validated.username,
+            textContent: "Account Settings & Customization",
           },
         ],
       },
@@ -140,7 +142,7 @@ if (validated) {
   };
   elements.appendElements(
     elements.getGPId("menuBar"),
-    elements.createElementsFromJSON([customizeButton, myAccountButton])
+    elements.createElementsFromJSON([myAccountButton])
   );
   handleUserAccountButtons();
 } else {

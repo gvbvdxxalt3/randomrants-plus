@@ -1,4 +1,5 @@
-var isWindows = navigator.userAgent.includes("Windows");
+var isWindows = navigator.userAgent.indexOf("Windows") > -1;
+var isChromeOS = navigator.userAgent.indexOf("CrOS") > -1;
 
 module.exports = {
   element: "div",
@@ -22,7 +23,9 @@ module.exports = {
             fontWeight: "bold",
             fontSize: "30px",
           },
-          textContent: "Wanna drop the icon onto your device?",
+          textContent:
+            "Wanna add the Random Rants+ icon on to your " +
+            (isChromeOS ? "Chromebook?" : "device?"),
         },
         {
           element: "div",
