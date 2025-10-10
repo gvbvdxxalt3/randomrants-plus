@@ -63,4 +63,16 @@ module.exports = [
     name: "Jolly cheer",
     family: "JollyCheer",
   },
+  {
+    name: "Just Squash",
+    family: "JustSquash",
+  },
+  {
+    name: "Beautiful Aletha Demo",
+    family: "BeautifulAlethaDemo",
+  },
+  {
+    name: "Permanent Marker",
+    family: "PermanentMarker",
+  },
 ];

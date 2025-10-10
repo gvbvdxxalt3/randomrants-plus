@@ -1905,7 +1905,7 @@ async function startRoomWSS(roomid) {
       sendPermData(ws);
       sendRoomChatMessage(
         "[Notice]",
-        `${displayName} has joined the room.`,
+        `[font family=${ws._rrUserFont}]${displayName}[/font] has joined the room.`,
         true
       );
       if (wss._rrEndRoomTimeout) {
@@ -1930,7 +1930,7 @@ async function startRoomWSS(roomid) {
         sendOnlineList();
         sendRoomChatMessage(
           "[Notice]",
-          `${displayName} has left the room.`,
+          `[font family=${ws._rrUserFont}]${displayName}[/font] has left the room.`,
           true
         );
         if (ws._rrConnectionID == currentScreensharingWebsocket) {

@@ -62,3 +62,21 @@
   font-family: JollyCheer;
   src: url(fonts/jollycheer.ttf?n=1);
 }
+@font-face {
+  font-family: JustSquash;
+  src: url(fonts/justsquash.otf?n=1);
+}
+@font-face {
+  font-family: BeautifulAlethaDemo;
+  src: url(fonts/beautifulalethademo.ttf?n=1);
+}
+
+@font-face {
+  font-family: ScholarBlock;
+  src: url(fonts/scholarblock.ttf?n=1);
+}
+
+@font-face {
+  font-family: PermanentMarker;
+  src: url(fonts/permanentmarker.ttf?n=1);
+}

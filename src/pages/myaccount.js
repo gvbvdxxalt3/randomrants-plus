@@ -81,9 +81,23 @@ function compressImage(oldsrc) {
             borderRadius: "5px",
             padding: "15px 15px",
             boxShadow: "0px 0px 20px black",
+            maxHeight: "calc(100vh - 100px)",
+            maxWidth: "calc(100vw - 100px)",
+            overflowY: "auto",
           },
           children: [
             require("./sitenews-notice.js"),
+            {
+              element: "span",
+              style: {
+                fontSize: "20px",
+                fontWeight: "bold",
+              },
+              textContent: "Your Random Rants + account",
+            },
+            {
+              element: "hr",
+            },
             {
               element: "div",
               style: {
@@ -123,7 +137,7 @@ function compressImage(oldsrc) {
                         border: "none",
                         background: "none",
                         fontFamily: session.font,
-                        width: "380px",
+                        width: "fit-content",
                       },
                       gid: "displayNameInput",
                       value: session.displayName,
@@ -155,39 +169,73 @@ function compressImage(oldsrc) {
                   },
                   children: [
                     {
-                      element: "input",
-                      type: "color",
-                      value: userColor,
-                      gid: "username_color_input",
+                      element: "div",
                       style: {
-                        width: "100%",
-                      },
-                    },
-                    {
-                      element: "select",
-                      className: "inputText2",
-                      gid: "fontInput",
-                      style: {
-                        width: "100%",
-                        fontSize: "10px",
+                        display: "flex",
+                        justifyContent: "center",
                       },
                       children: [
                         {
-                          element: "option",
-                          textContent: "Arial",
-                          value: "Arial",
-                          selected: true,
+                          element: "span",
+                          style: {
+                            marginRight: "3px",
+                          },
+                          textContent: "Color: ",
                         },
-                      ].concat(
-                        fontList.map((font) => {
-                          //Takes font from list and puts them like: {element: "option",textContent: "Font Name", value: "FontFamily"}
-                          return {
-                            element: "option",
-                            textContent: font.name,
-                            value: font.family,
-                          };
-                        })
-                      ),
+                        {
+                          element: "input",
+                          type: "color",
+                          value: userColor,
+                          gid: "username_color_input",
+                          style: {
+                            width: "100%",
+                            minWidth: "50px",
+                          },
+                        },
+                      ],
+                    },
+                    {
+                      element: "div",
+                      style: {
+                        display: "flex",
+                        justifyContent: "center",
+                      },
+                      children: [
+                        {
+                          element: "span",
+                          style: {
+                            marginRight: "3px",
+                          },
+                          textContent: "Font: ",
+                        },
+                        {
+                          element: "select",
+                          className: "inputText2",
+                          gid: "fontInput",
+                          style: {
+                            width: "100%",
+                            fontSize: "10px",
+                            minWidth: "50px",
+                          },
+                          children: [
+                            {
+                              element: "option",
+                              textContent: "Arial",
+                              value: "Arial",
+                              selected: true,
+                            },
+                          ].concat(
+                            fontList.map((font) => {
+                              //Takes font from list and puts them like: {element: "option",textContent: "Font Name", value: "FontFamily"}
+                              return {
+                                element: "option",
+                                textContent: font.name,
+                                value: font.family,
+                              };
+                            })
+                          ),
+                        },
+                      ],
                     },
                   ],
                 },
@@ -196,12 +244,6 @@ function compressImage(oldsrc) {
             {
               element: "hr",
             },
-            {
-              element: "span",
-              className: "headerText",
-              textContent: "Your Random Rants + account",
-            },
-            { element: "br" },
             {
               element: "div",
               style: {

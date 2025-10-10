@@ -402,3 +402,21 @@ a:hover {
   font-family: Arial;
   border-radius: 5px;
 }
+
+::-webkit-scrollbar {
+  width: 24px;
+}
+
+::-webkit-scrollbar-track {
+  background: #b8b8b8;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f2f2f2;
+}
