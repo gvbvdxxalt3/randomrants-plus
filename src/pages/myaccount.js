@@ -180,6 +180,7 @@ function compressImage(oldsrc) {
                         },
                       ].concat(
                         fontList.map((font) => {
+                          //Takes font from list and puts them like: {element: "option",textContent: "Font Name", value: "FontFamily"}
                           return {
                             element: "option",
                             textContent: font.name,
