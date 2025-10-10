@@ -12,7 +12,14 @@ function createAudioElement() {
 
 var userMicrophones = {};
 
-microphones.start = function (id, code, displayName, userColor, isSelf) {
+microphones.start = function (
+  id,
+  code,
+  displayName,
+  userColor,
+  userFont,
+  isSelf
+) {
   var ssc = window.screenShareClient;
   if (ssc) {
     if (userMicrophones[id]) {
@@ -26,6 +33,7 @@ microphones.start = function (id, code, displayName, userColor, isSelf) {
     var span = document.createElement("span");
     span.className = "isTalkingSpan";
     span.style.color = userColor;
+    span.style.fontFamily = userFont;
     span.textContent = `${displayName} is talking.`;
     span.style.pointerEvents = "none";
 
@@ -43,7 +51,7 @@ microphones.start = function (id, code, displayName, userColor, isSelf) {
           } catch (e) {}
         }
       },
-      () => {},
+      () => {}
     );
 
     userMicrophones[id] = userMicrophone;

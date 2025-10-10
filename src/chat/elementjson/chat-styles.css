@@ -1,20 +1,3 @@
-@font-face {
-  font-family: BeachDay;
-  src: url(fonts/beachday.ttf?n=1);
-}
-@font-face {
-  font-family: ChildHood;
-  src: url(fonts/childhood.ttf?n=1);
-}
-@font-face {
-  font-family: Mochibop;
-  src: url(fonts/mochibop.ttf?n=1);
-}
-@font-face {
-  font-family: SNESS;
-  src: url(fonts/sness.ttf?n=1);
-}
-
 :root {
   --doNotTouchThisEver: 100%; /* but... of what?? */
 

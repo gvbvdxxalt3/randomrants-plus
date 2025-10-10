@@ -404,7 +404,13 @@ reconnectingScreen.hidden = true;
         }
         if (json.type == "cameraUpdate") {
           if (json.code) {
-            cameras.show(json.id, json.code, json.displayName, json.color);
+            cameras.show(
+              json.id,
+              json.code,
+              json.displayName,
+              json.color,
+              json.font
+            );
           } else {
             cameras.hide(json.id);
           }
@@ -416,6 +422,7 @@ reconnectingScreen.hidden = true;
               json.code,
               json.displayName,
               json.color,
+              json.font,
               json.isSelf
             ); //Add isSelf so the audio will not play for yourself to avoid interference.
           } else {
@@ -759,7 +766,6 @@ reconnectingScreen.hidden = true;
 
     require("./chatappinterface.js");
     require("./accountnotice.js");
-    require("./installapp.js");
   } catch (e) {
     handleErrors(e);
   }

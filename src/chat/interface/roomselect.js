@@ -79,7 +79,7 @@ function doJoinCodeScreen(code) {
         {
           element: "span",
           textContent:
-            "This code will self destruct in 20 minutes, use it or lose it.",
+            "This code will self destruct after a period of inactivity, use it or lose it.",
         },
         {
           element: "br",
@@ -233,7 +233,7 @@ async function doRoomSelect() {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                padding: "4px 4px",
+                padding: "2px 4px",
               },
               children: [
                 {
@@ -250,6 +250,7 @@ async function doRoomSelect() {
                   style: {
                     fontWeight: "bold",
                     color: userInList.color,
+                    fontFamily: userInList.font,
                   },
                   textContent: userInList.display,
                 },

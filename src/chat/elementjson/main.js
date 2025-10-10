@@ -1,3 +1,4 @@
+require("../../fontface.js");
 var styles = require("./chat-styles.css"); //Imported as text.
 //Elements will be processed by gp2/elements.js
 module.exports = [

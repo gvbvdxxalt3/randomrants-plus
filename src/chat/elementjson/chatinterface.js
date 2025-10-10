@@ -7,11 +7,14 @@ function surroundFlexboxDiv(c) {
 }
 
 var chatInputPlaceholders = [
-  "Enter your random thought here",
-  "Type a rant and make it spicy",
+  "Enter your random rant here",
   "Type a rant to tell us",
-  "Type a rant that everyone regrets reading",
-  "Write a random rant here.",
+  "Write a random rant here",
+  "Tap or click and type your random rant here",
+  "Write your random rants here",
+  "Be creative, write a rant here",
+  "Write random rants here",
+  "Write a message here",
 ];
 
 function returnRandomValueFromArray(array) {
@@ -216,7 +219,7 @@ var rightSide = {
             event: "input",
             func: function () {
               this.placeholder = returnRandomValueFromArray(
-                chatInputPlaceholders,
+                chatInputPlaceholders
               );
             },
           },

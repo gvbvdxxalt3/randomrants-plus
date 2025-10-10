@@ -1492,7 +1492,6 @@ async function startRoomWSS(roomid) {
           ws._rrUsername = decryptedUserdata.username;
           ws._rrUserColor = validation.color;
           ws._rrUserFont = validation.font;
-          console.log(ws._rrUserFont);
           if (info.owners.indexOf(decryptedUserdata.username) > -1) {
             ws._rrIsOwner = true;
             if (info.owners.indexOf(decryptedUserdata.username) == 0) {

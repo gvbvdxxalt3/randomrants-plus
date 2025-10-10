@@ -22,7 +22,7 @@ function createCameraVideoDiv() {
 
 var cameraVideos = {};
 
-cameras.show = function (id, code, displayName, userColor) {
+cameras.show = function (id, code, displayName, userColor, userFont) {
   var ssc = window.screenShareClient;
   if (ssc) {
     if (cameraVideos[id]) {
@@ -32,6 +32,7 @@ cameras.show = function (id, code, displayName, userColor) {
     var elms = createCameraVideoDiv();
     cameraVideo.elms = elms;
     elms.displayNameSpan.textContent = displayName;
+    elms.displayNameSpan.style.fontFamily = userFont;
 
     cameraVideosDiv.append(elms.div);
 
@@ -43,7 +44,7 @@ cameras.show = function (id, code, displayName, userColor) {
         elms.video.muted = true;
         elms.video.play();
       },
-      () => {},
+      () => {}
     );
 
     cameraVideos[id] = cameraVideo;

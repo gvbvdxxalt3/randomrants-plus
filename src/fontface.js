@@ -1,5 +1,5 @@
-var styles = require("./style.css");
-var elements = require("../gp2/elements.js");
+var styles = require("./fontface.css");
+var elements = require("./gp2/elements.js");
 
 var pageElements = elements.createElementsFromJSON([
   {
@@ -8,5 +8,3 @@ var pageElements = elements.createElementsFromJSON([
   },
 ]);
 elements.appendElements(elements.body, pageElements);
-
-require("../fontface.js");

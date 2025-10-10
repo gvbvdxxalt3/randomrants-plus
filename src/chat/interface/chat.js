@@ -23,7 +23,6 @@ if (!currentRoom) {
     roomSelect.show();
   };
   require("./accountnotice.js");
-  require("./installapp.js");
   require("./updatecheck.js");
 } else {
   require("./chatinterface.js");

@@ -7,6 +7,7 @@ var elements = require("../gp2/elements.js"); //Based on gvbvdxx-pack-2's elemen
 var accountHelper = require("../accounthelper/index.js");
 var dialog = require("../dialogs.js");
 var loader = require("./loadingscreen.js");
+var fontList = require("../fontlist.js");
 require("./navigate-loader.js");
 
 function compressImage(oldsrc) {
@@ -164,7 +165,7 @@ function compressImage(oldsrc) {
                     },
                     {
                       element: "select",
-                      className: "inputText1",
+                      className: "inputText2",
                       gid: "fontInput",
                       style: {
                         width: "100%",
@@ -177,27 +178,15 @@ function compressImage(oldsrc) {
                           value: "Arial",
                           selected: true,
                         },
-                        {
-                          element: "option",
-                          textContent: "Beach Day",
-                          value: "BeachDay",
-                        },
-                        {
-                          element: "option",
-                          textContent: "Child Hood",
-                          value: "ChildHood",
-                        },
-                        {
-                          element: "option",
-                          textContent: "Mochibop",
-                          value: "Mochibop",
-                        },
-                        {
-                          element: "option",
-                          textContent: "SNESS",
-                          value: "SNESS",
-                        },
-                      ],
+                      ].concat(
+                        fontList.map((font) => {
+                          return {
+                            element: "option",
+                            textContent: font.name,
+                            value: font.family,
+                          };
+                        })
+                      ),
                     },
                   ],
                 },
