@@ -220,7 +220,7 @@ function getMessageHTML(inputstr, noBracketCode, otherBracketCodes = {}) {
               if (type == "search") {
                 valid = true;
                 output_html += `<a href="https://google.com/search?q=${encodeURIComponent(
-                  value,
+                  value
                 )}" style="color: var(--link-text-color);" target="_blank">Google Search "${value}"</a>`;
               }
               if (type == "emoji") {
@@ -340,10 +340,10 @@ function getMessageHTML(inputstr, noBracketCode, otherBracketCodes = {}) {
                 colorsText = false;
                 output_html += `</span>`;
               }
-							if (type == "year") {
+              if (type == "year") {
                 valid = true;
                 colorsText = false;
-                output_html += (new Date()).getFullYear();
+                output_html += new Date().getFullYear();
               }
               if (type == "i") {
                 valid = true;
@@ -413,7 +413,31 @@ function getMessageHTML(inputstr, noBracketCode, otherBracketCodes = {}) {
   return output_html; // display output html
 }
 
+function bracketCodeRemoval(text) {
+  var i = 0;
+  var removing = false;
+  var newText = "";
+  while (i < text.length) {
+    if (text[i] == "[") {
+      removing = true;
+    } else {
+      if (text[i] == "]") {
+        removing = false;
+      } else {
+        if (!removing) {
+          newText += text[i];
+        }
+      }
+    }
+
+    i += 1;
+  }
+
+  return newText;
+}
+
 module.exports = {
   getSafeHTML,
   getMessageHTML,
+  bracketCodeRemoval,
 };

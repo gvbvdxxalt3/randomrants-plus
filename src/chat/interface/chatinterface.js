@@ -491,7 +491,7 @@ reconnectingScreen.hidden = true;
           sounds.play("notify", 1);
           notify.sendIfOnScreen(
             "New message!",
-            `${json.displayName}: ${json.message}`
+            `${json.displayName}: ${shtml.bracketCodeRemoval(json.message)}`
           );
         }
         if (json.type == "usernameExists") {
