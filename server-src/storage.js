@@ -170,7 +170,7 @@ class GvbBaseSupabaseStorage {
       path,
       {
         "Content-Type": contentType,
-        "Content-Length": data.length,
+        "Content-Length": contentLength,
         "x-upsert": "true",
         "cache-control": "max-age=0",
       },
