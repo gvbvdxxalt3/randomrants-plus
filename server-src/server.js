@@ -2388,8 +2388,8 @@ const server = http.createServer(async function (req, res) {
               quickJoinRooms[qjCode] = undefined;
               quickJoinRoomTimeouts[qjCode] = null;
             },
-            8 * 60 * 1000
-          ); //8 minutes before code expires.
+            15 * 60 * 1000
+          ); //15 minutes before code expires.
           res.end(
             JSON.stringify({
               code: qjCode,
@@ -2404,17 +2404,17 @@ const server = http.createServer(async function (req, res) {
     }
 
     if (urlsplit[2] == "code" && urlsplit[3]) {
-      var code = urlsplit[3];
-      if (quickJoinRooms[code]) {
+      var qjCode = urlsplit[3];
+      if (quickJoinRooms[qjCode]) {
         clearTimeout(quickJoinRoomTimeouts[qjCode]);
         quickJoinRoomTimeouts[qjCode] = setTimeout(
           () => {
             quickJoinRooms[qjCode] = undefined;
             quickJoinRoomTimeouts[qjCode] = null;
           },
-          8 * 60 * 1000
+          15 * 60 * 1000
         );
-        res.end(quickJoinRooms[code]);
+        res.end(quickJoinRooms[qjCode]);
       } else {
         res.statusCode = 404;
         res.end("Code not found");
