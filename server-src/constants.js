@@ -20,4 +20,8 @@ e.MAX_REQUESTS_PER_SECOND = 40; //Maximum of 40 requests per second for user or 
 e.MAX_REQUESTS_TIMEOUT = 15000; //Time it takes to timeout requests.
 e.BCRYPT_SALT_ROUNDS = 10; //bcryptjs salt rounds used for comparing hashed passwords.
 e.MAX_USER_SESSIONS = 15; //Max user sessions per user.
+
+e.DISPLAYNAME_CHAR_SET =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890~`!@#$%^&*()-_=+{[]}|\\'\";:/?.>,<";
+
 module.exports = e;

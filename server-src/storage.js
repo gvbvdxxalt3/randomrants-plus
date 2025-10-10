@@ -36,7 +36,7 @@ class GvbBaseSupabaseStorage {
           const buffer = Buffer.concat(chunks);
           if (res.statusCode >= 400) {
             return reject(
-              new Error(`HTTP ${res.statusCode}: ${buffer.toString()}`),
+              new Error(`HTTP ${res.statusCode}: ${buffer.toString()}`)
             );
           }
           resolve({ buffer, response: res, request: req });
@@ -51,7 +51,7 @@ class GvbBaseSupabaseStorage {
 
   async getFileStatus(filename) {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename,
+      filename
     )}`;
     const { buffer } = await this._makeRequest("GET", path);
     return true;
@@ -59,7 +59,7 @@ class GvbBaseSupabaseStorage {
 
   async downloadFile(filename) {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename,
+      filename
     )}?v=${Date.now()}`;
     const { buffer } = await this._makeRequest("GET", path);
     return buffer;
@@ -67,7 +67,7 @@ class GvbBaseSupabaseStorage {
 
   async downloadFileAdvanced(filename) {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename,
+      filename
     )}?v=${Date.now()}`;
     const { buffer, response, request } = await this._makeRequest("GET", path);
     return {
@@ -92,11 +92,11 @@ class GvbBaseSupabaseStorage {
     filename,
     _customHeaders,
     serverResponse,
-    proxyHeaders = [],
+    proxyHeaders = []
   ) {
     return new Promise((resolve, reject) => {
       const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-        filename,
+        filename
       )}?v=${Date.now()}`;
       var url = URLModule.parse(this.projectUrl + path);
 
@@ -154,8 +154,17 @@ class GvbBaseSupabaseStorage {
   async uploadFile(filename, data, contentType = "text/plain") {
     //Usually files get sent in text format.
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename,
+      filename
     )}`;
+
+    var contentLength;
+    if (typeof data === "string") {
+      contentLength = Buffer.byteLength(data, "utf8");
+    } else {
+      // Assumes Buffer or other type with a byte-based .length property
+      contentLength = data.length;
+    }
+
     const { buffer } = await this._makeRequest(
       "POST",
       path,
@@ -165,25 +174,34 @@ class GvbBaseSupabaseStorage {
         "x-upsert": "true",
         "cache-control": "max-age=0",
       },
-      data,
+      data
     );
     return buffer;
   }
 
   async uploadFileAdvanced(filename, data, contentType = "text/plain") {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename,
+      filename
     )}`;
+
+    var contentLength;
+    if (typeof data === "string") {
+      contentLength = Buffer.byteLength(data, "utf8");
+    } else {
+      // Assumes Buffer or other type with a byte-based .length property
+      contentLength = data.length;
+    }
+
     const { buffer, response, request } = await this._makeRequest(
       "POST",
       path,
       {
         "Content-Type": contentType,
-        "Content-Length": data.length,
+        "Content-Length": contentLength,
         "x-upsert": "true",
         "cache-control": "max-age=0",
       },
-      data,
+      data
     );
 
     return {
@@ -197,7 +215,7 @@ class GvbBaseSupabaseStorage {
 
   async deleteFile(filename) {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename,
+      filename
     )}`;
     const { buffer } = await this._makeRequest("DELETE", path);
     return buffer;
@@ -205,11 +223,11 @@ class GvbBaseSupabaseStorage {
 
   async deleteFileAdvanced(filename) {
     const path = `/storage/v1/object/${this.bucket}/${encodeURIComponent(
-      filename,
+      filename
     )}`;
     const { buffer, response, request } = await this._makeRequest(
       "DELETE",
-      path,
+      path
     );
     return {
       buffer,
