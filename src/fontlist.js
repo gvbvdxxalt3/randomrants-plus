@@ -75,4 +75,40 @@ module.exports = [
     name: "Permanent Marker",
     family: "PermanentMarker",
   },
+  {
+    name: "Analogy",
+    family: "Analogy",
+  },
+  {
+    name: "Gerion",
+    family: "Gerion",
+  },
+  {
+    name: "Soccer League",
+    family: "SoccerLeague",
+  },
+  {
+    name: "Rusted Vibe",
+    family: "RustedVibe",
+  },
+  {
+    name: "Beluga Road",
+    family: "BelugaRoad",
+  },
+  {
+    name: "Heavy Jack",
+    family: "HeavyJack",
+  },
+  {
+    name: "Badge Robo",
+    family: "BadgeRobo",
+  },
+  {
+    name: "Big Party O2",
+    family: "BigPartyO2-Black",
+  },
+  {
+    name: "Pacifico",
+    family: "Pacifico-Regular",
+  },
 ];

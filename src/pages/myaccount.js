@@ -137,7 +137,7 @@ function compressImage(oldsrc) {
                         border: "none",
                         background: "none",
                         fontFamily: session.font,
-                        width: "fit-content",
+                        width: "100%",
                       },
                       gid: "displayNameInput",
                       value: session.displayName,
@@ -219,21 +219,36 @@ function compressImage(oldsrc) {
                           },
                           children: [
                             {
-                              element: "option",
-                              textContent: "Arial",
-                              value: "Arial",
-                              selected: true,
+                              element: "optgroup",
+                              label: "Browser Fonts",
+                              children: [
+                                {
+                                  element: "option",
+                                  textContent: "Arial (Default)",
+                                  value: "Arial",
+                                  selected: true,
+                                },
+                                {
+                                  element: "option",
+                                  textContent: "Monospace",
+                                  value: "monospace",
+                                  selected: true,
+                                },
+                              ],
                             },
-                          ].concat(
-                            fontList.map((font) => {
-                              //Takes font from list and puts them like: {element: "option",textContent: "Font Name", value: "FontFamily"}
-                              return {
-                                element: "option",
-                                textContent: font.name,
-                                value: font.family,
-                              };
-                            })
-                          ),
+                            {
+                              element: "optgroup",
+                              label: "Additional Fonts",
+                              children: fontList.map((font) => {
+                                //Takes font from list and puts them like: {element: "option",textContent: "Font Name", value: "FontFamily"}
+                                return {
+                                  element: "option",
+                                  textContent: font.name,
+                                  value: font.family,
+                                };
+                              }),
+                            },
+                          ],
                         },
                       ],
                     },

@@ -45,6 +45,7 @@ function generateDiv(
       src: "images/mic.svg",
       style: {
         height: "23px",
+        padding: "4px 2px",
       },
       title: "This person is sharing their microphone.",
     });
@@ -57,6 +58,7 @@ function generateDiv(
       className: "ownerKeyIcon",
       style: {
         height: "23px",
+        padding: "4px 2px",
       },
       title: "This person is the real owner of this room.",
     });
@@ -180,6 +182,7 @@ function generateDiv(
           src: "images/key.svg",
           style: {
             height: "23px",
+            padding: "4px 2px",
           },
           title: "This person has ownership of this room.",
         });
@@ -236,6 +239,12 @@ function generateDiv(
                 display: "flex",
               },
               children: [
+                {
+                  element: "div",
+                  style: {
+                    width: "6px",
+                  },
+                },
                 {
                   element: "div",
                   style: {

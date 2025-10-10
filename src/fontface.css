@@ -80,3 +80,48 @@
   font-family: PermanentMarker;
   src: url(fonts/permanentmarker.ttf?n=1);
 }
+
+@font-face {
+  font-family: SoccerLeague;
+  src: url(fonts/soccerleague.ttf?n=1);
+}
+
+@font-face {
+  font-family: Analogy;
+  src: url(fonts/analogy.ttf?n=1);
+}
+
+@font-face {
+  font-family: Gerion;
+  src: url(fonts/gerion.otf?n=1);
+}
+
+@font-face {
+  font-family: RustedVibe;
+  src: url(fonts/rustedvibe.otf?n=1);
+}
+
+@font-face {
+  font-family: BelugaRoad;
+  src: url(fonts/belugaroad.otf?n=1);
+}
+
+@font-face {
+  font-family: HeavyJack;
+  src: url(fonts/heavyjack.otf?n=1);
+}
+
+@font-face {
+  font-family: BadgeRobo;
+  src: url(fonts/badgerobo.otf?n=1);
+}
+
+@font-face {
+  font-family: BigPartyO2-Black;
+  src: url(fonts/BigPartyO2-Black.ttf?n=1);
+}
+
+@font-face {
+  font-family: Pacifico-Regular;
+  src: url(fonts/Pacifico-Regular.ttf?n=1);
+}
