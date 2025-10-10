@@ -338,7 +338,6 @@ async function validateUserCookie(decryptedUserdata) {
     }
   } catch (e) {
     console.log(`Error validating session cookie ${e}.`);
-    console.log(data.toString());
     return {
       success: false,
       error: true,
