@@ -340,6 +340,7 @@ body {
   top: 0;
   left: 0;
   transition: 0.05s;
+  font-size: 13px;
 }
 
 .cameraVideo:hover {
@@ -356,6 +357,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999999;
+  font-size: 30px;
 }
 
 .cameraVideoElement {
@@ -370,7 +372,6 @@ body {
   transform: translate(-50%, 0);
   color: white;
   font-weight: bold;
-  font-size: 13px;
   opacity: 0.5;
   max-width: 100px;
 }
