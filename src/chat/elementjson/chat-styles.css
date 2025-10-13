@@ -333,12 +333,29 @@ body {
   min-width: 150px;
   min-height: 150px;
   background: black;
-  border: 2px solid #333; /* Subtle border for separation */
-  border-radius: 8px; /* Rounded corners for better aesthetics */
-  margin: 0 4px; /* Adds spacing between video elements */
+  border: 2px solid #333;
+  border-radius: 8px;
+  margin: 0 4px;
   position: relative;
   top: 0;
   left: 0;
+  transition: 0.05s;
+}
+
+.cameraVideo:hover {
+  cursor: pointer;
+  filter: drop-shadow(0px 0px 2px #ffffff);
+  border: 2px solid #ffffff;
+}
+
+.cameraVideo[fullscreen] {
+  width: calc(100vw - 100px);
+  height: calc(100vh - 100px);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999999;
 }
 
 .cameraVideoElement {

@@ -8,7 +8,7 @@ var typingNoticeDiv = elements.getGPId("typingNoticeDiv");
 var typingMessages = {};
 
 var typingnote = {
-  activateTypingMessage: function (username, displayName, color) {
+  activateTypingMessage: function (username, displayName, color, userFont) {
     if (typingMessages[username]) {
       var typingMessage = typingMessages[username];
       typingMessage.resetTimeout();
@@ -18,13 +18,18 @@ var typingnote = {
       {
         element: "div",
         className: "userTypingText",
-        style: {
-          color,
-        },
         children: [
           {
             element: "span",
-            textContent: displayName + " is typing...",
+            style: {
+              color: color,
+              fontFamily: userFont,
+            },
+            textContent: displayName,
+          },
+          {
+            element: "span",
+            textContent: " is typing...",
           },
           {
             element: "div",
@@ -57,7 +62,7 @@ var typingnote = {
           {
             duration: 70,
             easing: "ease-out",
-          },
+          }
         );
       },
     };

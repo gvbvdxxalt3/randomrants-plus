@@ -3,7 +3,7 @@ var microphones = {};
 var elements = require("../../gp2/elements.js");
 var dialogs = require("../../dialogs.js");
 
-var microphoneUsageTexts = elements.getGPId("microphoneUsageTexts");
+var microphoneUsageTexts = elements.getGPId("typingNoticeDiv");
 
 function createAudioElement() {
   var audio = document.createElement("audio");
@@ -30,12 +30,24 @@ microphones.start = function (
     userMicrophone.audioElement = audioElement;
     userMicrophone.isSelf = isSelf;
 
-    var span = document.createElement("span");
-    span.className = "isTalkingSpan";
-    span.style.color = userColor;
-    span.style.fontFamily = userFont;
-    span.textContent = `${displayName} is talking.`;
+    var span = document.createElement("div");
+    span.className = "userTypingText";
+    //span.style.fontFamily = userFont;
+    var span1 = document.createElement("span");
+    span1.textContent = displayName;
+    span1.style.fontFamily = userFont;
+    span1.style.color = userColor;
+    var span2 = document.createElement("span");
+    span2.textContent = " is talking";
+    span.append(span1);
+    span.append(span2);
     span.style.pointerEvents = "none";
+
+    var micImg = document.createElement("img");
+    micImg.src = "images/mic.svg";
+    micImg.style.width = "17px";
+    micImg.style.height = "17px";
+    span2.append(micImg);
 
     userMicrophone.span = span;
     microphoneUsageTexts.append(span);

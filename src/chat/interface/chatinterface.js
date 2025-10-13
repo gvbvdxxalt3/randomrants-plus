@@ -56,7 +56,7 @@ var roomErrorScreen = elements.getGPId("roomErrorScreen");
 var guestErrorScreen = elements.getGPId("guestErrorScreen");
 var banRoomError = elements.getGPId("banRoomError");
 var notAllowedError = elements.getGPId("notAllowedError");
-
+var typingNoticeDiv = elements.getGPId("typingNoticeDiv");
 var userOnlineViewBox = elements.getGPId("userOnlineViewBox");
 var toggleMessageAndOnlineView = elements.getGPId("toggleMessageAndOnlineView");
 var toggleMessageAndOnlineViewText = elements.getGPId(
@@ -92,12 +92,14 @@ function toggleMessageAndOnlineViewClicked() {
     messageSendButton.hidden = true;
     userMessagesBox.hidden = true;
     messageAttachFilesButton.hidden = true;
+    typingNoticeDiv.hidden = true;
   } else {
     userOnlineViewBox.hidden = true;
     messageInputBox.hidden = false;
     messageSendButton.hidden = false;
     userMessagesBox.hidden = false;
     messageAttachFilesButton.hidden = false;
+    typingNoticeDiv.hidden = false;
   }
   updateToggleOnlineViewText();
 }
@@ -675,7 +677,8 @@ reconnectingScreen.hidden = true;
           typingnotice.activateTypingMessage(
             json.username,
             json.displayName,
-            json.color
+            json.color,
+            json.font
           );
         }
       } catch (e) {

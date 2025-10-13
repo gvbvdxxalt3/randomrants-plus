@@ -363,7 +363,7 @@ var dom = elements.createElementsFromJSON([
                 style: {
                   height: "100%",
                 },
-                src: "images/promote.svg",
+                src: "images/addcrown.svg",
               },
               {
                 element: "span",

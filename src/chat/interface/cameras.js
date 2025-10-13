@@ -5,7 +5,7 @@ var dialogs = require("../../dialogs.js");
 
 var cameraVideosDiv = elements.getGPId("camerasVideosDiv");
 
-function createCameraVideoDiv() {
+function createCameraVideoDiv(fullScreenToggleFunction) {
   var div = document.createElement("div");
   var video = document.createElement("video");
   var displayNameSpan = document.createElement("span");
@@ -14,10 +14,23 @@ function createCameraVideoDiv() {
   video.className = "cameraVideoElement";
   displayNameSpan.className = "cameraVideoUsername";
 
+  div.addEventListener("click", () => {
+    fullScreenToggleFunction();
+  });
+
   div.append(video);
   div.append(displayNameSpan);
 
-  return { div, video, displayNameSpan };
+  var fullScreenDiv = document.createElement("div");
+  fullScreenDiv.style.position = "fixed";
+  fullScreenDiv.style.top = "0";
+  fullScreenDiv.style.left = "0";
+  fullScreenDiv.style.width = "100vw";
+  fullScreenDiv.style.height = "100vh";
+  fullScreenDiv.style.background = "#000000";
+  fullScreenDiv.style.opacity = 0.5;
+
+  return { div, video, displayNameSpan, fullScreenDiv };
 }
 
 var cameraVideos = {};
@@ -29,7 +42,22 @@ cameras.show = function (id, code, displayName, userColor, userFont) {
       cameras.hide(id);
     }
     var cameraVideo = {};
-    var elms = createCameraVideoDiv();
+    var elms = createCameraVideoDiv(() => {
+      var div = elms.div;
+      var fullScreenDiv = elms.fullScreenDiv;
+      if (div.hasAttribute("fullscreen")) {
+        div.remove();
+        fullScreenDiv.remove();
+        cameraVideosDiv.append(div);
+        div.removeAttribute("fullscreen");
+      } else {
+        div.remove();
+        fullScreenDiv.remove();
+        document.body.append(fullScreenDiv);
+        document.body.append(div);
+        div.setAttribute("fullscreen", "");
+      }
+    });
     cameraVideo.elms = elms;
     elms.displayNameSpan.textContent = displayName;
     elms.displayNameSpan.style.fontFamily = userFont;

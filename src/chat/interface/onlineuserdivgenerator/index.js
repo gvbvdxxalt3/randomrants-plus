@@ -54,7 +54,7 @@ function generateDiv(
   if (isRealOwner) {
     icons.push({
       element: "img",
-      src: "images/key.svg",
+      src: "images/crown.svg",
       className: "ownerKeyIcon",
       style: {
         height: "23px",
@@ -118,7 +118,7 @@ function generateDiv(
               style: {
                 height: "100%",
               },
-              src: "images/demote.svg",
+              src: "images/removecrown.svg",
             },
             {
               element: "span",
@@ -153,7 +153,7 @@ function generateDiv(
               style: {
                 height: "100%",
               },
-              src: "images/promote.svg",
+              src: "images/addcrown.svg",
             },
             {
               element: "span",
@@ -179,7 +179,7 @@ function generateDiv(
       if (isOwner) {
         icons.push({
           element: "img",
-          src: "images/key.svg",
+          src: "images/crown.svg",
           style: {
             height: "23px",
             padding: "4px 2px",
