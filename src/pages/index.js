@@ -7,47 +7,15 @@ var elements = require("../gp2/elements.js");
 var shtml = require("../safehtmlencode.js");
 var accountHelper = require("../accounthelper/index.js");
 var dialogs = require("../dialogs.js");
+var { rainbowHexes } = require("../colorutil.js");
 require("./navigate-loader.js");
 
 var randomDialogText = require("../randomquotes.txt");
 var randomQuotes = randomDialogText.trim().split("\n");
 
-async function fetchAsJSON(url, options) {
-  var a = await fetch(url, options);
-  var b = await a.json();
-
-  return b;
-}
-
 function returnRandomValueFromArray(array) {
   return array[Math.round(Math.random() * (array.length - 1))];
 }
-
-var rainbow = [
-  "#ff0000",
-  "#ff6600",
-  "#ffb300",
-  "#ffe600",
-  "#d9ff00",
-  "#9dff00",
-  "#55ff00",
-  "#0dff00",
-  "#00ff40",
-  "#00ff88",
-  "#00ffcc",
-  "#00eeff",
-  "#00aaff",
-  "#0066ff",
-  "#0026ff",
-  "#3700ff",
-  "#8800ff",
-  "#dd00ff",
-  "#ff00e1",
-  "#ff00a6",
-  "#ff006a",
-  "#ff0033",
-  "#ff0000",
-];
 
 var elementJSON = [
   {
@@ -257,7 +225,7 @@ var elementJSON = [
             className: "fadeIn delay-3",
             style: {
               fontSize: "40px",
-              color: returnRandomValueFromArray(rainbow),
+              color: returnRandomValueFromArray(rainbowHexes),
               fontFamily: "Mochibop",
               overflowWrap: "break-word",
               //display: "inline",

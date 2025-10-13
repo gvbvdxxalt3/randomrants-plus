@@ -1,3 +1,10 @@
+async function fetchAsJSON(url, options) {
+  var a = await fetch(url, options);
+  var b = await a.json();
+
+  return b;
+}
+
 var audioEngine = require("../audio.js");
 
 var elements = require("../gp2/elements.js");

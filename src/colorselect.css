@@ -1,0 +1,93 @@
+.colorSelectDialog {
+  z-index: 99999999999;
+  position: fixed;
+  font-family: Arial;
+}
+.colorSelectDialogBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: 0.5;
+}
+.colorSelectDialogBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: fit-content;
+  height: fit-content;
+  background: white;
+  padding: 10px 10px;
+  border-radius: 5px;
+  color: black;
+  transform: translate(-50%, -50%);
+}
+
+.colorSelectHeader {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.colorSelectLabel {
+  font-weight: bold;
+}
+
+.colorSelectPreviewBox {
+  width: 150px;
+  height: 150px;
+  border-radius: 4px;
+  color: white;
+  line-height: 150px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.colorSelectColorDiv {
+  width: 32px;
+  height: 32px;
+  flex-grow: 0;
+  border-radius: 4px;
+  color: red;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+}
+.colorSelectColorDiv:hover {
+  filter: brightness(1.2);
+  border-color: gray;
+  cursor: pointer;
+}
+.colorSelectColorDiv:active {
+  border-color: white;
+}
+
+.colorSelectPickRainbowContainer {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.colorSelectPickRainbowContainer2 {
+  width: 500px;
+  height: fit-content;
+  overflow: auto;
+}
+
+.colorSelectButton {
+  all: unset;
+  background: #006eff;
+  border-radius: 4px;
+  padding: 3px 3px;
+  font-weight: bold;
+  color: white;
+  margin: 2px 2px;
+}
+
+.colorSelectButton:hover {
+  background: #5ca3ff;
+  cursor: pointer;
+}

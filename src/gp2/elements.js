@@ -11,10 +11,9 @@ var elements = {
     }
   },
   appendElementsFromJSON: function (elm, appendJSONArray) {
-    elements.appendElements(
-      elm,
-      elements.createElementsFromJSON(appendJSONArray)
-    );
+    var elms = elements.createElementsFromJSON(appendJSONArray);
+    elements.appendElements(elm, elms);
+    return elms;
   },
   createElementsFromJSON: function (jsonelmArray) {
     //converts an array of json's with element properties to a element list.
