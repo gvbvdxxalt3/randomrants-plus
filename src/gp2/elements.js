@@ -10,6 +10,12 @@ var elements = {
       elm.append(appendElm);
     }
   },
+  appendElementsFromJSON: function (elm, appendJSONArray) {
+    elements.appendElements(
+      elm,
+      elements.createElementsFromJSON(appendJSONArray)
+    );
+  },
   createElementsFromJSON: function (jsonelmArray) {
     //converts an array of json's with element properties to a element list.
     function runElements(arry) {

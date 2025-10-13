@@ -7,7 +7,11 @@ function getSafeHTML(unsafeText) {
         safeText += "<br>";
         break;
       case " ":
-        safeText += "&nbsp;";
+        if (unsafeText[i + 1] == " ") {
+          safeText += "&nbsp;";
+        } else {
+          safeText += " ";
+        }
         break;
       case "\t":
         if (unsafeText[i - 1] != "\t") safeText += " ";

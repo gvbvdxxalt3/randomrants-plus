@@ -180,21 +180,7 @@ var rightSide = {
       element: "div",
       className: "chatInterfaceMessagesBox",
       gid: "userMessagesBox",
-      children: [
-        {
-          element: "div",
-          children: [
-            {
-              element: "span",
-              style: {
-                fontWeight: "bold",
-              },
-              textContent: "Messages:",
-            },
-          ],
-        },
-        { element: "div", gid: "userMessagesContainer" },
-      ],
+      children: [{ element: "div", gid: "userMessagesContainer" }],
     },
     {
       element: "div",

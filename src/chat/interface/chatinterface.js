@@ -292,7 +292,7 @@ reconnectingScreen.hidden = true;
       );
       userMessagesContainer.append(messageElement);
 
-      if (messageElement) {
+      if (isNew) {
         messageElement.animate(
           [
             { transform: "translate(0px, -10px)", opacity: "0" },
@@ -459,6 +459,23 @@ reconnectingScreen.hidden = true;
           for (var e of a) {
             e.remove();
           }
+          if (json.messages.length > 0) {
+            elements.appendElementsFromJSON(userMessagesContainer, [
+              {
+                element: "div",
+                style: {
+                  fontWeight: "bold",
+                  padding: "5px 5px",
+                  width: "100%",
+                  background: "#ffffff",
+                  opacity: 0.5,
+                  color: "black",
+                  borderRadius: "5px",
+                },
+                textContent: "Previous messages:",
+              },
+            ]);
+          }
           for (var messageData of json.messages) {
             putMessage(
               messageData.username,
@@ -471,6 +488,24 @@ reconnectingScreen.hidden = true;
               false
             );
           }
+          if (json.messages.length > 0) {
+            elements.appendElementsFromJSON(userMessagesContainer, []);
+          }
+          elements.appendElementsFromJSON(userMessagesContainer, [
+            {
+              element: "div",
+              style: {
+                fontWeight: "bold",
+                padding: "5px 5px",
+                width: "100%",
+                background: "#ffffff",
+                opacity: 0.5,
+                color: "black",
+                borderRadius: "5px",
+              },
+              textContent: "Messages:",
+            },
+          ]);
         }
         if (json.type == "sendKeepAlive") {
           sws.send(

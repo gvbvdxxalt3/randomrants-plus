@@ -820,6 +820,8 @@ a {
 }
 .messageSpan {
   align-content: center;
+  display: "inline-block",
+  overflow-wrap: "break-word",
 }
 
 .onlineUserContainer {

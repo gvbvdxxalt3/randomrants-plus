@@ -11,7 +11,39 @@ require("./navigate-loader.js");
 var elementJSON = [
   {
     element: "div",
-    className: "centeredDialog",
+    gid: "emojiContainer",
+    style: {
+      width: "100vw",
+      height: "100vh",
+      position: "fixed",
+      top: "0px",
+      left: "0px",
+      overflow: "hidden",
+    },
+  },
+  {
+    element: "div",
+    className: "centeredDialogSolid",
+    GPWhenCreated: function (elm) {
+      elm.animate(
+        [
+          {
+            transform: "translate(-50%, -50%) scale(0)",
+          },
+          {
+            transform: "translate(-50%, -50%) scale(0)",
+          },
+          {
+            transform: "translate(-50%, -50%) scale(1)",
+          },
+        ],
+        {
+          duration: 700,
+          iterations: 1,
+          easing: "ease-out",
+        }
+      );
+    },
     children: [
       require("./sitenews-notice.js"),
       {
@@ -64,8 +96,15 @@ var elementJSON = [
       },
       {
         element: "span",
+        textContent: "Type the wacky code from your friends screen.",
+      },
+      {
+        element: "br",
+      },
+      {
+        element: "span",
         textContent:
-          "Type the wacky code from your friends screen to join their room. The code would destruct in 20 minutes after its creation, so think fast!",
+          "The code would self destruct after 15 minutes of inactivity. Think fast!",
       },
     ],
   },
@@ -108,3 +147,5 @@ joinCodeInput.addEventListener("input", (event) => {
 joinCodeButton.addEventListener("click", () => {
   joinToRoom();
 });
+
+require("./floatingemojis.js");
