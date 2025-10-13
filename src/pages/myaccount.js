@@ -534,7 +534,7 @@ function compressImage(oldsrc) {
       var uploadPFP = elements.getGPId("uploadPFP");
       uploadPFP.onclick = function () {
         var input = document.createElement("input");
-        input.accept = ".png, .jpeg, .bmp, .jpg, .ico, .webm";
+        input.accept = ".png, .jpeg, .bmp, .jpg, .ico, .webm, .webp";
         input.type = "file";
         input.onchange = function () {
           var file = input.files[0];
