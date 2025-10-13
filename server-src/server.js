@@ -4359,6 +4359,9 @@ var serverPort = 3000;
 if (process.env.serverPort) {
   serverPort = Number(process.env.serverPort);
 }
+if (process.env.PORT) {
+  serverPort = Number(process.env.PORT);
+}
 
 (async function () {
   await checkServerLoop(); //when it loops back, it accepts the promise.
