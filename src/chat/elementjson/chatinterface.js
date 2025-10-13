@@ -135,7 +135,7 @@ var rightSide = {
           children: [
             {
               element: "img",
-              src: "images/audio.svg",
+              src: "images/speaker.svg",
             },
             {
               element: "span",
