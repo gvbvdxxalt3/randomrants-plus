@@ -13,7 +13,7 @@ const pages = [
   "about",
   "security",
   "sitenews",
-  "history"
+  "history",
 ];
 try {
   require("fs").rmSync("./public", { recursive: true });
@@ -77,6 +77,22 @@ module.exports = {
         ],
         type: "javascript/auto",
       },
+      {
+        test: /\.ttf$/i,
+        use: [
+          {
+            loader: "url-loader",
+          },
+        ],
+      },
+      {
+        test: /\.otf$/i,
+        use: [
+          {
+            loader: "url-loader",
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -87,7 +103,7 @@ module.exports = {
           title: `Random Rants +`,
           template: "./webpackhtml/base.html",
           chunks: [page],
-        }),
+        })
     ),
     new CopyWebpackPlugin({
       patterns: [

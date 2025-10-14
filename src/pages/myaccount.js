@@ -9,6 +9,7 @@ var dialog = require("../dialogs.js");
 var loader = require("./loadingscreen.js");
 var fontList = require("../fontlist.js");
 var colorSelect = require("../colorselect.js");
+var fontSelect = require("../fontselect.js");
 require("./navigate-loader.js");
 
 function compressImage(oldsrc) {
@@ -168,66 +169,6 @@ function compressImage(oldsrc) {
                   style: {
                     alignContent: "center",
                   },
-                  children: [
-                    {
-                      element: "div",
-                      style: {
-                        display: "flex",
-                        justifyContent: "center",
-                      },
-                      children: [
-                        {
-                          element: "span",
-                          style: {
-                            marginRight: "3px",
-                          },
-                          textContent: "Font: ",
-                        },
-                        {
-                          element: "select",
-                          className: "inputText2",
-                          gid: "fontInput",
-                          style: {
-                            width: "100%",
-                            fontSize: "10px",
-                            minWidth: "50px",
-                          },
-                          children: [
-                            {
-                              element: "optgroup",
-                              label: "Browser Fonts",
-                              children: [
-                                {
-                                  element: "option",
-                                  textContent: "Arial (Default)",
-                                  value: "Arial",
-                                  selected: true,
-                                },
-                                {
-                                  element: "option",
-                                  textContent: "Monospace",
-                                  value: "monospace",
-                                  selected: true,
-                                },
-                              ],
-                            },
-                            {
-                              element: "optgroup",
-                              label: "Additional Fonts",
-                              children: fontList.map((font) => {
-                                //Takes font from list and puts them like: {element: "option",textContent: "Font Name", value: "FontFamily"}
-                                return {
-                                  element: "option",
-                                  textContent: font.name,
-                                  value: font.family,
-                                };
-                              }),
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
                 },
               ],
             },
@@ -265,7 +206,6 @@ function compressImage(oldsrc) {
                   element: "div",
                   className: "button",
                   gid: "changeDisplayNameFontButton",
-                  hidden: true,
                   style: {
                     width: "fit-content",
                   },
@@ -458,7 +398,6 @@ function compressImage(oldsrc) {
       var selectUsernameColorButton = elements.getGPId(
         "selectUsernameColorButton"
       );
-      var usernameFontInput = elements.getGPId("fontInput");
       var usernameSpan = elements.getGPId("usernameSpan");
       var changeDisplayNameButton = elements.getGPId("changeDisplayNameButton");
       var changeDisplayNameFontButton = elements.getGPId(
@@ -482,11 +421,27 @@ function compressImage(oldsrc) {
       }
       loadImage();
 
-      changeDisplayNameFontButton.onclick = function () {
-        //var event;
-        //event = document.createEvent("MouseEvents");
-        //event.initMouseEvent("mousedown", true, true, window);
-        //usernameFontInput.dispatchEvent(event);
+      changeDisplayNameFontButton.onclick = async function () {
+        var selectedFont = await fontSelect.ask(
+          [
+            {
+              name: "Arial",
+              family: "Arial",
+            },
+          ].concat(fontList),
+          displayNameInput.style.fontFamily
+        );
+        if (!selectedFont) {
+          return;
+        }
+        displayNameInput.style.fontFamily = selectedFont;
+        usernameSpan.style.fontFamily = selectedFont;
+        await fetch(accountHelper.getServerURL() + "/account/setfont/", {
+          method: "POST",
+          body: JSON.stringify({
+            font: selectedFont,
+          }),
+        });
       };
 
       var signOutButton = elements.getGPId("signOutButton");
@@ -574,23 +529,11 @@ function compressImage(oldsrc) {
         });
       }
       selectUsernameColorButton.addEventListener("click", async function () {
-        var chosenColor = await colorSelect.ask();
+        var chosenColor = await colorSelect.ask(userColor);
         if (chosenColor) {
           await setColor(chosenColor);
         }
       });
-
-      usernameFontInput.onchange = async function () {
-        displayNameInput.style.fontFamily = usernameFontInput.value;
-        usernameSpan.style.fontFamily = usernameFontInput.value;
-        await fetch(accountHelper.getServerURL() + "/account/setfont/", {
-          method: "POST",
-          body: JSON.stringify({
-            font: usernameFontInput.value,
-          }),
-        });
-      };
-      usernameFontInput.value = session.font;
 
       changeDisplayNameButton.onclick = async function () {
         displayNameInput.focus();

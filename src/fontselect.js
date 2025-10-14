@@ -3,7 +3,7 @@ var fontSelectStylesheet = require("./fontselect.css");
 var importedFontList = require("./fontlist.js");
 
 var fontSelector = {
-  ask: function (fontList = importedFontList) {
+  ask: function (fontList = importedFontList, defaultValue) {
     return new Promise((accept, reject) => {
       var onFontClick = function () {};
       var previewText = "[Preview] ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890";
@@ -129,6 +129,12 @@ var fontSelector = {
         fontSelectDialog.remove();
         accept(null);
       });
+
+      if (defaultValue) {
+        if (fontElements[defaultValue]) {
+          selectedFont = defaultValue;
+        }
+      }
     });
   },
 };

@@ -11,7 +11,7 @@ var {
 } = require("./colorutil.js");
 
 var colorSelector = {
-  ask: function () {
+  ask: function (defaultValue) {
     return new Promise((accept, reject) => {
       var setColorDiv = function () {};
       var dialog = elements.appendElementsFromJSON(document.body, [
@@ -567,6 +567,11 @@ var colorSelector = {
         colorSelectDialog.remove();
         accept(null);
       });
+
+      if (defaultValue) {
+        var hsl = hexToHsl(defaultValue);
+        setHSL(hsl.h, hsl.s, hsl.l);
+      }
     });
   },
 };
