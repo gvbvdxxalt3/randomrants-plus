@@ -85,16 +85,6 @@ module.exports = [
     file: "Bangers-Regular.ttf",
   },
   {
-    name: "Bangers",
-    family: "Bangers",
-    file: "Bangers-Regular.ttf",
-  },
-  {
-    name: "Creepster",
-    family: "Creepster",
-    file: "Creepster-Regular.ttf",
-  },
-  {
     name: "Creepster",
     family: "Creepster",
     file: "Creepster-Regular.ttf",
