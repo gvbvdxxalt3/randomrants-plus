@@ -428,6 +428,10 @@ function compressImage(oldsrc) {
               name: "Arial",
               family: "Arial",
             },
+            {
+              name: "Monospace",
+              family: "monospace",
+            },
           ].concat(fontList),
           displayNameInput.style.fontFamily
         );

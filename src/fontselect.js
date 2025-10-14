@@ -108,9 +108,15 @@ var fontSelector = {
       function updateFontListSelection() {
         previewSpan.style.fontFamily = selectedFont;
         fontList.forEach((font) => {
-          fontElements[font.family].removeAttribute("selected");
+          var elm = fontElements[font.family];
+          if (elm) {
+            elm.removeAttribute("selected");
+          }
         });
-        fontElements[selectedFont].setAttribute("selected", "");
+        var elm = fontElements[selectedFont];
+        if (elm) {
+          elm.setAttribute("selected", "");
+        }
       }
       updateFontListSelection();
       onFontClick = function (elm) {
@@ -133,6 +139,7 @@ var fontSelector = {
       if (defaultValue) {
         if (fontElements[defaultValue]) {
           selectedFont = defaultValue;
+          updateFontListSelection();
         }
       }
     });

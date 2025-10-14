@@ -2,7 +2,7 @@ module.exports = [
   {
     name: "Permanent Marker",
     family: "Permanent Marker",
-    file: "PermanentMarker-Regular.ttf", // File name from Google Fonts repo
+    file: "permanentmarker.ttf",
   },
   {
     name: "Pacifico",
@@ -45,16 +45,6 @@ module.exports = [
     file: "Caveat-Regular.ttf",
   },
   {
-    name: "Caveat",
-    family: "Caveat",
-    file: "Caveat-Regular.ttf",
-  },
-  {
-    name: "Gochi Hand",
-    family: "Gochi Hand",
-    file: "GochiHand-Regular.ttf",
-  },
-  {
     name: "Gochi Hand",
     family: "Gochi Hand",
     file: "GochiHand-Regular.ttf",
@@ -88,5 +78,10 @@ module.exports = [
     name: "Creepster",
     family: "Creepster",
     file: "Creepster-Regular.ttf",
+  },
+  {
+    name: "Comic Neue",
+    family: "ComicNeue",
+    file: "ComicNeue-Regular.ttf",
   },
 ];
