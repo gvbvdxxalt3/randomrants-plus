@@ -148,15 +148,13 @@ reconnectingScreen.hidden = true;
 
     try {
       rrLoadingStatusText.textContent = "Initializing meme sounds...";
-      await soundboard.load(
-        externalThings.soundboardURL,
-        function (current, max) {
-          var percent = (current / max) * 100;
-          rrLoadingStatusText.textContent =
-            "Loading meme sounds (" + Math.round(percent) + "%)";
-        }
-      );
+      await soundboard.load(externalThings, function (current, max) {
+        var percent = (current / max) * 100;
+        rrLoadingStatusText.textContent =
+          "Loading meme sounds (" + Math.round(percent) + "%)";
+      });
     } catch (e) {
+      //dialogs.alert(e);
       dialogs.alert(
         "Soundboard completley failed to load, no more goofy sounds for you! Blame your schools firewall."
       );

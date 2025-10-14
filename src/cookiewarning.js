@@ -7,3 +7,4 @@ console.log(
   "font-size: 32px; font-weight: bold; font-family: Arial, sans-serif; color: red;",
   "font-size: 20px; font-family: Arial, sans-serif; color: black;"
 );
+require("./fontselect.js");

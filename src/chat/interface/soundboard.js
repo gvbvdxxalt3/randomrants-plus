@@ -246,7 +246,7 @@ function createSoundboardButtonDiv(sound, index) {
           func: function () {
             sb.onSoundButtonClick(
               index,
-              soundboardMultipliers[soundboardMutliplier].mult,
+              soundboardMultipliers[soundboardMutliplier].mult
             );
           },
         },
@@ -268,16 +268,27 @@ async function showSoundboardDialog() {
 
 sb.show = showSoundboardDialog;
 
-sb.load = function (soundboardURL, onProgress) {
+function getGHFileURL(username, repo, version, file) {
+  return `https://cdn.jsdelivr.net/gh/${username}/${repo}@${version}/${file}`;
+}
+
+sb.load = function (otherJSON, onProgress) {
   if (!onProgress) {
     onProgress = () => {};
   }
 
-  const MAX_CONCURRENT_LOADS = 5;
+  const MAX_CONCURRENT_LOADS = 15;
+
+  var repoURL = getGHFileURL(
+    otherJSON.soundboardGithub.user,
+    otherJSON.soundboardGithub.repo,
+    otherJSON.soundboardGithub.version,
+    ""
+  );
 
   return new Promise((accept, reject) => {
     fetchUtils
-      .fetchAsJSON(soundboardURL)
+      .fetchAsJSON(repoURL + "soundboard.json")
       .then((sounds) => {
         let soundsLoaded = 0;
         let currentIndex = 0;
@@ -305,7 +316,7 @@ sb.load = function (soundboardURL, onProgress) {
             activeLoads++;
 
             const soundPromise = audioEngine
-              .loadSoundFromURL(sound.url)
+              .loadSoundFromURL(repoURL + "sounds/" + sound.file)
               .then((soundData) => {
                 soundsLoaded++;
                 onProgress(soundsLoaded, sounds.length);
@@ -375,7 +386,7 @@ sb.playSound = function (index, mult = 1, displayName) {
           {
             easing: "ease-in",
             duration: 50,
-          },
+          }
         );
       }
     }
@@ -410,7 +421,7 @@ sb.playSound = function (index, mult = 1, displayName) {
             {
               easing: "ease-in",
               duration: 50,
-            },
+            }
           );
           animation.addEventListener("finish", () => {
             player._element.remove();

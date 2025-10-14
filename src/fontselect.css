@@ -45,10 +45,38 @@
   margin: 2px 2px;
 }
 
-.fontSelectOption {
-}
-
 .fontSelectButton:hover {
   background: #5ca3ff;
   cursor: pointer;
+}
+
+.fontSelectOptionContainer {
+  background: white;
+  border-style: solid;
+  border-width: 1.5px;
+  border-color: gray;
+  border-radius: 2px;
+  width: 100%;
+  height: 120px;
+  overflow-y: scroll;
+}
+
+.fontSelectOption {
+  width: 100%;
+  height: fit-content;
+  border-radius: 2px;
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
+  user-select: none;
+  padding: 10px 0px;
+  text-align: center;
+}
+.fontSelectOption:hover {
+  color: #5ca3ff;
+  cursor: pointer;
+}
+.fontSelectOption[selected] {
+  color: #006eff;
+  cursor: default;
 }
