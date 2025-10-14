@@ -10,13 +10,6 @@ var {
   getRainbowHexes,
 } = require("./colorutil.js");
 
-elements.appendElementsFromJSON(document.body, [
-  {
-    element: "style",
-    innerHTML: colorSelectStylesheet,
-  },
-]);
-
 var colorSelector = {
   ask: function () {
     return new Promise((accept, reject) => {
@@ -27,6 +20,10 @@ var colorSelector = {
           className: "colorSelectDialog",
           gid: "colorSelectDialog",
           children: [
+            {
+              element: "style",
+              innerHTML: colorSelectStylesheet,
+            },
             {
               element: "div",
               className: "colorSelectDialogBackground",
@@ -62,6 +59,242 @@ var colorSelector = {
                       },
                       children: [
                         {
+                          element: "button",
+                          className: "colorSelectButton",
+                          textContent: "Normal",
+                          eventListeners: [
+                            {
+                              event: "click",
+                              func: function () {
+                                elements.getGPId("colorSelectHSL").hidden =
+                                  true;
+                                elements.getGPId("colorSelectRGB").hidden =
+                                  true;
+                                elements.getGPId("colorSelectCursor").hidden =
+                                  false;
+                              },
+                            },
+                          ],
+                        },
+                        {
+                          element: "button",
+                          className: "colorSelectButton",
+                          textContent: "HSL",
+                          eventListeners: [
+                            {
+                              event: "click",
+                              func: function () {
+                                elements.getGPId("colorSelectHSL").hidden =
+                                  false;
+                                elements.getGPId("colorSelectRGB").hidden =
+                                  true;
+                                elements.getGPId("colorSelectCursor").hidden =
+                                  true;
+                              },
+                            },
+                          ],
+                        },
+                        {
+                          element: "button",
+                          className: "colorSelectButton",
+                          textContent: "RGB",
+                          eventListeners: [
+                            {
+                              event: "click",
+                              func: function () {
+                                elements.getGPId("colorSelectHSL").hidden =
+                                  true;
+                                elements.getGPId("colorSelectRGB").hidden =
+                                  false;
+                                elements.getGPId("colorSelectCursor").hidden =
+                                  true;
+                              },
+                            },
+                          ],
+                        },
+                        {
+                          element: "br",
+                        },
+                        {
+                          element: "div",
+                          gid: "colorSelectHSL",
+                          hidden: true,
+                          children: [
+                            {
+                              element: "span",
+                              className: "colorSelectLabel",
+                              textContent: "Hue: ",
+                            },
+                            {
+                              element: "input",
+                              gid: "colorSelectHueInput",
+                              type: "range",
+                              min: 0,
+                              max: 360,
+                              value: 0,
+                            },
+                            {
+                              element: "br",
+                            },
+                            {
+                              element: "span",
+                              className: "colorSelectLabel",
+                              textContent: "Saturation: ",
+                            },
+                            {
+                              element: "input",
+                              gid: "colorSelectSaturationInput",
+                              type: "range",
+                              min: 0,
+                              max: 100,
+                              value: 100,
+                            },
+                            {
+                              element: "br",
+                            },
+                            {
+                              element: "span",
+                              className: "colorSelectLabel",
+                              textContent: "Lightness: ",
+                            },
+                            {
+                              element: "input",
+                              gid: "colorSelectLightnessInput",
+                              type: "range",
+                              min: 0,
+                              max: 100,
+                              value: 50,
+                            },
+                          ],
+                        },
+                        {
+                          element: "div",
+                          gid: "colorSelectRGB",
+                          hidden: true,
+                          children: [
+                            {
+                              element: "span",
+                              className: "colorSelectLabel",
+                              textContent: "Red: ",
+                            },
+                            {
+                              element: "input",
+                              gid: "colorSelectRedInput",
+                              type: "range",
+                              min: 0,
+                              max: 255,
+                              value: 0,
+                            },
+                            {
+                              element: "br",
+                            },
+                            {
+                              element: "span",
+                              className: "colorSelectLabel",
+                              textContent: "Green: ",
+                            },
+                            {
+                              element: "input",
+                              gid: "colorSelectGreenInput",
+                              type: "range",
+                              min: 0,
+                              max: 255,
+                              value: 0,
+                            },
+                            {
+                              element: "br",
+                            },
+                            {
+                              element: "span",
+                              className: "colorSelectLabel",
+                              textContent: "Blue: ",
+                            },
+                            {
+                              element: "input",
+                              gid: "colorSelectBlueInput",
+                              type: "range",
+                              min: 0,
+                              max: 255,
+                              value: 0,
+                            },
+                          ],
+                        },
+                        {
+                          element: "div",
+                          gid: "colorSelectCursor",
+                          children: [
+                            {
+                              element: "div",
+                              style: {
+                                display: "flex",
+                              },
+                              children: [
+                                {
+                                  element: "div",
+                                  style: {
+                                    width: "125px",
+                                    height: "fit-content",
+                                    marginRight: "10px",
+                                  },
+                                  children: [
+                                    {
+                                      element: "div",
+                                      className: "colorSelectDropContainer",
+                                      children: [
+                                        {
+                                          element: "div",
+                                          className: "colorSelectDrop",
+                                          gid: "colorSelectDrop",
+                                        },
+                                      ],
+                                    },
+                                    {
+                                      element: "canvas",
+                                      width: "125",
+                                      height: "125",
+                                      gid: "colorSelectCursorCanvas",
+                                      className: "colorSelectCursorCanvas",
+                                    },
+                                    {
+                                      element: "br",
+                                    },
+                                    {
+                                      element: "span",
+                                      style: {
+                                        width: "125px",
+                                        fontSize: "12px",
+                                      },
+                                      textContent:
+                                        "Click in the square to choose a color.",
+                                    },
+                                  ],
+                                },
+                                {
+                                  element: "div",
+                                  children: [
+                                    {
+                                      element: "span",
+                                      className: "colorSelectLabel",
+                                      textContent: "Hue: ",
+                                    },
+                                    {
+                                      element: "input",
+                                      gid: "colorSelectHueInput2",
+                                      type: "range",
+                                      min: 0,
+                                      max: 360,
+                                      value: 0,
+                                    },
+                                  ],
+                                },
+                              ],
+                            },
+                            {
+                              element: "br",
+                            },
+                          ],
+                        },
+                        /*{
                           element: "input",
                           type: "color",
                           gid: "colorSelectInput",
@@ -69,138 +302,54 @@ var colorSelector = {
                             width: "100%",
                           },
                         },
-                        { element: "br" },
-                        {
-                          element: "span",
-                          className: "colorSelectLabel",
-                          textContent: "Hue: ",
-                        },
-                        {
-                          element: "input",
-                          gid: "colorSelectHueInput",
-                          type: "range",
-                          min: 0,
-                          max: 360,
-                          value: 0,
-                        },
-                        {
-                          element: "br",
-                        },
-                        {
-                          element: "span",
-                          className: "colorSelectLabel",
-                          textContent: "Saturation: ",
-                        },
-                        {
-                          element: "input",
-                          gid: "colorSelectSaturationInput",
-                          type: "range",
-                          min: 0,
-                          max: 100,
-                          value: 100,
-                        },
-                        {
-                          element: "br",
-                        },
-                        {
-                          element: "span",
-                          className: "colorSelectLabel",
-                          textContent: "Lightness: ",
-                        },
-                        {
-                          element: "input",
-                          gid: "colorSelectLightnessInput",
-                          type: "range",
-                          min: 0,
-                          max: 100,
-                          value: 50,
-                        },
-                        {
-                          element: "br",
-                        },
-                        {
-                          element: "span",
-                          className: "colorSelectLabel",
-                          textContent: "Red: ",
-                        },
-                        {
-                          element: "input",
-                          gid: "colorSelectRedInput",
-                          type: "range",
-                          min: 0,
-                          max: 255,
-                          value: 0,
-                        },
-                        {
-                          element: "br",
-                        },
-                        {
-                          element: "span",
-                          className: "colorSelectLabel",
-                          textContent: "Green: ",
-                        },
-                        {
-                          element: "input",
-                          gid: "colorSelectGreenInput",
-                          type: "range",
-                          min: 0,
-                          max: 255,
-                          value: 0,
-                        },
-                        {
-                          element: "br",
-                        },
-                        {
-                          element: "span",
-                          className: "colorSelectLabel",
-                          textContent: "Blue: ",
-                        },
-                        {
-                          element: "input",
-                          gid: "colorSelectBlueInput",
-                          type: "range",
-                          min: 0,
-                          max: 255,
-                          value: 0,
-                        },
-                        {
-                          element: "br",
-                        },
+                        { element: "br" },*/
                       ],
                     },
                   ],
                 },
                 {
-                  element: "br",
+                  element: "span",
+                  className: "colorSelectLabel",
+                  textContent: "Hex: ",
                 },
                 {
+                  element: "input",
+                  type: "text",
+                  className: "colorSelectTextInput",
+                  gid: "colorSelectInput",
+                  value: "#ffffff",
+                },
+                {
+                  element: "br",
+                },
+                /*{
                   element: "div",
                   className: "colorSelectPickRainbowContainer2",
-                  children: [
-                    {
+                  children: [*/
+                {
+                  element: "div",
+                  className: "colorSelectPickRainbowContainer",
+                  children: getRainbowHexes(20).map((hex) => {
+                    return {
                       element: "div",
-                      className: "colorSelectPickRainbowContainer",
-                      children: getRainbowHexes(20).map((hex) => {
-                        return {
-                          element: "div",
-                          className: "colorSelectColorDiv",
-                          style: {
-                            background: hex,
+                      className: "colorSelectColorDiv",
+                      style: {
+                        background: hex,
+                      },
+                      backgroundHex: hex,
+                      eventListeners: [
+                        {
+                          event: "click",
+                          func: function () {
+                            setColorDiv(this);
                           },
-                          backgroundHex: hex,
-                          eventListeners: [
-                            {
-                              event: "click",
-                              func: function () {
-                                setColorDiv(this);
-                              },
-                            },
-                          ],
-                        };
-                      }),
-                    },
-                  ],
+                        },
+                      ],
+                    };
+                  }),
                 },
+                /*],
+                },*/
                 {
                   element: "br",
                 },
@@ -225,6 +374,7 @@ var colorSelector = {
       var previewDiv = elements.getGPId("colorSelectPreview");
 
       var hueInput = elements.getGPId("colorSelectHueInput");
+      var hueInput2 = elements.getGPId("colorSelectHueInput2");
       var saturationInput = elements.getGPId("colorSelectSaturationInput");
       var lightnessInput = elements.getGPId("colorSelectLightnessInput");
 
@@ -232,11 +382,59 @@ var colorSelector = {
       var greenInput = elements.getGPId("colorSelectGreenInput");
       var blueInput = elements.getGPId("colorSelectBlueInput");
 
+      var colorDrop = elements.getGPId("colorSelectDrop");
+      var cvs = elements.getGPId("colorSelectCursorCanvas");
+      var ctx = cvs.getContext("2d");
+
       var colorInput = elements.getGPId("colorSelectInput");
 
       var currentHSL = { h: 0, s: 0, l: 0 };
 
-      function updateHSL() {
+      function mapPosToHSL(hue, x, y, width, height) {
+        const s = (x / width) * 100;
+        const l = 100 + (y / height) * -100;
+        return { h: hue, s, l };
+      }
+      function SLToPos(s, l, width, height) {
+        const colorX = (s / 100) * width;
+        const colorY = (1 - l / 100) * height;
+        return { x: colorX, y: colorY };
+      }
+
+      function drawCanvasSelect() {
+        var x = 0;
+        var y = 0;
+        var hue = currentHSL.h;
+        var resolutionX = 2;
+        var resolutionY = 2;
+
+        while (y < cvs.height) {
+          x = 0;
+          while (x < cvs.width) {
+            var hsl = mapPosToHSL(hue, x, y, cvs.width, cvs.height);
+            ctx.fillStyle = hslToHex(hsl.h, hsl.s, hsl.l);
+            ctx.fillRect(x, y, resolutionX, resolutionY);
+            x += resolutionX;
+          }
+          y += resolutionY;
+        }
+      }
+
+      function adjustColorPickerCursor() {
+        var colorPos = SLToPos(
+          currentHSL.s,
+          currentHSL.l,
+          cvs.width,
+          cvs.height
+        );
+        var color = getHex();
+
+        colorDrop.style.backgroundColor = color;
+        colorDrop.style.left = colorPos.x + "px";
+        colorDrop.style.top = colorPos.y + "px";
+      }
+
+      function updateHSL(moving) {
         currentHSL = {
           h: +hueInput.value,
           s: +saturationInput.value,
@@ -249,6 +447,10 @@ var colorSelector = {
         redInput.value = rgb.r;
         greenInput.value = rgb.g;
         blueInput.value = rgb.b;
+        hueInput2.value = hueInput.value;
+
+        drawCanvasSelect();
+        adjustColorPickerCursor();
       }
       function updateHSLRGB() {
         var hsl = rgbToHsl(
@@ -259,6 +461,7 @@ var colorSelector = {
         hueInput.value = hsl.h;
         saturationInput.value = hsl.s;
         lightnessInput.value = hsl.l;
+        hueInput2.value = hsl.h;
         updateHSL();
       }
       function setHSL(h, s, l) {
@@ -274,6 +477,10 @@ var colorSelector = {
       updateHSL();
 
       hueInput.addEventListener("input", updateHSL);
+      hueInput2.addEventListener("input", function () {
+        hueInput.value = hueInput2.value;
+        updateHSL();
+      });
       saturationInput.addEventListener("input", updateHSL);
       lightnessInput.addEventListener("input", updateHSL);
 
@@ -281,19 +488,75 @@ var colorSelector = {
       greenInput.addEventListener("input", updateHSLRGB);
       blueInput.addEventListener("input", updateHSLRGB);
 
-      colorInput.addEventListener("input", () => {
+      function adjustPickerPosition(offsetX, offsetY) {
+        var clickX = Math.max(0, Math.min(cvs.width, offsetX));
+        var clickY = Math.max(0, Math.min(cvs.height, offsetY));
+
+        var hsl = mapPosToHSL(
+          currentHSL.h,
+          clickX,
+          clickY,
+          cvs.width,
+          cvs.height
+        );
+        hueInput.value = hsl.h;
+        saturationInput.value = hsl.s;
+        lightnessInput.value = hsl.l;
+        updateHSL();
+      }
+
+      cvs.addEventListener("click", function (e) {
+        adjustPickerPosition(e.offsetX, e.offsetY, false);
+        e.preventDefault();
+      });
+
+      cvs.addEventListener("touchmove", function (e) {
+        var boundingBox = cvs.getBoundingClientRect();
+        var touchX = e.touches[0].clientX;
+        var touchY = e.touches[0].clientY;
+
+        var x = touchX - boundingBox.x;
+        var y = touchY - boundingBox.y;
+
+        adjustPickerPosition(x, y, true);
+        e.preventDefault();
+      });
+      var mousedown = false;
+      cvs.addEventListener("mousedown", function (e) {
+        mousedown = true;
+        adjustPickerPosition(e.offsetX, e.offsetY, true);
+        e.preventDefault();
+      });
+      cvs.addEventListener("mousemove", function (e) {
+        if (mousedown) {
+          adjustPickerPosition(e.offsetX, e.offsetY, true);
+          e.preventDefault();
+        }
+      });
+
+      var colorSelectDialog = elements.getGPId("colorSelectDialog");
+
+      colorSelectDialog.addEventListener("mouseup", function (e) {
+        mousedown = false;
+        e.preventDefault();
+      });
+
+      colorInput.addEventListener("change", () => {
         var hsl = hexToHsl(colorInput.value);
         setHSL(hsl.h, hsl.s, hsl.l);
       });
 
       setColorDiv = function (elm) {
-        var hsl = hexToHsl(elm.getAttribute("backgroundHex"));
-        setHSL(hsl.h, hsl.s, hsl.l);
+        try {
+          var hsl = hexToHsl(elm.getAttribute("backgroundHex"));
+          setHSL(hsl.h, hsl.s, hsl.l);
+        } catch (e) {
+          window.alert(e);
+        }
       };
 
       var okButton = elements.getGPId("colorSelectOkButton");
       var cancelButton = elements.getGPId("colorSelectCancelButton");
-      var colorSelectDialog = elements.getGPId("colorSelectDialog");
 
       okButton.addEventListener("click", () => {
         colorSelectDialog.remove();

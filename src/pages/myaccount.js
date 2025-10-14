@@ -8,6 +8,7 @@ var accountHelper = require("../accounthelper/index.js");
 var dialog = require("../dialogs.js");
 var loader = require("./loadingscreen.js");
 var fontList = require("../fontlist.js");
+var colorSelect = require("../colorselect.js");
 require("./navigate-loader.js");
 
 function compressImage(oldsrc) {
@@ -180,32 +181,6 @@ function compressImage(oldsrc) {
                           style: {
                             marginRight: "3px",
                           },
-                          textContent: "Color: ",
-                        },
-                        {
-                          element: "input",
-                          type: "color",
-                          value: userColor,
-                          gid: "username_color_input",
-                          style: {
-                            width: "100%",
-                            minWidth: "50px",
-                          },
-                        },
-                      ],
-                    },
-                    {
-                      element: "div",
-                      style: {
-                        display: "flex",
-                        justifyContent: "center",
-                      },
-                      children: [
-                        {
-                          element: "span",
-                          style: {
-                            marginRight: "3px",
-                          },
                           textContent: "Font: ",
                         },
                         {
@@ -363,17 +338,7 @@ function compressImage(oldsrc) {
             {
               element: "div",
               className: "button",
-              eventListeners: [
-                {
-                  event: "click",
-                  func: function () {
-                    var usernameColorInput = elements.getGPId(
-                      "username_color_input"
-                    );
-                    usernameColorInput.click();
-                  },
-                },
-              ],
+              gid: "selectUsernameColorButton",
               children: [
                 {
                   element: "img",
@@ -490,7 +455,9 @@ function compressImage(oldsrc) {
 
       var queryNumber = 0;
       var pfp = elements.getGPId("profilePicture_account");
-      var usernameColorInput = elements.getGPId("username_color_input");
+      var selectUsernameColorButton = elements.getGPId(
+        "selectUsernameColorButton"
+      );
       var usernameFontInput = elements.getGPId("fontInput");
       var usernameSpan = elements.getGPId("usernameSpan");
       var changeDisplayNameButton = elements.getGPId("changeDisplayNameButton");
@@ -595,18 +562,23 @@ function compressImage(oldsrc) {
 
         resetPFP.disabled = false;
       };
-
-      usernameColorInput.onchange = async function () {
-        userColor = usernameColorInput.value;
-        displayNameInput.style.color = userColor;
-        usernameSpan.style.color = userColor;
+      async function setColor(color) {
+        userColor = color;
+        displayNameInput.style.color = color;
+        usernameSpan.style.color = color;
         await fetch(accountHelper.getServerURL() + "/account/setcolor/", {
           method: "POST",
           body: JSON.stringify({
-            color: usernameColorInput.value,
+            color,
           }),
         });
-      };
+      }
+      selectUsernameColorButton.addEventListener("click", async function () {
+        var chosenColor = await colorSelect.ask();
+        if (chosenColor) {
+          await setColor(chosenColor);
+        }
+      });
 
       usernameFontInput.onchange = async function () {
         displayNameInput.style.fontFamily = usernameFontInput.value;

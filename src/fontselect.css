@@ -1,0 +1,54 @@
+.fontSelectDialog {
+  z-index: 99999999999;
+  position: fixed;
+  font-family: Arial;
+}
+.fontSelectDialogBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: 0.5;
+}
+.fontSelectDialogBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: calc(100% - 200px);
+  max-width: fit-content;
+  max-height: fit-content;
+  height: calc(100vh - 50px);
+  background: white;
+  padding: 10px 10px;
+  border-radius: 5px;
+  color: black;
+  transform: translate(-50%, -50%);
+  min-width: 200px;
+  min-height: 200px;
+  overflow: scroll;
+}
+
+.fontSelectHeader {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.fontSelectButton {
+  all: unset;
+  background: #006eff;
+  border-radius: 4px;
+  padding: 3px 3px;
+  font-weight: bold;
+  color: white;
+  margin: 2px 2px;
+}
+
+.fontSelectOption {
+}
+
+.fontSelectButton:hover {
+  background: #5ca3ff;
+  cursor: pointer;
+}
