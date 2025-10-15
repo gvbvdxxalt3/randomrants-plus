@@ -9,7 +9,7 @@
 package-lock.json
 yarn.lock
 goorm.manifest
-
+arkain.manifest
 node_modules
 public
 counters
