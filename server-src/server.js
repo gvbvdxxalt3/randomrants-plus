@@ -1831,13 +1831,6 @@ async function startRoomWSS(roomid) {
                 return;
               }
               messageChatNumber += 1;
-              wss._rrRoomMessages.push({
-                displayName: displayName,
-                username: ws._rrUsername,
-                message: json.message,
-                color: ws._rrUserColor,
-                font: ws._rrUserFont,
-              });
               wss._rrRoomMessages = wss._rrRoomMessages.slice(-100);
               wss.clients.forEach((cli) => {
                 if (!cli._rrIsReady) {
@@ -1856,6 +1849,17 @@ async function startRoomWSS(roomid) {
               });
               if (hasPermission("commands", ws)) {
                 wss._rrCommandHandler.handleMessage(ws, json.message);
+              }
+
+              if (!json.message.trim().startsWith(";")) {
+                //Filter out command messages in history.
+                wss._rrRoomMessages.push({
+                  displayName: displayName,
+                  username: ws._rrUsername,
+                  message: json.message,
+                  color: ws._rrUserColor,
+                  font: ws._rrUserFont,
+                });
               }
             }
           }
