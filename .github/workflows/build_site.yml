@@ -37,7 +37,6 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git checkout -B deploy
-          git add public
-          git add wpstatic
+          git add *
           git commit -m "${{ github.event.head_commit.message }} [Run webpack for commit]" || echo "No changes to commit"
-          git push
+          git push -f origin deploy
