@@ -11,6 +11,7 @@ yarn.lock
 goorm.manifest
 
 node_modules
+public
 counters
 crashlogs
 usermedia
