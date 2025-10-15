@@ -226,7 +226,7 @@ var elementJSON = [
             style: {
               fontSize: "40px",
               color: returnRandomValueFromArray(rainbowHexes),
-              fontFamily: "Mochibop",
+              fontFamily: "Fredoka",
               overflowWrap: "break-word",
               //display: "inline",
             },
