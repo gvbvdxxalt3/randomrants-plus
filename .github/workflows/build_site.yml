@@ -38,5 +38,5 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add public
           git add wpstatic
-          git commit -m "Build files for ${{ github.event.head_commit.message }}" || echo "No changes to commit"
+          git commit -m "${{ github.event.head_commit.message }} [Run webpack for commit]" || echo "No changes to commit"
           git push
