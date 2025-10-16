@@ -6,6 +6,33 @@ function surroundFlexboxDiv(c) {
   };
 }
 
+var reactionEmojis = [
+  "👍",
+  "😂",
+  "🔥",
+  "❤️",
+  "🤯",
+  "🤔",
+  "💀",
+  "🎉",
+  "🗿",
+  "🤣",
+  "👋",
+  "🤡",
+  "🥲",
+  "😭",
+  "🗣",
+  "💯",
+  "👑",
+  "✨",
+  "🤠",
+  "🙌",
+  "😬",
+  "😝",
+];
+
+var chatEmojis = require("../../chat-emojis.js");
+
 var chatInputPlaceholders = [
   "Enter your random rant here",
   "Type a rant to tell us",
@@ -50,6 +77,18 @@ var leftSide = {
               children: [
                 {
                   element: "div",
+                  gid: "emojiReactions",
+                  style: {
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    overflow: "hidden",
+                  },
+                },
+                {
+                  element: "div",
                   className: "middleChatDiv",
                   children: [
                     {
@@ -68,6 +107,34 @@ var leftSide = {
                       ],
                     },
                   ],
+                },
+                {
+                  element: "div",
+                  gid: "emojiReactionButtons",
+                  style: {
+                    position: "absolute",
+                    left: "50%",
+                    bottom: "4px",
+                    maxWidth: "100%",
+                    width: "fit-content",
+                    minWidth: "10px",
+                    height: "fit-content",
+                    display: "flex",
+                    flexDirection: "row",
+                    overflow: "auto",
+                    transform: "translate(-50%, 0px)",
+                  },
+                  children: reactionEmojis.map((emoji) => {
+                    return {
+                      element: "div",
+                      className: "divButton roundborder",
+                      style: {
+                        margin: "2px 2px",
+                        userSelect: "none",
+                      },
+                      textContent: emoji,
+                    };
+                  }),
                 },
                 {
                   element: "div",
@@ -184,12 +251,60 @@ var rightSide = {
     },
     {
       element: "div",
+      gid: "chatDialogsDiv",
       children: [
         {
           element: "div",
           gid: "typingNoticeDiv",
           className: "typingNoticeDiv",
           children: [],
+        },
+        {
+          element: "div",
+          gid: "addEmojiDiv",
+          children: [
+            {
+              element: "div",
+              className: "emojiDialogBox",
+              children: [
+                {
+                  element: "div",
+                  className: "divButton roundborder",
+                  style: {
+                    width: "100%",
+                    textAlign: "center",
+                    padding: "5px 0px",
+                  },
+                  textContent: "Close",
+                  gid: "emojiDialogCloseButton",
+                },
+                {
+                  element: "div",
+                  className: "emojiDialogCategoryContainerScroller",
+                  children: [
+                    {
+                      element: "div",
+                      className: "emojiDialogCategoryContainer",
+                      gid: "emojiDialogCategory",
+                      children: [],
+                    },
+                  ],
+                },
+                {
+                  element: "div",
+                  className: "emojiDialogContainer",
+                  children: [
+                    {
+                      element: "div",
+                      className: "emojiDialogContainer2",
+                      gid: "emojiDialogContainer",
+                      children: [],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
       ],
     },
@@ -212,24 +327,10 @@ var rightSide = {
         ],
       },
       {
-        //Add a bit of spacing between the text box and the send button
-        element: "div",
-        style: {
-          width: "2px",
-        },
-      },
-      {
         element: "div",
         className: "chatInterfaceMessageSendButton roundborder",
         textContent: "Send",
         gid: "messageSendButton",
-      },
-      {
-        //Add a bit of spacing between the text box and the send button
-        element: "div",
-        style: {
-          width: "2px",
-        },
       },
       {
         element: "div",
@@ -244,6 +345,20 @@ var rightSide = {
           },
         ],
         gid: "messageAttachFilesButton",
+      },
+      {
+        element: "div",
+        className: "chatInterfaceMessageSendButton roundborder",
+        children: [
+          {
+            element: "img",
+            src: "images/emojiadd.svg",
+            style: {
+              height: "25px",
+            },
+          },
+        ],
+        gid: "messageAddEmojiButton",
       },
     ]),
     {

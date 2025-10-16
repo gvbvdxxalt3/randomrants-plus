@@ -50,7 +50,7 @@ async function updateAllowGuests(allow) {
         body: JSON.stringify({
           allowGuests: allow,
         }),
-      },
+      }
     );
   } catch (e) {
     console.error(e);
@@ -201,7 +201,7 @@ var dom = elements.createElementsFromJSON([
                     name: this.value,
                     id: userState.roomID,
                   }),
-                },
+                }
               );
             },
           },
@@ -286,6 +286,37 @@ var dom = elements.createElementsFromJSON([
             func: async function () {
               this.disabled = true;
               await updatePermissionSetting("media", this.value);
+              this.disabled = false;
+            },
+          },
+        ],
+      },
+      {
+        element: "br",
+      },
+
+      //App area reactions permission
+
+      {
+        element: "span",
+        textContent: "Media area reactions:",
+      },
+
+      {
+        element: "select",
+        className: "inputText1 roundborder",
+        gid: "roomPerms_reactions",
+        style: {
+          width: "200px",
+          height: "30px",
+        },
+        children: roomPermissionOptions,
+        eventListeners: [
+          {
+            event: "change",
+            func: async function () {
+              this.disabled = true;
+              await updatePermissionSetting("reactions", this.value);
               this.disabled = false;
             },
           },
@@ -559,7 +590,7 @@ var dom = elements.createElementsFromJSON([
             event: "click",
             func: async function () {
               const dialogResponse = await dialogs.confirm(
-                'This WILL make the room vanish. Click "Ok" to destroy.',
+                'This WILL make the room vanish. Click "Ok" to destroy.'
               );
 
               if (dialogResponse) {
@@ -574,13 +605,13 @@ var dom = elements.createElementsFromJSON([
                       body: JSON.stringify({
                         id: userState.roomID,
                       }),
-                    },
+                    }
                   );
 
                   if (!response.ok) {
                     dialogs.alert(
                       `Room destorying failed, the server said: ${response.status}.\n` +
-                        "Maybe someone demoted you without you knowing, or your session got expired.",
+                        "Maybe someone demoted you without you knowing, or your session got expired."
                     );
                     return;
                   }
@@ -588,7 +619,7 @@ var dom = elements.createElementsFromJSON([
                 } catch (e) {
                   console.error("Room destroy error:", e);
                   dialogs.alert(
-                    "The room failed to destroy with this weird error:\n" + e,
+                    "The room failed to destroy with this weird error:\n" + e
                   );
                 }
               }
@@ -639,7 +670,7 @@ showRoomSettingsButton.addEventListener("click", function () {
 
 var showRoomSettingsButton2 = elements.getGPId("showRoomSettingsButton2");
 var roomSettingsPermissionSettings = elements.getGPId(
-  "roomSettingsPermissionSettings",
+  "roomSettingsPermissionSettings"
 );
 showRoomSettingsButton2.addEventListener("click", function () {
   dialogDiv.hidden = false;

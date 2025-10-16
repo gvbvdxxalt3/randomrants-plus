@@ -230,7 +230,7 @@ function getMessageHTML(inputstr, noBracketCode, otherBracketCodes = {}) {
               if (type == "emoji") {
                 if (isSafeURLOrDomain(value)) {
                   valid = true;
-                  output_html += `<img src="${value}" imageisemoji="true" ondragstart="return false;" style="image-rendering:pixelated;object-fit:contain;height:26px;" ondragend="return false;">`;
+                  output_html += `<img src="${value}" imageisemoji="true" ondragstart="return false;" style="image-rendering:pixelated;object-fit:contain;height:32px;" ondragend="return false;">`;
                 }
               }
               if (type == "image") {

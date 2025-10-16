@@ -10,6 +10,9 @@ var elements = {
       elm.append(appendElm);
     }
   },
+  removeAllChildren: function (elm) {
+    Array.from(elm.children).forEach((elm) => elm.remove());
+  },
   appendElementsFromJSON: function (elm, appendJSONArray) {
     var elms = elements.createElementsFromJSON(appendJSONArray);
     elements.appendElements(elm, elms);

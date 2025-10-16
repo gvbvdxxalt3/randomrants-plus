@@ -41,6 +41,7 @@ var reconnectingScreen = elements.getGPId("reconnectingScreen");
 var messageInputBox = elements.getGPId("messageInputBox");
 var messageSendButton = elements.getGPId("messageSendButton");
 var messageAttachFilesButton = elements.getGPId("messageAttachFilesButton");
+var messageAddEmojiButton = elements.getGPId("messageAddEmojiButton");
 var userMessagesBox = elements.getGPId("userMessagesBox");
 var sharedAppInterface = elements.getGPId("sharedAppInterface");
 var usernameErrorScreen = elements.getGPId("usernameErrorScreen");
@@ -62,6 +63,7 @@ var toggleMessageAndOnlineView = elements.getGPId("toggleMessageAndOnlineView");
 var toggleMessageAndOnlineViewText = elements.getGPId(
   "toggleMessageAndOnlineViewText"
 );
+var chatDialogsDiv = elements.getGPId("chatDialogsDiv");
 
 var showRoomSettingsButton = elements.getGPId("showRoomSettingsButton");
 var showRoomSettingsButton2 = elements.getGPId("showRoomSettingsButton2");
@@ -92,14 +94,18 @@ function toggleMessageAndOnlineViewClicked() {
     messageSendButton.hidden = true;
     userMessagesBox.hidden = true;
     messageAttachFilesButton.hidden = true;
+    messageAddEmojiButton.hidden = true;
     typingNoticeDiv.hidden = true;
+    chatDialogsDiv.hidden = true;
   } else {
     userOnlineViewBox.hidden = true;
     messageInputBox.hidden = false;
     messageSendButton.hidden = false;
     userMessagesBox.hidden = false;
     messageAttachFilesButton.hidden = false;
+    messageAddEmojiButton.hidden = false;
     typingNoticeDiv.hidden = false;
+    chatDialogsDiv.hidden = false;
   }
   updateToggleOnlineViewText();
 }
@@ -112,6 +118,8 @@ toggleMessageAndOnlineView.addEventListener(
 );
 
 reconnectingScreen.hidden = true;
+
+var emojiReactions = require("./emojireactions.js");
 
 (async function () {
   try {
@@ -388,6 +396,9 @@ reconnectingScreen.hidden = true;
         if (json.type == "allowGuests") {
           roomSettings.updateAllowGuests(json.allow);
         }
+        if (json.type == "reaction") {
+          emojiReactions.onReaction(json.emoji);
+        }
         if (json.type == "roomPermissions") {
           //Room permissions recieved, update the user state to reflect them.
           var perms = json.perms;
@@ -461,18 +472,7 @@ reconnectingScreen.hidden = true;
             elements.appendElementsFromJSON(userMessagesContainer, [
               {
                 element: "div",
-                style: {
-                  fontWeight: "bold",
-                  padding: "5px 5px",
-                  width: "100%",
-                  background: "#ffffff",
-                  opacity: 0.5,
-                  color: "black",
-                  borderRadius: "3px",
-                  borderStyle: "dashed",
-                  borderColor: "black",
-                  borderWidth: "2px",
-                },
+                className: "messageCategorySeparator",
                 textContent: "Previous messages:",
               },
             ]);
@@ -495,18 +495,7 @@ reconnectingScreen.hidden = true;
           elements.appendElementsFromJSON(userMessagesContainer, [
             {
               element: "div",
-              style: {
-                fontWeight: "bold",
-                padding: "5px 5px",
-                width: "100%",
-                background: "#ffffff",
-                opacity: 0.5,
-                color: "black",
-                borderRadius: "3px",
-                borderStyle: "dashed",
-                borderColor: "black",
-                borderWidth: "2px",
-              },
+              className: "messageCategorySeparator",
               textContent: "Messages:",
             },
           ]);
@@ -790,6 +779,7 @@ reconnectingScreen.hidden = true;
     reconnectUsernameError.addEventListener("click", openConnection);
 
     require("./messagebox.js");
+    require("./emojidialog.js");
 
     require("./attachfiles.js");
 

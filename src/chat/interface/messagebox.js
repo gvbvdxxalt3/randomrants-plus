@@ -15,6 +15,9 @@ function sendMessageFromTextBox() {
   if (messageTrimmed.length < 1) {
     return;
   }
+  myChatHistory.push(message); // Add to chat history.
+  myChatHistory = myChatHistory.slice(-100); // Keep only the last 100 messages to try to avoid memory overflow.
+  chatHistoryNumber = myChatHistory.length; // Reset to latest message position.
   if (messageTrimmed.startsWith("@")) {
     var splitMessage = messageTrimmed.split(" ");
     var targetUsername = splitMessage[0].slice(1); //Remove the @ symbol.
@@ -35,7 +38,7 @@ function sendMessageFromTextBox() {
         type: "postMessagePrivate",
         message: privateMessage,
         targetUser: targetUsername,
-      }),
+      })
     );
 
     return;
@@ -45,11 +48,8 @@ function sendMessageFromTextBox() {
     JSON.stringify({
       type: "postMessage",
       message,
-    }),
+    })
   );
-  myChatHistory.push(message); // Add to chat history.
-  myChatHistory = myChatHistory.slice(-100); // Keep only the last 100 messages to try to avoid memory overflow.
-  chatHistoryNumber = myChatHistory.length; // Reset to latest message position.
 }
 
 messageSendButton.addEventListener("click", function () {
@@ -61,7 +61,7 @@ messageInputBox.addEventListener("input", function () {
   sws.send(
     JSON.stringify({
       type: "typing",
-    }),
+    })
   );
 });
 

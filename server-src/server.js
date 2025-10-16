@@ -1585,6 +1585,27 @@ async function startRoomWSS(roomid) {
           return;
         }
         try {
+          if (json.type == "reaction" && hasPermission("reactions", ws)) {
+            if (typeof json.emoji !== "string") {
+              return;
+            }
+            if (json.emoji.length > 4) {
+              //It should be pretty small for it.
+              return;
+            }
+            for (var client of wss.clients) {
+              client.send(
+                JSON.stringify({
+                  type: "reaction",
+                  username: ws._rrUsername,
+                  displayName: ws._rrDisplayName,
+                  color: ws._rrUserColor,
+                  font: ws._rrUserFont,
+                  emoji: json.emoji,
+                })
+              );
+            }
+          }
           if (json.type == "typing") {
             for (var client of wss.clients) {
               client.send(
@@ -2151,6 +2172,7 @@ var roomPermNames = [
   "soundboard",
   "media",
   "commands",
+  "reactions",
 ];
 
 var roomPermValues = [
@@ -2163,6 +2185,7 @@ var roomPermValues = [
 var roomDefaultPerms = {
   //names and values must be ones from above
   soundboard: "everyone",
+  reactions: "everyone",
   media: "everyone",
   commands: "everyone",
 };

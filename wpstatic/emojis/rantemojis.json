@@ -1,0 +1,146 @@
+{
+        "name": "Random Rants + Emojis",
+        "slug": "rrp_emojis",
+        "emojis": [
+            {
+                "src": "img/guy_pointing.svg",
+                "name": "Guy pointing",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/mrbeaast.svg",
+                "name": "Mr Beast",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/obama.svg",
+                "name": "Obama",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/whatthe.jpg",
+                "name": "Flabbergasted",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/anotherthing.svg",
+                "name": "Happy face",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/sad.svg",
+                "name": "Ugly sad face",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/thing.svg",
+                "name": "White ugly face",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/dance.gif",
+                "name": "Pixelated guy dancing",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/sonk.png",
+                "name": "Mini sonic exe",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/2.png",
+                "name": "Ugly smile look",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/smw-bored.png",
+                "name": "Pixel jason bored face",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/smw-grin.png",
+                "name": "Pixel jason grin face",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/smw-laugh.gif",
+                "name": "Pixel jason laughing face",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/smw-smile.png",
+                "name": "Pixel jason smile face",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/smw-straightface.png",
+                "name": "Pixel jason straight face",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/smw-uhoh.png",
+                "name": "Pixel jason Uh oh",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/smw-uhoh2.png",
+                "name": "Pixel jason Alt Uh oh",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/coin.gif",
+                "name": "Pixel coin",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/num0.png",
+                "name": "Pixel 0",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/num1.png",
+                "name": "Pixel 1",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/num2.png",
+                "name": "Pixel 2",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/num3.png",
+                "name": "Pixel 3",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/num4.png",
+                "name": "Pixel 4",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/num5.png",
+                "name": "Pixel 5",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/num6.png",
+                "name": "Pixel 6",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/num7.png",
+                "name": "Pixel 7",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/num8.png",
+                "name": "Pixel 8",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "img/num9.png",
+                "name": "Pixel 9",
+                "emojiURL": "rrp"
+            }
+        ]
+    }
