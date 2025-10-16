@@ -105,6 +105,24 @@ function reloadEmojis() {
             .indexOf(emojiDialogTextInput.value.toLowerCase()) > -1
       );
     }
+    if (foundEmojis.length < 1) {
+      elements.appendElementsFromJSON(emojiDialogContainer, [
+        {
+          element: "span",
+          style: {
+            fontWeight: "bold",
+            fontSize: "20px",
+            position: "absolute",
+            transform: "translate(-50%, -50%)",
+            top: "50%",
+            left: "50%",
+            height: "50px",
+            lineHeight: "50px",
+          },
+          textContent: "No emojis found!",
+        },
+      ]);
+    }
     if (foundEmojis) {
       elements.appendElementsFromJSON(
         emojiDialogContainer,

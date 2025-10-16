@@ -27,6 +27,36 @@
                 "src": "images/amogus.png",
                 "name": "Amogus",
                 "emojiURL": "rrp"
+            },
+            {
+                "src": "images/Stonks.png",
+                "name": "Stonks",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "images/drakehotline-approve.png",
+                "name": "Drake Hotline Bling Approve",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "images/drakehotline-disapprove.png",
+                "name": "Drake Hotline Bling Disapprove",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "images/cat-jam.gif",
+                "name": "Cat Jam Vibing Cat",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "images/parrot-party.gif",
+                "name": "Rainbow Party Parrot",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "images/grumpy-cat.png",
+                "name": "Grumpy cat",
+                "emojiURL": "rrp"
             }
         ]
     },
