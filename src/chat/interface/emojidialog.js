@@ -57,10 +57,12 @@ function mapToButtons(emojiArray) {
         ? [
             {
               element: "img",
-              height: 40,
               src: emojiInfo.src,
               style: {
                 imageRendering: "pixelated",
+                height: "40px",
+                maxWidth: "40px",
+                objectFit: "contain",
               },
             },
           ]
