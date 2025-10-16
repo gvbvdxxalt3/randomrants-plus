@@ -1,6 +1,10 @@
 var sounds = require("./sounds.js");
 
-const clickableClasses = ["divButton"]; //Handling for div button styles.
+const clickableClasses = [
+  "divButton",
+  "emojiDialogCategoryButton",
+  "emojiDialogButton",
+]; //Handling for div button styles.
 
 document.addEventListener("click", (e) => {
   var el = e.target;
