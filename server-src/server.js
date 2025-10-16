@@ -1403,7 +1403,7 @@ async function startRoomWSS(roomid) {
         message: message,
       });
     }
-    wss._rrRoomMessages = wss._rrRoomMessages.slice(-100);
+    wss._rrRoomMessages = wss._rrRoomMessages.slice(-cons.MAX_STORED_MESSAGES);
     wss.clients.forEach((cli) => {
       if (!cli._rrIsReady) {
         return;

@@ -430,4 +430,9 @@ a:hover {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #f2f2f2;
+  cursor: grab;
+}
+
+::-webkit-scrollbar-thumb:active {
+  cursor: grabbing;
 }
