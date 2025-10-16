@@ -57,6 +57,11 @@
                 "src": "images/grumpy-cat.png",
                 "name": "Grumpy cat",
                 "emojiURL": "rrp"
+            },
+            {
+                "src": "images/crying-cat.png",
+                "name": "Crying cat",
+                "emojiURL": "rrp"
             }
         ]
     },
