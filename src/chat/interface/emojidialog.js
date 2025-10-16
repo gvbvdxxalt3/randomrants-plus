@@ -11,8 +11,12 @@ var emojiDialogCategories = elements.getGPId("emojiDialogCategory");
 var emojiJSONURL = "emojis/data-by-group.json";
 
 var randomRantsEmojiURL = "/emojis/rantemojis.json";
-var rantEmojiURL =
-  "https://cdn.jsdelivr.net/gh/Random-Rants-Chat/randomrants-emojis/";
+var timestamp = Math.round(Date.now());
+var prefixURLS = {
+  rr: "https://cdn.jsdelivr.net/gh/Random-Rants-Chat/randomrants-emojis/",
+  rrp: "https://cdn.jsdelivr.net/gh/gvbvdxxalt3/randomrants-plus-emojis/",
+  gc: "https://cdn.jsdelivr.net/gh/jasonglenevans/GvbvdxxChatEmojis/",
+};
 
 var searchSlug = "SEARCHEMOJIS";
 
@@ -88,7 +92,7 @@ function reloadEmojis() {
         emojis = emojis.concat(group.emojis);
       }
     });
-    if (emojiDialogTextInput.value.length > 0) {
+    if (emojiDialogTextInput.value.length > -1) {
       var foundEmojis = emojis.filter(
         (emoji) =>
           emoji.name
@@ -134,7 +138,7 @@ function debounce(func, delay = 60) {
   };
 }
 
-function emojisLoaded() {
+function emojisLoaded(preferedCategory) {
   var categories = emojiJSON.map((group) => {
     if (group.slug == searchSlug) {
       return {
@@ -191,7 +195,7 @@ function emojisLoaded() {
 
   elements.appendElementsFromJSON(emojiDialogCategories, categories);
 
-  selectedCategory = emojiJSON[0].slug;
+  selectedCategory = emojiJSON[preferedCategory].slug;
   updateSelectedCategory();
 }
 
@@ -200,17 +204,20 @@ function emojisLoaded() {
     emojiJSON = [];
 
     var rantEmojis = await fetchUtils.fetchAsJSON(randomRantsEmojiURL);
-    rantEmojis.emojis = rantEmojis.emojis.map((emoji) => {
-      if (emoji.emojiURL == "rrp") {
-        emoji.src = rantEmojiURL + emoji.src;
-      }
-      return emoji;
+    emojiJSON.push({ slug: searchSlug });
+    rantEmojis.forEach((emojiGroup) => {
+      emojiGroup.emojis = emojiGroup.emojis.map((emoji) => {
+        if (emoji.emojiURL) {
+          emoji.src =
+            prefixURLS[emoji.emojiURL] + emoji.src + "?v=" + timestamp;
+        }
+        return emoji;
+      });
     });
 
-    emojiJSON.push(rantEmojis);
-    emojiJSON.push({ slug: searchSlug });
+    emojiJSON = emojiJSON.concat(rantEmojis);
     emojiJSON = emojiJSON.concat(await fetchUtils.fetchAsJSON(emojiJSONURL));
-    emojisLoaded();
+    emojisLoaded(1); //Second category cause first is search.
   } catch (e) {
     emojiJSON = [];
     console.error("Emojis failed to load: " + e);

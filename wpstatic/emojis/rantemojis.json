@@ -1,146 +1,365 @@
-{
-        "name": "Random Rants + Emojis",
+[
+    {
+        "name": "Random Rants +",
         "slug": "rrp_emojis",
+        "emojis": [
+            {
+                "src": "images/doge.png",
+                "name": "Doge",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "images/surprised_pikachu.png",
+                "name": "Surprised Pikachu",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "images/thisisfine.png",
+                "name": "This is fine",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "images/popcat.gif",
+                "name": "Popcat",
+                "emojiURL": "rrp"
+            },
+            {
+                "src": "images/amogus.png",
+                "name": "Amogus",
+                "emojiURL": "rrp"
+            }
+        ]
+    },
+    {
+        "name": "Random Rants",
+        "slug": "rr_emojis",
         "emojis": [
             {
                 "src": "img/guy_pointing.svg",
                 "name": "Guy pointing",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/mrbeaast.svg",
                 "name": "Mr Beast",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/obama.svg",
                 "name": "Obama",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/whatthe.jpg",
                 "name": "Flabbergasted",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/anotherthing.svg",
                 "name": "Happy face",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/sad.svg",
                 "name": "Ugly sad face",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/thing.svg",
                 "name": "White ugly face",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/dance.gif",
                 "name": "Pixelated guy dancing",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/sonk.png",
                 "name": "Mini sonic exe",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/2.png",
                 "name": "Ugly smile look",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/smw-bored.png",
                 "name": "Pixel jason bored face",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/smw-grin.png",
                 "name": "Pixel jason grin face",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/smw-laugh.gif",
                 "name": "Pixel jason laughing face",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/smw-smile.png",
                 "name": "Pixel jason smile face",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/smw-straightface.png",
                 "name": "Pixel jason straight face",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/smw-uhoh.png",
                 "name": "Pixel jason Uh oh",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/smw-uhoh2.png",
                 "name": "Pixel jason Alt Uh oh",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/coin.gif",
                 "name": "Pixel coin",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/num0.png",
                 "name": "Pixel 0",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/num1.png",
                 "name": "Pixel 1",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/num2.png",
                 "name": "Pixel 2",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/num3.png",
                 "name": "Pixel 3",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/num4.png",
                 "name": "Pixel 4",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/num5.png",
                 "name": "Pixel 5",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/num6.png",
                 "name": "Pixel 6",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/num7.png",
                 "name": "Pixel 7",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/num8.png",
                 "name": "Pixel 8",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
             },
             {
                 "src": "img/num9.png",
                 "name": "Pixel 9",
-                "emojiURL": "rrp"
+                "emojiURL": "rr"
+            }
+        ]
+    },
+    {
+        "name": "Gvbvdxx Chat",
+        "slug": "gc_emojis",
+        "emojis": [
+            {
+                "src": "I_EGG.ICO",
+                "name": "Eggman face",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "I_EGG2.ICO",
+                "name": "Eggman",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "sonic-tails.gif",
+                "name": "Sonic and tails dancing",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "I_KNACK.ICO",
+                "name": "Knuckles face",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "I_KNACS2.ICO",
+                "name": "Knuckles",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "I_MILES.ICO",
+                "name": "Tails face",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "I_MILES2.ICO",
+                "name": "Tails",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "I_SONIC.ICO",
+                "name": "Sonic face",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "I_SONIC2.ICO",
+                "name": "Sonic",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "SONIC_SCREAM.png",
+                "name": "Sonic screaming meme",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "SONIC_BLUE_SPHERE.png",
+                "name": "Blue sphere",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "SONIC_RUN.gif",
+                "name": "Sonic running animated",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "SONIC_DAB.png",
+                "name": "Sonic dabbing",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "ARVSM_IDLE.svg",
+                "name": "Aibo Recognition Sitting",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "ARVSM_XD.png",
+                "name": "Aibo Recognition XD",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "ARVSM_DIE.png",
+                "name": "Aibo Recognition Hurt",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "DE_AIBO_1.png",
+                "name": "Aibo Face Eyebrow Annoyed",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "DE_AIBO_2.png",
+                "name": "Aibo Face Wink",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "DE_AIBO_4.png",
+                "name": "Aibo Face Angry",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "DE_AIBO_5.png",
+                "name": "Aibo Face Shocked",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "DE_AIBO_6.png",
+                "name": "Aibo Face Laughing with tear",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "DE_AIBO_7.png",
+                "name": "Aibo Face Discusted",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "LUISSTUFF.png",
+                "name": "Luis Stuff Profile Pictrue",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "SCRATCH_WIN_XP.svg",
+                "name": "Windows XP scratch logo",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "MSG_1.gif",
+                "name": "MiniScratchGamer",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "MSG_2.png",
+                "name": "MiniScratchGamer Sad",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "MSG_3.png",
+                "name": "MiniScratchGamer Happy",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "MSG_4.png",
+                "name": "MiniScratchGamer Cool face",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "MSG_5.png",
+                "name": "MiniScratchGamer Laughing with tears",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "MSG_6.png",
+                "name": "MiniScratchGamer Vomit",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "MSG_7.png",
+                "name": "MiniScratchGamer Holding Vomit",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "MSG_8.png",
+                "name": "MiniScratchGamer Crying",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "MSG_9.png",
+                "name": "MiniScratchGamer Angry",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "CATTO_BOI.gif",
+                "name": "CattoBoi",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "CHEESEPUFFS.jpg",
+                "name": "Cheese puffs",
+                "emojiURL": "gc"
+            },
+            {
+                "src": "PLUSH.png",
+                "name": "Plush",
+                "emojiURL": "gc"
             }
         ]
     }
+]
