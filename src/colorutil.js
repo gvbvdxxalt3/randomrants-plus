@@ -26,7 +26,7 @@ var rainbowHexes = [
 ];
 
 //Gets rainbow hexes
-function getRainbowHexes(hueBy = 10) {
+function getRainbowHexes(hueBy = 10, saturation = 100, lightness = 50) {
   var hue = -hueBy;
   var hexes = [];
   while (hue < 360) {
@@ -34,7 +34,20 @@ function getRainbowHexes(hueBy = 10) {
     if (hue > 360) {
       hue = 360;
     }
-    hexes.push(hslToHex(hue, 100, 50));
+    hexes.push(hslToHex(hue, saturation, lightness));
+  }
+  return hexes;
+}
+//Gets black & white hexes
+function getBlackWhiteHexes(lightnessBy = 20) {
+  var lightness = -lightnessBy;
+  var hexes = [];
+  while (lightness < 100) {
+    lightness += lightnessBy;
+    if (lightness > 100) {
+      lightness = 100;
+    }
+    hexes.push(hslToHex(0, 0, 100 - lightness));
   }
   return hexes;
 }
@@ -195,4 +208,5 @@ module.exports = {
   hslToHex,
   rainbowHexes,
   getRainbowHexes,
+  getBlackWhiteHexes,
 };

@@ -59,7 +59,7 @@ function mapToButtons(emojiArray) {
               element: "img",
               src: emojiInfo.src,
               style: {
-                imageRendering: "pixelated",
+                //imageRendering: "pixelated",
                 height: "40px",
                 maxWidth: "40px",
                 objectFit: "contain",
@@ -94,19 +94,22 @@ function reloadEmojis() {
         emojis = emojis.concat(group.emojis);
       }
     });
-    if (emojiDialogTextInput.value.length > -1) {
+    var imageOnlyMode = emojiDialogTextInput.value.length < 1;
+    if (imageOnlyMode) {
+      var foundEmojis = emojis.filter((emoji) => emoji.src);
+    } else {
       var foundEmojis = emojis.filter(
         (emoji) =>
           emoji.name
             .toLowerCase()
             .indexOf(emojiDialogTextInput.value.toLowerCase()) > -1
       );
-      if (foundEmojis) {
-        elements.appendElementsFromJSON(
-          emojiDialogContainer,
-          mapToButtons(foundEmojis)
-        );
-      }
+    }
+    if (foundEmojis) {
+      elements.appendElementsFromJSON(
+        emojiDialogContainer,
+        mapToButtons(foundEmojis)
+      );
     }
     return;
   }
@@ -219,7 +222,7 @@ function emojisLoaded(preferedCategory) {
 
     emojiJSON = emojiJSON.concat(rantEmojis);
     emojiJSON = emojiJSON.concat(await fetchUtils.fetchAsJSON(emojiJSONURL));
-    emojisLoaded(1); //Second category cause first is search.
+    emojisLoaded(0); //Second category cause first is search.
   } catch (e) {
     emojiJSON = [];
     console.error("Emojis failed to load: " + e);

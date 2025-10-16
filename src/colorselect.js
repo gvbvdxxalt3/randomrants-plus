@@ -8,6 +8,7 @@ var {
   hexToHsl,
   hslToHex,
   getRainbowHexes,
+  getBlackWhiteHexes,
 } = require("./colorutil.js");
 
 var colorSelector = {
@@ -329,24 +330,26 @@ var colorSelector = {
                 {
                   element: "div",
                   className: "colorSelectPickRainbowContainer",
-                  children: getRainbowHexes(20).map((hex) => {
-                    return {
-                      element: "div",
-                      className: "colorSelectColorDiv",
-                      style: {
-                        background: hex,
-                      },
-                      backgroundHex: hex,
-                      eventListeners: [
-                        {
-                          event: "click",
-                          func: function () {
-                            setColorDiv(this);
-                          },
+                  children: getRainbowHexes(20)
+                    .concat(getBlackWhiteHexes(20))
+                    .map((hex) => {
+                      return {
+                        element: "div",
+                        className: "colorSelectColorDiv",
+                        style: {
+                          background: hex,
                         },
-                      ],
-                    };
-                  }),
+                        backgroundHex: hex,
+                        eventListeners: [
+                          {
+                            event: "click",
+                            func: function () {
+                              setColorDiv(this);
+                            },
+                          },
+                        ],
+                      };
+                    }),
                 },
                 /*],
                 },*/
@@ -420,7 +423,7 @@ var colorSelector = {
         }
       }
 
-      function adjustColorPickerCursor() {
+      function adjustColorPickerCursor(moving) {
         var colorPos = SLToPos(
           currentHSL.s,
           currentHSL.l,
@@ -432,6 +435,11 @@ var colorSelector = {
         colorDrop.style.backgroundColor = color;
         colorDrop.style.left = colorPos.x + "px";
         colorDrop.style.top = colorPos.y + "px";
+        if (!moving) {
+          colorDrop.style.transition = "left 0.3s, top 0.3s";
+        } else {
+          colorDrop.style.transition = "0s";
+        }
       }
 
       function updateHSL(moving) {
@@ -450,7 +458,7 @@ var colorSelector = {
         hueInput2.value = hueInput.value;
 
         drawCanvasSelect();
-        adjustColorPickerCursor();
+        adjustColorPickerCursor(moving);
       }
       function updateHSLRGB() {
         var hsl = rgbToHsl(
@@ -488,7 +496,7 @@ var colorSelector = {
       greenInput.addEventListener("input", updateHSLRGB);
       blueInput.addEventListener("input", updateHSLRGB);
 
-      function adjustPickerPosition(offsetX, offsetY) {
+      function adjustPickerPosition(offsetX, offsetY, moving) {
         var clickX = Math.max(0, Math.min(cvs.width, offsetX));
         var clickY = Math.max(0, Math.min(cvs.height, offsetY));
 
@@ -502,7 +510,7 @@ var colorSelector = {
         hueInput.value = hsl.h;
         saturationInput.value = hsl.s;
         lightnessInput.value = hsl.l;
-        updateHSL();
+        updateHSL(moving);
       }
 
       cvs.addEventListener("click", function (e) {
@@ -527,18 +535,22 @@ var colorSelector = {
         adjustPickerPosition(e.offsetX, e.offsetY, true);
         e.preventDefault();
       });
-      cvs.addEventListener("mousemove", function (e) {
-        if (mousedown) {
-          adjustPickerPosition(e.offsetX, e.offsetY, true);
-          e.preventDefault();
-        }
-      });
 
       var colorSelectDialog = elements.getGPId("colorSelectDialog");
 
       colorSelectDialog.addEventListener("mouseup", function (e) {
         mousedown = false;
         e.preventDefault();
+      });
+      colorSelectDialog.addEventListener("mousemove", function (e) {
+        if (mousedown) {
+          var boundingBox = cvs.getBoundingClientRect();
+
+          var x = e.clientX - boundingBox.x;
+          var y = e.clientY - boundingBox.y;
+          adjustPickerPosition(x, y, true);
+          e.preventDefault();
+        }
       });
 
       colorInput.addEventListener("change", () => {

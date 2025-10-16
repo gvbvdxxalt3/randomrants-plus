@@ -182,12 +182,12 @@
         "emojis": [
             {
                 "src": "I_EGG.ICO",
-                "name": "Eggman face",
+                "name": "Robotnicks's face",
                 "emojiURL": "gc"
             },
             {
                 "src": "I_EGG2.ICO",
-                "name": "Eggman",
+                "name": "Robotnicks",
                 "emojiURL": "gc"
             },
             {
@@ -197,7 +197,7 @@
             },
             {
                 "src": "I_KNACK.ICO",
-                "name": "Knuckles face",
+                "name": "Knuckles' face",
                 "emojiURL": "gc"
             },
             {
@@ -207,7 +207,7 @@
             },
             {
                 "src": "I_MILES.ICO",
-                "name": "Tails face",
+                "name": "Tails' face",
                 "emojiURL": "gc"
             },
             {
@@ -217,7 +217,7 @@
             },
             {
                 "src": "I_SONIC.ICO",
-                "name": "Sonic face",
+                "name": "Sonic's face",
                 "emojiURL": "gc"
             },
             {
