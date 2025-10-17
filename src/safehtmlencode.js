@@ -445,7 +445,6 @@ function bracketCodeRemoval(text) {
 var elements = require("./gp2/elements.js");
 
 function getBracketCodeJSON(inputText = "") {
-
   var linkfixes = inputText.split(" ");
   var newinputstr = [];
   for (var word of linkfixes) {
@@ -579,7 +578,7 @@ function getBracketCodeJSON(inputText = "") {
 
           var newElm = run(true, "/font");
           newElm.style = {
-            fontFamily: value
+            fontFamily: value,
           };
           elm.children.push(newElm);
           elm.children.push({
@@ -598,7 +597,7 @@ function getBracketCodeJSON(inputText = "") {
           }
           newElm.target = "_blank";
           newElm.style = {
-            color: "var(--link-text-color)"
+            color: "var(--link-text-color)",
           };
           elm.children.push(newElm);
           elm.children.push({
@@ -625,8 +624,8 @@ function getBracketCodeJSON(inputText = "") {
                 a.href = url;
                 a.target = "_blank";
                 a.click();
-              }
-            }
+              },
+            },
           ];
 
           elm.children.push(newElm);
@@ -646,7 +645,7 @@ function getBracketCodeJSON(inputText = "") {
                 width: "40px",
                 height: "40px",
               },
-              src: value.trim()
+              src: value.trim(),
             });
           }
           elm.children.push({
@@ -660,7 +659,7 @@ function getBracketCodeJSON(inputText = "") {
           if (isSafeURLOrDomain(value.trim())) {
             elm.children.push({
               element: "img",
-              src: value.trim()
+              src: value.trim(),
             });
           }
           elm.children.push({
@@ -675,7 +674,7 @@ function getBracketCodeJSON(inputText = "") {
             elm.children.push({
               element: "video",
               controls: true,
-              src: value.trim()
+              src: value.trim(),
             });
           }
           elm.children.push({
@@ -690,7 +689,7 @@ function getBracketCodeJSON(inputText = "") {
             elm.children.push({
               element: "video",
               controls: true,
-              src: value.trim()
+              src: value.trim(),
             });
           }
           elm.children.push({
@@ -698,7 +697,7 @@ function getBracketCodeJSON(inputText = "") {
             textContent: "",
           });
         }
-        
+
         if (name == "br" && !exists) {
           exists = true;
           elm.children.push({
@@ -714,8 +713,6 @@ function getBracketCodeJSON(inputText = "") {
           exists = true;
           addChar(new Date().getFullYear());
         }
-
-        
 
         if (!exists) {
           i -= 1;
