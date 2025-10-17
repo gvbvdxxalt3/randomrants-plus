@@ -58,6 +58,7 @@ function mapToButtons(emojiArray) {
             {
               element: "img",
               src: emojiInfo.src,
+              lazy: true,
               style: {
                 //imageRendering: "pixelated",
                 height: "40px",
@@ -83,6 +84,22 @@ function mapToButtons(emojiArray) {
   });
 }
 
+function existsNoCaseSensitive(term, finder) {
+  return term.toLowerCase().trim().indexOf(finder.trim().toLowerCase()) > -1;
+}
+
+function lettersAndNumbersOnly(ogText) {
+  var lettersAndNumbers =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+  var text = "";
+  for (var letter of ogText) {
+    if (lettersAndNumbers.indexOf(letter) > -1) {
+      text += letter;
+    }
+  }
+  return text;
+}
+
 function reloadEmojis() {
   elements.removeAllChildren(emojiDialogContainer);
 
@@ -95,33 +112,66 @@ function reloadEmojis() {
       }
     });
     var imageOnlyMode = emojiDialogTextInput.value.length < 1;
+    var termToFind = lettersAndNumbersOnly(emojiDialogTextInput.value);
     if (imageOnlyMode) {
       var foundEmojis = emojis.filter((emoji) => emoji.src);
+      foundEmojis = [];
     } else {
-      var foundEmojis = emojis.filter(
-        (emoji) =>
-          emoji.name
-            .toLowerCase()
-            .indexOf(emojiDialogTextInput.value.toLowerCase()) > -1
-      );
+      var foundEmojis = emojis.filter((emoji) => {
+        if (emoji.tags) {
+          for (var tag of emoji.tags) {
+            if (existsNoCaseSensitive(lettersAndNumbersOnly(tag), termToFind)) {
+              return true;
+            }
+          }
+        }
+        return existsNoCaseSensitive(
+          lettersAndNumbersOnly(emoji.name),
+          termToFind
+        );
+      });
     }
+    var alreadyExists = [];
+    foundEmojis = foundEmojis.filter((emoji) => {
+      //To avoid duplicate emojis in search results, filter out already added ones.
+      if (alreadyExists.indexOf(emoji.name || emoji.emoji) < 0) {
+        alreadyExists.push(emoji.name || emoji.emoji);
+        return true;
+      }
+      return false;
+    });
     if (foundEmojis.length < 1) {
-      elements.appendElementsFromJSON(emojiDialogContainer, [
-        {
-          element: "span",
-          style: {
-            fontWeight: "bold",
-            fontSize: "20px",
-            position: "absolute",
-            transform: "translate(-50%, -50%)",
-            top: "50%",
-            left: "50%",
-            height: "50px",
-            lineHeight: "50px",
+      if (emojiDialogTextInput.value.length < 1) {
+        elements.appendElementsFromJSON(emojiDialogContainer, [
+          {
+            element: "div",
+            style: {
+              textAlign: "center",
+              display: "block",
+              fontWeight: "bold",
+              marginTop: "10px",
+            },
+            textContent: "Type something in emoji search to begin searching",
           },
-          textContent: "No emojis found!",
-        },
-      ]);
+        ]);
+      } else {
+        elements.appendElementsFromJSON(emojiDialogContainer, [
+          {
+            element: "span",
+            style: {
+              fontWeight: "bold",
+              fontSize: "20px",
+              position: "absolute",
+              transform: "translate(-50%, -50%)",
+              top: "50%",
+              left: "50%",
+              height: "50px",
+              lineHeight: "50px",
+            },
+            textContent: "No emojis found!",
+          },
+        ]);
+      }
     }
     if (foundEmojis) {
       elements.appendElementsFromJSON(
@@ -227,9 +277,10 @@ function emojisLoaded(preferedCategory) {
     emojiJSON = [];
 
     var rantEmojis = await fetchUtils.fetchAsJSON(randomRantsEmojiURL);
-    emojiJSON.push({ slug: searchSlug });
+    var allRantEmojis = [];
     rantEmojis.forEach((emojiGroup) => {
       emojiGroup.emojis = emojiGroup.emojis.map((emoji) => {
+        allRantEmojis.push(emoji);
         if (emoji.emojiURL) {
           emoji.src =
             prefixURLS[emoji.emojiURL] + emoji.src + "?v=" + timestamp;
@@ -237,12 +288,19 @@ function emojisLoaded(preferedCategory) {
         return emoji;
       });
     });
-
+    emojiJSON.push({
+      slug: "all_image_emojis",
+      name: "All image-emojis",
+      emojis: allRantEmojis,
+    });
+    emojiJSON.push({ slug: searchSlug });
     emojiJSON = emojiJSON.concat(rantEmojis);
-    emojiJSON = emojiJSON.concat(await fetchUtils.fetchAsJSON(emojiJSONURL));
-    emojisLoaded(0); //Second category cause first is search.
+    emojiJSON = emojiJSON.concat(await fetchUtils.fetchAsJSON(emojiJSONURL)); //Load normal text emojis.
+    emojisLoaded(0);
   } catch (e) {
     emojiJSON = [];
     console.error("Emojis failed to load: " + e);
+    emojiDialogCategories.textContent =
+      "Emojis failed to load, try again later. Error: " + e;
   }
 })();
