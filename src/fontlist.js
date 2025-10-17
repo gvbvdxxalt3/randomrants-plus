@@ -1,7 +1,7 @@
 module.exports = [
   {
     name: "Permanent Marker",
-    family: "Permanent Marker",
+    family: "PermanentMarker",
     file: "permanentmarker.ttf",
   },
   {
