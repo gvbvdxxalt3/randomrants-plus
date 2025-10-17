@@ -41,7 +41,14 @@ var elements = {
                   }
                   setattri = false;
                 }
-                if (attriName == "innerHTML") {
+                if (attriName == "dangerouslySetInnerHTML") {
+                  realElm.innerHTML = attributeValue;
+                  setattri = false;
+                } else if (attriName == "innerHTML") {
+                  console.trace(
+                    'Warning: The "innerHTML" property is deprecated. ' +
+                    'Please use "dangerouslySetInnerHTML" instead.'
+                  );
                   realElm.innerHTML = attributeValue;
                   setattri = false;
                 }

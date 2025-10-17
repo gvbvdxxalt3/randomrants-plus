@@ -291,7 +291,7 @@ var emojiReactions = require("./emojireactions.js");
       var messageElement = messageElementGenerator(
         username,
         displayName,
-        shtml.getMessageHTML(message),
+        shtml.getBracketCodeJSON(message),
         isServerMessage,
         userColor,
         userFont

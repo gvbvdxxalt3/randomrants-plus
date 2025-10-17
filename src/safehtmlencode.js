@@ -1,3 +1,5 @@
+var dialogs = require("./dialogs.js");
+
 function getSafeHTML(unsafeText) {
   var safeText = "";
   var i = 0;
@@ -440,8 +442,300 @@ function bracketCodeRemoval(text) {
   return newText;
 }
 
+var elements = require("./gp2/elements.js");
+
+function getBracketCodeJSON(inputText = "") {
+
+  var linkfixes = inputText.split(" ");
+  var newinputstr = [];
+  for (var word of linkfixes) {
+    if (
+      word.startsWith("http://") ||
+      word.startsWith("https://") ||
+      word.startsWith("www.")
+    ) {
+      if (word.startsWith("www.")) {
+        newinputstr.push(`[link url=https://${word}]${word}[/link]`);
+      } else {
+        newinputstr.push(`[link url=${word}]${word}[/link]`);
+      }
+    } else {
+      newinputstr.push(word);
+    }
+  }
+
+  inputText = newinputstr.join(" ");
+
+  var i = 0;
+
+  function run(mode, endName) {
+    var elm = {
+      element: "span",
+      children: [],
+    };
+
+    function addChar(char) {
+      var lastChild = elm.children[elm.children.length - 1];
+      if (lastChild) {
+        lastChild.textContent += char;
+      } else {
+        elm.children.push({
+          element: "span",
+          textContent: char,
+        });
+      }
+    }
+
+    while (i < inputText.length) {
+      var char = inputText[i];
+      if (char == "[") {
+        i += 1;
+        var bracketInside = "";
+        while (char !== "]") {
+          if (i > inputText.length) {
+            elm.children = [];
+            elm.textContent = inputText;
+            return elm;
+          }
+          var char = inputText[i];
+          if (char !== "]") {
+            bracketInside += char;
+          }
+          i += 1;
+        }
+        var splitSpaces = bracketInside.split(" ");
+        var valueName = "";
+        var value = "";
+        if (splitSpaces[1]) {
+          var v = splitSpaces[1].split("=");
+          valueName = v[0];
+          value = v.splice(1, v.length).join("=");
+        }
+        var name = splitSpaces[0].trim();
+        //console.log(name);
+        //console.log(valueName);
+        //console.log(value);
+
+        if (mode) {
+          if (name == endName) {
+            //console.log("close reached ",name);
+            return elm;
+          }
+        }
+
+        var exists = false;
+
+        if (name == "bold" && !exists) {
+          exists = true;
+
+          var newElm = run(true, "/bold");
+          newElm.style = {
+            fontWeight: "bold",
+          };
+          elm.children.push(newElm);
+          elm.children.push({
+            element: "span",
+            textContent: "",
+          });
+        }
+        if (name == "color" && !exists) {
+          exists = true;
+
+          var newElm = run(true, "/color");
+          newElm.style = {
+            color: value,
+          };
+          elm.children.push(newElm);
+          elm.children.push({
+            element: "span",
+            textContent: "",
+          });
+        }
+        if (name == "blur" && !exists) {
+          exists = true;
+
+          var newElm = run(true, "/blur");
+          newElm.style = {
+            filter: "blur(5px)",
+            cursor: "pointer",
+          };
+          newElm.eventListeners = [
+            {
+              event: "click",
+              func: function () {
+                this.style.filter = "";
+                this.style.cursor = "";
+              },
+            },
+          ];
+          elm.children.push(newElm);
+          elm.children.push({
+            element: "span",
+            textContent: "",
+          });
+        }
+        if (name == "font" && !exists) {
+          exists = true;
+
+          var newElm = run(true, "/font");
+          newElm.style = {
+            fontFamily: value
+          };
+          elm.children.push(newElm);
+          elm.children.push({
+            element: "span",
+            textContent: "",
+          });
+        }
+
+        if (name == "link" && !exists) {
+          exists = true;
+
+          var newElm = run(true, "/link");
+          newElm.element = "a";
+          if (isSafeURLOrDomain(value.trim())) {
+            newElm.href = value.trim();
+          }
+          newElm.target = "_blank";
+          newElm.style = {
+            color: "var(--link-text-color)"
+          };
+          elm.children.push(newElm);
+          elm.children.push({
+            element: "span",
+            textContent: "",
+          });
+        }
+
+        if (name == "button" && !exists) {
+          exists = true;
+
+          var newElm = run(true, "/button");
+          newElm.element = "button";
+          newElm.className = "roundborder";
+          var url = "";
+          if (isSafeURLOrDomain(value.trim())) {
+            url = value.trim();
+          }
+          newElm.eventListeners = [
+            {
+              event: "click",
+              func: function () {
+                var a = document.createElement("a");
+                a.href = url;
+                a.target = "_blank";
+                a.click();
+              }
+            }
+          ];
+
+          elm.children.push(newElm);
+          elm.children.push({
+            element: "span",
+            textContent: "",
+          });
+        }
+
+        if (name == "emoji" && !exists) {
+          exists = true;
+          if (isSafeURLOrDomain(value.trim())) {
+            elm.children.push({
+              element: "img",
+              style: {
+                objectFit: "contain",
+                width: "40px",
+                height: "40px",
+              },
+              src: value.trim()
+            });
+          }
+          elm.children.push({
+            element: "span",
+            textContent: "",
+          });
+        }
+
+        if (name == "image" && !exists) {
+          exists = true;
+          if (isSafeURLOrDomain(value.trim())) {
+            elm.children.push({
+              element: "img",
+              src: value.trim()
+            });
+          }
+          elm.children.push({
+            element: "span",
+            textContent: "",
+          });
+        }
+
+        if (name == "video" && !exists) {
+          exists = true;
+          if (isSafeURLOrDomain(value.trim())) {
+            elm.children.push({
+              element: "video",
+              controls: true,
+              src: value.trim()
+            });
+          }
+          elm.children.push({
+            element: "span",
+            textContent: "",
+          });
+        }
+
+        if (name == "audio" && !exists) {
+          exists = true;
+          if (isSafeURLOrDomain(value.trim())) {
+            elm.children.push({
+              element: "video",
+              controls: true,
+              src: value.trim()
+            });
+          }
+          elm.children.push({
+            element: "span",
+            textContent: "",
+          });
+        }
+        
+        if (name == "br" && !exists) {
+          exists = true;
+          elm.children.push({
+            element: "br",
+          });
+          elm.children.push({
+            element: "span",
+            textContent: "",
+          });
+        }
+
+        if (name == "year" && !exists) {
+          exists = true;
+          addChar(new Date().getFullYear());
+        }
+
+        
+
+        if (!exists) {
+          i -= 1;
+          addChar("[");
+          i -= bracketInside.length;
+        }
+      } else {
+        addChar(char);
+        i += 1;
+      }
+    }
+    return elm;
+  }
+  var output = run(inputText);
+  return output;
+}
+
 module.exports = {
   getSafeHTML,
   getMessageHTML,
   bracketCodeRemoval,
+  getBracketCodeJSON,
 };

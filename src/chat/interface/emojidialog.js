@@ -150,6 +150,7 @@ function reloadEmojis() {
               display: "block",
               fontWeight: "bold",
               marginTop: "10px",
+              height: "fit-content"
             },
             textContent: "Type something in emoji search to begin searching",
           },
@@ -159,14 +160,11 @@ function reloadEmojis() {
           {
             element: "span",
             style: {
+              textAlign: "center",
+              display: "block",
               fontWeight: "bold",
-              fontSize: "20px",
-              position: "absolute",
-              transform: "translate(-50%, -50%)",
-              top: "50%",
-              left: "50%",
-              height: "50px",
-              lineHeight: "50px",
+              marginTop: "10px",
+              height: "fit-content"
             },
             textContent: "No emojis found!",
           },

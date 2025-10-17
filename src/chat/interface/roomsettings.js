@@ -178,7 +178,7 @@ var dom = elements.createElementsFromJSON([
       },
       {
         element: "span",
-        innerHTML: "&nbsp;",
+        dangerouslySetInnerHTML: "&nbsp;",
       },
       {
         element: "input",

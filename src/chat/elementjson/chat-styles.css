@@ -824,6 +824,8 @@ a {
 .usernameSpan {
   font-weight: bold;
   align-content: center;
+  display: block;
+  height: 32px;
 }
 .messageSpan {
   align-content: center;

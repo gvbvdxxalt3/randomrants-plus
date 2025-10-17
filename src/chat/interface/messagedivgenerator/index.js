@@ -6,7 +6,7 @@ var cacheBust = require("../cachebust.js");
 function generateMessageDiv(
   username,
   displayName,
-  messageHTML,
+  messageContent,
   isServerMessage,
   userColor,
   userFont
@@ -80,12 +80,12 @@ function generateMessageDiv(
             {
               element: "span", //I don't know how else to add a whitespace.
               className: "usernameSpan",
-              innerHTML: "&nbsp;",
+              dangerouslySetInnerHTML: "&nbsp;",
             },
             {
               element: "span",
               className: "messageSpan",
-              innerHTML: messageHTML,
+              children: [messageContent],
             },
           ],
         },
